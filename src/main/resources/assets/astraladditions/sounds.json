@@ -1,0 +1,280 @@
+{
+  "music_moon": {
+    "subtitle": "subtitles.astraladditions.hesperyd",
+    "sounds": [
+      {
+        "name": "astraladditions:nostalgia",
+        "stream": true
+      }
+    ]
+  },
+	"music_post_moon": {
+    "subtitle": "subtitles.astraladditions.xetroo",
+    "sounds": [
+      {
+        "name": "astraladditions:despiteeverythingitsstillyou",
+        "stream": true
+      }
+    ]
+  },
+  "music_mars": {
+    "subtitle": "subtitles.astraladditions.hesperyd",
+    "sounds": [
+      {
+        "name": "astraladditions:uneasy",
+        "stream": true
+      }
+    ]
+  },
+  "music_mercury": {
+    "sounds": [
+      {
+        "name": "astraladditions:uneasy",
+        "stream": true,
+        "weight": 2
+      },
+      {
+        "name": "music/game/nether/nether1",
+        "stream": true,
+        "weight": 1
+      },
+      {
+        "name": "music/game/nether/nether_wastes/rubedo",
+        "stream": true,
+        "weight": 1
+      },
+      {
+        "name": "music/game/nether/crimson_forest/chrysopoeia",
+        "stream": true,
+        "weight": 1
+      }
+    ]
+  },
+  "music_orbit": {
+    "subtitle": "subtitles.astraladditions.hesperyd",
+    "sounds": [
+      {
+        "name": "astraladditions:bodiesfloatinginspace",
+        "stream": true
+      },
+			{
+        "name": "astraladditions:wow",
+        "stream": true
+      }
+    ]
+  },
+  "music_day": {
+    "subtitle": "subtitles.astraladditions.xh",
+    "sounds": [
+      {
+        "name": "astraladditions:newday",
+        "stream": true
+      },
+      {
+        "name": "astraladditions:breathein",
+        "stream": true
+      }
+    ]
+  },
+  "music_night": {
+    "subtitle": "subtitles.astraladditions.xh",
+    "sounds": [
+      {
+        "name": "astraladditions:moonlight",
+        "stream": true
+      }
+    ]
+  },
+	"music_ow_day": {
+    "sounds": [
+      {
+        "name": "astraladditions:day",
+        "stream": true,
+        "weight": 3
+      },
+			{
+        "name": "music/game/calm1",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/hal2",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/hal3",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/hal4",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/piano2",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/piano3",
+        "stream": true,
+        "weight": 1
+      }
+    ]
+  },
+	"music_ow_night": {
+    "sounds": [
+      {
+        "name": "astraladditions:night",
+        "stream": true,
+        "weight": 2
+      },
+			{
+        "name": "music/game/calm2",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/calm3",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/hal1",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/piano1",
+        "stream": true,
+        "weight": 1
+      }
+    ]
+  },
+	"music_ow_scary": {
+    "sounds": [
+      {
+        "name": "astraladditions:cave",
+        "stream": true,
+        "weight": 2
+      },
+			{
+        "name": "music/game/nuance1",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/nether/soulsand_valley/so_below",
+        "stream": true,
+        "weight": 1
+      }
+    ]
+  },
+  "music_ow_cave": {
+    "sounds": [
+      {
+        "name": "astraladditions:starcave",
+        "stream": true,
+        "weight": 2
+      },
+			{
+        "name": "music/game/nuance2",
+        "stream": true,
+        "weight": 1
+      },
+      {
+        "name": "music/game/nether/nether3",
+        "stream": true,
+        "weight": 1
+      },
+      {
+        "name": "music/game/nether/nether4",
+        "stream": true,
+        "weight": 1
+      }
+    ]
+  },
+  "music_end": {
+    "sounds": [
+      {
+        "name": "astraladditions:gazinglakes",
+        "stream": true,
+        "weight": 2
+      },
+      {
+        "name": "music/game/end/end",
+        "stream": true,
+        "weight": 1
+      }
+    ]
+  },
+  "music_end_boss": {
+    "subtitle": "subtitles.astraladditions.hesperyd",
+    "sounds": [
+      {
+        "name": "astraladditions:astralsend",
+        "stream": true
+      }
+    ]
+  },
+  "music_wither": {
+    "sounds": [
+      {
+        "name": "astraladditions:wither",
+        "stream": true
+      }
+    ]
+  },
+	"music_wither_phase2": {
+    "sounds": [
+      {
+        "name": "astraladditions:witherphase2",
+        "stream": true
+      }
+    ]
+  },
+	"music_wither_spawn": {
+    "subtitle": "subtitles.astraladditions.hesperyd",
+    "sounds": [
+      {
+        "name": "astraladditions:witherspawn",
+        "stream": true
+      }
+    ]
+  },
+	"music_wither_death": {
+    "sounds": [
+      {
+        "name": "astraladditions:stance",
+        "stream": true
+      }
+    ]
+  },
+	"music_combat": {
+    "subtitle": "subtitles.astraladditions.hesperyd",
+    "sounds": [
+      {
+        "name": "astraladditions:tensionrising",
+        "stream": true
+      }
+    ]
+  },
+	"music_combat_end": {
+    "sounds": [
+      {
+        "name": "astraladditions:andbreathe",
+        "stream": true
+      }
+    ]
+  },
+	"mmmdisc": {
+    "sounds": [
+      {
+        "name": "astraladditions:disc/notsuspencebut",
+        "stream": true
+      }
+    ]
+  }
+}
