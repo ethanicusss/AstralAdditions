@@ -1,4 +1,4 @@
-package com.github.ethanicuss.astraladditions.entities.glutton;
+package com.github.ethanicuss.astraladditions.entities.hemogiant;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -8,8 +8,8 @@ import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.entity.LivingEntity;
 
 @Environment(value= EnvType.CLIENT)
-public class GluttonEntityModel<T extends LivingEntity> extends BipedEntityModel<T> {
-    public GluttonEntityModel(ModelPart modelPart) {
+public class HemogiantEntityModel<T extends LivingEntity> extends BipedEntityModel<T> {
+    public HemogiantEntityModel(ModelPart modelPart) {
         super(modelPart);
     }
     public boolean carryingBlock;

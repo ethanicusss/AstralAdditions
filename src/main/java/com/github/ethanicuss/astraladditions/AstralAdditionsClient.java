@@ -1,7 +1,7 @@
 package com.github.ethanicuss.astraladditions;
 
-import com.github.ethanicuss.astraladditions.entities.glutton.GluttonEntityModel;
-import com.github.ethanicuss.astraladditions.entities.glutton.GluttonEntityRenderer;
+import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntityModel;
+import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.moondragon.EnderBallEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.moonman.MoonmanEntityModel;
 import com.github.ethanicuss.astraladditions.entities.moonman.MoonmanEntityRenderer;
@@ -35,8 +35,8 @@ public class AstralAdditionsClient implements ClientModInitializer {
         EntityRendererRegistry.register(AstralAdditions.MOONMAN, MoonmanEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MODEL_MOONMAN_LAYER, MoonmanEntityModel::getTexturedModelData);
 
-        EntityRendererRegistry.register(AstralAdditions.GLUTTON, GluttonEntityRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(MODEL_GLUTTON_LAYER, GluttonEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(AstralAdditions.GLUTTON, HemogiantEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_GLUTTON_LAYER, HemogiantEntityModel::getTexturedModelData);
 
         EntityRendererRegistry.register(AstralAdditions.VOIDTOUCHED_SKELETON, VoidtouchedSkeletonEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MODEL_VOIDTOUCHED_SKELETON_LAYER, SkeletonEntityModel::getTexturedModelData);

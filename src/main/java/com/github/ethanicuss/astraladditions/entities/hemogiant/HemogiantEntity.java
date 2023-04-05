@@ -1,4 +1,4 @@
-package com.github.ethanicuss.astraladditions.entities.glutton;
+package com.github.ethanicuss.astraladditions.entities.hemogiant;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -22,11 +22,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import net.minecraft.world.explosion.Explosion;
 
-public class GluttonEntity extends EndermanEntity {
+public class HemogiantEntity extends EndermanEntity {
     private static final Double maxHP = 150.0;
 
-    private static final TrackedData<Integer> EAT_TIME = DataTracker.registerData(GluttonEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    public GluttonEntity(EntityType<? extends EndermanEntity> entityType, World world) {
+    private static final TrackedData<Integer> EAT_TIME = DataTracker.registerData(HemogiantEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    public HemogiantEntity(EntityType<? extends EndermanEntity> entityType, World world) {
         super(entityType, world);
         this.stepHeight = 2.0f;
         this.setPathfindingPenalty(PathNodeType.WATER, -0.2f);

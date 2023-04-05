@@ -1,6 +1,6 @@
 package com.github.ethanicuss.astraladditions;
 
-import com.github.ethanicuss.astraladditions.entities.glutton.GluttonEntity;
+import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntity;
 import com.github.ethanicuss.astraladditions.entities.moondragon.EnderBallEntity;
 import com.github.ethanicuss.astraladditions.entities.moonman.MoonmanEntity;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedskeleton.VoidtouchedSkeletonEntity;
@@ -25,10 +25,10 @@ public class AstralAdditions implements ModInitializer {
 			new Identifier(AstralAdditions.MOD_ID, "moonman"),
 			FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, MoonmanEntity::new).dimensions(EntityDimensions.fixed(0.75f, 2.8f)).build()
 	);
-	public static final EntityType<GluttonEntity> GLUTTON = Registry.register(
+	public static final EntityType<HemogiantEntity> GLUTTON = Registry.register(
 			Registry.ENTITY_TYPE,
 			new Identifier(AstralAdditions.MOD_ID, "hemogiant"),
-			FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GluttonEntity::new).dimensions(EntityDimensions.fixed(1.05f, 5.8f)).build()
+			FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, HemogiantEntity::new).dimensions(EntityDimensions.fixed(1.05f, 5.8f)).build()
 	);
 	public static final EntityType<VoidtouchedSkeletonEntity> VOIDTOUCHED_SKELETON = Registry.register(
 			Registry.ENTITY_TYPE,
@@ -50,7 +50,7 @@ public class AstralAdditions implements ModInitializer {
 	public void onInitialize() {
 		ModFluids.registerFluids();
 		FabricDefaultAttributeRegistry.register(MOONMAN, MoonmanEntity.createMoonmanAttributes());
-		FabricDefaultAttributeRegistry.register(GLUTTON, GluttonEntity.createGluttonAttributes());
+		FabricDefaultAttributeRegistry.register(GLUTTON, HemogiantEntity.createGluttonAttributes());
 		FabricDefaultAttributeRegistry.register(VOIDTOUCHED_SKELETON, VoidtouchedSkeletonEntity.createVoidtouchedSkeletonAttributes());
 		FabricDefaultAttributeRegistry.register(VOIDTOUCHED_ZOMBIE, VoidtouchedZombieEntity.createVoidtouchedZombieAttributes());
 		LOGGER.info("Astral Additions is active!");
