@@ -1,16 +1,10 @@
 package com.github.ethanicuss.astraladditions.mixin.betterdragon;
 
-<<<<<<< HEAD:src/main/java/net/fabricmc/AstralAdditions/mixin/betterdragon/BetterDragon.java
-import net.fabricmc.AstralAdditions.AstralAdditions;
-import net.fabricmc.AstralAdditions.entities.moondragon.EnderBallEntity;
-import net.fabricmc.AstralAdditions.entities.moondragon.GluttonyBallEntity;
-import net.fabricmc.AstralAdditions.entities.voidtouchedzombie.VoidtouchedZombieEntity;
-=======
 import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import com.github.ethanicuss.astraladditions.entities.moondragon.EnderBallEntity;
+import com.github.ethanicuss.astraladditions.entities.moondragon.GluttonyBallEntity;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedzombie.VoidtouchedZombieEntity;
->>>>>>> origin/master:src/main/java/com/github/ethanicuss/astraladditions/mixin/betterdragon/BetterDragon.java
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -34,12 +28,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.WorldEvents;
-<<<<<<< HEAD:src/main/java/net/fabricmc/AstralAdditions/mixin/betterdragon/BetterDragon.java
-import net.minecraft.world.gen.feature.EndPortalFeature;
-import org.jetbrains.annotations.Nullable;
-import org.lwjgl.system.CallbackI;
-=======
->>>>>>> origin/master:src/main/java/com/github/ethanicuss/astraladditions/mixin/betterdragon/BetterDragon.java
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -73,7 +61,7 @@ public class BetterDragon {
         if (((EnderDragonEntity)(Object) this).slowedDownByBlock) {
             ((EnderDragonEntity)(Object) this).addVelocity(0, 0.01, 0);
         }
-        System.out.println(phaseManager.getCurrent().toString());
+        AstralAdditions.LOGGER.debug(phaseManager.getCurrent().toString());
     }
 
     @Inject(method = "launchLivingEntities", at = @At("HEAD"), cancellable = true)
@@ -288,7 +276,7 @@ class BetterChargingPlayerPhase {
                 double l = dragon.head.getX() - vec3d3.x;
                 double m = dragon.head.getBodyY(0.5) + 0.5;
                 double n = dragon.head.getZ() - vec3d3.z;
-                GluttonyBallEntity e = new GluttonyBallEntity(AstralAdditions.GLUTTONY_BALL, dragon.world);
+                GluttonyBallEntity e = new GluttonyBallEntity(ModEntities.GLUTTONY_BALL, dragon.world);
                 e.setPos(l, m, n);
                 e.refreshPositionAndAngles(l, m, n, 0.0f, 0.0f);
                 double speed = 0.1;

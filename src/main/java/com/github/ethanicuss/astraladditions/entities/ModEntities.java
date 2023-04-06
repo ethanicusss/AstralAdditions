@@ -6,6 +6,8 @@ import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntityM
 import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.moondragon.EnderBallEntity;
 import com.github.ethanicuss.astraladditions.entities.moondragon.EnderBallEntityRenderer;
+import com.github.ethanicuss.astraladditions.entities.moondragon.GluttonyBallEntity;
+import com.github.ethanicuss.astraladditions.entities.moondragon.GluttonyBallEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.moonman.MoonmanEntity;
 import com.github.ethanicuss.astraladditions.entities.moonman.MoonmanEntityModel;
 import com.github.ethanicuss.astraladditions.entities.moonman.MoonmanEntityRenderer;
@@ -84,6 +86,6 @@ public class ModEntities {
 
         EntityRendererRegistry.register(ENDER_BALL, EnderBallEntityRenderer::new);
         
-        EntityRendererRegistry.register(AstralAdditions.GLUTTONY_BALL, GluttonyBallEntityRenderer::new);
+        EntityRendererRegistry.register(GLUTTONY_BALL, GluttonyBallEntityRenderer::new);
     }
 }
