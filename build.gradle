@@ -13,6 +13,8 @@ group = project.maven_group
 repositories {
 	maven { url "https://maven.shedaniel.me/" }
 	maven { url "https://maven.terraformersmc.com/releases/" }
+	maven { url = "https://maven.quiltmc.org/repository/release" } // QM
+	maven { url = "https://maven.parchmentmc.org" } // Parchm
 }
 
 dependencies {
