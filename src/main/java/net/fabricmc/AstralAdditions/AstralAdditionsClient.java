@@ -3,6 +3,7 @@ package net.fabricmc.AstralAdditions;
 import net.fabricmc.AstralAdditions.entities.glutton.GluttonEntityModel;
 import net.fabricmc.AstralAdditions.entities.glutton.GluttonEntityRenderer;
 import net.fabricmc.AstralAdditions.entities.moondragon.EnderBallEntityRenderer;
+import net.fabricmc.AstralAdditions.entities.moondragon.GluttonyBallEntityRenderer;
 import net.fabricmc.AstralAdditions.entities.moonman.MoonmanEntityModel;
 import net.fabricmc.AstralAdditions.entities.moonman.MoonmanEntityRenderer;
 import net.fabricmc.AstralAdditions.entities.voidtouchedskeleton.VoidtouchedSkeletonEntityRenderer;
@@ -45,6 +46,8 @@ public class AstralAdditionsClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(MODEL_VOIDTOUCHED_ZOMBIE_LAYER, VoidtouchedZombieEntityRenderer::getTexturedModelData);
 
         EntityRendererRegistry.register(AstralAdditions.ENDER_BALL, EnderBallEntityRenderer::new);
+
+        EntityRendererRegistry.register(AstralAdditions.GLUTTONY_BALL, GluttonyBallEntityRenderer::new);
 
     }
 }

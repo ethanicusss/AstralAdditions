@@ -1,11 +1,15 @@
 package net.fabricmc.AstralAdditions.mixin.betterdragon;
 
+import net.minecraft.entity.ai.TargetPredicate;
+import net.minecraft.entity.ai.pathing.Path;
+import net.minecraft.entity.boss.dragon.phase.HoldingPatternPhase;
 import net.minecraft.entity.boss.dragon.phase.HoverPhase;
 import net.minecraft.entity.boss.dragon.phase.LandingPhase;
 import net.minecraft.entity.boss.dragon.phase.SittingFlamingPhase;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(LandingPhase.class)
 interface LandingPhaseAccessor {

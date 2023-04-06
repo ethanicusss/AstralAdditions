@@ -29,6 +29,7 @@ public class GluttonEntity extends EndermanEntity {
     public GluttonEntity(EntityType<? extends EndermanEntity> entityType, World world) {
         super(entityType, world);
         this.stepHeight = 2.0f;
+        this.experiencePoints = 20;
         this.setPathfindingPenalty(PathNodeType.WATER, -0.2f);
     }
 

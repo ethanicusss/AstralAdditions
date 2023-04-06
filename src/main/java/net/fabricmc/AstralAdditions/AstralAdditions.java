@@ -2,6 +2,7 @@ package net.fabricmc.AstralAdditions;
 
 import net.fabricmc.AstralAdditions.entities.glutton.GluttonEntity;
 import net.fabricmc.AstralAdditions.entities.moondragon.EnderBallEntity;
+import net.fabricmc.AstralAdditions.entities.moondragon.GluttonyBallEntity;
 import net.fabricmc.AstralAdditions.entities.moonman.MoonmanEntity;
 import net.fabricmc.AstralAdditions.entities.voidtouchedskeleton.VoidtouchedSkeletonEntity;
 import net.fabricmc.AstralAdditions.entities.voidtouchedzombie.VoidtouchedZombieEntity;
@@ -44,6 +45,11 @@ public class AstralAdditions implements ModInitializer {
 			Registry.ENTITY_TYPE,
 			new Identifier(AstralAdditions.MOD_ID, "ender_ball"),
 			FabricEntityTypeBuilder.create(SpawnGroup.MISC, EnderBallEntity::new).dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build()
+	);
+	public static final EntityType<GluttonyBallEntity> GLUTTONY_BALL = Registry.register(
+			Registry.ENTITY_TYPE,
+			new Identifier(AstralAdditions.MOD_ID, "gluttony_ball"),
+			FabricEntityTypeBuilder.create(SpawnGroup.MISC, GluttonyBallEntity::new).dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build()
 	);
 
 	@Override

@@ -8,6 +8,7 @@
     "ShimmerEffect",
     "betterdragon.AbstractPhaseAccessor",
     "betterdragon.BetterAbstractSittingPhase",
+    "betterdragon.BetterChargingPlayerPhase",
     "betterdragon.BetterDragon",
     "betterdragon.BetterHoverPhase",
     "betterdragon.BetterLandingPhase",
