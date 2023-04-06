@@ -51,6 +51,11 @@ public class ModEntities {
             new Identifier(AstralAdditions.MOD_ID, "ender_ball"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, EnderBallEntity::new).dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build()
     );
+    public static final EntityType<GluttonyBallEntity> GLUTTONY_BALL = Registry.register(
+			Registry.ENTITY_TYPE,
+			new Identifier(AstralAdditions.MOD_ID, "gluttony_ball"),
+			FabricEntityTypeBuilder.create(SpawnGroup.MISC, GluttonyBallEntity::new).dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build()
+	);
 
     public static final EntityModelLayer MODEL_MOONMAN_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "moonman"), "main");
     public static final EntityModelLayer MODEL_GLUTTON_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "hemogiant"), "main");
@@ -78,5 +83,7 @@ public class ModEntities {
         EntityModelLayerRegistry.registerModelLayer(MODEL_VOIDTOUCHED_ZOMBIE_LAYER, VoidtouchedZombieEntityRenderer::getTexturedModelData);
 
         EntityRendererRegistry.register(ENDER_BALL, EnderBallEntityRenderer::new);
+        
+        EntityRendererRegistry.register(AstralAdditions.GLUTTONY_BALL, GluttonyBallEntityRenderer::new);
     }
 }
