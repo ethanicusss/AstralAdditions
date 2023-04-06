@@ -1,97 +1,101 @@
 package com.github.ethanicuss.astraladditions.entities.hemogiant;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.pathing.PathNodeType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.EndermanEntity;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.FluidTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldEvents;
-import net.minecraft.world.explosion.Explosion;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.AreaEffectCloud;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
-public class HemogiantEntity extends EndermanEntity {
+public class HemogiantEntity extends EnderMan {
     private static final Double maxHP = 150.0;
 
-    private static final TrackedData<Integer> EAT_TIME = DataTracker.registerData(HemogiantEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    public HemogiantEntity(EntityType<? extends EndermanEntity> entityType, World world) {
+    private static final EntityDataAccessor<Integer> EAT_TIME = SynchedEntityData.defineId(HemogiantEntity.class, EntityDataSerializers.INT);
+    public HemogiantEntity(EntityType<? extends EnderMan> entityType, Level world) {
         super(entityType, world);
-        this.stepHeight = 2.0f;
-        this.setPathfindingPenalty(PathNodeType.WATER, -0.2f);
+        this.maxUpStep = 2.0f;
+        this.setPathfindingMalus(BlockPathTypes.WATER, -0.2f);
     }
 
-    public static DefaultAttributeContainer.Builder createGluttonAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, maxHP).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.12f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 16.0).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 96.0);
+    public static AttributeSupplier.Builder createGluttonAttributes() {
+        return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, maxHP).add(Attributes.MOVEMENT_SPEED, 0.12f).add(Attributes.ATTACK_DAMAGE, 16.0).add(Attributes.FOLLOW_RANGE, 96.0);
     }
 
     @Override
-    protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
+    protected float getStandingEyeHeight(Pose pose, EntityDimensions dimensions) {
         return 5.5f;
     }
 
     @Override
-    public void tickMovement() {
-        if (this.world.isClient) {
-            this.world.addParticle(ParticleTypes.SQUID_INK, this.getParticleX(0.5), this.getRandomBodyY() - 0.25, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 0.5, (this.random.nextDouble() - 0.5) * 0.5, (this.random.nextDouble() - 0.5) * 0.5);
-            if (this.dataTracker.get(EAT_TIME) <= 0) {
+    public void aiStep() {
+        if (this.level.isClientSide) {
+            this.level.addParticle(ParticleTypes.SQUID_INK, this.getRandomX(0.5), this.getRandomY() - 0.25, this.getRandomZ(0.5), (this.random.nextDouble() - 0.5) * 0.5, (this.random.nextDouble() - 0.5) * 0.5, (this.random.nextDouble() - 0.5) * 0.5);
+            if (this.entityData.get(EAT_TIME) <= 0) {
                 for (int i = 0; i < 4; ++i) {
-                    this.world.addParticle(ParticleTypes.SQUID_INK, this.getParticleX(0.5), this.getRandomBodyY() - 0.25, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 1.0, (this.random.nextDouble() - 0.8) * 0.5, (this.random.nextDouble() - 0.5) * 1.0);
-                    this.world.addParticle(ParticleTypes.DRAGON_BREATH, this.getParticleX(0.5), this.getRandomBodyY() - 0.25, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, (this.random.nextDouble() - 0.5) * 1.0, (this.random.nextDouble() - 0.5) * 2.0);
+                    this.level.addParticle(ParticleTypes.SQUID_INK, this.getRandomX(0.5), this.getRandomY() - 0.25, this.getRandomZ(0.5), (this.random.nextDouble() - 0.5) * 1.0, (this.random.nextDouble() - 0.8) * 0.5, (this.random.nextDouble() - 0.5) * 1.0);
+                    this.level.addParticle(ParticleTypes.DRAGON_BREATH, this.getRandomX(0.5), this.getRandomY() - 0.25, this.getRandomZ(0.5), (this.random.nextDouble() - 0.5) * 2.0, (this.random.nextDouble() - 0.5) * 1.0, (this.random.nextDouble() - 0.5) * 2.0);
                 }
             }
-            if (this.dataTracker.get(EAT_TIME) <= -20 - this.getHealth()/maxHP*40 + 1) {
+            if (this.entityData.get(EAT_TIME) <= -20 - this.getHealth()/maxHP*40 + 1) {
                 for (int i = 0; i < 40; ++i) {
-                    this.world.addParticle(ParticleTypes.SQUID_INK, this.getParticleX(0.5), this.getRandomBodyY() - 0.25, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 4.0, (this.random.nextDouble() - 0.5) * 1.0, (this.random.nextDouble() - 0.5) * 4.0);
-                    this.world.addParticle(ParticleTypes.DRAGON_BREATH, this.getParticleX(0.5), this.getRandomBodyY() - 0.25, this.getParticleZ(0.5), (this.random.nextDouble() - 0.5) * 4.0, (this.random.nextDouble() - 0.5) * 2.0, (this.random.nextDouble() - 0.5) * 4.0);
+                    this.level.addParticle(ParticleTypes.SQUID_INK, this.getRandomX(0.5), this.getRandomY() - 0.25, this.getRandomZ(0.5), (this.random.nextDouble() - 0.5) * 4.0, (this.random.nextDouble() - 0.5) * 1.0, (this.random.nextDouble() - 0.5) * 4.0);
+                    this.level.addParticle(ParticleTypes.DRAGON_BREATH, this.getRandomX(0.5), this.getRandomY() - 0.25, this.getRandomZ(0.5), (this.random.nextDouble() - 0.5) * 4.0, (this.random.nextDouble() - 0.5) * 2.0, (this.random.nextDouble() - 0.5) * 4.0);
                 }
             }
         }
-        super.tickMovement();
+        super.aiStep();
     }
 
     @Override
-    protected void mobTick() {
+    protected void customServerAiStep() {
 
-        if (isAngry()) {
-            int eattime = this.dataTracker.get(EAT_TIME);
-            this.dataTracker.set(EAT_TIME, eattime - 1);
+        if (isCreepy()) {
+            int eattime = this.entityData.get(EAT_TIME);
+            this.entityData.set(EAT_TIME, eattime - 1);
             if (eattime <= 0) {
-                this.stopAnger();
+                this.stopBeingAngry();
                 if (eattime <= -20 - this.getHealth()/maxHP*40) {
-                    this.world.createExplosion(this, this.getX(), this.getY(), this.getZ(), 4, Explosion.DestructionType.BREAK);
+                    this.level.explode(this, this.getX(), this.getY(), this.getZ(), 4, Explosion.BlockInteraction.BREAK);
                     for (int i = 0; i < 50; i++){
                         int _x = random.nextInt(12) - 6;
                         int _y = random.nextInt(8) - 4;
                         int _z = random.nextInt(12) - 6;
                         BlockPos pos = new BlockPos(this.getBlockX() + _x, this.getBlockY() + _y, this.getBlockZ() + _z);
-                        if (this.world.getBlockState(pos) != Blocks.AIR.getDefaultState() && this.world.getBlockState(pos) != Blocks.END_STONE.getDefaultState()){
-                            this.world.setBlockState(pos, Blocks.END_STONE.getDefaultState());
+                        if (this.level.getBlockState(pos) != Blocks.AIR.defaultBlockState() && this.level.getBlockState(pos) != Blocks.END_STONE.defaultBlockState()){
+                            this.level.setBlockAndUpdate(pos, Blocks.END_STONE.defaultBlockState());
                         }
                     }
-                    AreaEffectCloudEntity cloud = new AreaEffectCloudEntity(this.world, this.getX(), this.getY(), this.getZ());
+                    AreaEffectCloud cloud = new AreaEffectCloud(this.level, this.getX(), this.getY(), this.getZ());
                     cloud.setOwner((LivingEntity)this);
-                    cloud.setParticleType(ParticleTypes.DRAGON_BREATH);
+                    cloud.setParticle(ParticleTypes.DRAGON_BREATH);
                     cloud.setRadius(3.0f);
                     cloud.setDuration(600);
-                    cloud.setRadiusGrowth((7.0f - cloud.getRadius()) / (float)cloud.getDuration());
-                    cloud.addEffect(new StatusEffectInstance(StatusEffects.INSTANT_DAMAGE, 1, 1));
-                    cloud.setPosition(this.getX(), this.getY(), this.getZ());
-                    this.world.syncWorldEvent(WorldEvents.DRAGON_BREATH_CLOUD_SPAWNS, this.getBlockPos(), this.isSilent() ? -1 : 1);
-                    this.world.spawnEntity(cloud);
-                    this.setTarget(this.world.getClosestPlayer(this, 52));
-                    this.dataTracker.set(EAT_TIME, 100 + (int) (this.random.nextFloat() * 30) + (int) (this.getHealth()/maxHP*100));
+                    cloud.setRadiusPerTick((7.0f - cloud.getRadius()) / (float)cloud.getDuration());
+                    cloud.addEffect(new MobEffectInstance(MobEffects.HARM, 1, 1));
+                    cloud.setPos(this.getX(), this.getY(), this.getZ());
+                    this.level.levelEvent(LevelEvent.PARTICLES_DRAGON_FIREBALL_SPLASH, this.blockPosition(), this.isSilent() ? -1 : 1);
+                    this.level.addFreshEntity(cloud);
+                    this.setTarget(this.level.getNearestPlayer(this, 52));
+                    this.entityData.set(EAT_TIME, 100 + (int) (this.random.nextFloat() * 30) + (int) (this.getHealth()/maxHP*100));
                 }
             }
             else{
@@ -100,38 +104,38 @@ public class HemogiantEntity extends EndermanEntity {
                 }
             }
         }
-        super.mobTick();
+        super.customServerAiStep();
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(EAT_TIME, 180);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(EAT_TIME, 180);
     }
 
     protected boolean teleportRandomly(int range, int yRange) {
-        if (this.world.isClient() || !this.isAlive()) {
+        if (this.level.isClientSide() || !this.isAlive()) {
             return false;
         }
         double d = this.getX() + (this.random.nextDouble() - 0.5) * range;
         double e = this.getY() + (double)(this.random.nextInt(yRange) - yRange/2);
         double f = this.getZ() + (this.random.nextDouble() - 0.5) * range;
-        return this.teleportTo(d, e, f);
+        return this.teleport(d, e, f);
     }
-    private boolean teleportTo(double x, double y, double z) {
-        BlockPos.Mutable mutable = new BlockPos.Mutable(x, y, z);
-        while (mutable.getY() > this.world.getBottomY() && !this.world.getBlockState(mutable).getMaterial().blocksMovement()) {
+    private boolean teleport(double x, double y, double z) {
+        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos(x, y, z);
+        while (mutable.getY() > this.level.getMinBuildHeight() && !this.level.getBlockState(mutable).getMaterial().blocksMotion()) {
             mutable.move(Direction.DOWN);
         }
-        BlockState blockState = this.world.getBlockState(mutable);
-        boolean bl = blockState.getMaterial().blocksMovement();
-        boolean bl2 = blockState.getFluidState().isIn(FluidTags.WATER);
+        BlockState blockState = this.level.getBlockState(mutable);
+        boolean bl = blockState.getMaterial().blocksMotion();
+        boolean bl2 = blockState.getFluidState().is(FluidTags.WATER);
         if (!bl || bl2) {
             return false;
         }
-        boolean bl3 = this.teleport(x, y, z, true);
+        boolean bl3 = this.randomTeleport(x, y, z, true);
         if (bl3 && !this.isSilent()) {
-            this.world.playSound(null, this.prevX, this.prevY, this.prevZ, SoundEvents.ENTITY_ENDERMAN_TELEPORT, this.getSoundCategory(), 1.0f, 1.0f);
-            this.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
+            this.level.playSound(null, this.xo, this.yo, this.zo, SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 1.0f, 1.0f);
+            this.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0f, 1.0f);
         }
         return bl3;
     }

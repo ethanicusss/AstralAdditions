@@ -2,18 +2,17 @@ package com.github.ethanicuss.astraladditions.playertracker;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import java.io.*;
 import java.nio.file.Path;
 
 public class PlayerTracker{
-    private ClientPlayerEntity player;
+    private LocalPlayer player;
     public boolean hasBeenToMoon = false;
     public boolean hasHeardPostMoonSong = false;
     public PlayerTracker(){
-        player = MinecraftClient.getInstance().player;
+        player = Minecraft.getInstance().player;
         LoadTrackingData();
     }
 

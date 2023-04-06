@@ -1,50 +1,44 @@
 package com.github.ethanicuss.astraladditions.entities.moondragon;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.GhastEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ExplosiveProjectileEntity;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
-
 import java.util.List;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.HitResult;
 
-public class GluttonyBallEntity extends ExplosiveProjectileEntity {
+public class GluttonyBallEntity extends AbstractHurtingProjectile {
 
     private int timer = 240;
-    private static final TrackedData<Integer> FRAME = DataTracker.registerData(GluttonyBallEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    public GluttonyBallEntity(EntityType<? extends GluttonyBallEntity> entityType, World world) {
-        super((EntityType<? extends ExplosiveProjectileEntity>)entityType, world);
+    private static final EntityDataAccessor<Integer> FRAME = SynchedEntityData.defineId(GluttonyBallEntity.class, EntityDataSerializers.INT);
+    public GluttonyBallEntity(EntityType<? extends GluttonyBallEntity> entityType, Level world) {
+        super((EntityType<? extends AbstractHurtingProjectile>)entityType, world);
     }
 
     @Override
-    protected void onCollision(HitResult hitResult) {
-        super.onCollision(hitResult);
+    protected void onHit(HitResult hitResult) {
+        super.onHit(hitResult);
         if (hitResult.getType() == HitResult.Type.ENTITY){
-            PlayerEntity p = this.world.getClosestPlayer(this, 3);
+            Player p = this.level.getNearestPlayer(this, 3);
             if (p != null){
-                p.setVelocity(0, -2.0, 0);
-                p.damage(DamageSource.STARVE, 6);
+                p.setDeltaMovement(0, -2.0, 0);
+                p.hurt(DamageSource.STARVE, 6);
                 this.discard();
             }
         }
         if (hitResult.getType() == HitResult.Type.BLOCK){
-            if (this.getBlockStateAtPos() != Blocks.AIR.getDefaultState()) {
-                boolean bl = this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
-                this.world.createExplosion(null, this.getX(), this.getY(), this.getZ(), 1, false, bl ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE);
+            if (this.getFeetBlockState() != Blocks.AIR.defaultBlockState()) {
+                boolean bl = this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
+                this.level.explode(null, this.getX(), this.getY(), this.getZ(), 1, false, bl ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE);
                 this.discard();
             }
         }
@@ -54,12 +48,12 @@ public class GluttonyBallEntity extends ExplosiveProjectileEntity {
     public void tick() {
         super.tick();
 
-        this.dataTracker.set(FRAME, this.dataTracker.get(FRAME)+1);
-        if (this.dataTracker.get(FRAME) == 9){
-            this.dataTracker.set(FRAME, 0);
+        this.entityData.set(FRAME, this.entityData.get(FRAME)+1);
+        if (this.entityData.get(FRAME) == 9){
+            this.entityData.set(FRAME, 0);
         }
 
-        PlayerEntity p = this.world.getClosestPlayer(this, 64);
+        Player p = this.level.getNearestPlayer(this, 64);
         if (p != null){
             double strength = 0.15;
             double xdiff = this.getX() - p.getX();
@@ -92,7 +86,7 @@ public class GluttonyBallEntity extends ExplosiveProjectileEntity {
                     yVel = -dist;
                 }
 
-                this.addVelocity(dist * cosX * strength * (Math.abs(angleX) / angleX), yVel * strength, dist * cosZ * strength * (Math.abs(angleZ) / angleZ));
+                this.push(dist * cosX * strength * (Math.abs(angleX) / angleX), yVel * strength, dist * cosZ * strength * (Math.abs(angleZ) / angleZ));
             //}
         }
 
@@ -103,22 +97,22 @@ public class GluttonyBallEntity extends ExplosiveProjectileEntity {
     }
 
     public int getFrame(){
-        return this.dataTracker.get(FRAME);
+        return this.entityData.get(FRAME);
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(FRAME, 0);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(FRAME, 0);
     }
 
     @Override
-    protected ParticleEffect getParticleType() {
+    protected ParticleOptions getTrailParticle() {
         return ParticleTypes.ENCHANTED_HIT;
     }
 
     @Override
-    protected boolean isBurning() {
+    protected boolean shouldBurn() {
         return false;
     }
 }

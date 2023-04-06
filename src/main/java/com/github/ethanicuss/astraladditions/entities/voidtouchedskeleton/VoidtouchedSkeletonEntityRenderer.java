@@ -5,23 +5,23 @@ import com.github.ethanicuss.astraladditions.AstralAdditionsClient;
 import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.SkeletonEntityRenderer;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.SkeletonRenderer;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.monster.AbstractSkeleton;
 
 @Environment(value= EnvType.CLIENT)
 public class VoidtouchedSkeletonEntityRenderer
-        extends SkeletonEntityRenderer {
-    private static final Identifier TEXTURE = new Identifier(AstralAdditions.MOD_ID, "textures/entity/voidtouched_skeleton/skeleton.png");
+        extends SkeletonRenderer {
+    private static final ResourceLocation TEXTURE = new ResourceLocation(AstralAdditions.MOD_ID, "textures/entity/voidtouched_skeleton/skeleton.png");
 
-    public VoidtouchedSkeletonEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, ModEntities.MODEL_VOIDTOUCHED_SKELETON_LAYER, EntityModelLayers.SKELETON_INNER_ARMOR, EntityModelLayers.SKELETON_OUTER_ARMOR);
+    public VoidtouchedSkeletonEntityRenderer(EntityRendererProvider.Context context) {
+        super(context, ModEntities.MODEL_VOIDTOUCHED_SKELETON_LAYER, ModelLayers.SKELETON_INNER_ARMOR, ModelLayers.SKELETON_OUTER_ARMOR);
     }
 
     @Override
-    public Identifier getTexture(AbstractSkeletonEntity abstractSkeletonEntity) {
+    public ResourceLocation getTextureLocation(AbstractSkeleton abstractSkeletonEntity) {
         return TEXTURE;
     }
 }

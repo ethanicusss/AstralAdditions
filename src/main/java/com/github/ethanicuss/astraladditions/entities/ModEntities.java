@@ -19,50 +19,50 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.model.SkeletonEntityModel;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.client.model.SkeletonModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 
 public class ModEntities {
     public static final EntityType<MoonmanEntity> MOONMAN = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier(AstralAdditions.MOD_ID, "moonman"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, MoonmanEntity::new).dimensions(EntityDimensions.fixed(0.75f, 2.8f)).build()
+            new ResourceLocation(AstralAdditions.MOD_ID, "moonman"),
+            FabricEntityTypeBuilder.create(MobCategory.MONSTER, MoonmanEntity::new).dimensions(EntityDimensions.fixed(0.75f, 2.8f)).build()
     );
     public static final EntityType<HemogiantEntity> GLUTTON = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier(AstralAdditions.MOD_ID, "hemogiant"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, HemogiantEntity::new).dimensions(EntityDimensions.fixed(1.05f, 5.8f)).build()
+            new ResourceLocation(AstralAdditions.MOD_ID, "hemogiant"),
+            FabricEntityTypeBuilder.create(MobCategory.MONSTER, HemogiantEntity::new).dimensions(EntityDimensions.fixed(1.05f, 5.8f)).build()
     );
     public static final EntityType<VoidtouchedSkeletonEntity> VOIDTOUCHED_SKELETON = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier(AstralAdditions.MOD_ID, "voidtouched_skeleton"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, VoidtouchedSkeletonEntity::new).dimensions(EntityDimensions.fixed(0.75f, 1.8f)).build()
+            new ResourceLocation(AstralAdditions.MOD_ID, "voidtouched_skeleton"),
+            FabricEntityTypeBuilder.create(MobCategory.MONSTER, VoidtouchedSkeletonEntity::new).dimensions(EntityDimensions.fixed(0.75f, 1.8f)).build()
     );
     public static final EntityType<VoidtouchedZombieEntity> VOIDTOUCHED_ZOMBIE = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier(AstralAdditions.MOD_ID, "voidtouched_zombie"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, VoidtouchedZombieEntity::new).dimensions(EntityDimensions.fixed(0.8f, 2.5f)).build()
+            new ResourceLocation(AstralAdditions.MOD_ID, "voidtouched_zombie"),
+            FabricEntityTypeBuilder.create(MobCategory.MONSTER, VoidtouchedZombieEntity::new).dimensions(EntityDimensions.fixed(0.8f, 2.5f)).build()
     );
     public static final EntityType<EnderBallEntity> ENDER_BALL = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier(AstralAdditions.MOD_ID, "ender_ball"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, EnderBallEntity::new).dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build()
+            new ResourceLocation(AstralAdditions.MOD_ID, "ender_ball"),
+            FabricEntityTypeBuilder.create(MobCategory.MISC, EnderBallEntity::new).dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build()
     );
     public static final EntityType<GluttonyBallEntity> GLUTTONY_BALL = Registry.register(
 			Registry.ENTITY_TYPE,
-			new Identifier(AstralAdditions.MOD_ID, "gluttony_ball"),
-			FabricEntityTypeBuilder.create(SpawnGroup.MISC, GluttonyBallEntity::new).dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build()
+			new ResourceLocation(AstralAdditions.MOD_ID, "gluttony_ball"),
+			FabricEntityTypeBuilder.create(MobCategory.MISC, GluttonyBallEntity::new).dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build()
 	);
 
-    public static final EntityModelLayer MODEL_MOONMAN_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "moonman"), "main");
-    public static final EntityModelLayer MODEL_GLUTTON_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "hemogiant"), "main");
-    public static final EntityModelLayer MODEL_VOIDTOUCHED_SKELETON_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "voidtouched_skeleton"), "main");
-    public static final EntityModelLayer MODEL_VOIDTOUCHED_ZOMBIE_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "voidtouched_zombie"), "main");
+    public static final ModelLayerLocation MODEL_MOONMAN_LAYER = new ModelLayerLocation(new ResourceLocation(AstralAdditions.MOD_ID, "moonman"), "main");
+    public static final ModelLayerLocation MODEL_GLUTTON_LAYER = new ModelLayerLocation(new ResourceLocation(AstralAdditions.MOD_ID, "hemogiant"), "main");
+    public static final ModelLayerLocation MODEL_VOIDTOUCHED_SKELETON_LAYER = new ModelLayerLocation(new ResourceLocation(AstralAdditions.MOD_ID, "voidtouched_skeleton"), "main");
+    public static final ModelLayerLocation MODEL_VOIDTOUCHED_ZOMBIE_LAYER = new ModelLayerLocation(new ResourceLocation(AstralAdditions.MOD_ID, "voidtouched_zombie"), "main");
 
     public static void init() {
         FabricDefaultAttributeRegistry.register(MOONMAN, MoonmanEntity.createMoonmanAttributes());
@@ -79,7 +79,7 @@ public class ModEntities {
         EntityModelLayerRegistry.registerModelLayer(MODEL_GLUTTON_LAYER, HemogiantEntityModel::getTexturedModelData);
 
         EntityRendererRegistry.register(VOIDTOUCHED_SKELETON, VoidtouchedSkeletonEntityRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(MODEL_VOIDTOUCHED_SKELETON_LAYER, SkeletonEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_VOIDTOUCHED_SKELETON_LAYER, SkeletonModel::createBodyLayer);
 
         EntityRendererRegistry.register(VOIDTOUCHED_ZOMBIE, VoidtouchedZombieEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MODEL_VOIDTOUCHED_ZOMBIE_LAYER, VoidtouchedZombieEntityRenderer::getTexturedModelData);

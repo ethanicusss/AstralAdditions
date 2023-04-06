@@ -1,35 +1,35 @@
 package com.github.ethanicuss.astraladditions.mixin.betterdragon;
 
-import net.minecraft.entity.boss.dragon.phase.HoverPhase;
-import net.minecraft.entity.boss.dragon.phase.LandingPhase;
-import net.minecraft.entity.boss.dragon.phase.SittingFlamingPhase;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.entity.boss.enderdragon.phases.DragonHoverPhase;
+import net.minecraft.world.entity.boss.enderdragon.phases.DragonLandingPhase;
+import net.minecraft.world.entity.boss.enderdragon.phases.DragonSittingFlamingPhase;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(LandingPhase.class)
+@Mixin(DragonLandingPhase.class)
 interface LandingPhaseAccessor {
     @Accessor
-    Vec3d getTarget();
+    Vec3 getTargetLocation();
 
-    @Accessor("target")
-    public void setTarget(Vec3d target);
+    @Accessor("targetLocation")
+    public void setTargetLocation(Vec3 target);
 }
-@Mixin(HoverPhase.class)
+@Mixin(DragonHoverPhase.class)
 interface HoverPhaseAccessor {
     @Accessor
-    Vec3d getTarget();
+    Vec3 getTargetLocation();
 
-    @Accessor("target")
-    public void setTarget(Vec3d target);
+    @Accessor("targetLocation")
+    public void setTarget(Vec3 target);
 }
 
-@Mixin(SittingFlamingPhase.class)
+@Mixin(DragonSittingFlamingPhase.class)
 interface SittingFlamingPhaseAccessor {
 
     @Accessor
-    int getTicks();
+    int getFlameTicks();
 
     @Accessor
-    int getTimesRun();
+    int getFlameCount();
 }

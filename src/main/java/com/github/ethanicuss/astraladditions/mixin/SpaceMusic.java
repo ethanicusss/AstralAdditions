@@ -2,17 +2,6 @@ package com.github.ethanicuss.astraladditions.mixin;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.AstralAdditionsClient;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.sound.MusicTracker;
-import net.minecraft.entity.boss.WitherEntity;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.sound.MusicSound;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.TypeFilter;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -24,16 +13,27 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.sounds.MusicManager;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.Music;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.level.entity.EntityTypeTest;
+import net.minecraft.world.phys.AABB;
 
 
-@Mixin(MinecraftClient.class)
+@Mixin(Minecraft.class)
 public class SpaceMusic {
-    @Shadow public boolean wireFrame;
-    @Shadow @Final private MusicTracker musicTracker;
+    @Shadow public boolean wireframe;
+    @Shadow @Final private MusicManager musicManager;
     private static final int GAME_MIN_DELAY = 12000;
     private static final int GAME_MAX_DELAY = 24000;//12000, 24000
     private static SoundEvent register(String id) {
-        return Registry.register(Registry.SOUND_EVENT, id, new SoundEvent(new Identifier(AstralAdditions.MOD_ID, id)));
+        return Registry.register(Registry.SOUND_EVENT, id, new SoundEvent(new ResourceLocation(AstralAdditions.MOD_ID, id)));
     }
     private static final SoundEvent MUSIC_MOON = register("music_moon");
     private static final SoundEvent MUSIC_POST_MOON = register("music_post_moon");
@@ -54,39 +54,39 @@ public class SpaceMusic {
     private static final SoundEvent MUSIC_WITHER_DEATH = register("music_wither_death");
     private static final SoundEvent MUSIC_COMBAT = register("music_combat");
     private static final SoundEvent MUSIC_COMBAT_END = register("music_combat_end");
-    private static final MusicSound MOON = new MusicSound(MUSIC_MOON, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
-    private static final MusicSound POST_MOON = new MusicSound(MUSIC_POST_MOON, 0, 0, true);
-    private static final MusicSound DAY = new MusicSound(MUSIC_DAY, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
-    private static final MusicSound NIGHT = new MusicSound(MUSIC_NIGHT, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
-    private static final MusicSound OW_DAY = new MusicSound(MUSIC_OW_DAY, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
-    private static final MusicSound OW_NIGHT = new MusicSound(MUSIC_OW_NIGHT, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
-    private static final MusicSound OW_CAVE = new MusicSound(MUSIC_OW_CAVE, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
-    private static final MusicSound OW_SCARY = new MusicSound(MUSIC_OW_SCARY, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
-    private static final MusicSound ORBIT = new MusicSound(MUSIC_ORBIT, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
-    private static final MusicSound MERCURY = new MusicSound(MUSIC_MERCURY, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
-    private static final MusicSound MARS = new MusicSound(MUSIC_MARS, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
-    private static final MusicSound END = new MusicSound(MUSIC_END, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
-    private static final MusicSound END_BOSS = new MusicSound(MUSIC_END_BOSS, 0, 0, true);
-    private static final MusicSound WITHER = new MusicSound(MUSIC_WITHER, 0, 0, true);
-    private static final MusicSound WITHER_PHASE2 = new MusicSound(MUSIC_WITHER_PHASE2, 0, 0, true);
-    private static final MusicSound WITHER_SPAWN = new MusicSound(MUSIC_WITHER_SPAWN, 0, 0, true);
-    private static final MusicSound WITHER_DEATH = new MusicSound(MUSIC_WITHER_DEATH, 0, 0, true);
-    private static final MusicSound COMBAT = new MusicSound(MUSIC_COMBAT, 0, 0, true);
-    private static final MusicSound COMBAT_END = new MusicSound(MUSIC_COMBAT_END, 0, 0, true);
+    private static final Music MOON = new Music(MUSIC_MOON, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
+    private static final Music POST_MOON = new Music(MUSIC_POST_MOON, 0, 0, true);
+    private static final Music DAY = new Music(MUSIC_DAY, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
+    private static final Music NIGHT = new Music(MUSIC_NIGHT, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
+    private static final Music OW_DAY = new Music(MUSIC_OW_DAY, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
+    private static final Music OW_NIGHT = new Music(MUSIC_OW_NIGHT, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
+    private static final Music OW_CAVE = new Music(MUSIC_OW_CAVE, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
+    private static final Music OW_SCARY = new Music(MUSIC_OW_SCARY, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
+    private static final Music ORBIT = new Music(MUSIC_ORBIT, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
+    private static final Music MERCURY = new Music(MUSIC_MERCURY, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
+    private static final Music MARS = new Music(MUSIC_MARS, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
+    private static final Music END = new Music(MUSIC_END, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
+    private static final Music END_BOSS = new Music(MUSIC_END_BOSS, 0, 0, true);
+    private static final Music WITHER = new Music(MUSIC_WITHER, 0, 0, true);
+    private static final Music WITHER_PHASE2 = new Music(MUSIC_WITHER_PHASE2, 0, 0, true);
+    private static final Music WITHER_SPAWN = new Music(MUSIC_WITHER_SPAWN, 0, 0, true);
+    private static final Music WITHER_DEATH = new Music(MUSIC_WITHER_DEATH, 0, 0, true);
+    private static final Music COMBAT = new Music(MUSIC_COMBAT, 0, 0, true);
+    private static final Music COMBAT_END = new Music(MUSIC_COMBAT_END, 0, 0, true);
 
-    private static final Predicate<WitherEntity> WITHER_PREDICATE = (entity) -> {
+    private static final Predicate<WitherBoss> WITHER_PREDICATE = (entity) -> {
         return true;
     };
-    private static final Predicate<HostileEntity> ENEMY_PREDICATE = (entity) -> {
+    private static final Predicate<Monster> ENEMY_PREDICATE = (entity) -> {
         return true;
     };
 
-    @Inject(method = "getMusicType", at = @At("HEAD"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
-    private void getMusicType(CallbackInfoReturnable<MusicSound> cir){
-        ClientPlayerEntity player = MinecraftClient.getInstance().player;
+    @Inject(method = "getSituationalMusic", at = @At("HEAD"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
+    private void getMusicType(CallbackInfoReturnable<Music> cir){
+        LocalPlayer player = Minecraft.getInstance().player;
         if (player != null) {
-            if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:overworld")){
-                if (player.world.getTimeOfDay()%24000 < 12000) {
+            if (Objects.equals(player.level.dimension().location().toString(), "minecraft:overworld")){
+                if (player.level.getDayTime()%24000 < 12000) {
                     cir.setReturnValue(OW_DAY);
                 }
                 else{
@@ -95,52 +95,52 @@ public class SpaceMusic {
                 if (player.getY() < 50){
                     cir.setReturnValue(OW_CAVE);
                 }
-                if (player.getY() < 30 && player.world.getLightLevel(player.getBlockPos()) == 0){
+                if (player.getY() < 30 && player.level.getMaxLocalRawBrightness(player.blockPosition()) == 0){
                     cir.setReturnValue(OW_SCARY);
                 }
             }
-            if (!Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:overworld") && !Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:the_end")) {
-                if (player.world.getTimeOfDay()%24000 < 12000) {
+            if (!Objects.equals(player.level.dimension().location().toString(), "minecraft:overworld") && !Objects.equals(player.level.dimension().location().toString(), "minecraft:the_end")) {
+                if (player.level.getDayTime()%24000 < 12000) {
                     cir.setReturnValue(DAY);
                 }
                 else{
                     cir.setReturnValue(NIGHT);
                 }
             }
-            if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:moon") && player.getY() < 95) {
+            if (Objects.equals(player.level.dimension().location().toString(), "ad_astra:moon") && player.getY() < 95) {
                 cir.setReturnValue(MOON);
             }
-            if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:mercury")) {
+            if (Objects.equals(player.level.dimension().location().toString(), "ad_astra:mercury")) {
                 cir.setReturnValue(MERCURY);
             }
-            if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:the_end")) {
+            if (Objects.equals(player.level.dimension().location().toString(), "minecraft:the_end")) {
                 cir.setReturnValue(END);
-                if (MinecraftClient.getInstance().inGameHud.getBossBarHud().shouldPlayDragonMusic()) {
+                if (Minecraft.getInstance().gui.getBossOverlay().shouldPlayMusic()) {
                     cir.setReturnValue(END_BOSS);
                 }
             }
-            if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:mars") && player.getY() < 80) {
+            if (Objects.equals(player.level.dimension().location().toString(), "ad_astra:mars") && player.getY() < 80) {
                 cir.setReturnValue(MARS);
             }
-            if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:moon_orbit") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:mars_orbit") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:mercury_orbit") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:earth_orbit")) {
+            if (Objects.equals(player.level.dimension().location().toString(), "ad_astra:moon_orbit") || Objects.equals(player.level.dimension().location().toString(), "ad_astra:mars_orbit") || Objects.equals(player.level.dimension().location().toString(), "ad_astra:mercury_orbit") || Objects.equals(player.level.dimension().location().toString(), "ad_astra:earth_orbit")) {
                 cir.setReturnValue(ORBIT);
             }
-            if ((player.getHealth() < 12.0f || musicTracker.isPlayingType(COMBAT)) && !musicTracker.isPlayingType(WITHER_DEATH)) {
+            if ((player.getHealth() < 12.0f || musicManager.isPlayingMusic(COMBAT)) && !musicManager.isPlayingMusic(WITHER_DEATH)) {
                 double i = player.getX();
                 double j = player.getY();
                 double k = player.getZ();
                 float f = 20.0f;
-                Box box = new Box((float) i - f, (float) j - f, (float) k - f, (float) (i + 1) + f, (float) (j + 1) + f, (float) (k + 1) + f);
-                List<HostileEntity> list = player.world.getEntitiesByType(TypeFilter.instanceOf(HostileEntity.class), box, ENEMY_PREDICATE);
+                AABB box = new AABB((float) i - f, (float) j - f, (float) k - f, (float) (i + 1) + f, (float) (j + 1) + f, (float) (k + 1) + f);
+                List<Monster> list = player.level.getEntities(EntityTypeTest.forClass(Monster.class), box, ENEMY_PREDICATE);
                 int enemySeeCount = 0;
                 int enemyCount = 0;
                 boolean enemyDied = false;
-                for (HostileEntity e : list) {
+                for (Monster e : list) {
                     enemyCount++;
-                    if (e.canSee(player)) {
+                    if (e.hasLineOfSight(player)) {
                         enemySeeCount++;
                     }
-                    if (e.isDead()) {
+                    if (e.isDeadOrDying()) {
                         enemyDied = true;
                         enemySeeCount--;
                         enemyCount--;
@@ -149,33 +149,33 @@ public class SpaceMusic {
                 if (enemySeeCount >= 3) {
                     cir.setReturnValue(COMBAT);
                 }
-                if (enemyDied && musicTracker.isPlayingType(COMBAT)){
+                if (enemyDied && musicManager.isPlayingMusic(COMBAT)){
                     if (enemySeeCount == 0){
                         cir.setReturnValue(COMBAT_END);
                     }
                 }
-                if (enemyCount == 0 && musicTracker.isPlayingType(COMBAT)) {
+                if (enemyCount == 0 && musicManager.isPlayingMusic(COMBAT)) {
                     cir.setReturnValue(COMBAT_END);
                 }
             }
-            if (MinecraftClient.getInstance().inGameHud.getBossBarHud().shouldDarkenSky()) {
+            if (Minecraft.getInstance().gui.getBossOverlay().shouldDarkenScreen()) {
                 double i = player.getX();
                 double j = player.getY();
                 double k = player.getZ();
                 float f = 40.0f;
-                Box box = new Box((float)i - f, (float)j - f, (float)k - f, (float)(i + 1) + f, (float)(j + 1) + f, (float)(k + 1) + f);
-                List<WitherEntity> list = player.world.getEntitiesByType(TypeFilter.instanceOf(WitherEntity.class), box, WITHER_PREDICATE);
+                AABB box = new AABB((float)i - f, (float)j - f, (float)k - f, (float)(i + 1) + f, (float)(j + 1) + f, (float)(k + 1) + f);
+                List<WitherBoss> list = player.level.getEntities(EntityTypeTest.forClass(WitherBoss.class), box, WITHER_PREDICATE);
                 boolean witherExists = false;
                 boolean spawnExists = false;
                 boolean phase2Exists = false;
                 boolean witherDead = false;
-                for (WitherEntity w : list) {
+                for (WitherBoss w : list) {
                     witherExists = true;
-                    if (w.getInvulnerableTimer() > 0){
+                    if (w.getInvulnerableTicks() > 0){
                         spawnExists = true;
                     }
                     else {
-                        if (w.shouldRenderOverlay()) {
+                        if (w.isPowered()) {
                             phase2Exists = true;
                         }
                     }
@@ -195,7 +195,7 @@ public class SpaceMusic {
                             cir.setReturnValue(WITHER);
                         }
                         else{
-                            if (musicTracker.isPlayingType(WITHER) || musicTracker.isPlayingType(WITHER_PHASE2)){
+                            if (musicManager.isPlayingMusic(WITHER) || musicManager.isPlayingMusic(WITHER_PHASE2)){
                                 cir.setReturnValue(COMBAT_END);
                             }
                         }
@@ -206,13 +206,13 @@ public class SpaceMusic {
                 }
             }
             if (!AstralAdditionsClient.playerTracker.hasBeenToMoon){
-                if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:moon")) {
+                if (Objects.equals(player.level.dimension().location().toString(), "ad_astra:moon")) {
                     AstralAdditionsClient.playerTracker.hasBeenToMoon = true;
                 }
             }
             else{
                 if (!AstralAdditionsClient.playerTracker.hasHeardPostMoonSong){
-                    if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:overworld")) {
+                    if (Objects.equals(player.level.dimension().location().toString(), "minecraft:overworld")) {
                         AstralAdditionsClient.playerTracker.hasHeardPostMoonSong = true;
                         cir.setReturnValue(POST_MOON);
                         AstralAdditionsClient.playerTracker.SaveTrackingData();

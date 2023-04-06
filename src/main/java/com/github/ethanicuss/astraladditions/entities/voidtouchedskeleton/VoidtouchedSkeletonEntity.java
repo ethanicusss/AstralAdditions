@@ -1,34 +1,34 @@
 package com.github.ethanicuss.astraladditions.entities.voidtouchedskeleton;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.StrayEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Stray;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class VoidtouchedSkeletonEntity
-        extends StrayEntity {
+        extends Stray {
 
-    public VoidtouchedSkeletonEntity(EntityType<? extends VoidtouchedSkeletonEntity> entityType, World world) {
-        super((EntityType<? extends StrayEntity>) entityType, world);
+    public VoidtouchedSkeletonEntity(EntityType<? extends VoidtouchedSkeletonEntity> entityType, Level world) {
+        super((EntityType<? extends Stray>) entityType, world);
     }
 
-    public static DefaultAttributeContainer.Builder createVoidtouchedSkeletonAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 22.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64.0);
+    public static AttributeSupplier.Builder createVoidtouchedSkeletonAttributes() {
+        return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 22.0).add(Attributes.MOVEMENT_SPEED, 0.3f).add(Attributes.ATTACK_DAMAGE, 5.0).add(Attributes.FOLLOW_RANGE, 64.0);
     }
 
     @Override
-    protected PersistentProjectileEntity createArrowProjectile(ItemStack arrow, float damageModifier) {
-        PersistentProjectileEntity persistentProjectileEntity = super.createArrowProjectile(arrow, damageModifier);
-        if (persistentProjectileEntity instanceof ArrowEntity) {
-            float f = this.world.getLocalDifficulty(this.getBlockPos()).getLocalDifficulty();
-            ((ArrowEntity)persistentProjectileEntity).addEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 100 * (int)f));
+    protected AbstractArrow getArrow(ItemStack arrow, float damageModifier) {
+        AbstractArrow persistentProjectileEntity = super.getArrow(arrow, damageModifier);
+        if (persistentProjectileEntity instanceof Arrow) {
+            float f = this.level.getCurrentDifficultyAt(this.blockPosition()).getEffectiveDifficulty();
+            ((Arrow)persistentProjectileEntity).addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100 * (int)f));
         }
         return persistentProjectileEntity;
     }

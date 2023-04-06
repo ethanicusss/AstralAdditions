@@ -5,29 +5,34 @@ import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import com.github.ethanicuss.astraladditions.entities.moondragon.EnderBallEntity;
 import com.github.ethanicuss.astraladditions.entities.moondragon.GluttonyBallEntity;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedzombie.VoidtouchedZombieEntity;
-import net.minecraft.entity.AreaEffectCloudEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
-import net.minecraft.entity.ai.TargetPredicate;
-import net.minecraft.entity.ai.pathing.Path;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonPart;
-import net.minecraft.entity.boss.dragon.phase.*;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.WorldEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.AreaEffectCloud;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.boss.EnderDragonPart;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.boss.enderdragon.phases.AbstractDragonPhaseInstance;
+import net.minecraft.world.entity.boss.enderdragon.phases.AbstractDragonSittingPhase;
+import net.minecraft.world.entity.boss.enderdragon.phases.DragonChargePlayerPhase;
+import net.minecraft.world.entity.boss.enderdragon.phases.DragonHoverPhase;
+import net.minecraft.world.entity.boss.enderdragon.phases.DragonLandingPhase;
+import net.minecraft.world.entity.boss.enderdragon.phases.DragonSittingAttackingPhase;
+import net.minecraft.world.entity.boss.enderdragon.phases.DragonSittingFlamingPhase;
+import net.minecraft.world.entity.boss.enderdragon.phases.EnderDragonPhase;
+import net.minecraft.world.entity.boss.enderdragon.phases.EnderDragonPhaseManager;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -39,35 +44,35 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 import java.util.Random;
 
-@Mixin(EnderDragonEntity.class)
+@Mixin(EnderDragon.class)
 public class BetterDragon {
 
-    @Shadow @Final private PhaseManager phaseManager;
+    @Shadow @Final private EnderDragonPhaseManager phaseManager;
 
-    @Inject(method = "createEnderDragonAttributes", at = @At("HEAD"), cancellable = true)
-    private static void createEnderDragonAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
-        cir.setReturnValue(MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 300.0));
+    @Inject(method = "createAttributes", at = @At("HEAD"), cancellable = true)
+    private static void createEnderDragonAttributes(CallbackInfoReturnable<AttributeSupplier.Builder> cir) {
+        cir.setReturnValue(Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 300.0));
     }
 
-    @Inject(method = "addStatusEffect", at = @At("HEAD"), cancellable = true)
-    public void addStatusEffect(StatusEffectInstance effect, Entity source, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "addEffect", at = @At("HEAD"), cancellable = true)
+    public void addStatusEffect(MobEffectInstance effect, Entity source, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(true);
     }
 
-    @Inject(method = "tickMovement", at = @At("HEAD"))
+    @Inject(method = "aiStep", at = @At("HEAD"))
     public void tickMovement(CallbackInfo ci){
-        ((EnderDragonEntity)(Object) this).world.addParticle(ParticleTypes.SQUID_INK, ((EnderDragonEntity)(Object) this).getParticleX(0.5), ((EnderDragonEntity)(Object) this).getRandomBodyY() - 0.25, ((EnderDragonEntity)(Object) this).getParticleZ(0.5), 0, 0, 0);
+        ((EnderDragon)(Object) this).level.addParticle(ParticleTypes.SQUID_INK, ((EnderDragon)(Object) this).getRandomX(0.5), ((EnderDragon)(Object) this).getRandomY() - 0.25, ((EnderDragon)(Object) this).getRandomZ(0.5), 0, 0, 0);
 
-        if (((EnderDragonEntity)(Object) this).slowedDownByBlock) {
-            ((EnderDragonEntity)(Object) this).addVelocity(0, 0.01, 0);
+        if (((EnderDragon)(Object) this).inWall) {
+            ((EnderDragon)(Object) this).push(0, 0.01, 0);
         }
-        AstralAdditions.LOGGER.debug(phaseManager.getCurrent().toString());
+        AstralAdditions.LOGGER.debug(phaseManager.getCurrentPhase().toString());
     }
 
-    @Inject(method = "launchLivingEntities", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "knockBack", at = @At("HEAD"), cancellable = true)
     private void launchLivingEntities(List<Entity> entities, CallbackInfo ci) {
-        EnderDragonPart body = ((DragonAccessor) (EnderDragonEntity) (Object) this).getBody();
-        PhaseManager phaseManager = ((DragonAccessor) (EnderDragonEntity) (Object) this).getPhaseManager();
+        EnderDragonPart body = ((DragonAccessor) (EnderDragon) (Object) this).getBody();
+        EnderDragonPhaseManager phaseManager = ((DragonAccessor) (EnderDragon) (Object) this).getPhaseManager();
 
         double d = (body.getBoundingBox().minX + body.getBoundingBox().maxX) / 2.0;
         double e = (body.getBoundingBox().minZ + body.getBoundingBox().maxZ) / 2.0;
@@ -77,157 +82,157 @@ public class BetterDragon {
             double f = entity.getX() - d;
             double g = entity.getZ() - e;
             double h = Math.max(f * f + g * g, 0.1);
-            entity.setVelocity(f / h * 2.0, 0.2f, g / h * 2.0);
-            if (phaseManager.getCurrent().isSittingOrHovering() || phaseManager.getCurrent().getType() == PhaseType.SITTING_ATTACKING || phaseManager.getCurrent().getType() == PhaseType.SITTING_FLAMING || ((LivingEntity) entity).getLastAttackedTime() >= entity.age - 2)
+            entity.setDeltaMovement(f / h * 2.0, 0.2f, g / h * 2.0);
+            if (phaseManager.getCurrentPhase().isSitting() || phaseManager.getCurrentPhase().getPhase() == EnderDragonPhase.SITTING_ATTACKING || phaseManager.getCurrentPhase().getPhase() == EnderDragonPhase.SITTING_FLAMING || ((LivingEntity) entity).getLastHurtByMobTimestamp() >= entity.tickCount - 2)
                 continue;
 
 
-            entity.setVelocity(f / h * 4.0, 0.5f, g / h * 4.0);
-            entity.damage(DamageSource.mob((EnderDragonEntity) (Object) this), 5.0f);
-            System.out.println(phaseManager.getCurrent().getType().toString());
+            entity.setDeltaMovement(f / h * 4.0, 0.5f, g / h * 4.0);
+            entity.hurt(DamageSource.mobAttack((EnderDragon) (Object) this), 5.0f);
+            System.out.println(phaseManager.getCurrentPhase().getPhase().toString());
         }
         ci.cancel();
     }
 }
 
-@Mixin(LandingPhase.class)
+@Mixin(DragonLandingPhase.class)
 class BetterLandingPhase {
 
-    @Inject(method = "serverTick", at = @At("TAIL"))
+    @Inject(method = "doServerTick", at = @At("TAIL"))
     public void serverTick(CallbackInfo ci) {
-        Vec3d target = ((LandingPhaseAccessor) (LandingPhase) (Object) this).getTarget();
-        EnderDragonEntity dragon = ((AbstractPhaseAccessor) (AbstractPhase) (Object) this).getDragon();
+        Vec3 target = ((LandingPhaseAccessor) (DragonLandingPhase) (Object) this).getTargetLocation();
+        EnderDragon dragon = ((AbstractPhaseAccessor) (AbstractDragonPhaseInstance) (Object) this).getDragon();
         boolean fountainTooFarAway = false;
 
         if (target != null){
-            if (target.squaredDistanceTo(dragon.getX(), target.y, dragon.getZ()) > 256.0) {
+            if (target.distanceToSqr(dragon.getX(), target.y, dragon.getZ()) > 256.0) {
                 fountainTooFarAway = true;
             }
         }
         if (target == null || fountainTooFarAway){
-            PlayerEntity p = dragon.world.getClosestPlayer(dragon, 64);
+            Player p = dragon.level.getNearestPlayer(dragon, 64);
             if (p != null){
-                Vec3d vec3d3 = dragon.getRotationVec(1.0f);
+                Vec3 vec3d3 = dragon.getViewVector(1.0f);
                 double l = dragon.head.getX() - vec3d3.x;
-                double m = dragon.head.getBodyY(0.5) + 0.5;
+                double m = dragon.head.getY(0.5) + 0.5;
                 double n = dragon.head.getZ() - vec3d3.z;
-                EnderBallEntity e = new EnderBallEntity(ModEntities.ENDER_BALL, dragon.world);
-                e.setPos(l, m, n);
-                e.refreshPositionAndAngles(l, m, n, 0.0f, 0.0f);
+                EnderBallEntity e = new EnderBallEntity(ModEntities.ENDER_BALL, dragon.level);
+                e.setPosRaw(l, m, n);
+                e.moveTo(l, m, n, 0.0f, 0.0f);
                 double speed = 0.1;
-                e.setVelocity((p.getX() - e.getX()) * speed, (p.getY() - e.getY()) * speed, (p.getZ() - e.getZ()) * speed);
-                dragon.world.spawnEntity(e);
+                e.setDeltaMovement((p.getX() - e.getX()) * speed, (p.getY() - e.getY()) * speed, (p.getZ() - e.getZ()) * speed);
+                dragon.level.addFreshEntity(e);
                 if (!dragon.isSilent()) {
-                    dragon.world.syncWorldEvent(null, WorldEvents.ENDER_DRAGON_SHOOTS, dragon.getBlockPos(), 0);
+                    dragon.level.levelEvent(null, LevelEvent.SOUND_DRAGON_FIREBALL, dragon.blockPosition(), 0);
                 }
             }
 
-            BlockPos pos = dragon.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, dragon.getBlockPos());
+            BlockPos pos = dragon.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, dragon.blockPosition());
             BlockPos newpos = new BlockPos(pos.getX(), pos.getY() + 4, pos.getZ());
-            target = Vec3d.ofBottomCenter(newpos);
+            target = Vec3.atBottomCenterOf(newpos);
             if (target == null && p != null){
-                pos = p.getBlockPos();
+                pos = p.blockPosition();
             }
-            target = Vec3d.ofBottomCenter(pos);
-            ((LandingPhaseAccessor) this).setTarget(target);
+            target = Vec3.atBottomCenterOf(pos);
+            ((LandingPhaseAccessor) this).setTargetLocation(target);
         }
-        if (dragon.getY() > target.getY() + 5) {
-            dragon.addVelocity(0, -0.05, 0);
+        if (dragon.getY() > target.y() + 5) {
+            dragon.push(0, -0.05, 0);
         }
-        if (target.squaredDistanceTo(dragon.getX(), dragon.getY(), dragon.getZ()) < 2.0) {
-            dragon.getPhaseManager().create(PhaseType.SITTING_FLAMING).reset();
-            dragon.getPhaseManager().setPhase(PhaseType.SITTING_SCANNING);
+        if (target.distanceToSqr(dragon.getX(), dragon.getY(), dragon.getZ()) < 2.0) {
+            dragon.getPhaseManager().getPhase(EnderDragonPhase.SITTING_FLAMING).resetFlameCount();
+            dragon.getPhaseManager().setPhase(EnderDragonPhase.SITTING_SCANNING);
         }
     }
 }
 
-@Mixin(HoverPhase.class)
+@Mixin(DragonHoverPhase.class)
 class BetterHoverPhase {
 
-    @Inject(method = "serverTick", at = @At("HEAD"))
+    @Inject(method = "doServerTick", at = @At("HEAD"))
     public void serverTick(CallbackInfo ci){
-        Vec3d target = ((HoverPhaseAccessor) (HoverPhase) (Object) this).getTarget();
-        EnderDragonEntity dragon = ((AbstractPhaseAccessor) (AbstractPhase) (Object) this).getDragon();
+        Vec3 target = ((HoverPhaseAccessor) (DragonHoverPhase) (Object) this).getTargetLocation();
+        EnderDragon dragon = ((AbstractPhaseAccessor) (AbstractDragonPhaseInstance) (Object) this).getDragon();
         if (target == null){
             BlockPos pos = new BlockPos(dragon.getX(), dragon.getY() + 10, dragon.getZ());
-            target = Vec3d.ofBottomCenter(pos);
+            target = Vec3.atBottomCenterOf(pos);
         }
         ((HoverPhaseAccessor) this).setTarget(target);
         if (dragon.getY() > target.y - 1){
-            dragon.getPhaseManager().create(PhaseType.LANDING);
-            dragon.getPhaseManager().setPhase(PhaseType.LANDING);
+            dragon.getPhaseManager().getPhase(EnderDragonPhase.LANDING);
+            dragon.getPhaseManager().setPhase(EnderDragonPhase.LANDING);
         }
     }
 }
 
-@Mixin(AbstractSittingPhase.class)
+@Mixin(AbstractDragonSittingPhase.class)
 class BetterAbstractSittingPhase {
 
-    @Inject(method = "modifyDamageTaken", at = @At("RETURN"))
+    @Inject(method = "onHurt", at = @At("RETURN"))
     public void modifyDamageTaken(DamageSource damageSource, float damage, CallbackInfoReturnable<Float> cir){
-        if (damageSource.getSource() instanceof PersistentProjectileEntity proj) {
-            proj.setPunch(3);
+        if (damageSource.getDirectEntity() instanceof AbstractArrow proj) {
+            proj.setKnockback(3);
             double vel = 2;
-            PlayerEntity p = proj.world.getClosestPlayer(proj, 64);
+            Player p = proj.level.getNearestPlayer(proj, 64);
             if (p != null) {
-                proj.setVelocity((proj.getX() - p.getX()) * vel, (proj.getY() - p.getY()) * vel - 4.5, (proj.getZ() - p.getZ()) * vel);
+                proj.setDeltaMovement((proj.getX() - p.getX()) * vel, (proj.getY() - p.getY()) * vel - 4.5, (proj.getZ() - p.getZ()) * vel);
             }
         }
     }
 }
 
-@Mixin(SittingAttackingPhase.class)
+@Mixin(DragonSittingAttackingPhase.class)
 class BetterSittingAttackPhase {
 
-    @Inject(method = "beginPhase", at = @At("HEAD"))
+    @Inject(method = "begin", at = @At("HEAD"))
     public void beginPhase(CallbackInfo ci) {
-        EnderDragonEntity dragon = ((AbstractPhaseAccessor) (AbstractPhase) (Object) this).getDragon();
+        EnderDragon dragon = ((AbstractPhaseAccessor) (AbstractDragonPhaseInstance) (Object) this).getDragon();
         Random random = new Random();
         for (int i = 0; i < 2; i++){
-            VoidtouchedZombieEntity z = new VoidtouchedZombieEntity(ModEntities.VOIDTOUCHED_ZOMBIE, dragon.world);
-            BlockPos pos = dragon.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, dragon.getBlockPos());
+            VoidtouchedZombieEntity z = new VoidtouchedZombieEntity(ModEntities.VOIDTOUCHED_ZOMBIE, dragon.level);
+            BlockPos pos = dragon.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, dragon.blockPosition());
             if (pos.getY() == 0) {
                 pos = new BlockPos(pos.getX(), dragon.getY(), pos.getZ());
             }
             BlockPos newpos = new BlockPos(pos.getX() + random.nextInt(2) - 1, pos.getY(), pos.getZ() + random.nextInt(2) - 1);
-            z.setPos(newpos.getX(), newpos.getY(), newpos.getZ());
-            z.refreshPositionAndAngles(newpos, random.nextInt(360), 0);
-            dragon.world.spawnEntity(z);
+            z.setPosRaw(newpos.getX(), newpos.getY(), newpos.getZ());
+            z.moveTo(newpos, random.nextInt(360), 0);
+            dragon.level.addFreshEntity(z);
         }
     }
 }
 
-@Mixin(SittingFlamingPhase.class)
+@Mixin(DragonSittingFlamingPhase.class)
 class BetterSittingFlamingPhase {
 
-    @Inject(method = "serverTick", at = @At("HEAD"))
+    @Inject(method = "doServerTick", at = @At("HEAD"))
     public void serverTick(CallbackInfo ci) {
-        int ticks = ((SittingFlamingPhaseAccessor) (Object) this).getTicks();
-        int timesRun = ((SittingFlamingPhaseAccessor) (Object) this).getTimesRun();
-        EnderDragonEntity dragon = ((AbstractPhaseAccessor) (AbstractPhase) (Object) this).getDragon();
+        int ticks = ((SittingFlamingPhaseAccessor) (Object) this).getFlameTicks();
+        int timesRun = ((SittingFlamingPhaseAccessor) (Object) this).getFlameCount();
+        EnderDragon dragon = ((AbstractPhaseAccessor) (AbstractDragonPhaseInstance) (Object) this).getDragon();
         ++ticks;
         if (ticks >= 30) {
             if (timesRun >= 3) {
-                dragon.getPhaseManager().setPhase(PhaseType.TAKEOFF);
+                dragon.getPhaseManager().setPhase(EnderDragonPhase.TAKEOFF);
             } else {
-                dragon.getPhaseManager().setPhase(PhaseType.SITTING_SCANNING);
+                dragon.getPhaseManager().setPhase(EnderDragonPhase.SITTING_SCANNING);
             }
         } else if (ticks == 10) {
             double g;
-            Vec3d vec3d = new Vec3d(dragon.head.getX() - dragon.getX(), 0.0, dragon.head.getZ() - dragon.getZ()).normalize();
+            Vec3 vec3d = new Vec3(dragon.head.getX() - dragon.getX(), 0.0, dragon.head.getZ() - dragon.getZ()).normalize();
             float f = 5.0f;
             double d = dragon.head.getX() + vec3d.x * 5.0 / 2.0;
             double e = dragon.head.getZ() + vec3d.z * 5.0 / 2.0;
-            double h = g = dragon.head.getBodyY(0.5);
-            BlockPos.Mutable mutable = new BlockPos.Mutable(d, h, e);
-            while (dragon.world.isAir(mutable)) {
+            double h = g = dragon.head.getY(0.5);
+            BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos(d, h, e);
+            while (dragon.level.isEmptyBlock(mutable)) {
                 if ((h -= 1.0) < 0.0) {
                     h = g;
                     break;
                 }
                 mutable.set(d, h, e);
             }
-            h = MathHelper.floor(h) + 1;
+            h = Mth.floor(h) + 1;
             for (var i = 0; i < 5; i++) {
                 double xdiff = dragon.getX() - d;
                 double zdiff = dragon.getZ() - e;
@@ -250,41 +255,41 @@ class BetterSittingFlamingPhase {
                 }
 
                 BlockPos hpos = new BlockPos(d + dist*cosX*(Math.abs(angleX) / angleX), h, e + dist*cosZ*(Math.abs(angleZ) / angleZ));
-                BlockPos pos = dragon.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, hpos);
-                AreaEffectCloudEntity dragonBreathEntity = new AreaEffectCloudEntity(dragon.world, pos.getX(), pos.getY(), pos.getZ());
+                BlockPos pos = dragon.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, hpos);
+                AreaEffectCloud dragonBreathEntity = new AreaEffectCloud(dragon.level, pos.getX(), pos.getY(), pos.getZ());
                 dragonBreathEntity.setOwner(dragon);
                 dragonBreathEntity.setRadius(4.0f+i/2.0f);
                 dragonBreathEntity.setDuration(180);
-                dragonBreathEntity.setParticleType(ParticleTypes.DRAGON_BREATH);
-                dragonBreathEntity.addEffect(new StatusEffectInstance(StatusEffects.INSTANT_DAMAGE));
-                dragon.world.spawnEntity(dragonBreathEntity);
+                dragonBreathEntity.setParticle(ParticleTypes.DRAGON_BREATH);
+                dragonBreathEntity.addEffect(new MobEffectInstance(MobEffects.HARM));
+                dragon.level.addFreshEntity(dragonBreathEntity);
             }
         }
     }
 }
 
-@Mixin(ChargingPlayerPhase.class)
+@Mixin(DragonChargePlayerPhase.class)
 class BetterChargingPlayerPhase {
 
-    @Inject(method = "beginPhase", at = @At("HEAD"))
+    @Inject(method = "begin", at = @At("HEAD"))
     public void beginPhase(CallbackInfo ci) {
-        EnderDragonEntity dragon = ((AbstractPhaseAccessor) (AbstractPhase) (Object) this).getDragon();
-        PlayerEntity p = dragon.world.getClosestPlayer(dragon, 96);
+        EnderDragon dragon = ((AbstractPhaseAccessor) (AbstractDragonPhaseInstance) (Object) this).getDragon();
+        Player p = dragon.level.getNearestPlayer(dragon, 96);
         if (p != null) {
             for (var i = 0; i < 3; i++) {
-                Vec3d vec3d3 = dragon.getRotationVec(1.0f);
+                Vec3 vec3d3 = dragon.getViewVector(1.0f);
                 double l = dragon.head.getX() - vec3d3.x;
-                double m = dragon.head.getBodyY(0.5) + 0.5;
+                double m = dragon.head.getY(0.5) + 0.5;
                 double n = dragon.head.getZ() - vec3d3.z;
-                GluttonyBallEntity e = new GluttonyBallEntity(ModEntities.GLUTTONY_BALL, dragon.world);
-                e.setPos(l, m, n);
-                e.refreshPositionAndAngles(l, m, n, 0.0f, 0.0f);
+                GluttonyBallEntity e = new GluttonyBallEntity(ModEntities.GLUTTONY_BALL, dragon.level);
+                e.setPosRaw(l, m, n);
+                e.moveTo(l, m, n, 0.0f, 0.0f);
                 double speed = 0.1;
-                e.setVelocity((p.getX() - e.getX()) * speed - 0.1 + i * 0.1, (p.getY() - e.getY()) * speed - 0.2 + i * 0.2, (p.getZ() - e.getZ()) * speed - 0.1 + i * 0.1);
-                dragon.world.spawnEntity(e);
+                e.setDeltaMovement((p.getX() - e.getX()) * speed - 0.1 + i * 0.1, (p.getY() - e.getY()) * speed - 0.2 + i * 0.2, (p.getZ() - e.getZ()) * speed - 0.1 + i * 0.1);
+                dragon.level.addFreshEntity(e);
             }
             if (!dragon.isSilent()) {
-                dragon.world.syncWorldEvent(null, WorldEvents.ENDER_DRAGON_SHOOTS, dragon.getBlockPos(), 0);
+                dragon.level.levelEvent(null, LevelEvent.SOUND_DRAGON_FIREBALL, dragon.blockPosition(), 0);
             }
         }
     }
