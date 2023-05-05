@@ -1,4 +1,4 @@
-package net.fabricmc.AstralAdditions.entities.moondragon;
+package com.github.ethanicuss.astraladditions.entities.moondragon;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

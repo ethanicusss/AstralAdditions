@@ -1,4 +1,4 @@
-package net.fabricmc.AstralAdditions.entities.moondragon;
+package com.github.ethanicuss.astraladditions.entities.moondragon;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;

@@ -1,9 +1,9 @@
-package net.fabricmc.AstralAdditions.mixin.betterdragon;
+package com.github.ethanicuss.astraladditions.mixin.betterdragon;
 
-import net.fabricmc.AstralAdditions.AstralAdditions;
-import net.fabricmc.AstralAdditions.entities.moondragon.EnderBallEntity;
-import net.fabricmc.AstralAdditions.entities.moondragon.GluttonyBallEntity;
-import net.fabricmc.AstralAdditions.entities.voidtouchedzombie.VoidtouchedZombieEntity;
+import com.github.ethanicuss.astraladditions.entities.ModEntities;
+import com.github.ethanicuss.astraladditions.entities.moondragon.EnderBallEntity;
+import com.github.ethanicuss.astraladditions.entities.moondragon.GluttonyBallEntity;
+import com.github.ethanicuss.astraladditions.entities.voidtouchedzombie.VoidtouchedZombieEntity;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -113,7 +113,7 @@ class BetterLandingPhase {
                 double l = dragon.head.getX() - vec3d3.x;
                 double m = dragon.head.getBodyY(0.5) + 0.5;
                 double n = dragon.head.getZ() - vec3d3.z;
-                EnderBallEntity e = new EnderBallEntity(AstralAdditions.ENDER_BALL, dragon.world);
+                EnderBallEntity e = new EnderBallEntity(ModEntities.ENDER_BALL, dragon.world);
                 e.setPos(l, m, n);
                 e.refreshPositionAndAngles(l, m, n, 0.0f, 0.0f);
                 double speed = 0.1;
@@ -186,7 +186,7 @@ class BetterSittingAttackPhase {
         EnderDragonEntity dragon = ((AbstractPhaseAccessor) (AbstractPhase) (Object) this).getDragon();
         Random random = new Random();
         for (int i = 0; i < 2; i++){
-            VoidtouchedZombieEntity z = new VoidtouchedZombieEntity(AstralAdditions.VOIDTOUCHED_ZOMBIE, dragon.world);
+            VoidtouchedZombieEntity z = new VoidtouchedZombieEntity(ModEntities.VOIDTOUCHED_ZOMBIE, dragon.world);
             BlockPos pos = dragon.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, dragon.getBlockPos());
             if (pos.getY() == 0) {
                 pos = new BlockPos(pos.getX(), dragon.getY(), pos.getZ());
@@ -278,7 +278,7 @@ class BetterChargingPlayerPhase {
                 double l = dragon.head.getX() - vec3d3.x;
                 double m = dragon.head.getBodyY(0.5) + 0.5;
                 double n = dragon.head.getZ() - vec3d3.z;
-                GluttonyBallEntity e = new GluttonyBallEntity(AstralAdditions.GLUTTONY_BALL, dragon.world);
+                GluttonyBallEntity e = new GluttonyBallEntity(ModEntities.GLUTTONY_BALL, dragon.world);
                 e.setPos(l, m, n);
                 e.refreshPositionAndAngles(l, m, n, 0.0f, 0.0f);
                 double speed = 0.1;
