@@ -1,9 +1,9 @@
 package com.github.ethanicuss.astraladditions.entities;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
-import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntity;
-import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntityModel;
-import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntityRenderer;
+import com.github.ethanicuss.astraladditions.entities.glutton.GluttonEntity;
+import com.github.ethanicuss.astraladditions.entities.glutton.GluttonEntityModel;
+import com.github.ethanicuss.astraladditions.entities.glutton.GluttonEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.moondragon.EnderBallEntity;
 import com.github.ethanicuss.astraladditions.entities.moondragon.EnderBallEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.moondragon.GluttonyBallEntity;
@@ -33,10 +33,10 @@ public class ModEntities {
             new Identifier(AstralAdditions.MOD_ID, "moonman"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, MoonmanEntity::new).dimensions(EntityDimensions.fixed(0.75f, 2.8f)).build()
     );
-    public static final EntityType<HemogiantEntity> GLUTTON = Registry.register(
+    public static final EntityType<GluttonEntity> GLUTTON = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(AstralAdditions.MOD_ID, "hemogiant"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, HemogiantEntity::new).dimensions(EntityDimensions.fixed(1.05f, 5.8f)).build()
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GluttonEntity::new).dimensions(EntityDimensions.fixed(1.05f, 5.8f)).build()
     );
     public static final EntityType<VoidtouchedSkeletonEntity> VOIDTOUCHED_SKELETON = Registry.register(
             Registry.ENTITY_TYPE,
@@ -66,7 +66,7 @@ public class ModEntities {
 
     public static void init() {
         FabricDefaultAttributeRegistry.register(MOONMAN, MoonmanEntity.createMoonmanAttributes());
-        FabricDefaultAttributeRegistry.register(GLUTTON, HemogiantEntity.createGluttonAttributes());
+        FabricDefaultAttributeRegistry.register(GLUTTON, GluttonEntity.createGluttonAttributes());
         FabricDefaultAttributeRegistry.register(VOIDTOUCHED_SKELETON, VoidtouchedSkeletonEntity.createVoidtouchedSkeletonAttributes());
         FabricDefaultAttributeRegistry.register(VOIDTOUCHED_ZOMBIE, VoidtouchedZombieEntity.createVoidtouchedZombieAttributes());
     }
@@ -75,8 +75,8 @@ public class ModEntities {
         EntityRendererRegistry.register(MOONMAN, MoonmanEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MODEL_MOONMAN_LAYER, MoonmanEntityModel::getTexturedModelData);
 
-        EntityRendererRegistry.register(GLUTTON, HemogiantEntityRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(MODEL_GLUTTON_LAYER, HemogiantEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(GLUTTON, GluttonEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_GLUTTON_LAYER, GluttonEntityModel::getTexturedModelData);
 
         EntityRendererRegistry.register(VOIDTOUCHED_SKELETON, VoidtouchedSkeletonEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MODEL_VOIDTOUCHED_SKELETON_LAYER, SkeletonEntityModel::getTexturedModelData);
