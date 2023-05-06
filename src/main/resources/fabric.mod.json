@@ -14,15 +14,15 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/AstralAdditions/icon.png",
+  "icon": "assets/astraladditions/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.AstralAdditions.AstralAdditions"
+      "com.github.ethanicuss.astraladditions.AstralAdditions"
     ],
     "client": [
-      "net.fabricmc.AstralAdditions.AstralAdditionsClient"
+      "com.github.ethanicuss.astraladditions.AstralAdditionsClient"
     ]
   },
   "mixins": [
