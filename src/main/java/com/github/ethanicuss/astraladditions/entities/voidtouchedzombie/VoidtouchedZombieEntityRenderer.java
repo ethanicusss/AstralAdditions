@@ -2,6 +2,7 @@ package com.github.ethanicuss.astraladditions.entities.voidtouchedzombie;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.AstralAdditionsClient;
+import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -18,7 +19,7 @@ public class VoidtouchedZombieEntityRenderer
     private static final Identifier TEXTURE = new Identifier(AstralAdditions.MOD_ID, "textures/entity/voidtouched_zombie/zombie.png");
 
     public VoidtouchedZombieEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, AstralAdditionsClient.MODEL_VOIDTOUCHED_ZOMBIE_LAYER, EntityModelLayers.HUSK_INNER_ARMOR, EntityModelLayers.HUSK_OUTER_ARMOR);
+        super(context, ModEntities.MODEL_VOIDTOUCHED_ZOMBIE_LAYER, EntityModelLayers.HUSK_INNER_ARMOR, EntityModelLayers.HUSK_OUTER_ARMOR);
     }
 
     public static TexturedModelData getTexturedModelData(){

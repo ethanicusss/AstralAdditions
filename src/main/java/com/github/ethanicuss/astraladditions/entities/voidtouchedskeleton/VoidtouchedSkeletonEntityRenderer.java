@@ -2,6 +2,7 @@ package com.github.ethanicuss.astraladditions.entities.voidtouchedskeleton;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.AstralAdditionsClient;
+import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -16,7 +17,7 @@ public class VoidtouchedSkeletonEntityRenderer
     private static final Identifier TEXTURE = new Identifier(AstralAdditions.MOD_ID, "textures/entity/voidtouched_skeleton/skeleton.png");
 
     public VoidtouchedSkeletonEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, AstralAdditionsClient.MODEL_VOIDTOUCHED_SKELETON_LAYER, EntityModelLayers.SKELETON_INNER_ARMOR, EntityModelLayers.SKELETON_OUTER_ARMOR);
+        super(context, ModEntities.MODEL_VOIDTOUCHED_SKELETON_LAYER, EntityModelLayers.SKELETON_INNER_ARMOR, EntityModelLayers.SKELETON_OUTER_ARMOR);
     }
 
     @Override
