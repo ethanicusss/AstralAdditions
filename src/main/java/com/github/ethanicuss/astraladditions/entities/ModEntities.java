@@ -85,7 +85,7 @@ public class ModEntities {
         EntityModelLayerRegistry.registerModelLayer(MODEL_VOIDTOUCHED_ZOMBIE_LAYER, VoidtouchedZombieEntityRenderer::getTexturedModelData);
 
         EntityRendererRegistry.register(ENDER_BALL, EnderBallEntityRenderer::new);
-        
+
         EntityRendererRegistry.register(GLUTTONY_BALL, GluttonyBallEntityRenderer::new);
     }
 }

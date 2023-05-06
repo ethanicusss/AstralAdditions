@@ -6,23 +6,23 @@
   "name": "Astral Additions",
   "description": "Misc additions for Create: Astral - MUSIC IS FREE TO USE IN YOUTUBE VIDEOS UNDER CC BY-SA 4.0",
   "authors": [
-    "ethanicuss",
-    "Erdragh"
+    "rango"
   ],
   "contact": {
-    "sources": "https://github.com/ethanicuss/AstralAdditions"
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/astraladditions/icon.png",
+  "icon": "assets/AstralAdditions/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.ethanicuss.astraladditions.AstralAdditions"
+      "net.fabricmc.AstralAdditions.AstralAdditions"
     ],
     "client": [
-      "com.github.ethanicuss.astraladditions.AstralAdditionsClient"
+      "net.fabricmc.AstralAdditions.AstralAdditionsClient"
     ]
   },
   "mixins": [
@@ -30,9 +30,12 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.14",
+    "fabricloader": ">=0.13.3",
     "fabric": "*",
     "minecraft": "~1.18.2",
     "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
   }
 }
