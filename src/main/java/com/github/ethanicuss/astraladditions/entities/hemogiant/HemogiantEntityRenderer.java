@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
 public class HemogiantEntityRenderer extends MobEntityRenderer<HemogiantEntity, HemogiantEntityModel<HemogiantEntity>> {
 
     public HemogiantEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new HemogiantEntityModel(context.getPart(ModEntities.MODEL_GLUTTON_LAYER)), 0.5f);
+        super(context, new HemogiantEntityModel(context.getPart(ModEntities.MODEL_HEMOGIANT_LAYER)), 0.5f);
         this.addFeature(new HemogiantEyesFeatureRenderer<HemogiantEntity>(this));
     }
 
