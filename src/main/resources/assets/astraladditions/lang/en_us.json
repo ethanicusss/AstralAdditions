@@ -4,5 +4,12 @@
 	"subtitles.astraladditions.xh": "By Hesperyd and XETROO",
 	"subtitles.astraladditions.pisn3y": "By PINS3Y",
 	"items.astraladditions.funny_disc": "funny disc",
-	"items.astraladditions.funny_disc.desc": "omg its"
+	"items.astraladditions.funny_disc.desc": "omg its",
+	"items.astraladditions.moonset_crystal_block": "Moonset Crystal Block",
+	"blocks.astraladditions.moonset_crystal_block": "Moonset Crystal Block",
+	"item.astraladditions.cometball": "Cometball",
+	"item.astraladditions.cosmic_hourglass": "Cosmic Hourglass",
+	"item.astraladditions.pylon": "Pylon",
+	"item.astraladditions.meteor_mitts": "Meteor Mitts",
+	"item.astraladditions.e_guitar": "E Guitar"
 }
