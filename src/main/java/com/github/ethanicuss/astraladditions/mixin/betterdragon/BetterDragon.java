@@ -48,7 +48,7 @@ public class BetterDragon {
 
     @Inject(method = "createEnderDragonAttributes", at = @At("HEAD"), cancellable = true)
     private static void createEnderDragonAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
-        cir.setReturnValue(MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 300.0));
+        cir.setReturnValue(MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 250.0));
     }
 
     @Inject(method = "addStatusEffect", at = @At("HEAD"), cancellable = true)
@@ -63,7 +63,7 @@ public class BetterDragon {
         if (((EnderDragonEntity)(Object) this).slowedDownByBlock) {
             ((EnderDragonEntity)(Object) this).addVelocity(0, 0.01, 0);
         }
-        System.out.println(phaseManager.getCurrent().toString());
+        //System.out.println(phaseManager.getCurrent().toString());
     }
 
     @Inject(method = "launchLivingEntities", at = @At("HEAD"), cancellable = true)
@@ -86,7 +86,7 @@ public class BetterDragon {
 
             entity.setVelocity(f / h * 4.0, 0.5f, g / h * 4.0);
             entity.damage(DamageSource.mob((EnderDragonEntity) (Object) this), 5.0f);
-            System.out.println(phaseManager.getCurrent().getType().toString());
+            //System.out.println(phaseManager.getCurrent().getType().toString());
         }
         ci.cancel();
     }
