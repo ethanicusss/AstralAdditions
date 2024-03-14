@@ -1,5 +1,6 @@
 package com.github.ethanicuss.astraladditions.mixin.betterdragon;
 
+import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import com.github.ethanicuss.astraladditions.entities.moondragon.EnderBallEntity;
 import com.github.ethanicuss.astraladditions.entities.moondragon.GluttonyBallEntity;
@@ -7,9 +8,6 @@ import com.github.ethanicuss.astraladditions.entities.voidtouchedzombie.Voidtouc
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
-import net.minecraft.entity.ai.TargetPredicate;
-import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
@@ -27,9 +25,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.WorldEvents;
-import net.minecraft.world.gen.feature.EndPortalFeature;
-import org.jetbrains.annotations.Nullable;
-import org.lwjgl.system.CallbackI;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -63,7 +58,6 @@ public class BetterDragon {
         if (((EnderDragonEntity)(Object) this).slowedDownByBlock) {
             ((EnderDragonEntity)(Object) this).addVelocity(0, 0.01, 0);
         }
-        //System.out.println(phaseManager.getCurrent().toString());
     }
 
     @Inject(method = "launchLivingEntities", at = @At("HEAD"), cancellable = true)
