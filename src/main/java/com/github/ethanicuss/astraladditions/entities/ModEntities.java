@@ -96,7 +96,7 @@ public class ModEntities {
         EntityRendererRegistry.register(MOONMAN, MoonmanEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MODEL_MOONMAN_LAYER, MoonmanEntityModel::getTexturedModelData);
 
-        EntityRendererRegistry.register(GLUTTON, HemogiantEntityRenderer::new);
+        EntityRendererRegistry.register(HEMOGIANT, HemogiantEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MODEL_HEMOGIANT_LAYER, HemogiantEntityModel::getTexturedModelData);
 
         EntityRendererRegistry.register(VOIDTOUCHED_SKELETON, VoidtouchedSkeletonEntityRenderer::new);
