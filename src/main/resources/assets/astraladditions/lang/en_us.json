@@ -11,5 +11,7 @@
 	"item.astraladditions.cosmic_hourglass": "Cosmic Hourglass",
 	"item.astraladditions.pylon": "Pylon",
 	"item.astraladditions.meteor_mitts": "Meteor Mitts",
-	"item.astraladditions.e_guitar": "E Guitar"
+	"item.astraladditions.e_guitar": "E Guitar",
+	"block.astraladditions.bulba_root": "Bulba Root",
+	"block.astraladditions.lune_shroom": "Lune Shroom"
 }
