@@ -107,7 +107,7 @@ public abstract class ModFluid extends FlowableFluid {
             }
 
             if (random.nextInt(250) == 0) {
-                world.playSound((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.4F + random.nextFloat() * 0.3F, false);
+                world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SoundCategory.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.4F + random.nextFloat() * 0.3F, false);
             }
         }
     }
