@@ -13,5 +13,8 @@
 	"item.astraladditions.meteor_mitts": "Meteor Mitts",
 	"item.astraladditions.e_guitar": "E Guitar",
 	"block.astraladditions.bulba_root": "Bulba Root",
-	"block.astraladditions.lune_shroom": "Lune Shroom"
+	"block.astraladditions.lune_shroom": "Lune Shroom",
+	"block.astraladditions.bramblebone": "Bramblebone",
+	"item.astraladditions.oh-no": "OH-NO",
+	"item.astraladditions.oh-no_broken": "Shattered OH-NO"
 }

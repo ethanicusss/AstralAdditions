@@ -17,6 +17,7 @@ import com.github.ethanicuss.astraladditions.entities.moonman.MoonmanEntityModel
 import com.github.ethanicuss.astraladditions.entities.moonman.MoonmanEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.pylon.PylonEntity;
 import com.github.ethanicuss.astraladditions.entities.pylon.PylonEntityRenderer;
+import com.github.ethanicuss.astraladditions.entities.shimmerblaze.ShimmerBlazeEntity;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedskeleton.VoidtouchedSkeletonEntity;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedskeleton.VoidtouchedSkeletonEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedzombie.VoidtouchedZombieEntity;
@@ -25,6 +26,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.client.render.entity.BlazeEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.SkeletonEntityModel;
 import net.minecraft.entity.EntityDimensions;
@@ -79,6 +81,11 @@ public class ModEntities {
             new Identifier(AstralAdditions.MOD_ID, "meteor_fist"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, MeteorPunchEntity::new).dimensions(EntityDimensions.fixed(1.5f, 1.5f)).build()
     );
+    public static final EntityType<ShimmerBlazeEntity> SHIMMER_BLAZE = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(AstralAdditions.MOD_ID, "shimmer_blaze"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, ShimmerBlazeEntity::new).dimensions(EntityDimensions.fixed(1.0f, 1.8f)).build()
+    );
 
     public static final EntityModelLayer MODEL_MOONMAN_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "moonman"), "main");
     public static final EntityModelLayer MODEL_HEMOGIANT_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "hemogiant"), "main");
@@ -114,5 +121,7 @@ public class ModEntities {
         EntityRendererRegistry.register(PYLON, PylonEntityRenderer::new);
 
         EntityRendererRegistry.register(METEOR_FIST, MeteorPunchEntityRenderer::new);
+
+        EntityRendererRegistry.register(SHIMMER_BLAZE, BlazeEntityRenderer::new);
     }
 }
