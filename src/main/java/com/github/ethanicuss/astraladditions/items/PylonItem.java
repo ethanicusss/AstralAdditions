@@ -4,7 +4,9 @@ import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import com.github.ethanicuss.astraladditions.entities.cometball.CometballEntity;
 import com.github.ethanicuss.astraladditions.entities.pylon.PylonEntity;
+import com.github.ethanicuss.astraladditions.registry.ModItems;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -21,13 +23,14 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypeFilter;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
+import net.minecraft.util.*;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.system.CallbackI;
 
 import java.util.EnumSet;
@@ -35,10 +38,46 @@ import java.util.List;
 
 public class PylonItem extends Item {
 
+    public static final String X_KEY = "coord_x";
+    public static final String Y_KEY = "coord_y";
+    public static final String Z_KEY = "coord_z";
     public PylonItem(Item.Settings settings) {
         super(settings);
     }
 
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack itemStack = user.getStackInHand(hand);
+        NbtCompound nbtCompound = itemStack.getOrCreateNbt();
+
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON, SoundCategory.NEUTRAL, 0.5f, 0.5f);
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.NEUTRAL, 0.5f, 0.5f);
+        if (world.isClient()) {
+            if (!nbtCompound.isEmpty()) {
+                user.setVelocity(0, 0.2, 0);
+                user.setPos(nbtCompound.getDouble(X_KEY), nbtCompound.getDouble(Y_KEY), nbtCompound.getDouble(Z_KEY));
+                itemStack.setNbt(new NbtCompound());
+                user.incrementStat(Stats.USED.getOrCreateStat(this));
+                return TypedActionResult.success(itemStack, world.isClient());
+            }
+        } else {
+            if (nbtCompound.isEmpty()){
+                double i = user.getX();
+                double j = user.getY();
+                double k = user.getZ();
+
+                nbtCompound.putDouble(X_KEY, i);
+                nbtCompound.putDouble(Y_KEY, j);
+                nbtCompound.putDouble(Z_KEY, k);
+                user.getItemCooldownManager().set(this, 60);
+                return TypedActionResult.success(itemStack, world.isClient());
+            } else{
+
+            }
+        }
+        return TypedActionResult.fail(itemStack);
+    }
+    /*
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
@@ -128,6 +167,19 @@ public class PylonItem extends Item {
         user.getItemCooldownManager().set(this, 60);
         user.incrementStat(Stats.USED.getOrCreateStat(this));
         return TypedActionResult.success(itemStack, world.isClient());
+    }
+
+     */
+
+    @Override
+    public void appendTooltip(ItemStack itemStack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        if (itemStack.hasNbt()) {
+            NbtCompound nbtCompound = itemStack.getNbt();
+            String string = String.join(", ", String.valueOf(Math.round(nbtCompound.getDouble(X_KEY))), String.valueOf(Math.round(nbtCompound.getDouble(Y_KEY))), String.valueOf(Math.round(nbtCompound.getDouble(Z_KEY))));
+            if (!StringHelper.isEmpty(string)) {
+                tooltip.add(new LiteralText(string).formatted(Formatting.DARK_AQUA));
+            }
+        }
     }
 
 

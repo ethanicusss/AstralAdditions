@@ -17,7 +17,8 @@
     "betterdragon.DragonAccessor",
     "betterdragon.HoverPhaseAccessor",
     "betterdragon.LandingPhaseAccessor",
-    "betterdragon.SittingFlamingPhaseAccessor"
+    "betterdragon.SittingFlamingPhaseAccessor",
+    "ItemEntityMixin"
   ],
   "client": [
     "SpaceMusic"

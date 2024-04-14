@@ -269,6 +269,14 @@
       }
     ]
   },
+	"music_shimmer_blaze": {
+		"sounds": [
+			{
+				"name": "astraladditions:purple_prison",
+				"stream": true
+			}
+		]
+	},
 	"mmmdisc": {
     "sounds": [
       {

@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.EnumSet;
 import java.util.List;
 
-public class OHNOItem extends Item {//Orbital Homeward Navigation Orb - O.H-N.O
+public class OHNOItem extends Item {//Orbital Homeward Navigation Orb - O.H-N.O //doesn't work across dimensions as I want it to.
 
     public static final String X_KEY = "coord_x";
     public static final String Y_KEY = "coord_y";
@@ -44,22 +44,20 @@ public class OHNOItem extends Item {//Orbital Homeward Navigation Orb - O.H-N.O
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
         NbtCompound nbtCompound = itemStack.getOrCreateNbt();
-        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_ENDERMAN_DEATH, SoundCategory.NEUTRAL, 0.5f, 0.3f);
+
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON, SoundCategory.NEUTRAL, 0.5f, 0.5f);
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.NEUTRAL, 0.5f, 0.5f);
         if (world.isClient()) {
             if (!nbtCompound.isEmpty()) {
-                AstralAdditions.LOGGER.info("get");
                 user.setVelocity(0, 0.2, 0);
                 user.setPos(nbtCompound.getDouble(X_KEY), nbtCompound.getDouble(Y_KEY), nbtCompound.getDouble(Z_KEY));
-                itemStack.setNbt(new NbtCompound());
+                //itemStack.setNbt(new NbtCompound());
                 itemStack = new ItemStack(ModItems.OHNO_BROKEN);
                 user.incrementStat(Stats.USED.getOrCreateStat(this));
                 return TypedActionResult.success(itemStack, world.isClient());
             }
         } else {
-            AstralAdditions.LOGGER.info("erm");
-            AstralAdditions.LOGGER.info(nbtCompound.toString());
             if (nbtCompound.isEmpty()){
-                AstralAdditions.LOGGER.info("set");
                 double i = user.getX();
                 double j = user.getY();
                 double k = user.getZ();

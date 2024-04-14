@@ -18,6 +18,7 @@ import net.minecraft.entity.damage.EntityDamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerTask;
@@ -34,7 +35,8 @@ import java.util.List;
 
 public class EGuitarItem extends Item {
 
-    private int charge = 0;
+
+    public static final String CHARGE_KEY = "charge";
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
     private final float[] notes = {getNote(15-10), getNote(17-10), getNote(18-10), getNote(22-10), getNote(27-10), getNote(34-10)};
     public EGuitarItem(Settings settings) {
@@ -53,19 +55,23 @@ public class EGuitarItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
+        NbtCompound nbtCompound = itemStack.getOrCreateNbt();
+        if (nbtCompound.isEmpty()){
+            nbtCompound.putInt(CHARGE_KEY, 0);
+        }
 
-        if (this.charge >= 3) {
+        if (nbtCompound.getInt(CHARGE_KEY) >= 3) {
             if (world.isClient()) {
-                user.setPitch(user.getPitch()-this.charge);
+                user.setPitch(user.getPitch()-nbtCompound.getInt(CHARGE_KEY));
             } else {
-                if (this.charge >= 5) {
+                if (nbtCompound.getInt(CHARGE_KEY) >= 5) {
                     world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.NEUTRAL, 0.7f, notes[0]);
                 }
-                if (this.charge >= 4) {
-                    world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.NEUTRAL, 0.7f, notes[this.charge - 3]);
+                if (nbtCompound.getInt(CHARGE_KEY) >= 4) {
+                    world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.NEUTRAL, 0.7f, notes[nbtCompound.getInt(CHARGE_KEY) - 3]);
                 }
-                world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.NEUTRAL, 0.7f, notes[this.charge - 1]);
-                world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.NEUTRAL, 0.7f, notes[this.charge]);
+                world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.NEUTRAL, 0.7f, notes[nbtCompound.getInt(CHARGE_KEY) - 1]);
+                world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.NEUTRAL, 0.7f, notes[nbtCompound.getInt(CHARGE_KEY)]);
                 double px = user.getX();
                 double py = user.getY() + 1;
                 double pz = user.getZ();
@@ -83,12 +89,12 @@ public class EGuitarItem extends Item {
                     double ix = px + dx/32*i;
                     double iy = py + dy/32*i;
                     double iz = pz + dz/32*i;
-                    if (this.charge == 5) {
+                    if (nbtCompound.getInt(CHARGE_KEY) == 5) {
                         ModUtils.spawnForcedParticles((ServerWorld) world, ParticleTypes.EXPLOSION, ix, iy, iz, 1, 0.0, 0.1, 0.0, 0);
                     }
                     float angle = world.getRandom().nextFloat()*360;
                     for (double j = 0; j < 5; j++) {
-                        ModUtils.spawnForcedParticles((ServerWorld) world, ParticleTypes.END_ROD, ix + Math.sin(Math.toRadians(angle) * (j / 2)), iy + Math.sin(Math.toRadians(-angle * 5) * (j / 2)), iz + Math.cos(Math.toRadians(angle) * (j / 2)), this.charge - 2, 0.0, 0.1, 0.0, 0.1);
+                        ModUtils.spawnForcedParticles((ServerWorld) world, ParticleTypes.END_ROD, ix + Math.sin(Math.toRadians(angle) * (j / 2)), iy + Math.sin(Math.toRadians(-angle * 5) * (j / 2)), iz + Math.cos(Math.toRadians(angle) * (j / 2)), nbtCompound.getInt(CHARGE_KEY) - 2, 0.0, 0.1, 0.0, 0.1);
                     }
                     float f = 3.0f;
                     Box box = new Box((float) ix - f, (float) iy - f, (float) iz - f, (float) (ix + 1) + f, (float) (iy + 1) + f, (float) (iz + 1) + f);
@@ -96,17 +102,15 @@ public class EGuitarItem extends Item {
                     for (Entity p : list) {
                         if (p instanceof LivingEntity) {
                             if (((LivingEntity) p).hurtTime == 0){
-                                AstralAdditions.LOGGER.info(Integer.toString(this.charge));
-                                AstralAdditions.LOGGER.info(Integer.toString(10 + (this.charge-3)*5));
-                                p.damage(DamageSource.player(user), 10 + (this.charge-3)*5);
+                                p.damage(DamageSource.player(user), 10 + (nbtCompound.getInt(CHARGE_KEY)-3)*5);
                                 if (p instanceof EnderDragonEntity) {
-                                    ((EnderDragonEntity) p).damagePart(((EnderDragonEntity) p).getBodyParts()[2], DamageSource.player(user), 10 + (this.charge-3)*5);
+                                    ((EnderDragonEntity) p).damagePart(((EnderDragonEntity) p).getBodyParts()[2], DamageSource.player(user), 10 + (nbtCompound.getInt(CHARGE_KEY)-3)*5);
                                 }
                             }
                         }
                     }
                 }
-                this.charge = 0;
+                nbtCompound.putInt(CHARGE_KEY, 0);
             }
         }
         user.incrementStat(Stats.USED.getOrCreateStat(this));
@@ -116,12 +120,13 @@ public class EGuitarItem extends Item {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         //target.damage(DamageSource.mob(attacker), 8);
-        if (this.charge < 5) {
-            this.charge++;
+        NbtCompound nbtCompound = stack.getOrCreateNbt();
+        if (nbtCompound.getInt(CHARGE_KEY) < 5) {
+            nbtCompound.putInt(CHARGE_KEY, nbtCompound.getInt(CHARGE_KEY)+1);
         }
-        attacker.world.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.NEUTRAL, 0.5f + 0.2f*this.charge, notes[this.charge - 1]);
+        attacker.world.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.NEUTRAL, 0.5f + 0.2f*nbtCompound.getInt(CHARGE_KEY), notes[nbtCompound.getInt(CHARGE_KEY) - 1]);
 
-        ModUtils.spawnForcedParticles((ServerWorld)attacker.world, ParticleTypes.END_ROD, target.getX(), target.getY(), target.getZ(), 3 + charge, 0.5 * target.world.getRandom().nextFloat(), 0.3, 0.5 * target.world.getRandom().nextFloat(), 0.5);
+        ModUtils.spawnForcedParticles((ServerWorld)attacker.world, ParticleTypes.END_ROD, target.getX(), target.getY(), target.getZ(), 3 + nbtCompound.getInt(CHARGE_KEY), 0.5 * target.world.getRandom().nextFloat(), 0.3, 0.5 * target.world.getRandom().nextFloat(), 0.5);
         return true;
     }
 

@@ -89,10 +89,7 @@ public class MeteorPunchEntity extends ThrownItemEntity {
 
     protected void entityHit(LivingEntity entity){
         double damage = Math.abs(this.getVelocity().x) + Math.abs(this.getVelocity().y) + Math.abs(this.getVelocity().z);
-        AstralAdditions.LOGGER.info("------");
-        AstralAdditions.LOGGER.info(Double.toString((float)damage*3 + 2));
         damage = Math.sqrt((float)damage + 0.1)*8 + 2;
-        AstralAdditions.LOGGER.info(Double.toString(damage));
         entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), (float)damage);
         world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.BLOCK_AMETHYST_BLOCK_BREAK, SoundCategory.NEUTRAL, 0.1f + (float)Math.sqrt(damage/3)/4, 0.1f + (float)damage/10);
         float multiply = 1.6f;

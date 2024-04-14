@@ -1,6 +1,7 @@
 package com.github.ethanicuss.astraladditions.musicplayer;
 
 import com.github.ethanicuss.astraladditions.AstralAdditionsClient;
+import com.github.ethanicuss.astraladditions.entities.shimmerblaze.ShimmerBlazeEntity;
 import com.github.ethanicuss.astraladditions.registry.ModMusic;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -17,6 +18,9 @@ import java.util.function.Predicate;
 
 public class MusicPlayer {
     private static final Predicate<WitherEntity> WITHER_PREDICATE = (entity) -> {
+        return true;
+    };
+    private static final Predicate<ShimmerBlazeEntity> SHIMMER_BLAZE_PREDICATE = (entity) -> {
         return true;
     };
     private static final Predicate<HostileEntity> ENEMY_PREDICATE = (entity) -> {
@@ -144,6 +148,31 @@ public class MusicPlayer {
                 }
                 if (witherDead){
                     val = ModMusic.WITHER_DEATH;
+                }
+            }
+            {
+                double i = player.getX();
+                double j = player.getY();
+                double k = player.getZ();
+                float f = 30.0f;
+                Box box = new Box((float)i - f, (float)j - f, (float)k - f, (float)(i + 1) + f, (float)(j + 1) + f, (float)(k + 1) + f);
+                List<ShimmerBlazeEntity> list = player.world.getEntitiesByType(TypeFilter.instanceOf(ShimmerBlazeEntity.class), box, SHIMMER_BLAZE_PREDICATE);
+                if (!list.isEmpty()) {
+                    boolean blazeExists = false;
+                    boolean blazeSeesU = false;
+                    for (ShimmerBlazeEntity b : list) {
+                        blazeExists = true;
+                        if (b.canSee(player)) {
+                            blazeSeesU = true;
+                        }
+                    }
+                    if (blazeSeesU) {
+                        val = ModMusic.SHIMMER_BLAZE;
+                    }
+                } else {
+                    if (musicTracker.isPlayingType(ModMusic.SHIMMER_BLAZE)) {
+                        val = ModMusic.COMBAT_END;
+                    }
                 }
             }
             if (!AstralAdditionsClient.playerTracker.hasBeenToMoon){

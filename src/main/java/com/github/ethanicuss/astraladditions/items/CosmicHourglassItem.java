@@ -49,6 +49,7 @@ public class CosmicHourglassItem extends Item {
             world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.NEUTRAL, 0.5f, 0.3f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
             MinecraftClient.getInstance().player.setVelocity(Math.sin(Math.toRadians(-user.getYaw()))*dash, 0, Math.cos(Math.toRadians(-user.getYaw()))*dash);
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 20), user);
+            user.setVelocity(Math.sin(Math.toRadians(-user.getYaw())) * 0.45, Math.sin(Math.toRadians(-user.getPitch())) * 0.45, Math.cos(Math.toRadians(-user.getYaw())) * 0.45);
             ghost = true;
             boostTime = boostMaxTime;
             user.getItemCooldownManager().set(this, 60);//200);
@@ -60,32 +61,31 @@ public class CosmicHourglassItem extends Item {
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (entity instanceof PlayerEntity) {
-            PlayerEntity user = (PlayerEntity) entity;
+            //PlayerEntity user = (PlayerEntity) entity;
             if (ghost) {
                 if (boostTime == 0) {
                     ghost = false;
                     jumped = false;
                 } else {
                     float boostMult = 0.5f;
-                    double xSpeed = user.getX() - this.userPosOld.x;
-                    double ySpeed = user.getY() - this.userPosOld.y;
-                    double zSpeed = user.getZ() - this.userPosOld.z;
+                    //double xSpeed = user.getX() - this.userPosOld.x;
+                    //double ySpeed = user.getY() - this.userPosOld.y;
+                    //double zSpeed = user.getZ() - this.userPosOld.z;
                     //if (user.isOnGround()) {boostMult += 2;}
-                    AstralAdditions.LOGGER.info(Boolean.toString(user.isOnGround()));
                     /*if (Math.sqrt(Math.pow(xSpeed, 2) + Math.pow(zSpeed, 2)) < 2.1 - (boostMult/2)) {
                         user.addVelocity(xSpeed * playerBoost * boostMult, 0, zSpeed * playerBoost * boostMult);
                     }
                     else{*/
                         //user.setVelocity(Math.sin(Math.toRadians(-user.getYaw())) * (2.1 - (boostMult/2)), Math.sin(Math.toRadians(-user.getPitch())) * (2.1 - (boostMult/2)), Math.cos(Math.toRadians(-user.getYaw())) * (2.1 - (boostMult/2)));
-                        user.setVelocity(Math.sin(Math.toRadians(-user.getYaw())) * 0.45, Math.sin(Math.toRadians(-user.getPitch())) * 0.45, Math.cos(Math.toRadians(-user.getYaw())) * 0.45);
+                        entity.setVelocity(Math.sin(Math.toRadians(-entity.getYaw())) * 0.45, Math.sin(Math.toRadians(-entity.getPitch())) * 0.45, Math.cos(Math.toRadians(-entity.getYaw())) * 0.45);
                     //}
                     /*if (ySpeed > 0 && !jumped) {
                         jumped = true;
-                        user.addVelocity(0, 0.7, 0);
+                        entity.addVelocity(0, 0.7, 0);
                     }*/
-                    this.userPosOld = user.getPos();
-                    world.addParticle(ParticleTypes.SQUID_INK, user.getX(), user.getY(), user.getZ(), 0, 0 + world.getRandom().nextFloat() * 0.5f, 0);
-                    world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.NEUTRAL, 0.1f, 0.2f);
+                    this.userPosOld = entity.getPos();
+                    world.addParticle(ParticleTypes.SQUID_INK, entity.getX(), entity.getY(), entity.getZ(), 0, 0 + world.getRandom().nextFloat() * 0.5f, 0);
+                    world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.NEUTRAL, 0.1f, 0.2f);
                 }
                 boostTime--;
             }

@@ -1,6 +1,5 @@
 package com.github.ethanicuss.astraladditions.mixin.betterdragon;
 
-import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import com.github.ethanicuss.astraladditions.entities.moondragon.EnderBallEntity;
 import com.github.ethanicuss.astraladditions.entities.moondragon.GluttonyBallEntity;
