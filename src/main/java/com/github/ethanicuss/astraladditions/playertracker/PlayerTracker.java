@@ -56,6 +56,19 @@ public class PlayerTracker{
         }
         catch (Exception e) {
             AstralAdditions.LOGGER.warn("Could not load music memory data (this is fine if it's your first time loading this instance):  " + e);
+            try {
+                Path path = FabricLoader.getInstance().getConfigDir();
+                if (new File(String.valueOf(path).concat("/astraladditions")).mkdirs()) {
+                    AstralAdditions.LOGGER.info("Astraladditions config folder did not exist. It has been created");
+                }
+                BufferedWriter writer = new BufferedWriter(new FileWriter(String.valueOf(path).concat("/astraladditions/musicdata.txt")));
+                writer.write(String.valueOf(hasBeenToMoon) + "\n");
+                writer.write(String.valueOf(hasHeardPostMoonSong) + "\n");
+                writer.close();
+            }
+            catch (Exception e2) {
+                AstralAdditions.LOGGER.warn("Could not create config path or data file: " + e2);
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import com.github.ethanicuss.astraladditions.entities.cometball.CometballEntity;
 import com.github.ethanicuss.astraladditions.entities.pylon.PylonEntity;
+import com.github.ethanicuss.astraladditions.entities.shimmerblaze.ShimmerBlazeEntity;
 import com.github.ethanicuss.astraladditions.registry.ModItems;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
@@ -25,6 +26,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.*;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
@@ -35,12 +37,20 @@ import org.lwjgl.system.CallbackI;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class PylonItem extends Item {
 
     public static final String X_KEY = "coord_x";
     public static final String Y_KEY = "coord_y";
     public static final String Z_KEY = "coord_z";
+
+    private static final int maxDistance = 128;
+    private static final float pylonSize = 2.0f;
+
+    private static final Predicate<PylonEntity> PYLON_PREDICATE = (entity) -> {
+        return true;
+    };
     public PylonItem(Item.Settings settings) {
         super(settings);
     }
@@ -50,32 +60,129 @@ public class PylonItem extends Item {
         ItemStack itemStack = user.getStackInHand(hand);
         NbtCompound nbtCompound = itemStack.getOrCreateNbt();
 
-        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON, SoundCategory.NEUTRAL, 0.5f, 0.5f);
-        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.NEUTRAL, 0.5f, 0.5f);
-        if (world.isClient()) {
-            if (!nbtCompound.isEmpty()) {
-                user.setVelocity(0, 0.2, 0);
-                user.setPos(nbtCompound.getDouble(X_KEY), nbtCompound.getDouble(Y_KEY), nbtCompound.getDouble(Z_KEY));
-                itemStack.setNbt(new NbtCompound());
-                user.incrementStat(Stats.USED.getOrCreateStat(this));
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.NEUTRAL, 0.5f, 0.3f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
+        if (world.isClient()) {//Client
+            if (!nbtCompound.isEmpty()) {//TP
+                double i = nbtCompound.getDouble(X_KEY);
+                double j = nbtCompound.getDouble(Y_KEY);
+                double k = nbtCompound.getDouble(Z_KEY);
+                float f = pylonSize;
+                Box box = new Box((float) i - f, (float) j - f, (float) k - f, (float) (i + 1) + f, (float) (j + 1) + f, (float) (k + 1) + f);
+                List<PylonEntity> pylons = user.world.getEntitiesByType(TypeFilter.instanceOf(PylonEntity.class), box, PYLON_PREDICATE);
+                if (getDistance(user.getX(), user.getY(), user.getZ(), i, j, k) < maxDistance) {
+                    itemStack.setNbt(new NbtCompound());//Clear nbt
+                    user.incrementStat(Stats.USED.getOrCreateStat(this));
+                }
+                else{
+                    user.sendMessage(new TranslatableText(AstralAdditions.MOD_ID + ".text.pylon_too_far"), true);
+                }
+
                 return TypedActionResult.success(itemStack, world.isClient());
             }
-        } else {
-            if (nbtCompound.isEmpty()){
+        } else {//Server
+            if (nbtCompound.isEmpty()){//PLACE
                 double i = user.getX();
                 double j = user.getY();
                 double k = user.getZ();
-
                 nbtCompound.putDouble(X_KEY, i);
                 nbtCompound.putDouble(Y_KEY, j);
-                nbtCompound.putDouble(Z_KEY, k);
-                user.getItemCooldownManager().set(this, 60);
-                return TypedActionResult.success(itemStack, world.isClient());
-            } else{
+                nbtCompound.putDouble(Z_KEY, k);//Write user coords
 
+                world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.AMBIENT_UNDERWATER_EXIT, SoundCategory.NEUTRAL, 0.7f, 0.8f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
+                for (int amount = 0; amount < 5; amount++) {
+                    MinecraftClient.getInstance().world.addParticle(ParticleTypes.WITCH, user.getX(), user.getY(), user.getZ(), 0.0 + world.getRandom().nextFloat() * 0.4f - 0.2f, 0.2 + world.getRandom().nextFloat() * 0.2f, 0.0 + world.getRandom().nextFloat() * 0.4f - 0.2f);
+                }
+                for (int amount = 0; amount < 45; amount++) {
+                    MinecraftClient.getInstance().world.addParticle(ParticleTypes.GLOW_SQUID_INK, user.getX(), user.getY() + 0.2f, user.getZ(), Math.sin(amount*8.0f)*1.0f, 0, Math.cos(amount*8.0f)*1.0f);
+                }
+                PylonEntity pylon = new PylonEntity(ModEntities.PYLON, user.world);
+                pylon.setPlayer(user.getEntityName());
+                pylon.setPos(user.getX(), user.getY() + 1, user.getZ());
+                pylon.refreshPositionAndAngles(user.getX(), user.getY() + 1, user.getZ(), 0, 0);
+                world.spawnEntity(pylon);//Place pylon entity
+
+                user.getItemCooldownManager().set(this, 45);
+                return TypedActionResult.success(itemStack, world.isClient());
+            } else{//TP
+                double i = nbtCompound.getDouble(X_KEY);
+                double j = nbtCompound.getDouble(Y_KEY);
+                double k = nbtCompound.getDouble(Z_KEY);
+                float f = pylonSize;
+                Box box = new Box((float) i - f, (float) j - f, (float) k - f, (float) (i + 1) + f, (float) (j + 1) + f, (float) (k + 1) + f);
+                List<PylonEntity> pylons = user.world.getEntitiesByType(TypeFilter.instanceOf(PylonEntity.class), box, PYLON_PREDICATE);
+                if (!pylons.isEmpty()) {
+                    PylonEntity pylon = pylons.get(0);
+                    if (getDistance(user.getX(), user.getY(), user.getZ(), i, j, k) < maxDistance) {
+                        if (user.isSneaking()){
+                            for (int amount = 0; amount < 45; amount++) {
+                                MinecraftClient.getInstance().world.addParticle(ParticleTypes.GLOW_SQUID_INK, pylon.getX(), pylon.getY() + 0.2f, pylon.getZ(), Math.sin(amount*8.0f)*1.2f, 0, Math.cos(amount*8.0f)*1.2f);
+                                MinecraftClient.getInstance().world.addParticle(ParticleTypes.SQUID_INK, pylon.getX(), pylon.getY() + 1.2f, pylon.getZ(), Math.sin(amount*8.0f)*1.4f, 0, Math.cos(amount*8.0f)*1.4f);
+                                MinecraftClient.getInstance().world.addParticle(ParticleTypes.GLOW_SQUID_INK, pylon.getX(), pylon.getY() + 2.2f, pylon.getZ(), Math.sin(amount*8.0f)*1.2f, 0, Math.cos(amount*8.0f)*1.2f);
+                            }
+                            world.playSound(null, pylon.getX(), pylon.getY(), pylon.getZ(), SoundEvents.BLOCK_BELL_USE, SoundCategory.NEUTRAL, 0.5f, 1.5f);
+                            float strength = -0.16f;
+                            float vStrength = 0.05f;
+                            List<Entity> pl = world.getOtherEntities(pylon, new Box(pylon.getX()-16, pylon.getY()-32, pylon.getZ()-16, pylon.getX()+16, pylon.getY()+32, pylon.getZ()+16));
+                            if (MinecraftClient.getInstance().player.isInRange(pylon, 32)) {
+                                pl.add(MinecraftClient.getInstance().player);
+                            }
+                            for (Entity p : pl) {
+                                if (p instanceof LivingEntity){
+                                    int strMult = 1;
+                                    if (!(p instanceof PlayerEntity)) {
+                                        strMult *= 2;
+                                    }
+                                    double xdiff = pylon.getX() - p.getX();
+                                    double zdiff = pylon.getZ() - p.getZ();
+                                    double dist = Math.sqrt(Math.pow(xdiff, 2) + Math.pow(zdiff, 2));
+                                    if (dist < 10) {
+                                        if (xdiff == 0) {
+                                            xdiff = 0.01;
+                                        }
+                                        if (zdiff == 0) {
+                                            zdiff = 0.01;
+                                        }
+                                        double angleX = Math.atan(Math.abs(zdiff) / xdiff);
+                                        double angleZ = Math.atan(Math.abs(xdiff) / zdiff);
+                                        double cosX = Math.cos(angleX);
+                                        double cosZ = Math.cos(angleZ);
+                                        if (cosX == 0) {
+                                            cosX = 0.01;
+                                        }
+                                        if (cosZ == 0) {
+                                            cosZ = 0.01;
+                                        }
+                                        dist = -dist + 10;
+                                        p.addVelocity(dist * cosX * strength * strMult * (Math.abs(angleX) / angleX), Math.abs(dist * vStrength * strMult), dist * cosZ * strength * strMult * (Math.abs(angleZ) / angleZ));
+                                    }
+                                }
+                            }
+                        }
+                        else{
+                            for (int amount = 0; amount < 10; amount++) {
+                                MinecraftClient.getInstance().world.addParticle(ParticleTypes.GLOW_SQUID_INK, user.getX(), user.getY(), user.getZ(), 0.0 + world.getRandom().nextFloat() * 0.2f - 0.1f, 0.3 + world.getRandom().nextFloat() * 0.7f, 0.0 + world.getRandom().nextFloat() * 0.2f - 0.1f);
+                                MinecraftClient.getInstance().world.addParticle(ParticleTypes.GLOW_SQUID_INK, pylon.getX(), pylon.getY(), pylon.getZ(), 0.0 + world.getRandom().nextFloat() * 0.2f - 0.1f, 0.3 + world.getRandom().nextFloat() * 0.7f, 0.0 + world.getRandom().nextFloat() * 0.2f - 0.1f);
+                                MinecraftClient.getInstance().world.addParticle(ParticleTypes.WITCH, user.getX(), user.getY(), user.getZ(), 0.0 + world.getRandom().nextFloat() * 0.8f - 0.4f, 0.4 + world.getRandom().nextFloat() * 0.3f, 0.0 + world.getRandom().nextFloat() * 0.8f - 0.4f);
+                                MinecraftClient.getInstance().world.addParticle(ParticleTypes.WITCH, pylon.getX(), pylon.getY(), pylon.getZ(), 0.0 + world.getRandom().nextFloat() * 0.8f - 0.4f, 0.4 + world.getRandom().nextFloat() * 0.3f, 0.0 + world.getRandom().nextFloat() * 0.8f - 0.4f);
+                            }
+                            ((ServerPlayerEntity) user).networkHandler.requestTeleport(nbtCompound.getDouble(X_KEY), nbtCompound.getDouble(Y_KEY), nbtCompound.getDouble(Z_KEY), user.getYaw(), user.getPitch(), EnumSet.noneOf(PlayerPositionLookS2CPacket.Flag.class));
+                            world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.AMBIENT_UNDERWATER_ENTER, SoundCategory.NEUTRAL, 0.7f, 0.8f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
+                            world.playSound(null, pylon.getX(), pylon.getY(), pylon.getZ(), SoundEvents.AMBIENT_UNDERWATER_ENTER, SoundCategory.NEUTRAL, 0.7f, 0.8f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
+                        }
+                        pylon.discard();
+                        itemStack.setNbt(new NbtCompound());
+                    } else{
+
+                        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_ENDERMAN_HURT, SoundCategory.NEUTRAL, 0.5f, 0.3f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
+                    }
+                }
             }
         }
         return TypedActionResult.fail(itemStack);
+    }
+
+    private double getDistance(double x1, double y1, double z1, double x2, double y2, double z2){
+        return Math.sqrt(Math.pow(x1-x2, 2) + Math.pow(y1-y2, 2) + Math.pow(z1-z2, 2));
     }
     /*
     @Override

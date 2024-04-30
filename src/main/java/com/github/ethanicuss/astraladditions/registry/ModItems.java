@@ -24,9 +24,9 @@ import java.util.List;
 
 public class ModItems {
     public static final Item COMETBALL = new CometballItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(16).rarity(Rarity.UNCOMMON));
-    public static final Item PYLON = new PylonItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON));
+    public static final Item PYLON = new PylonItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).rarity(Rarity.UNCOMMON));
     public static final Item METEOR_MITTS = new MeteorMittsItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON));
-    public static final Item COSMIC_HOURGLASS = new CosmicHourglassItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON));
+    public static final Item COSMIC_HOURGLASS = new CosmicHourglassItem(new FabricItemSettings().maxCount(1).rarity(Rarity.UNCOMMON));
     public static final Item E_GUITAR = new EGuitarItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON));
     public static final Item MOONSET_CRYSTAL = new Item(new FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON));
     public static final Item OHNO = new OHNOItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).rarity(Rarity.RARE));

@@ -18,5 +18,6 @@
 	"item.astraladditions.oh-no": "OH-NO",
 	"item.astraladditions.oh-no_broken": "Shattered OH-NO",
 	"item.astraladditions.shimmer_heart": "Shimmer Heart",
-	"item.astraladditions.awakened_shimmer_heart": "Awakened Shimmer Heart"
+	"item.astraladditions.awakened_shimmer_heart": "Awakened Shimmer Heart",
+	"astraladditions.text.pylon_too_far": "Pylon out of range"
 }

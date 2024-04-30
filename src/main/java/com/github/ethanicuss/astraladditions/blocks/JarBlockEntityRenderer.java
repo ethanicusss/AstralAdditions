@@ -31,12 +31,11 @@ public class JarBlockEntityRenderer
         DefaultedList<ItemStack> defaultedList = jarBlockEntity.getItems();
         int k = (int)jarBlockEntity.getPos().asLong();
         ItemStack itemStack = defaultedList.get(0);
-        System.out.println(itemStack);
         if (itemStack != ItemStack.EMPTY || itemStack.isOf(Items.AIR)) {
             matrixStack.push();
             matrixStack.translate(0.5, 0.44921875, 0.5);
             matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(jarBlockEntity.getWorld().getTime() + f));
-            matrixStack.scale(0.5f, 0.5f, 0.5f);
+            matrixStack.scale(0.6f, 0.6f, 0.6f);
             MinecraftClient.getInstance().getItemRenderer().renderItem(itemStack, ModelTransformation.Mode.FIXED, i, j, matrixStack, vertexConsumerProvider, k);
             matrixStack.pop();
         }
