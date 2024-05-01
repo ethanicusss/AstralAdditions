@@ -15,6 +15,8 @@ import com.github.ethanicuss.astraladditions.entities.moondragon.GluttonyBallEnt
 import com.github.ethanicuss.astraladditions.entities.moonman.MoonmanEntity;
 import com.github.ethanicuss.astraladditions.entities.moonman.MoonmanEntityModel;
 import com.github.ethanicuss.astraladditions.entities.moonman.MoonmanEntityRenderer;
+import com.github.ethanicuss.astraladditions.entities.phast.PhastEntity;
+import com.github.ethanicuss.astraladditions.entities.phast.PhastEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.pylon.PylonEntity;
 import com.github.ethanicuss.astraladditions.entities.pylon.PylonEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.shimmerblaze.*;
@@ -28,6 +30,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.client.render.entity.model.BlazeEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.render.entity.model.GhastEntityModel;
 import net.minecraft.client.render.entity.model.SkeletonEntityModel;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -96,12 +99,18 @@ public class ModEntities {
             new Identifier(AstralAdditions.MOD_ID, "shimmer_rain"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, ShimmerBlazeRainEntity::new).dimensions(EntityDimensions.fixed(1.0f, 5.0f)).build()
     );
+    public static final EntityType<PhastEntity> PHAST = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(AstralAdditions.MOD_ID, "phast"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, PhastEntity::new).dimensions(EntityDimensions.fixed(5.0f, 5.0f)).build()
+    );
 
     public static final EntityModelLayer MODEL_MOONMAN_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "moonman"), "main");
     public static final EntityModelLayer MODEL_HEMOGIANT_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "hemogiant"), "main");
     public static final EntityModelLayer MODEL_VOIDTOUCHED_SKELETON_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "voidtouched_skeleton"), "main");
     public static final EntityModelLayer MODEL_VOIDTOUCHED_ZOMBIE_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "voidtouched_zombie"), "main");
     public static final EntityModelLayer MODEL_SHIMMER_BLAZE_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "shimmer_blaze"), "main");
+    public static final EntityModelLayer MODEL_PHAST_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "phast"), "main");
 
     public static void init() {
         FabricDefaultAttributeRegistry.register(MOONMAN, MoonmanEntity.createMoonmanAttributes());
@@ -109,6 +118,7 @@ public class ModEntities {
         FabricDefaultAttributeRegistry.register(VOIDTOUCHED_SKELETON, VoidtouchedSkeletonEntity.createVoidtouchedSkeletonAttributes());
         FabricDefaultAttributeRegistry.register(VOIDTOUCHED_ZOMBIE, VoidtouchedZombieEntity.createVoidtouchedZombieAttributes());
         FabricDefaultAttributeRegistry.register(SHIMMER_BLAZE, ShimmerBlazeEntity.createShimmerBlazeAttributes());
+        FabricDefaultAttributeRegistry.register(PHAST, PhastEntity.createPhastAttributes());
     }
 
     public static void initClient() {
@@ -126,6 +136,9 @@ public class ModEntities {
 
         EntityRendererRegistry.register(SHIMMER_BLAZE, ShimmerBlazeEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MODEL_SHIMMER_BLAZE_LAYER, ShimmerBlazeEntityModel::getTexturedModelData);
+
+        EntityRendererRegistry.register(PHAST, PhastEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_PHAST_LAYER, GhastEntityModel::getTexturedModelData);
 
         EntityRendererRegistry.register(ENDER_BALL, EnderBallEntityRenderer::new);
 

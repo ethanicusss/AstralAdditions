@@ -38,18 +38,18 @@ public class ModBlocks {
     public static final BlockItem MOONSET_CRYSTAL_BLOCK_ITEM = new BlockItem(MOONSET_CRYSTAL_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
 
     public static final Block BULBA_BLOCK = new DroptusBlock(FabricBlockSettings.of(Material.CACTUS).ticksRandomly().sounds(BlockSoundGroup.SHROOMLIGHT).strength(0.2f).luminance(createLightLevelFromLitBlockState(7)));
-    public static final BlockItem BULBA_BLOCK_ITEM = new BlockItem(BULBA_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
+    public static final BlockItem BULBA_BLOCK_ITEM = new BlockItem(BULBA_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
 
     public static final Block LUNE_SHROOM_BLOCK = new LuneShroomBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().sounds(BlockSoundGroup.SHROOMLIGHT).luminance((state) -> {
         return 2;
     }));
-    public static final BlockItem LUNE_SHROOM_ITEM = new BlockItem(LUNE_SHROOM_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
+    public static final BlockItem LUNE_SHROOM_ITEM = new BlockItem(LUNE_SHROOM_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
 
     public static final Block BRAMBLEBONE_BLOCK = new BrambleboneBlock(FabricBlockSettings.of(Material.GLASS).ticksRandomly().sounds(BlockSoundGroup.TUFF).collidable(false).nonOpaque().allowsSpawning(ModBlocks::never).suffocates(ModBlocks::never));
-    public static final BlockItem BRAMBLEBONE_ITEM = new BlockItem(BRAMBLEBONE_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
+    public static final BlockItem BRAMBLEBONE_ITEM = new BlockItem(BRAMBLEBONE_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
 
     public static final Block JAR_BLOCK = new JarBlock(FabricBlockSettings.of(Material.GLASS).sounds(BlockSoundGroup.GLASS).nonOpaque().allowsSpawning(ModBlocks::never).suffocates(ModBlocks::never));
-    public static final BlockItem JAR_ITEM = new BlockItem(JAR_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
+    public static final BlockItem JAR_ITEM = new BlockItem(JAR_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
     public static final BlockEntityType<JarBlockEntity> JAR_BLOCKENTITY =
             Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AstralAdditions.MOD_ID, "jar"), FabricBlockEntityTypeBuilder.create(JarBlockEntity::new, JAR_BLOCK).build());
 
