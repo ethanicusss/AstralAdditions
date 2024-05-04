@@ -6,6 +6,7 @@ import com.github.ethanicuss.astraladditions.entities.meteor_mitts.MeteorPunchEn
 import com.github.ethanicuss.astraladditions.util.ModUtils;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -22,12 +23,14 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerTask;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
@@ -111,6 +114,7 @@ public class EGuitarItem extends Item {
                     }
                 }
                 nbtCompound.putInt(CHARGE_KEY, 0);
+                itemStack.damage(1, user, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
             }
         }
         user.incrementStat(Stats.USED.getOrCreateStat(this));
@@ -119,7 +123,9 @@ public class EGuitarItem extends Item {
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        //target.damage(DamageSource.mob(attacker), 8);
+        if (!attacker.world.isClient()) {
+            stack.damage(1, attacker, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
+        }
         NbtCompound nbtCompound = stack.getOrCreateNbt();
         if (nbtCompound.getInt(CHARGE_KEY) < 5) {
             nbtCompound.putInt(CHARGE_KEY, nbtCompound.getInt(CHARGE_KEY)+1);
@@ -136,6 +142,14 @@ public class EGuitarItem extends Item {
             return this.attributeModifiers;
         }
         return super.getAttributeModifiers(slot);
+    }
+
+    @Override
+    public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
+        if (state.getHardness(world, pos) != 0.0f) {
+            stack.damage(2, miner, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
+        }
+        return true;
     }
 
 }

@@ -22,6 +22,8 @@ import net.minecraft.world.explosion.Explosion;
 
 public class SmallShimmerballEntity extends SmallFireballEntity {
 
+    private boolean doesGriefing = false;
+
     public SmallShimmerballEntity(EntityType<? extends SmallShimmerballEntity> entityType, World world) {
         super((EntityType<? extends SmallFireballEntity>)entityType, world);
     }
@@ -41,6 +43,9 @@ public class SmallShimmerballEntity extends SmallFireballEntity {
         if (this.age > 23){
             if (!this.world.isClient) {
                 Explosion.DestructionType destructionType = this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING) ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE;
+                if (doesGriefing) {
+                    destructionType = Explosion.DestructionType.NONE;
+                }
                 this.world.createExplosion(this, this.getX(), this.getY(), this.getZ(), 1.5f, destructionType);
                 for (var i = 0; i < 6; i++){
                     this.world.addParticle(this.getParticleType(), this.getX() + this.world.random.nextFloat() * 4 - 2, this.getY() + this.world.random.nextFloat() * 4 - 2, this.getZ() + this.world.random.nextFloat() * 4 - 2, this.world.random.nextFloat()*3-1.5, this.world.random.nextFloat()*3-2, this.world.random.nextFloat()*3-1.5);
@@ -55,13 +60,16 @@ public class SmallShimmerballEntity extends SmallFireballEntity {
         if (this.world.isClient) {
             return;
         }
-        Entity entity = entityHitResult.getEntity();
+        Explosion.DestructionType destructionType = Explosion.DestructionType.NONE;
+        this.world.createExplosion(this, this.getX(), this.getY(), this.getZ(), 1.5f, destructionType);
+        this.discard();
+        /*Entity entity = entityHitResult.getEntity();
         Entity entity2 = this.getOwner();
         boolean bl = entity.damage(DamageSource.fireball(this, entity2), 5.0f);
         if (!bl) {
         } else if (entity2 instanceof LivingEntity) {
             this.applyDamageEffects((LivingEntity)entity2, entity);
-        }
+        }*/
     }
 
     @Override
@@ -76,6 +84,7 @@ public class SmallShimmerballEntity extends SmallFireballEntity {
                 this.world.setBlockState(blockPos, ModFluids.SHIMMER.getDefaultState());
             }
         }
+        System.out.println("hit");
         this.setVelocity(0, 0, 0);
     }
 

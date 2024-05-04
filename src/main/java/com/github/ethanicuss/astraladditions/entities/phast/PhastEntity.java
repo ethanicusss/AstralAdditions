@@ -7,19 +7,34 @@ import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.GhastEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
+import net.minecraft.world.event.GameEvent;
+import net.minecraft.world.explosion.Explosion;
 
 import java.util.EnumSet;
 import java.util.Random;
 
 public class PhastEntity extends GhastEntity {
+
+    private static final TrackedData<Integer> FUSE = DataTracker.registerData(GhastEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Boolean> SHOOT_SOUND_PLAYED = DataTracker.registerData(GhastEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final int fuse = 30;
+
+    private boolean hasPlayedShootSound = false;
 
     public PhastEntity(EntityType<? extends GhastEntity> entityType, World world) {
         super(entityType, world);
@@ -35,7 +50,7 @@ public class PhastEntity extends GhastEntity {
 
     @Override
     public int getFireballStrength() {
-        return 3;
+        return 2;
     }
 
     public static DefaultAttributeContainer.Builder createPhastAttributes() {
@@ -45,7 +60,48 @@ public class PhastEntity extends GhastEntity {
     @Override
     public void tick() {
         super.tick();
+        if (this.isShooting()){
+            if (!this.getDataTracker().get(SHOOT_SOUND_PLAYED)) {
+                this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_BLAZE_SHOOT, SoundCategory.NEUTRAL, 1.0F, 1.0F + this.random.nextFloat() * 0.1F);
+                this.getDataTracker().set(SHOOT_SOUND_PLAYED, true);
+            }
+        }
+        else{
+            if (this.getDataTracker().get(SHOOT_SOUND_PLAYED)) {this.getDataTracker().set(SHOOT_SOUND_PLAYED, false);}
+        }
+        if (this.getDataTracker().get(FUSE) > 0){
+            if (this.getDataTracker().get(FUSE) == 1){
+                this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_CREEPER_PRIMED, SoundCategory.NEUTRAL, 1.3F, 0.6f);
+            }
+            this.getDataTracker().set(FUSE, this.getDataTracker().get(FUSE)+1);
+            if (this.getDataTracker().get(FUSE) > fuse){
+                this.world.createExplosion(this, this.getX(), this.getY(), this.getZ(), 4, true, Explosion.DestructionType.DESTROY);
+                this.discard();
+            }
+        }
+    }
 
+    public int getFuse() {
+        return this.dataTracker.get(FUSE);
+    }
+
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_CAT_AMBIENT;
+    }
+
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_CAT_HURT;
+    }
+
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_CAT_DEATH;
+    }
+
+    @Override
+    protected void initDataTracker() {
+        super.initDataTracker();
+        this.dataTracker.startTracking(FUSE, 0);
+        this.dataTracker.startTracking(SHOOT_SOUND_PLAYED, false);
     }
 
     static class FlyRandomlyGoal
@@ -164,7 +220,24 @@ public class PhastEntity extends GhastEntity {
             double d = 64.0;
             if (livingEntity.squaredDistanceTo(this.ghast) < 4096.0 && this.ghast.canSee(livingEntity)) {
                 World world = this.ghast.world;
-                ++this.cooldown;
+                if (this.ghast.getDataTracker().get(FUSE) == 0) {
+                    ++this.cooldown;
+                }
+
+                double speed = 0.1;
+                if (livingEntity.squaredDistanceTo(this.ghast) < Math.pow(16, 2)){
+                    speed *= 2.5;
+                }
+                if (this.ghast.getDataTracker().get(FUSE) == 0 && livingEntity.squaredDistanceTo(this.ghast) < Math.pow(5, 2)){
+                    this.ghast.getDataTracker().set(FUSE, 1);
+                }
+                double dyaw = Math.atan((livingEntity.getX() - this.ghast.getX())/(livingEntity.getZ() - this.ghast.getZ()));
+                double dpitch = Math.atan((livingEntity.getX() - this.ghast.getX())/(livingEntity.getY() - this.ghast.getY()));
+                double dx = Math.sin(dyaw)*speed;
+                double dz = Math.cos(dyaw)*speed;
+                double dy = Math.cos(dpitch)*speed;
+                if (livingEntity.getZ()<this.ghast.getZ()){dx *= -1;dz *= -1;}
+                this.ghast.setVelocity(dx, -dy, dz);
                 if (this.cooldown == 10 && !this.ghast.isSilent()) {
                     world.syncWorldEvent(null, WorldEvents.GHAST_WARNS, this.ghast.getBlockPos(), 0);
                 }
@@ -180,7 +253,7 @@ public class PhastEntity extends GhastEntity {
                     FireballEntity fireballEntity = new FireballEntity(world, (LivingEntity)this.ghast, f*2, g*2, h*2, this.ghast.getFireballStrength());
                     fireballEntity.setPosition(this.ghast.getX() + vec3d.x * 4.0, this.ghast.getBodyY(0.5) + 0.5, fireballEntity.getZ() + vec3d.z * 4.0);
                     world.spawnEntity(fireballEntity);
-                    this.cooldown = -20;
+                    this.cooldown = -80;
                 }
             } else if (this.cooldown > 0) {
                 --this.cooldown;

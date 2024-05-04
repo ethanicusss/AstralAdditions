@@ -25,12 +25,14 @@ import java.util.List;
 public class ModItems {
     public static final Item COMETBALL = new CometballItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(16).rarity(Rarity.UNCOMMON));
     public static final Item PYLON = new PylonItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).rarity(Rarity.UNCOMMON));
-    public static final Item METEOR_MITTS = new MeteorMittsItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON));
+    public static final Item METEOR_MITTS = new MeteorMittsItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON).maxDamage(1536));
     public static final Item COSMIC_HOURGLASS = new CosmicHourglassItem(new FabricItemSettings().maxCount(1).rarity(Rarity.UNCOMMON));
-    public static final Item E_GUITAR = new EGuitarItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON));
+    public static final Item E_GUITAR = new EGuitarItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON).maxDamage(2048));
     public static final Item MOONSET_CRYSTAL = new Item(new FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON));
     public static final Item OHNO = new OHNOItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).rarity(Rarity.RARE));
     public static final Item OHNO_BROKEN = new OHNOBrokenItem(new FabricItemSettings().group(ItemGroup.TOOLS).rarity(Rarity.RARE));
+    public static final Item SHIMMER_BLOWER = new ShimmerBlowerItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON).maxDamage(20));
+    public static final Item LUNAR_WACKER = new LunarWackerItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON).maxDamage(512));
     public static final Item SHIMMER_HEART = new Item(new FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON));
     public static final Item AWAKENED_SHIMMER_HEART = new Item(new FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON));
     public static final Item SHIMMER_BLAZE_ROD = new Item(new FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON));
@@ -49,6 +51,8 @@ public class ModItems {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "moonset_crystal"), MOONSET_CRYSTAL);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "oh-no"), OHNO);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "oh-no_broken"), OHNO_BROKEN);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmer_blower"), SHIMMER_BLOWER);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "lunar_wacker"), LUNAR_WACKER);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmer_heart"), SHIMMER_HEART);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "awakened_shimmer_heart"), AWAKENED_SHIMMER_HEART);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmer_blaze_rod"), SHIMMER_BLAZE_ROD);

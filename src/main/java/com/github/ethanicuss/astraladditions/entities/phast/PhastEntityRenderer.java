@@ -11,6 +11,7 @@ import net.minecraft.client.render.entity.model.GhastEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.mob.GhastEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 
 @Environment(value= EnvType.CLIENT)
 public class PhastEntityRenderer
@@ -32,9 +33,15 @@ public class PhastEntityRenderer
 
     @Override
     protected void scale(PhastEntity ghastEntity, MatrixStack matrixStack, float f) {
-        float g = 1.0f;
         float h = 4.5f;
-        float i = 4.5f;
-        matrixStack.scale(4.5f, 4.5f, 4.5f);
+        float i = h;
+        float j = h;
+        if (ghastEntity.getFuse() > 0){
+            float g = MathHelper.sin(ghastEntity.getFuse() * 0.8f);
+            float d = MathHelper.sin(ghastEntity.getFuse() * 0.2f);
+            i = h + g;
+            j = h + d;
+        }
+        matrixStack.scale(i, j, i);
     }
 }
