@@ -6,6 +6,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -14,6 +15,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
@@ -69,6 +71,9 @@ public class HemogiantEntity extends EndermanEntity {
             int eattime = this.dataTracker.get(EAT_TIME);
             this.dataTracker.set(EAT_TIME, eattime - 1);
             if (eattime <= 0) {
+                if (eattime == 0){
+                    this.getWorld().playSoundFromEntity(null, this, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.NEUTRAL, 1.1F, 0.6F + this.random.nextFloat() * 0.1F);
+                }
                 this.stopAnger();
                 if (eattime <= -20 - this.getHealth()/maxHP*40) {
                     this.world.createExplosion(this, this.getX(), this.getY(), this.getZ(), 4, Explosion.DestructionType.BREAK);
@@ -109,9 +114,25 @@ public class HemogiantEntity extends EndermanEntity {
         this.dataTracker.startTracking(EAT_TIME, 180);
     }
 
+    @Override
+    protected void playHurtSound(DamageSource source){
+        this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_ENDERMAN_HURT, SoundCategory.NEUTRAL, 0.8F, 0.4F + this.random.nextFloat() * 0.1F);
+        super.playHurtSound(source);
+    }
+    @Override
+    protected void updatePostDeath() {
+        if (this.deathTime == 1){
+            this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_ENDERMAN_DEATH, SoundCategory.NEUTRAL, 1.0F, 0.3F + this.random.nextFloat() * 0.1F);
+        }
+        super.updatePostDeath();
+    }
+
     protected boolean teleportRandomly(int range, int yRange) {
         if (this.world.isClient() || !this.isAlive()) {
             return false;
+        }
+        else{
+            this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.NEUTRAL, 0.8F, 0.7F + this.random.nextFloat() * 0.1F);
         }
         double d = this.getX() + (this.random.nextDouble() - 0.5) * range;
         double e = this.getY() + (double)(this.random.nextInt(yRange) - yRange/2);

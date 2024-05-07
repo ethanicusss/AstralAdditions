@@ -276,13 +276,5 @@
 				"stream": true
 			}
 		]
-	},
-	"mmmdisc": {
-    "sounds": [
-      {
-        "name": "astraladditions:disc/notsuspencebut",
-        "stream": true
-      }
-    ]
-  }
+	}
 }

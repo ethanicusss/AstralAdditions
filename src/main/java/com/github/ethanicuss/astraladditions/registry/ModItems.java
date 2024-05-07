@@ -42,6 +42,9 @@ public class ModItems {
     public static final Item BLAZED_STEEL_RING = new Item(new FabricItemSettings().group(ItemGroup.MISC));
     public static final Item ORBITAL_NAVIGATION_RING = new Item(new FabricItemSettings().group(ItemGroup.MISC));
     public static final Item MOONBLAZED_ORB = new Item(new FabricItemSettings().group(ItemGroup.MISC));
+    public static final Item FRAGILE_ITEM = new FragileItem(new FabricItemSettings().group(ItemGroup.MISC), ModData.FRAGILE_ITEM_PARTS);
+    public static final Item FRAGILE_ITEM_2 = new FragileItem(new FabricItemSettings().group(ItemGroup.MISC), ModData.FRAGILE_ITEM_PARTS_2);
+    public static final Item FRAGILE_ITEM_3 = new FragileItem(new FabricItemSettings().group(ItemGroup.MISC), ModData.FRAGILE_ITEM_PARTS_3);
     public static void registerItems() {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "cometball"), COMETBALL);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "pylon"), PYLON);
@@ -62,6 +65,9 @@ public class ModItems {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "blazed_steel_ring"), BLAZED_STEEL_RING);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "orbital_navigation_ring"), ORBITAL_NAVIGATION_RING);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "moonblazed_orb"), MOONBLAZED_ORB);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "fragile_item"), FRAGILE_ITEM);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "fragile_item_2"), FRAGILE_ITEM_2);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "fragile_item_3"), FRAGILE_ITEM_3);
         addSacrificeItem(AWAKENED_SHIMMER_HEART, ModEntities.SHIMMER_BLAZE);
     }
     private static List<Item> sacrificableItems = new ArrayList<Item>();

@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "m",
+        "#",
+				"#"
+    ],
+    "key": {
+        "#": {
+            "item": "astraladditions:shimmer_blaze_rod"
+        },
+        "m": {
+            "item": "minecraft:ender_eye"
+        }
+    },
+    "result": {
+        "item": "astraladditions:shimmer_blower"
+    }
+} 

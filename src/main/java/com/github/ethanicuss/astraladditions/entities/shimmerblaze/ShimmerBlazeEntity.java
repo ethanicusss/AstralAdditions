@@ -20,6 +20,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 
@@ -277,6 +278,11 @@ public class ShimmerBlazeEntity extends BlazeEntity {
         super.tickMovement();
     }
     @Override
+    protected void playHurtSound(DamageSource source){
+        this.getWorld().playSoundFromEntity(null, this, SoundEvents.BLOCK_AMETHYST_BLOCK_BREAK, SoundCategory.NEUTRAL, 1.0F, 0.8F + this.random.nextFloat() * 0.2F);
+        super.playHurtSound(source);
+    }
+    @Override
     protected void updatePostDeath() {
         ++this.deathTime;
         this.setNoGravity(true);
@@ -284,10 +290,13 @@ public class ShimmerBlazeEntity extends BlazeEntity {
         this.dropXp();
         if (!this.world.isClient()) {
             ModUtils.spawnForcedParticles((ServerWorld) this.world, ParticleTypes.END_ROD, this.getX(), this.getY(), this.getZ(), 3, 0.2, 0.2, 0.2, 0.05);
+            this.getWorld().playSoundFromEntity(null, this, SoundEvents.BLOCK_AMETHYST_BLOCK_HIT, SoundCategory.NEUTRAL, 1.0F, 0.5F + this.random.nextFloat() * 1.0F);
         }
         if (this.deathTime == 40 && !this.world.isClient()) {
             if (!this.world.isClient()) {
                 ModUtils.spawnForcedParticles((ServerWorld) this.world, ParticleTypes.END_ROD, this.getX(), this.getY(), this.getZ(), 30, 0.5, 0.5, 0.5, 0.2);
+                this.getWorld().playSound(null, new BlockPos(this.getX(), this.getY(), this.getZ()), SoundEvents.ENTITY_BLAZE_DEATH, SoundCategory.NEUTRAL, 2.0F, 0.8F + this.random.nextFloat() * 0.2F);
+                this.getWorld().playSound(null, new BlockPos(this.getX(), this.getY(), this.getZ()), SoundEvents.BLOCK_AMETHYST_CLUSTER_BREAK, SoundCategory.NEUTRAL, 2.0F, 1.0f);
             }
             this.world.sendEntityStatus(this, (byte)60);
             this.remove(Entity.RemovalReason.KILLED);

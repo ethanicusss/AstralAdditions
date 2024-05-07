@@ -102,7 +102,7 @@ public class ModEntities {
     public static final EntityType<PhastEntity> PHAST = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(AstralAdditions.MOD_ID, "phast"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, PhastEntity::new).dimensions(EntityDimensions.fixed(5.0f, 5.0f)).build()
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, PhastEntity::new).dimensions(EntityDimensions.fixed(5.0f, 5.0f)).fireImmune().build()
     );
 
     public static final EntityModelLayer MODEL_MOONMAN_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "moonman"), "main");

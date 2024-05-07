@@ -6,11 +6,15 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -49,5 +53,19 @@ public class VoidtouchedZombieEntity
     @Override
     protected ItemStack getSkull() {
         return ItemStack.EMPTY;
+    }
+
+    @Override
+    protected void playHurtSound(DamageSource source){
+        this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_HUSK_HURT, SoundCategory.NEUTRAL, 1.0F, 0.8F + this.random.nextFloat() * 0.1F);
+        super.playHurtSound(source);
+    }
+
+    @Override
+    protected void updatePostDeath() {
+        if (this.deathTime == 1){
+            this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_HUSK_DEATH, SoundCategory.NEUTRAL, 1.0F, 0.8F + this.random.nextFloat() * 0.1F);
+        }
+        super.updatePostDeath();
     }
 }

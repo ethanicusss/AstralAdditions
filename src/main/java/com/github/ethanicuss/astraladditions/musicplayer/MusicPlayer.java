@@ -44,7 +44,7 @@ public class MusicPlayer {
                     val = ModMusic.OW_SCARY;
                 }
             }
-            if (!Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:overworld") && !Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:the_end")) {
+            if (!Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:overworld") && !Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:the_end") && !Objects.equals(player.world.getRegistryKey().getValue().toString(), "createastral:moon_debris")) {
                 if (player.world.getTimeOfDay()%24000 < 12000) {
                     val = ModMusic.DAY;
                 }
@@ -58,7 +58,7 @@ public class MusicPlayer {
             if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:mercury")) {
                 val = ModMusic.MERCURY;
             }
-            if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:the_end")) {
+            if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:the_end") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "createastral:moon_debris")) {
                 val = ModMusic.END;
                 if (MinecraftClient.getInstance().inGameHud.getBossBarHud().shouldPlayDragonMusic()) {
                     val = ModMusic.END_BOSS;
@@ -70,7 +70,7 @@ public class MusicPlayer {
             if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:moon_orbit") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:mars_orbit") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:mercury_orbit") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:earth_orbit")) {
                 val = ModMusic.ORBIT;
             }
-            if ((player.getHealth() < 12.0f || musicTracker.isPlayingType(ModMusic.COMBAT)) && !musicTracker.isPlayingType(ModMusic.WITHER_DEATH)) {
+            if (AstralAdditionsClient.playerTracker.doCombatMusic && ((player.getHealth() < 12.0f || musicTracker.isPlayingType(ModMusic.COMBAT)) && !musicTracker.isPlayingType(ModMusic.WITHER_DEATH))) {
                 double i = player.getX();
                 double j = player.getY();
                 double k = player.getZ();
@@ -171,7 +171,7 @@ public class MusicPlayer {
                     }
                 } else {
                     if (musicTracker.isPlayingType(ModMusic.SHIMMER_BLAZE)) {
-                        val = ModMusic.COMBAT_END;
+                        val = ModMusic.WITHER_DEATH;
                     }
                 }
             }

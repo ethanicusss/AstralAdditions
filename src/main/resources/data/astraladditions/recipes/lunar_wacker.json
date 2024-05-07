@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "m",
+        "#",
+				"#"
+    ],
+    "key": {
+        "#": {
+            "item": "astraladditions:shimmer_blaze_rod"
+        },
+        "m": {
+            "item": "astraladditions:lune_shroom"
+        }
+    },
+    "result": {
+        "item": "astraladditions:lunar_wacker"
+    }
+} 

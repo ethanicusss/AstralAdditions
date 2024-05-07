@@ -19,7 +19,17 @@
         {
           "type": "minecraft:item",
           "name": "astraladditions:shimmer_blaze_rod",
-          "weight": 1
+          "weight": 1,
+					"functions": [
+						{
+							"function": "minecraft:looting_enchant",
+							"count": {
+								"min": 1.0,
+								"max": 2.0
+							},
+							"limit": 1
+						}
+					]
         }
       ]
     }

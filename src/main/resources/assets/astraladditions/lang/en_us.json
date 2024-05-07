@@ -31,7 +31,13 @@
 	"item.astraladditions.blazed_steel_ring": "Blazed Steel Ring",
 	"item.astraladditions.orbital_navigation_ring": "Orbital Navigation Ring",
 	"item.astraladditions.moonblazed_orb": "Moonblazed Orb",
+	"item.astraladditions.fragile_item": "Fragile Item",
 	"item.astraladditions.jar": "Jar",
 	"block.astraladditions.jar": "Jar",
-	"astraladditions.text.pylon_too_far": "Pylon out of range"
+	"astraladditions.text.pylon_too_far": "Pylon out of range",
+	"entity.astraladditions.hemogiant": "Hemogiant",
+	"entity.astraladditions.voidtouched_zombie": "Voidtouched Zombie",
+	"entity.astraladditions.voidtouched_skeleton": "Voidtouched Skeleton",
+	"entity.astraladditions.phast": "Phast",
+	"entity.astraladditions.shimmer_blaze": "Shimmer Blaze"
 }

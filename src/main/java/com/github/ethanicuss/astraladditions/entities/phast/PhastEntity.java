@@ -85,16 +85,17 @@ public class PhastEntity extends GhastEntity {
         return this.dataTracker.get(FUSE);
     }
 
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_CAT_AMBIENT;
+    @Override
+    protected void playHurtSound(DamageSource source){
+        this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_GHAST_HURT, SoundCategory.NEUTRAL, 0.8F, 0.7F + this.random.nextFloat() * 0.1F);
+        super.playHurtSound(source);
     }
-
-    protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_CAT_HURT;
-    }
-
-    protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_CAT_DEATH;
+    @Override
+    protected void updatePostDeath() {
+        if (this.deathTime == 1){
+            this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_GHAST_DEATH, SoundCategory.NEUTRAL, 1.0F, 0.8F + this.random.nextFloat() * 0.1F);
+        }
+        super.updatePostDeath();
     }
 
     @Override

@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "m",
+        "#"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:glass"
+        },
+        "m": {
+            "tag": "minecraft:wooden_pressure_plates"
+        }
+    },
+    "result": {
+        "item": "astraladditions:jar"
+    }
+} 
