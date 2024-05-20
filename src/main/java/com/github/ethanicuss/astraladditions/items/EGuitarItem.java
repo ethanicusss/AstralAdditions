@@ -3,6 +3,7 @@ package com.github.ethanicuss.astraladditions.items;
 import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import com.github.ethanicuss.astraladditions.entities.meteor_mitts.MeteorPunchEntity;
+import com.github.ethanicuss.astraladditions.registry.ModSounds;
 import com.github.ethanicuss.astraladditions.util.ModUtils;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -26,6 +27,7 @@ import net.minecraft.server.ServerTask;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
@@ -42,6 +44,7 @@ public class EGuitarItem extends Item {
     public static final String CHARGE_KEY = "charge";
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
     private final float[] notes = {getNote(15-10), getNote(17-10), getNote(18-10), getNote(22-10), getNote(27-10), getNote(34-10)};
+    private final SoundEvent EGUITAR_NOTE = ModSounds.ITEM_EGUITAR_NOTE;
     public EGuitarItem(Settings settings) {
         super(settings);
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
@@ -68,13 +71,13 @@ public class EGuitarItem extends Item {
                 user.setPitch(user.getPitch()-nbtCompound.getInt(CHARGE_KEY));
             } else {
                 if (nbtCompound.getInt(CHARGE_KEY) >= 5) {
-                    world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.NEUTRAL, 0.7f, notes[0]);
+                    world.playSound(null, user.getX(), user.getY(), user.getZ(), EGUITAR_NOTE, SoundCategory.NEUTRAL, 0.7f, notes[0]);
                 }
                 if (nbtCompound.getInt(CHARGE_KEY) >= 4) {
-                    world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.NEUTRAL, 0.7f, notes[nbtCompound.getInt(CHARGE_KEY) - 3]);
+                    world.playSound(null, user.getX(), user.getY(), user.getZ(), EGUITAR_NOTE, SoundCategory.NEUTRAL, 0.7f, notes[nbtCompound.getInt(CHARGE_KEY) - 3]);
                 }
-                world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.NEUTRAL, 0.7f, notes[nbtCompound.getInt(CHARGE_KEY) - 1]);
-                world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.NEUTRAL, 0.7f, notes[nbtCompound.getInt(CHARGE_KEY)]);
+                world.playSound(null, user.getX(), user.getY(), user.getZ(), EGUITAR_NOTE, SoundCategory.NEUTRAL, 0.7f, notes[nbtCompound.getInt(CHARGE_KEY) - 1]);
+                world.playSound(null, user.getX(), user.getY(), user.getZ(), EGUITAR_NOTE, SoundCategory.NEUTRAL, 0.7f, notes[nbtCompound.getInt(CHARGE_KEY)]);
                 double px = user.getX();
                 double py = user.getY() + 1;
                 double pz = user.getZ();
@@ -130,7 +133,7 @@ public class EGuitarItem extends Item {
         if (nbtCompound.getInt(CHARGE_KEY) < 5) {
             nbtCompound.putInt(CHARGE_KEY, nbtCompound.getInt(CHARGE_KEY)+1);
         }
-        attacker.world.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundCategory.NEUTRAL, 0.5f + 0.2f*nbtCompound.getInt(CHARGE_KEY), notes[nbtCompound.getInt(CHARGE_KEY) - 1]);
+        attacker.world.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), EGUITAR_NOTE, SoundCategory.NEUTRAL, 0.5f + 0.2f*nbtCompound.getInt(CHARGE_KEY), notes[nbtCompound.getInt(CHARGE_KEY) - 1]);
 
         ModUtils.spawnForcedParticles((ServerWorld)attacker.world, ParticleTypes.END_ROD, target.getX(), target.getY(), target.getZ(), 3 + nbtCompound.getInt(CHARGE_KEY), 0.5 * target.world.getRandom().nextFloat(), 0.3, 0.5 * target.world.getRandom().nextFloat(), 0.5);
         return true;

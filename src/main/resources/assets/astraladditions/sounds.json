@@ -276,5 +276,12 @@
 				"stream": true
 			}
 		]
+	},
+	"item/note_eguitar": {
+		"sounds": [
+			{
+				"name": "astraladditions:item/note_eguitar"
+			}
+		]
 	}
 }
