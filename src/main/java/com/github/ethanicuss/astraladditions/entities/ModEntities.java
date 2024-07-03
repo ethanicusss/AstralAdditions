@@ -1,6 +1,7 @@
 package com.github.ethanicuss.astraladditions.entities;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
+import com.github.ethanicuss.astraladditions.AstralAdditionsClient;
 import com.github.ethanicuss.astraladditions.entities.cometball.CometballEntity;
 import com.github.ethanicuss.astraladditions.entities.cometball.CometballEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntity;
@@ -105,13 +106,6 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, PhastEntity::new).dimensions(EntityDimensions.fixed(5.0f, 5.0f)).fireImmune().build()
     );
 
-    public static final EntityModelLayer MODEL_MOONMAN_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "moonman"), "main");
-    public static final EntityModelLayer MODEL_HEMOGIANT_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "hemogiant"), "main");
-    public static final EntityModelLayer MODEL_VOIDTOUCHED_SKELETON_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "voidtouched_skeleton"), "main");
-    public static final EntityModelLayer MODEL_VOIDTOUCHED_ZOMBIE_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "voidtouched_zombie"), "main");
-    public static final EntityModelLayer MODEL_SHIMMER_BLAZE_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "shimmer_blaze"), "main");
-    public static final EntityModelLayer MODEL_PHAST_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "phast"), "main");
-
     public static void init() {
         FabricDefaultAttributeRegistry.register(MOONMAN, MoonmanEntity.createMoonmanAttributes());
         FabricDefaultAttributeRegistry.register(HEMOGIANT, HemogiantEntity.createGluttonAttributes());
@@ -123,22 +117,22 @@ public class ModEntities {
 
     public static void initClient() {
         EntityRendererRegistry.register(MOONMAN, MoonmanEntityRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(MODEL_MOONMAN_LAYER, MoonmanEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(AstralAdditionsClient.MODEL_MOONMAN_LAYER, MoonmanEntityModel::getTexturedModelData);
 
         EntityRendererRegistry.register(HEMOGIANT, HemogiantEntityRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(MODEL_HEMOGIANT_LAYER, HemogiantEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(AstralAdditionsClient.MODEL_HEMOGIANT_LAYER, HemogiantEntityModel::getTexturedModelData);
 
         EntityRendererRegistry.register(VOIDTOUCHED_SKELETON, VoidtouchedSkeletonEntityRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(MODEL_VOIDTOUCHED_SKELETON_LAYER, SkeletonEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(AstralAdditionsClient.MODEL_VOIDTOUCHED_SKELETON_LAYER, SkeletonEntityModel::getTexturedModelData);
 
         EntityRendererRegistry.register(VOIDTOUCHED_ZOMBIE, VoidtouchedZombieEntityRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(MODEL_VOIDTOUCHED_ZOMBIE_LAYER, VoidtouchedZombieEntityRenderer::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(AstralAdditionsClient.MODEL_VOIDTOUCHED_ZOMBIE_LAYER, VoidtouchedZombieEntityRenderer::getTexturedModelData);
 
         EntityRendererRegistry.register(SHIMMER_BLAZE, ShimmerBlazeEntityRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(MODEL_SHIMMER_BLAZE_LAYER, ShimmerBlazeEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(AstralAdditionsClient.MODEL_SHIMMER_BLAZE_LAYER, ShimmerBlazeEntityModel::getTexturedModelData);
 
         EntityRendererRegistry.register(PHAST, PhastEntityRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(MODEL_PHAST_LAYER, GhastEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(AstralAdditionsClient.MODEL_PHAST_LAYER, GhastEntityModel::getTexturedModelData);
 
         EntityRendererRegistry.register(ENDER_BALL, EnderBallEntityRenderer::new);
 

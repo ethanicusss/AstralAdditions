@@ -41,7 +41,7 @@ public class CometballItem
             Vec3d vec3d = new Vec3d(f, g, h).normalize().multiply(0.5).add(user.getVelocity());
             user.setVelocity(vec3d);
             user.damage(DamageSource.FALL, 2);
-           world.addParticle(ParticleTypes.GLOW_SQUID_INK, user.getX(), user.getY(), user.getZ(), 0.0, 0.0, 0.0);
+            world.addParticle(ParticleTypes.GLOW_SQUID_INK, user.getX(), user.getY(), user.getZ(), 0.0, 0.0, 0.0);
         }
         else{
             if (!world.isClient) {

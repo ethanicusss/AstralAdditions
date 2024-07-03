@@ -5,6 +5,7 @@ import com.github.ethanicuss.astraladditions.fluids.ModFluids;
 import com.github.ethanicuss.astraladditions.playertracker.WorldRegister;
 import com.github.ethanicuss.astraladditions.registry.ModBlocks;
 import com.github.ethanicuss.astraladditions.registry.ModItems;
+import com.github.ethanicuss.astraladditions.registry.ModSounds;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.Item;
 import net.minecraft.tag.TagKey;
@@ -24,6 +25,7 @@ public class AstralAdditions implements ModInitializer {
 		ModEntities.init();
 		ModBlocks.registerBlocks();
 		ModItems.registerItems();
+		ModSounds.registerSounds();
 		LOGGER.info("Astral Additions is active!");
 	}
 }

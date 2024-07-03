@@ -46,11 +46,12 @@ public class ModSounds {
     public static final SoundEvent MUSIC_COMBAT_END = new SoundEvent(MUSIC_COMBAT_END_ID);
     public static final Identifier MUSIC_SHIMMER_BLAZE_ID = new Identifier(AstralAdditions.MOD_ID, "music_shimmer_blaze");
     public static final SoundEvent MUSIC_SHIMMER_BLAZE = new SoundEvent(MUSIC_SHIMMER_BLAZE_ID);
-
+    public static final Identifier MUSIC_ASTRAL_LAKES_REMIX_ID = new Identifier(AstralAdditions.MOD_ID, "music_astral_lakes_remix");
+    public static final SoundEvent MUSIC_ASTRAL_LAKES_REMIX = new SoundEvent(MUSIC_ASTRAL_LAKES_REMIX_ID);
 
     public static final Identifier ITEM_EGUITAR_NOTE_ID = new Identifier(AstralAdditions.MOD_ID, "item/note_eguitar");
     public static final SoundEvent ITEM_EGUITAR_NOTE = new SoundEvent(ITEM_EGUITAR_NOTE_ID);
-    private static void registerSounds() {
+    public static void registerSounds() {
         Registry.register(Registry.SOUND_EVENT, MUSIC_MOON_ID, MUSIC_MOON);
         Registry.register(Registry.SOUND_EVENT, MUSIC_POST_MOON_ID, MUSIC_POST_MOON);
         Registry.register(Registry.SOUND_EVENT, MUSIC_DAY_ID, MUSIC_DAY);
@@ -71,6 +72,7 @@ public class ModSounds {
         Registry.register(Registry.SOUND_EVENT, MUSIC_COMBAT_ID, MUSIC_COMBAT);
         Registry.register(Registry.SOUND_EVENT, MUSIC_COMBAT_END_ID, MUSIC_COMBAT_END);
         Registry.register(Registry.SOUND_EVENT, MUSIC_SHIMMER_BLAZE_ID, MUSIC_SHIMMER_BLAZE);
+        Registry.register(Registry.SOUND_EVENT, MUSIC_ASTRAL_LAKES_REMIX_ID, MUSIC_ASTRAL_LAKES_REMIX);
         Registry.register(Registry.SOUND_EVENT, ITEM_EGUITAR_NOTE_ID, ITEM_EGUITAR_NOTE);
     }
 }

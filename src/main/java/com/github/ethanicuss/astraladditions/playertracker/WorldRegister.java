@@ -1,7 +1,10 @@
 package com.github.ethanicuss.astraladditions.playertracker;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.World;
 
 import java.util.*;
 
@@ -13,9 +16,9 @@ public class WorldRegister {
 
     }
 
-    public void LoadData(){
-        MinecraftClient client = MinecraftClient.getInstance();
-        for (ServerWorld serverWorld : Objects.requireNonNull(client.getServer()).getWorlds()) {
+    public void LoadData(World world){
+        MinecraftServer server = world.getServer();
+        for (ServerWorld serverWorld : Objects.requireNonNull(server).getWorlds()) { //💀
             worldRegister.put(serverWorld.getRegistryKey().getValue().toString(), serverWorld);
         }
     }

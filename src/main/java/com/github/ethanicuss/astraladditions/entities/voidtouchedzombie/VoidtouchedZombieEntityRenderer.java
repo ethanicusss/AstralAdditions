@@ -19,7 +19,7 @@ public class VoidtouchedZombieEntityRenderer
     private static final Identifier TEXTURE = new Identifier(AstralAdditions.MOD_ID, "textures/entity/voidtouched_zombie/zombie.png");
 
     public VoidtouchedZombieEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, ModEntities.MODEL_VOIDTOUCHED_ZOMBIE_LAYER, EntityModelLayers.HUSK_INNER_ARMOR, EntityModelLayers.HUSK_OUTER_ARMOR);
+        super(context, AstralAdditionsClient.MODEL_VOIDTOUCHED_ZOMBIE_LAYER, EntityModelLayers.HUSK_INNER_ARMOR, EntityModelLayers.HUSK_OUTER_ARMOR);
     }
 
     public static TexturedModelData getTexturedModelData(){

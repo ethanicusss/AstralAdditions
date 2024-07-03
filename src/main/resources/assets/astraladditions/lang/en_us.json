@@ -39,5 +39,10 @@
 	"entity.astraladditions.voidtouched_zombie": "Voidtouched Zombie",
 	"entity.astraladditions.voidtouched_skeleton": "Voidtouched Skeleton",
 	"entity.astraladditions.phast": "Phast",
-	"entity.astraladditions.shimmer_blaze": "Shimmer Blaze"
+	"entity.astraladditions.shimmer_blaze": "Shimmer Blaze",
+	
+	"item.astraladditions.disc_purple_prison": "Purple Prison Music Disc",
+	"item.astraladditions.disc_purple_prison.desc": "Purple Prison - ethanicuss",
+	"item.astraladditions.disc_astral_lakes_remix": "Astral Lakes (ethanicuss' meow moew :wolfGif: remix) Music Disc",
+	"item.astraladditions.disc_astral_lakes_remix.desc": "Astral Lakes (ethanicuss' meow moew :wolfGif: remix) - ethanicuss"
 }

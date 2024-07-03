@@ -6,6 +6,7 @@ import com.github.ethanicuss.astraladditions.entities.cometball.CometballEntity;
 import com.github.ethanicuss.astraladditions.entities.pylon.PylonEntity;
 import com.github.ethanicuss.astraladditions.entities.shimmerblaze.ShimmerBlazeEntity;
 import com.github.ethanicuss.astraladditions.registry.ModItems;
+import com.github.ethanicuss.astraladditions.util.ModUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -21,6 +22,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.PlayerPositionLookS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
@@ -32,6 +34,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.core.jmx.Server;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.system.CallbackI;
 
@@ -90,10 +93,10 @@ public class PylonItem extends Item {
 
                 world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.AMBIENT_UNDERWATER_EXIT, SoundCategory.NEUTRAL, 0.7f, 0.8f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
                 for (int amount = 0; amount < 5; amount++) {
-                    MinecraftClient.getInstance().world.addParticle(ParticleTypes.WITCH, user.getX(), user.getY(), user.getZ(), 0.0 + world.getRandom().nextFloat() * 0.4f - 0.2f, 0.2 + world.getRandom().nextFloat() * 0.2f, 0.0 + world.getRandom().nextFloat() * 0.4f - 0.2f);
-                }
-                for (int amount = 0; amount < 45; amount++) {
-                    MinecraftClient.getInstance().world.addParticle(ParticleTypes.GLOW_SQUID_INK, user.getX(), user.getY() + 0.2f, user.getZ(), Math.sin(amount*8.0f)*1.0f, 0, Math.cos(amount*8.0f)*1.0f);
+                    ModUtils.spawnForcedParticles((ServerWorld)world, ParticleTypes.WITCH, user.getX(), user.getY(), user.getZ(), 1, 0.0 + world.getRandom().nextFloat() * 0.4f - 0.2f, 0.2 + world.getRandom().nextFloat() * 0.2f, 0.0 + world.getRandom().nextFloat() * 0.4f - 0.2f, 0);
+                    }
+                for (int amount = 0; amount < 10; amount++) {
+                    ModUtils.spawnForcedParticles((ServerWorld)world, ParticleTypes.GLOW_SQUID_INK, user.getX(), user.getY() + 0.2f, user.getZ(), 45, Math.sin(amount*8.0f)*1.0f, 0, Math.cos(amount*8.0f)*1.0f, 0.1);
                 }
                 PylonEntity pylon = new PylonEntity(ModEntities.PYLON, user.world);
                 pylon.setPlayer(user.getEntityName());
@@ -115,16 +118,16 @@ public class PylonItem extends Item {
                     if (getDistance(user.getX(), user.getY(), user.getZ(), i, j, k) < maxDistance) {
                         if (user.isSneaking()){
                             for (int amount = 0; amount < 45; amount++) {
-                                MinecraftClient.getInstance().world.addParticle(ParticleTypes.GLOW_SQUID_INK, pylon.getX(), pylon.getY() + 0.2f, pylon.getZ(), Math.sin(amount*8.0f)*1.2f, 0, Math.cos(amount*8.0f)*1.2f);
-                                MinecraftClient.getInstance().world.addParticle(ParticleTypes.SQUID_INK, pylon.getX(), pylon.getY() + 1.2f, pylon.getZ(), Math.sin(amount*8.0f)*1.4f, 0, Math.cos(amount*8.0f)*1.4f);
-                                MinecraftClient.getInstance().world.addParticle(ParticleTypes.GLOW_SQUID_INK, pylon.getX(), pylon.getY() + 2.2f, pylon.getZ(), Math.sin(amount*8.0f)*1.2f, 0, Math.cos(amount*8.0f)*1.2f);
+                                ModUtils.spawnForcedParticles((ServerWorld)world, ParticleTypes.GLOW_SQUID_INK, pylon.getX(), pylon.getY() + 0.2f, pylon.getZ(), 1, Math.sin(amount*8.0f)*1.2f, 0, Math.cos(amount*8.0f)*1.2f, 1);
+                                ModUtils.spawnForcedParticles((ServerWorld)world, ParticleTypes.SQUID_INK, pylon.getX(), pylon.getY() + 1.2f, pylon.getZ(), 1, Math.sin(amount*8.0f)*1.4f, 0, Math.cos(amount*8.0f)*1.4f, 1);
+                                ModUtils.spawnForcedParticles((ServerWorld)world, ParticleTypes.GLOW_SQUID_INK, pylon.getX(), pylon.getY() + 2.2f, pylon.getZ(), 1, Math.sin(amount*8.0f)*1.2f, 0, Math.cos(amount*8.0f)*1.2f, 1);
                             }
                             world.playSound(null, pylon.getX(), pylon.getY(), pylon.getZ(), SoundEvents.BLOCK_BELL_USE, SoundCategory.NEUTRAL, 0.5f, 1.5f);
                             float strength = -0.16f;
                             float vStrength = 0.05f;
                             List<Entity> pl = world.getOtherEntities(pylon, new Box(pylon.getX()-16, pylon.getY()-32, pylon.getZ()-16, pylon.getX()+16, pylon.getY()+32, pylon.getZ()+16));
-                            if (MinecraftClient.getInstance().player.isInRange(pylon, 32)) {
-                                pl.add(MinecraftClient.getInstance().player);
+                            if (user.isInRange(pylon, 32)) {
+                                pl.add(user);
                             }
                             for (Entity p : pl) {
                                 if (p instanceof LivingEntity){
@@ -160,10 +163,10 @@ public class PylonItem extends Item {
                         }
                         else{
                             for (int amount = 0; amount < 10; amount++) {
-                                MinecraftClient.getInstance().world.addParticle(ParticleTypes.GLOW_SQUID_INK, user.getX(), user.getY(), user.getZ(), 0.0 + world.getRandom().nextFloat() * 0.2f - 0.1f, 0.3 + world.getRandom().nextFloat() * 0.7f, 0.0 + world.getRandom().nextFloat() * 0.2f - 0.1f);
-                                MinecraftClient.getInstance().world.addParticle(ParticleTypes.GLOW_SQUID_INK, pylon.getX(), pylon.getY(), pylon.getZ(), 0.0 + world.getRandom().nextFloat() * 0.2f - 0.1f, 0.3 + world.getRandom().nextFloat() * 0.7f, 0.0 + world.getRandom().nextFloat() * 0.2f - 0.1f);
-                                MinecraftClient.getInstance().world.addParticle(ParticleTypes.WITCH, user.getX(), user.getY(), user.getZ(), 0.0 + world.getRandom().nextFloat() * 0.8f - 0.4f, 0.4 + world.getRandom().nextFloat() * 0.3f, 0.0 + world.getRandom().nextFloat() * 0.8f - 0.4f);
-                                MinecraftClient.getInstance().world.addParticle(ParticleTypes.WITCH, pylon.getX(), pylon.getY(), pylon.getZ(), 0.0 + world.getRandom().nextFloat() * 0.8f - 0.4f, 0.4 + world.getRandom().nextFloat() * 0.3f, 0.0 + world.getRandom().nextFloat() * 0.8f - 0.4f);
+                                ModUtils.spawnForcedParticles((ServerWorld)world, ParticleTypes.GLOW_SQUID_INK, user.getX(), user.getY(), user.getZ(), 1, 0.0 + world.getRandom().nextFloat() * 0.2f - 0.1f, 0.3 + world.getRandom().nextFloat() * 0.7f, 0.0 + world.getRandom().nextFloat() * 0.2f - 0.1f, 0);
+                                ModUtils.spawnForcedParticles((ServerWorld)world, ParticleTypes.GLOW_SQUID_INK, pylon.getX(), pylon.getY(), pylon.getZ(), 1, 0.0 + world.getRandom().nextFloat() * 0.2f - 0.1f, 0.3 + world.getRandom().nextFloat() * 0.7f, 0.0 + world.getRandom().nextFloat() * 0.2f - 0.1f, 0);
+                                ModUtils.spawnForcedParticles((ServerWorld)world, ParticleTypes.WITCH, user.getX(), user.getY(), user.getZ(), 1, 0.0 + world.getRandom().nextFloat() * 0.8f - 0.4f, 0.4 + world.getRandom().nextFloat() * 0.3f, 0.0 + world.getRandom().nextFloat() * 0.8f - 0.4f, 0);
+                                ModUtils.spawnForcedParticles((ServerWorld)world, ParticleTypes.WITCH, pylon.getX(), pylon.getY(), pylon.getZ(), 1, 0.0 + world.getRandom().nextFloat() * 0.8f - 0.4f, 0.4 + world.getRandom().nextFloat() * 0.3f, 0.0 + world.getRandom().nextFloat() * 0.8f - 0.4f, 0);
                             }
                             ((ServerPlayerEntity) user).networkHandler.requestTeleport(nbtCompound.getDouble(X_KEY), nbtCompound.getDouble(Y_KEY), nbtCompound.getDouble(Z_KEY), user.getYaw(), user.getPitch(), EnumSet.noneOf(PlayerPositionLookS2CPacket.Flag.class));
                             world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.AMBIENT_UNDERWATER_ENTER, SoundCategory.NEUTRAL, 0.7f, 0.8f / (world.getRandom().nextFloat() * 0.4f + 0.8f));

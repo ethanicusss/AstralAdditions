@@ -126,16 +126,15 @@ public class EGuitarItem extends Item {
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (!attacker.world.isClient()) {
-            stack.damage(1, attacker, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
-        }
         NbtCompound nbtCompound = stack.getOrCreateNbt();
         if (nbtCompound.getInt(CHARGE_KEY) < 5) {
             nbtCompound.putInt(CHARGE_KEY, nbtCompound.getInt(CHARGE_KEY)+1);
         }
-        attacker.world.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), EGUITAR_NOTE, SoundCategory.NEUTRAL, 0.5f + 0.2f*nbtCompound.getInt(CHARGE_KEY), notes[nbtCompound.getInt(CHARGE_KEY) - 1]);
-
-        ModUtils.spawnForcedParticles((ServerWorld)attacker.world, ParticleTypes.END_ROD, target.getX(), target.getY(), target.getZ(), 3 + nbtCompound.getInt(CHARGE_KEY), 0.5 * target.world.getRandom().nextFloat(), 0.3, 0.5 * target.world.getRandom().nextFloat(), 0.5);
+        if (!attacker.world.isClient()) {
+            stack.damage(1, attacker, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
+            attacker.world.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), EGUITAR_NOTE, SoundCategory.NEUTRAL, 0.5f + 0.2f*nbtCompound.getInt(CHARGE_KEY), notes[nbtCompound.getInt(CHARGE_KEY) - 1]);
+            ModUtils.spawnForcedParticles((ServerWorld)attacker.world, ParticleTypes.END_ROD, target.getX(), target.getY(), target.getZ(), 3 + nbtCompound.getInt(CHARGE_KEY), 0.5 * target.world.getRandom().nextFloat(), 0.3, 0.5 * target.world.getRandom().nextFloat(), 0.5);
+        }
         return true;
     }
 

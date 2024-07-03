@@ -1,6 +1,7 @@
 package com.github.ethanicuss.astraladditions.entities.shimmerblaze;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
+import com.github.ethanicuss.astraladditions.AstralAdditionsClient;
 import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -21,7 +22,7 @@ public class ShimmerBlazeEntityRenderer
     private static final Identifier TEXTURE = new Identifier(AstralAdditions.MOD_ID, "textures/entity/shimmer_blaze/shimmer_blaze.png");
 
     public ShimmerBlazeEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new ShimmerBlazeEntityModel(context.getPart(ModEntities.MODEL_SHIMMER_BLAZE_LAYER)), 0.5f);
+        super(context, new ShimmerBlazeEntityModel(context.getPart(AstralAdditionsClient.MODEL_SHIMMER_BLAZE_LAYER)), 0.5f);
     }
 
     @Override

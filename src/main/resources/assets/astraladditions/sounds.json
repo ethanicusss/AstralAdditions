@@ -277,6 +277,14 @@
 			}
 		]
 	},
+	"music_astral_lakes_remix": {
+		"sounds": [
+			{
+				"name": "astraladditions:disc/astral_lakes_remix",
+				"stream": true
+			}
+		]
+	},
 	"item/note_eguitar": {
 		"sounds": [
 			{

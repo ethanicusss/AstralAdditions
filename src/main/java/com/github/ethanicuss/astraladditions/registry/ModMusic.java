@@ -25,5 +25,6 @@ public class ModMusic {
     public static final MusicSound COMBAT = new MusicSound(ModSounds.MUSIC_COMBAT, 0, 0, true);
     public static final MusicSound COMBAT_END = new MusicSound(ModSounds.MUSIC_COMBAT_END, 0, 0, true);
     public static final MusicSound SHIMMER_BLAZE = new MusicSound(ModSounds.MUSIC_SHIMMER_BLAZE, 0, 0, true);
+    public static final MusicSound ASTRAL_LAKES_REMIX = new MusicSound(ModSounds.MUSIC_ASTRAL_LAKES_REMIX, 0, 0, true);
 
 }

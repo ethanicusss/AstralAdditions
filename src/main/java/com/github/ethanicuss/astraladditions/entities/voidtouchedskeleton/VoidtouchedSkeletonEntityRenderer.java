@@ -17,7 +17,7 @@ public class VoidtouchedSkeletonEntityRenderer
     private static final Identifier TEXTURE = new Identifier(AstralAdditions.MOD_ID, "textures/entity/voidtouched_skeleton/skeleton.png");
 
     public VoidtouchedSkeletonEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, ModEntities.MODEL_VOIDTOUCHED_SKELETON_LAYER, EntityModelLayers.SKELETON_INNER_ARMOR, EntityModelLayers.SKELETON_OUTER_ARMOR);
+        super(context, AstralAdditionsClient.MODEL_VOIDTOUCHED_SKELETON_LAYER, EntityModelLayers.SKELETON_INNER_ARMOR, EntityModelLayers.SKELETON_OUTER_ARMOR);
     }
 
     @Override

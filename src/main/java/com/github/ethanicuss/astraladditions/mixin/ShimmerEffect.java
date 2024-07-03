@@ -26,6 +26,7 @@ public class ShimmerEffect {
         if (!firstUpdate && world.getBlockState(((Entity)(Object)this).getBlockPos()).isOf(ModFluids.SHIMMER)){
             if (((Entity)(Object)this) instanceof LivingEntity le) {
                 le.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 60, 1, false, false));
+                le.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 90, 1, false, false));
             }
         }
     }

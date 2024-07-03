@@ -12,6 +12,8 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
@@ -43,9 +45,14 @@ public class ModBlocks {
     public static final Block LUNE_SHROOM_BLOCK = new LuneShroomBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().sounds(BlockSoundGroup.SHROOMLIGHT).luminance((state) -> {
         return 2;
     }));
-
-    public static final Block POTTED_LUNE_SHROOM_BLOCK = new FlowerPotBlock(ModBlocks.LUNE_SHROOM_BLOCK, FabricBlockSettings.copy(Blocks.POTTED_RED_MUSHROOM).nonOpaque());
     public static final BlockItem LUNE_SHROOM_ITEM = new BlockItem(LUNE_SHROOM_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
+    public static final Block POTTED_LUNE_SHROOM_BLOCK = new FlowerPotBlock(ModBlocks.LUNE_SHROOM_BLOCK, FabricBlockSettings.copy(Blocks.POTTED_RED_MUSHROOM).nonOpaque());
+
+    public static final Block SHIMMER_LILY_BLOCK = new FlowerBlock(StatusEffects.GLOWING, 600, AbstractBlock.Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).luminance((state) -> {
+        return 3;
+    }));
+    public static final BlockItem SHIMMER_LILY_ITEM = new BlockItem(SHIMMER_LILY_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
+    public static final Block POTTED_SHIMMER_LILY_BLOCK = new FlowerPotBlock(ModBlocks.SHIMMER_LILY_BLOCK, FabricBlockSettings.copy(Blocks.POTTED_RED_MUSHROOM).nonOpaque());
 
     public static final Block BRAMBLEBONE_BLOCK = new BrambleboneBlock(FabricBlockSettings.of(Material.GLASS).ticksRandomly().sounds(BlockSoundGroup.TUFF).collidable(false).nonOpaque().allowsSpawning(ModBlocks::never).suffocates(ModBlocks::never));
     public static final BlockItem BRAMBLEBONE_ITEM = new BlockItem(BRAMBLEBONE_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
@@ -63,12 +70,20 @@ public class ModBlocks {
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "lune_shroom"), LUNE_SHROOM_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "potted_lune_shroom"), POTTED_LUNE_SHROOM_BLOCK);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "lune_shroom"), LUNE_SHROOM_ITEM);
-        BlockRenderLayerMap.INSTANCE.putBlock(BRAMBLEBONE_BLOCK, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(BRAMBLEBONE_BLOCK, RenderLayer.getTranslucent());
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "shimmer_lily"), SHIMMER_LILY_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "potted_shimmer_lily"), POTTED_SHIMMER_LILY_BLOCK);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmer_lily"), SHIMMER_LILY_ITEM);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "bramblebone"), BRAMBLEBONE_BLOCK);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "bramblebone"), BRAMBLEBONE_ITEM);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "jar"), JAR_BLOCK);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "jar"), JAR_ITEM);
+    }
+
+    public static void registerClient() {
+        BlockRenderLayerMap.INSTANCE.putBlock(BRAMBLEBONE_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BRAMBLEBONE_BLOCK, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(SHIMMER_LILY_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(SHIMMER_LILY_BLOCK, RenderLayer.getTranslucent());
         BlockEntityRendererRegistry.register(JAR_BLOCKENTITY, JarBlockEntityRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(JAR_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(JAR_BLOCK, RenderLayer.getTranslucent());

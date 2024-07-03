@@ -61,7 +61,7 @@ public class OHNOItem extends Item {//Orbital Homeward Navigation Orb - O.H-N.O 
                 user.incrementStat(Stats.USED.getOrCreateStat(this));
                 return TypedActionResult.success(itemStack, world.isClient());
             }
-        } else {
+        } else {//server
             if (nbtCompound.isEmpty()){
                 double i = user.getX();
                 double j = user.getY();
@@ -80,7 +80,7 @@ public class OHNOItem extends Item {//Orbital Homeward Navigation Orb - O.H-N.O 
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 20*20, 10));
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 20*20, 0));
                 ((ServerPlayerEntity) user).networkHandler.requestTeleport(nbtCompound.getDouble(X_KEY), nbtCompound.getDouble(Y_KEY), nbtCompound.getDouble(Z_KEY), user.getYaw(), user.getPitch(), EnumSet.noneOf(PlayerPositionLookS2CPacket.Flag.class));
-                AstralAdditions.worldRegister.LoadData();
+                AstralAdditions.worldRegister.LoadData(world);
                 ServerWorld gotoWorld = AstralAdditions.worldRegister.getWorld(nbtCompound.getString(WORLD_KEY));
                 if (gotoWorld != null) {
                     Vec3d tpPos = new Vec3d(nbtCompound.getDouble(X_KEY), nbtCompound.getDouble(Y_KEY), nbtCompound.getDouble(Z_KEY));
