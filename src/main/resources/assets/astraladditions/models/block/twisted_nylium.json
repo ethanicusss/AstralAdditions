@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "astraladditions:block/twisted_nylium/twisted_nylium",
+    "bottom": "astraladditions:block/enderrack",
+    "side": "astraladditions:block/twisted_nylium/twisted_nylium_side"
+  }
+}

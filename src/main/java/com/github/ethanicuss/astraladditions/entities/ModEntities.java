@@ -4,6 +4,9 @@ import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.AstralAdditionsClient;
 import com.github.ethanicuss.astraladditions.entities.cometball.CometballEntity;
 import com.github.ethanicuss.astraladditions.entities.cometball.CometballEntityRenderer;
+import com.github.ethanicuss.astraladditions.entities.ender_watcher.EnderWatcherEntity;
+import com.github.ethanicuss.astraladditions.entities.ender_watcher.EnderWatcherEntityModel;
+import com.github.ethanicuss.astraladditions.entities.ender_watcher.EnderWatcherEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntity;
 import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntityModel;
 import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntityRenderer;
@@ -88,7 +91,7 @@ public class ModEntities {
     public static final EntityType<ShimmerBlazeEntity> SHIMMER_BLAZE = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(AstralAdditions.MOD_ID, "shimmer_blaze"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, ShimmerBlazeEntity::new).dimensions(EntityDimensions.fixed(1.0f, 2.2f)).build()
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ShimmerBlazeEntity::new).dimensions(EntityDimensions.fixed(1.0f, 2.2f)).build()
     );
     public static final EntityType<SmallShimmerballEntity> SMALL_SHIMMERBALL = Registry.register(
             Registry.ENTITY_TYPE,
@@ -103,7 +106,12 @@ public class ModEntities {
     public static final EntityType<PhastEntity> PHAST = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(AstralAdditions.MOD_ID, "phast"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, PhastEntity::new).dimensions(EntityDimensions.fixed(5.0f, 5.0f)).fireImmune().build()
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, PhastEntity::new).dimensions(EntityDimensions.fixed(5.0f, 5.0f)).fireImmune().build()
+    );
+    public static final EntityType<EnderWatcherEntity> ENDER_WATCHER = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(AstralAdditions.MOD_ID, "ender_watcher"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EnderWatcherEntity::new).dimensions(EntityDimensions.fixed(2.0f, 2.0f)).fireImmune().build()
     );
 
     public static void init() {
@@ -113,6 +121,7 @@ public class ModEntities {
         FabricDefaultAttributeRegistry.register(VOIDTOUCHED_ZOMBIE, VoidtouchedZombieEntity.createVoidtouchedZombieAttributes());
         FabricDefaultAttributeRegistry.register(SHIMMER_BLAZE, ShimmerBlazeEntity.createShimmerBlazeAttributes());
         FabricDefaultAttributeRegistry.register(PHAST, PhastEntity.createPhastAttributes());
+        FabricDefaultAttributeRegistry.register(ENDER_WATCHER, EnderWatcherEntity.createWatcherAttributes());
     }
 
     public static void initClient() {
@@ -133,6 +142,9 @@ public class ModEntities {
 
         EntityRendererRegistry.register(PHAST, PhastEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(AstralAdditionsClient.MODEL_PHAST_LAYER, GhastEntityModel::getTexturedModelData);
+
+        EntityRendererRegistry.register(ENDER_WATCHER, EnderWatcherEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(AstralAdditionsClient.MODEL_ENDER_WATCHER_LAYER, EnderWatcherEntityModel::getTexturedModelData);
 
         EntityRendererRegistry.register(ENDER_BALL, EnderBallEntityRenderer::new);
 
