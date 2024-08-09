@@ -148,7 +148,7 @@ public class EnderWatcherEntityModel<T extends Entity> extends EntityModel<T> {
         ModelData meshdefinition = new ModelData();
         ModelPartData partdefinition = meshdefinition.getRoot();
 
-        ModelPartData watcher = partdefinition.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 19.0F, 0.0F));
+        ModelPartData watcher = partdefinition.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
         ModelPartData body = watcher.addChild("body", ModelPartBuilder.create().uv(0, 41).cuboid(-7.0F, -5.25F, -8.0F, 14.0F, 3.0F, 14.0F, new Dilation(0.0F))
                 .uv(48, 22).cuboid(-6.0F, -8.25F, -7.0F, 12.0F, 3.0F, 12.0F, new Dilation(0.0F))
@@ -357,7 +357,10 @@ public class EnderWatcherEntityModel<T extends Entity> extends EntityModel<T> {
 
     @Override
     public void setAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+        watcher.pivotY = (float)Math.sin(ageInTicks/25)/10;
+        watcher.pivotX = (float)Math.sin(ageInTicks/80)/30;
+        watcher.pitch = (float)Math.sin(ageInTicks/50)/10;
+        watcher.yaw = (float)Math.sin(ageInTicks/40)/20;
     }
 
     @Override

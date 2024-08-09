@@ -111,7 +111,7 @@ public class ModEntities {
     public static final EntityType<EnderWatcherEntity> ENDER_WATCHER = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(AstralAdditions.MOD_ID, "ender_watcher"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EnderWatcherEntity::new).dimensions(EntityDimensions.fixed(2.0f, 2.0f)).fireImmune().build()
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EnderWatcherEntity::new).dimensions(EntityDimensions.fixed(2.0f, 3.0f)).fireImmune().build()
     );
 
     public static void init() {

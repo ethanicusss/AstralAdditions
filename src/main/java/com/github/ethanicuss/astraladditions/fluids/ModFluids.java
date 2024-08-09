@@ -1,5 +1,6 @@
 package com.github.ethanicuss.astraladditions.fluids;
 
+import com.github.ethanicuss.astraladditions.AstralAdditions;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.FluidBlock;
@@ -20,7 +21,13 @@ public class ModFluids {
     public static Item SHIMMER_BUCKET;
     public static Block SHIMMER;
 
-    public static final TagKey<Fluid> SHIMMER_TAG = register("shimmer");
+    public static final TagKey<Fluid> SHIMMER_TAG = register("sputum");
+    public static FlowableFluid STILL_SPUTUM;
+    public static FlowableFluid FLOWING_SPUTUM;
+    public static Item SPUTUM_BUCKET;
+    public static Block SPUTUM;
+
+    public static final TagKey<Fluid> SPUTUM_TAG = register("sputum");
 
     public static void registerFluids(){
         STILL_SHIMMER = Registry.register(Registry.FLUID, new Identifier(ASTRAL_ID, "shimmer"), new ShimmerFluid.Still());
@@ -28,6 +35,12 @@ public class ModFluids {
         SHIMMER_BUCKET = Registry.register(Registry.ITEM, new Identifier(ASTRAL_ID, "shimmer_bucket"),
                 new BucketItem(STILL_SHIMMER, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1)));
         SHIMMER = Registry.register(Registry.BLOCK, new Identifier(ASTRAL_ID, "shimmer"), new FluidBlock(STILL_SHIMMER, FabricBlockSettings.of(Material.WATER).noCollision().ticksRandomly().strength(1.0F).luminance((state) -> 10).dropsNothing()));
+
+        STILL_SPUTUM = Registry.register(Registry.FLUID, new Identifier(AstralAdditions.MOD_ID, "sputum"), new SputumFluid.Still());
+        FLOWING_SPUTUM = Registry.register(Registry.FLUID, new Identifier(AstralAdditions.MOD_ID, "flowing_sputum"), new SputumFluid.Flowing());
+        SPUTUM_BUCKET = Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "sputum_bucket"),
+                new BucketItem(STILL_SPUTUM, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1)));
+        SPUTUM = Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "sputum"), new FluidBlock(STILL_SPUTUM, FabricBlockSettings.of(Material.WATER).noCollision().ticksRandomly().strength(1.0F).luminance((state) -> 5).dropsNothing()));
 
     }
 

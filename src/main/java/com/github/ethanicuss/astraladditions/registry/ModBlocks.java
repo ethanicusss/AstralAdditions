@@ -63,6 +63,12 @@ public class ModBlocks {
     public static final BlockItem ENDERRACK_ITEM = new BlockItem(ENDERRACK_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
     public static final Block TWISTED_NYLIUM_BLOCK = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.NYLIUM).strength(2.5f));
     public static final BlockItem TWISTED_NYLIUM_ITEM = new BlockItem(TWISTED_NYLIUM_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
+    public static final Block ENDER_TIP_BLOCK = new EnderTipBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.POINTED_DRIPSTONE).strength(1.0f));
+    public static final BlockItem ENDER_TIP_ITEM = new BlockItem(ENDER_TIP_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
+    public static final Block ENDER_SPROUT_BLOCK = new EnderSproutsBlock(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.NETHER_SPROUTS));
+    public static final BlockItem ENDER_SPROUT_ITEM = new BlockItem(ENDER_SPROUT_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
+    public static final Block PEARL_POD_BLOCK = new EnderSproutsBlock(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.BONE));
+    public static final BlockItem PEARL_POD_ITEM = new BlockItem(PEARL_POD_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
     public static final Block JAR_BLOCK = new JarBlock(FabricBlockSettings.of(Material.GLASS).sounds(BlockSoundGroup.GLASS).nonOpaque().allowsSpawning(ModBlocks::never).suffocates(ModBlocks::never));
     public static final BlockItem JAR_ITEM = new BlockItem(JAR_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
     public static final BlockEntityType<JarBlockEntity> JAR_BLOCKENTITY =
@@ -88,6 +94,12 @@ public class ModBlocks {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "twisted_nylium"), TWISTED_NYLIUM_ITEM);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "jar"), JAR_BLOCK);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "jar"), JAR_ITEM);
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "ender_tip"), ENDER_TIP_BLOCK);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "ender_tip"), ENDER_TIP_ITEM);
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "ender_sprouts"), ENDER_SPROUT_BLOCK);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "ender_sprouts"), ENDER_SPROUT_ITEM);
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "pearl_pod"), PEARL_POD_BLOCK);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "pearl_pod"), PEARL_POD_ITEM);
     }
 
     public static void registerClient() {
@@ -98,5 +110,11 @@ public class ModBlocks {
         BlockEntityRendererRegistry.register(JAR_BLOCKENTITY, JarBlockEntityRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(JAR_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(JAR_BLOCK, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ENDER_SPROUT_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ENDER_SPROUT_BLOCK, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ENDER_TIP_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ENDER_TIP_BLOCK, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(PEARL_POD_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(PEARL_POD_BLOCK, RenderLayer.getTranslucent());
     }
 }

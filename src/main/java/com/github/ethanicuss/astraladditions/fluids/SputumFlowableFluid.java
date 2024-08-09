@@ -1,5 +1,6 @@
 package com.github.ethanicuss.astraladditions.fluids;
 
+import com.github.ethanicuss.astraladditions.registry.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -23,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public abstract class ModFluid extends FlowableFluid {
+public abstract class SputumFlowableFluid extends FlowableFluid {
 
     /**
      * @return whether the given fluid an instance of this fluid
@@ -48,7 +49,7 @@ public abstract class ModFluid extends FlowableFluid {
     @Override
     protected void beforeBreakingBlock(WorldAccess world, BlockPos pos, BlockState state) {
         final BlockEntity blockEntity = state.hasBlockEntity() ? world.getBlockEntity(pos) : null;
-        Block.dropStacks(state, world, pos, blockEntity);
+        //Block.dropStacks(state, world, pos, blockEntity);
     }
 
     /**
@@ -68,7 +69,7 @@ public abstract class ModFluid extends FlowableFluid {
      */
     @Override
     protected int getFlowSpeed(WorldView worldView) {
-        return 5;
+        return 6;
     }
 
     /**
@@ -102,19 +103,23 @@ public abstract class ModFluid extends FlowableFluid {
                 double d = (double)pos.getX() + random.nextDouble();
                 double e = (double)pos.getY() + 1.0;
                 double f = (double)pos.getZ() + random.nextDouble();
-                world.addParticle(ParticleTypes.DRAGON_BREATH, d, e, f, 0.0, 0.01, 0.0);
-                world.playSound(d, e, f, SoundEvents.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundCategory.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+                world.addParticle(ParticleTypes.ASH, d, e, f, 0.0, 0.01, 0.0);
             }
 
             if (random.nextInt(250) == 0) {
-                world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SoundCategory.BLOCKS, 0.4F + random.nextFloat() * 0.2F, 0.4F + random.nextFloat() * 0.3F, false);
+                double d = (double)pos.getX() + random.nextDouble();
+                double e = (double)pos.getY() + 1.0;
+                double f = (double)pos.getZ() + random.nextDouble();
+                world.addParticle(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, d, e, f, 0.0, 0.01, 0.0);
+                world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_LAVA_AMBIENT, SoundCategory.BLOCKS, 0.4F + random.nextFloat() * 0.2F, 0.1F + random.nextFloat() * 0.3F, false);
+
             }
         }
     }
 
     @Nullable
     public ParticleEffect getParticle() {
-        return ParticleTypes.DRIPPING_OBSIDIAN_TEAR;
+        return ParticleTypes.ASH;
     }
 
     protected void flow(WorldAccess world, BlockPos pos, BlockState state, Direction direction, FluidState fluidState) {
@@ -122,9 +127,15 @@ public abstract class ModFluid extends FlowableFluid {
             FluidState fluidState2 = world.getFluidState(pos);
             if (fluidState2.isIn(FluidTags.WATER)) {
                 if (state.getBlock() instanceof FluidBlock) {
-                    world.setBlockState(pos, Blocks.DEEPSLATE.getDefaultState(), 3);
+                    world.setBlockState(pos, ModBlocks.ENDERRACK_BLOCK.getDefaultState(), 3);
                 }
-
+//                this.playExtinguishEvent(world, pos);
+                return;
+            }
+            if (fluidState2.isIn(FluidTags.LAVA)) {
+                if (state.getBlock() instanceof FluidBlock) {
+                    world.setBlockState(pos, Blocks.CRYING_OBSIDIAN.getDefaultState(), 3);
+                }
 //                this.playExtinguishEvent(world, pos);
                 return;
             }

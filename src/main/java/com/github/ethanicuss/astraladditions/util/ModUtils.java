@@ -1,5 +1,6 @@
 package com.github.ethanicuss.astraladditions.util;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -16,6 +17,14 @@ public class ModUtils {
     public static <T extends ParticleEffect> void playSound(ServerWorld world, double x, double y, double z, SoundEvent sound, SoundCategory category, float vol, float pitch, boolean falloff) {
         for (ServerPlayerEntity player : world.getPlayers()) {
             player.world.playSound(x, y, z, sound, category, vol, pitch, falloff);
+        }
+    }
+
+    public static <T extends ParticleEffect> void setVelocityPlayer(ServerWorld world, PlayerEntity p, double x, double y, double z) {
+        for (ServerPlayerEntity player : world.getPlayers()) {
+            if (player == (ServerPlayerEntity) p) {
+                player.setVelocity(x, y, z);
+            }
         }
     }
 }

@@ -91,11 +91,6 @@ public class DroptusBlock extends Block {
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        entity.damage(DamageSource.CACTUS, 2.0f);
-    }
-
-    @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return switch (state.get(AGE)) {
             case 0 -> OUTLINE_SHAPE_0;

@@ -96,7 +96,7 @@ public class PylonItem extends Item {
                     ModUtils.spawnForcedParticles((ServerWorld)world, ParticleTypes.WITCH, user.getX(), user.getY(), user.getZ(), 1, 0.0 + world.getRandom().nextFloat() * 0.4f - 0.2f, 0.2 + world.getRandom().nextFloat() * 0.2f, 0.0 + world.getRandom().nextFloat() * 0.4f - 0.2f, 0);
                     }
                 for (int amount = 0; amount < 10; amount++) {
-                    ModUtils.spawnForcedParticles((ServerWorld)world, ParticleTypes.GLOW_SQUID_INK, user.getX(), user.getY() + 0.2f, user.getZ(), 45, Math.sin(amount*8.0f)*1.0f, 0, Math.cos(amount*8.0f)*1.0f, 0.1);
+                    ModUtils.spawnForcedParticles((ServerWorld)world, ParticleTypes.GLOW_SQUID_INK, user.getX(), user.getY() + 0.2f, user.getZ(), 1, Math.sin(amount*8.0f)*1.0f, 0, Math.cos(amount*8.0f)*1.0f, 0.1);
                 }
                 PylonEntity pylon = new PylonEntity(ModEntities.PYLON, user.world);
                 pylon.setPlayer(user.getEntityName());
@@ -127,6 +127,7 @@ public class PylonItem extends Item {
                             float vStrength = 0.05f;
                             List<Entity> pl = world.getOtherEntities(pylon, new Box(pylon.getX()-16, pylon.getY()-32, pylon.getZ()-16, pylon.getX()+16, pylon.getY()+32, pylon.getZ()+16));
                             if (user.isInRange(pylon, 32)) {
+                                System.out.println("player in range");
                                 pl.add(user);
                             }
                             for (Entity p : pl) {
@@ -156,6 +157,9 @@ public class PylonItem extends Item {
                                             cosZ = 0.01;
                                         }
                                         dist = -dist + 10;
+                                        if (p instanceof PlayerEntity){//gotta somehow apply velocity on the client. or both client and server?
+                                            ModUtils.setVelocityPlayer((ServerWorld)world, (PlayerEntity)p,dist * cosX * strength * strMult * (Math.abs(angleX) / angleX), Math.abs(dist * vStrength * strMult), dist * cosZ * strength * strMult * (Math.abs(angleZ) / angleZ));
+                                        }
                                         p.addVelocity(dist * cosX * strength * strMult * (Math.abs(angleX) / angleX), Math.abs(dist * vStrength * strMult), dist * cosZ * strength * strMult * (Math.abs(angleZ) / angleZ));
                                     }
                                 }
