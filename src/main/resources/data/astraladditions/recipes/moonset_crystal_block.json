@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "##",
+        "##"
+    ],
+    "key": {
+        "#": {
+            "item": "astraladditions:moonset_crystal"
+        }
+    },
+    "result": {
+        "item": "astraladditions:moonset_crystal_block"
+    }
+} 

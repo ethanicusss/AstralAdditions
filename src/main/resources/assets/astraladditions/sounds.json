@@ -8,6 +8,15 @@
       }
     ]
   },
+	"music_menu": {
+    "subtitle": "subtitles.astraladditions.hesperyd",
+    "sounds": [
+      {
+        "name": "astraladditions:astral_lakes",
+        "stream": true
+      }
+    ]
+  },
 	"music_post_moon": {
     "subtitle": "subtitles.astraladditions.xetroo",
     "sounds": [

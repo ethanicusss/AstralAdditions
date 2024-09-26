@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.boss.dragon.phase.*;
@@ -100,7 +101,7 @@ class BetterLandingPhase {
             }
         }
         if (target == null || fountainTooFarAway){
-            PlayerEntity p = dragon.world.getClosestPlayer(dragon, 64);
+            PlayerEntity p = dragon.world.getClosestPlayer(dragon, 80);
             if (p != null){
                 Vec3d vec3d3 = dragon.getRotationVec(1.0f);
                 double l = dragon.head.getX() - vec3d3.x;
@@ -120,7 +121,7 @@ class BetterLandingPhase {
             BlockPos pos = dragon.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, dragon.getBlockPos());
             BlockPos newpos = new BlockPos(pos.getX(), pos.getY() + 4, pos.getZ());
             target = Vec3d.ofBottomCenter(newpos);
-            if (target == null && p != null){
+            if ((target == null || Math.abs(pos.getY() - dragon.getY()) > 52) && p != null){
                 pos = p.getBlockPos();
             }
             target = Vec3d.ofBottomCenter(pos);
@@ -187,6 +188,7 @@ class BetterSittingAttackPhase {
             BlockPos newpos = new BlockPos(pos.getX() + random.nextInt(2) - 1, pos.getY(), pos.getZ() + random.nextInt(2) - 1);
             z.setPos(newpos.getX(), newpos.getY(), newpos.getZ());
             z.refreshPositionAndAngles(newpos, random.nextInt(360), 0);
+            z.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 90, 10));
             dragon.world.spawnEntity(z);
         }
     }

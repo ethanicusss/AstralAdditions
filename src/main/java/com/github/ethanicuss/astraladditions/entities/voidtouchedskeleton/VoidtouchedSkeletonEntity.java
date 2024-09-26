@@ -1,5 +1,6 @@
 package com.github.ethanicuss.astraladditions.entities.voidtouchedskeleton;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -20,6 +21,12 @@ public class VoidtouchedSkeletonEntity
 
     public VoidtouchedSkeletonEntity(EntityType<? extends VoidtouchedSkeletonEntity> entityType, World world) {
         super((EntityType<? extends StrayEntity>) entityType, world);
+        int catchCount = 0;
+        while ((this.world.getBlockState(this.getBlockPos().down()) == Blocks.AIR.getDefaultState() || this.world.getBlockState(this.getBlockPos()) != Blocks.AIR.getDefaultState()) && catchCount < 80){
+            this.setPos(this.getX(), this.getY()+1, this.getZ());
+            catchCount++;
+            System.out.println("up");
+        }
     }
 
     public static DefaultAttributeContainer.Builder createVoidtouchedSkeletonAttributes() {

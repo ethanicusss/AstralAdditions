@@ -20,7 +20,7 @@ public class ModUtils {
         }
     }
 
-    public static <T extends ParticleEffect> void setVelocityPlayer(ServerWorld world, PlayerEntity p, double x, double y, double z) {
+    public static void setVelocityPlayer(ServerWorld world, PlayerEntity p, double x, double y, double z) {
         for (ServerPlayerEntity player : world.getPlayers()) {
             if (player == (ServerPlayerEntity) p) {
                 player.setVelocity(x, y, z);

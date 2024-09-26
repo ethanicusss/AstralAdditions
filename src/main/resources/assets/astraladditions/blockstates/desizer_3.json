@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "astraladditions:block/desizer_3",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "astraladditions:block/desizer_3"
+    },
+    "facing=south": {
+      "model": "astraladditions:block/desizer_3",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "astraladditions:block/desizer_3",
+      "y": 270
+    }
+  }
+}

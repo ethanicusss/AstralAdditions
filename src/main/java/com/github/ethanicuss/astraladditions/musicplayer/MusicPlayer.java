@@ -7,6 +7,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.sound.MusicTracker;
 import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.sound.MusicSound;
 import net.minecraft.util.TypeFilter;
@@ -20,6 +21,9 @@ public class MusicPlayer {
     private static final Predicate<WitherEntity> WITHER_PREDICATE = (entity) -> {
         return true;
     };
+    private static final Predicate<EnderDragonEntity> ENDER_DRAGON_PREDICATE = (entity) -> {
+        return true;
+    };
     private static final Predicate<ShimmerBlazeEntity> SHIMMER_BLAZE_PREDICATE = (entity) -> {
         return true;
     };
@@ -27,7 +31,7 @@ public class MusicPlayer {
         return true;
     };
     public static MusicSound findMusic(MusicTracker musicTracker){
-        MusicSound val = ModMusic.DAY;
+        MusicSound val = ModMusic.MENU;
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if (player != null) {
             if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:overworld")){
@@ -58,10 +62,32 @@ public class MusicPlayer {
             if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:mercury")) {
                 val = ModMusic.MERCURY;
             }
-            if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:the_end") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "createastral:moon_debris")) {
+            if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:the_nether") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "createastral:moon_debris") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:the_end")) {
                 val = ModMusic.END;
-                if (MinecraftClient.getInstance().inGameHud.getBossBarHud().shouldPlayDragonMusic()) {
+                double i = player.getX();
+                double j = player.getY();
+                double k = player.getZ();
+                float f = 80.0f;
+                Box box = new Box((float)i - f, (float)j - f, (float)k - f, (float)(i + 1) + f, (float)(j + 1) + f, (float)(k + 1) + f);
+                List<EnderDragonEntity> list = player.world.getEntitiesByType(TypeFilter.instanceOf(EnderDragonEntity.class), box, ENDER_DRAGON_PREDICATE);
+                boolean dragonExists = false;
+                boolean dragonDead = false;
+                for (EnderDragonEntity w : list) {
+                    dragonExists = true;
+                    if (w.getHealth() <= 0){
+                        dragonDead = true;
+                    }
+                }
+                if (dragonExists) {
                     val = ModMusic.END_BOSS;
+                }
+                else{
+                    if (musicTracker.isPlayingType(ModMusic.END_BOSS)){
+                        val = ModMusic.COMBAT_END;
+                    }
+                }
+                if (dragonDead){
+                    val = ModMusic.WITHER_DEATH;
                 }
             }
             if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:mars") && player.getY() < 80) {

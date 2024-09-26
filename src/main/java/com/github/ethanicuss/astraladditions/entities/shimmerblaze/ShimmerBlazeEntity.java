@@ -282,6 +282,7 @@ public class ShimmerBlazeEntity extends BlazeEntity {
         this.getWorld().playSoundFromEntity(null, this, SoundEvents.BLOCK_AMETHYST_BLOCK_BREAK, SoundCategory.NEUTRAL, 1.0F, 0.8F + this.random.nextFloat() * 0.2F);
         super.playHurtSound(source);
     }
+
     @Override
     protected void updatePostDeath() {
         ++this.deathTime;

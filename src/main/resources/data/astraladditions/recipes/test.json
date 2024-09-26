@@ -1,0 +1,12 @@
+{
+    "type": "astraladditions:chromatic_vacuum",
+    "ingredient": {
+        "item": "minecraft:magma_block"
+    },
+    "output": {
+        "item": "minecraft:magma_cream"
+    },
+    "remainder": {
+        "item": "minecraft:netherrack"
+    }
+} 

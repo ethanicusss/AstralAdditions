@@ -8,6 +8,8 @@ import net.minecraft.util.registry.Registry;
 public class ModSounds {
     public static final Identifier MUSIC_MOON_ID = new Identifier(AstralAdditions.MOD_ID, "music_moon");
     public static final SoundEvent MUSIC_MOON = new SoundEvent(MUSIC_MOON_ID);
+    public static final Identifier MUSIC_ASTRAL_LAKES_ID = new Identifier(AstralAdditions.MOD_ID, "music_menu");
+    public static final SoundEvent MUSIC_ASTRAL_LAKES = new SoundEvent(MUSIC_ASTRAL_LAKES_ID);
     public static final Identifier MUSIC_POST_MOON_ID = new Identifier(AstralAdditions.MOD_ID, "music_post_moon");
     public static final SoundEvent MUSIC_POST_MOON = new SoundEvent(MUSIC_POST_MOON_ID);
     public static final Identifier MUSIC_DAY_ID = new Identifier(AstralAdditions.MOD_ID, "music_day");

@@ -27,6 +27,7 @@ dependencies {
 	// Dev QOL
 	modLocalRuntime("com.terraformersmc:modmenu:${modmenu_version}")
 	modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}")
+	implementation 'com.google.code.gson:gson:2.11.0'
 }
 
 processResources {

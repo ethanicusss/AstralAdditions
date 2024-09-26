@@ -157,10 +157,11 @@ public class PylonItem extends Item {
                                             cosZ = 0.01;
                                         }
                                         dist = -dist + 10;
-                                        if (p instanceof PlayerEntity){//gotta somehow apply velocity on the client. or both client and server?
-                                            ModUtils.setVelocityPlayer((ServerWorld)world, (PlayerEntity)p,dist * cosX * strength * strMult * (Math.abs(angleX) / angleX), Math.abs(dist * vStrength * strMult), dist * cosZ * strength * strMult * (Math.abs(angleZ) / angleZ));
-                                        }
+
                                         p.addVelocity(dist * cosX * strength * strMult * (Math.abs(angleX) / angleX), Math.abs(dist * vStrength * strMult), dist * cosZ * strength * strMult * (Math.abs(angleZ) / angleZ));
+                                        if (p instanceof PlayerEntity){//i love client-server relationships!!!!
+                                            ((PlayerEntity)p).velocityModified = true;
+                                        }
                                     }
                                 }
                             }

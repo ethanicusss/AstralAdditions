@@ -6,6 +6,7 @@ public class ModMusic {
     private static final int GAME_MIN_DELAY = 12000;
     private static final int GAME_MAX_DELAY = 24000;//12000, 24000
     public static final MusicSound MOON = new MusicSound(ModSounds.MUSIC_MOON, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
+    public static final MusicSound MENU = new MusicSound(ModSounds.MUSIC_ASTRAL_LAKES, 0, 0, true);
     public static final MusicSound POST_MOON = new MusicSound(ModSounds.MUSIC_POST_MOON, 0, 0, true);
     public static final MusicSound DAY = new MusicSound(ModSounds.MUSIC_DAY, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
     public static final MusicSound NIGHT = new MusicSound(ModSounds.MUSIC_NIGHT, GAME_MIN_DELAY, GAME_MAX_DELAY, false);

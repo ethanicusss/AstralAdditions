@@ -1,0 +1,19 @@
+{
+    "type": "astraladditions:desizer",
+    "ingredients": [
+        {"item":"minecraft:ice"}, {"item":"minecraft:ice"}, {"item":"minecraft:ice"},
+        {"item":"minecraft:ice"}, {"item":"minecraft:ice"}, {"item":"minecraft:ice"},
+        {"item":"minecraft:ice"}, {"item":"minecraft:ice"}, {"item":"minecraft:ice"},
+
+        {"item":"minecraft:ice"}, {"item":"minecraft:ice"}, {"item":"minecraft:ice"},
+        {"item":"minecraft:ice"}, {"item":"minecraft:ice"}, {"item":"minecraft:ice"},
+        {"item":"minecraft:ice"}, {"item":"minecraft:ice"}, {"item":"minecraft:ice"},
+
+        {"item":"minecraft:ice"}, {"item":"minecraft:ice"}, {"item":"minecraft:ice"},
+        {"item":"minecraft:ice"}, {"item":"minecraft:ice"}, {"item":"minecraft:ice"},
+        {"item":"minecraft:ice"}, {"item":"minecraft:ice"}, {"item":"minecraft:ice"}
+    ],
+    "output": {
+        "item": "minecraft:blue_ice"
+    }
+} 

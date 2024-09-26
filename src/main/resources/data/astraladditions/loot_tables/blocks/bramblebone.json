@@ -4,18 +4,37 @@
 		{
       "rolls": 1,
       "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:bone",
-					"functions": [
+				{
+          "type": "minecraft:alternatives",
+          "children": [
             {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2,
-                "max": 4
-              }
-            }
-          ]
+              "type": "minecraft:item",
+              "name": "astraladditions:bramblebone",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "items": [
+                      "minecraft:shears"
+                    ]
+                  }
+                }
+              ]
+            },
+						{
+							"type": "minecraft:item",
+							"name": "minecraft:bone",
+							"functions": [
+								{
+									"function": "minecraft:set_count",
+									"count": {
+										"min": 2,
+										"max": 4
+									}
+								}
+							]
+						}
+					]
         }
       ]
     }

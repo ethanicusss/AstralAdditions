@@ -38,7 +38,7 @@ public class JarBlockEntity extends BlockEntity implements ImplementedInventory{
     }
 
     @Override
-    public void writeNbt(NbtCompound nbt) {//waaa it not worky. don't use Inventories.writeNbt. copy from another mod like tech reborn
+    public void writeNbt(NbtCompound nbt) {
         Inventories.writeNbt(nbt, this.item);
         DefaultedList<ItemStack> stacks = this.item;
         NbtList nbtList = new NbtList();

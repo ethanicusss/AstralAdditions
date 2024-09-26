@@ -3,9 +3,7 @@ package com.github.ethanicuss.astraladditions;
 import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import com.github.ethanicuss.astraladditions.fluids.ModFluids;
 import com.github.ethanicuss.astraladditions.playertracker.WorldRegister;
-import com.github.ethanicuss.astraladditions.registry.ModBlocks;
-import com.github.ethanicuss.astraladditions.registry.ModItems;
-import com.github.ethanicuss.astraladditions.registry.ModSounds;
+import com.github.ethanicuss.astraladditions.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.Item;
 import net.minecraft.tag.TagKey;
@@ -21,11 +19,15 @@ public class AstralAdditions implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+
 		ModFluids.registerFluids();
 		ModEntities.init();
 		ModBlocks.registerBlocks();
 		ModItems.registerItems();
 		ModSounds.registerSounds();
+		//DesizerRecipes.init();
+		ModRecipes.registerRecipes();
+		ModEntitySpawn.addEntitySpawn();
 		LOGGER.info("Astral Additions is active!");
 	}
 }

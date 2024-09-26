@@ -2,25 +2,16 @@ package com.github.ethanicuss.astraladditions.registry;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.entities.ModEntities;
-import com.github.ethanicuss.astraladditions.entities.shimmerblaze.ShimmerBlazeEntity;
 import com.github.ethanicuss.astraladditions.items.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.impl.registry.sync.FabricRegistry;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.MusicDiscItem;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class ModItems {
@@ -48,7 +39,8 @@ public class ModItems {
     public static final Item FRAGILE_ITEM_3 = new FragileItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1), ModData.FRAGILE_ITEM_PARTS_3);
     public static final Item DISC_PURPLE_PRISON = new ModMusicDiscItem(7, ModSounds.MUSIC_SHIMMER_BLAZE, new FabricItemSettings().group(ItemGroup.MISC).maxCount(1));
     public static final Item DISC_ASTRAL_LAKES_REMIX = new ModMusicDiscItem(7, ModSounds.MUSIC_ASTRAL_LAKES_REMIX, new FabricItemSettings().group(ItemGroup.MISC).maxCount(1));
-    public static final Item SHIMMER_BOTTLE = new ShimmerBottleItem(new FabricItemSettings().group(ItemGroup.BREWING).maxCount(1));
+    //public static final Item SHIMMER_BOTTLE = new ShimmerBottleItem(new FabricItemSettings().group(ItemGroup.BREWING).maxCount(1));
+    public static final Item CHROMATIC_VACUUM = new ChromaticVacuumItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(512));
     public static void registerItems() {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "cometball"), COMETBALL);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "pylon"), PYLON);
@@ -74,7 +66,8 @@ public class ModItems {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "fragile_item_3"), FRAGILE_ITEM_3);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "disc_purple_prison"), DISC_PURPLE_PRISON);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "disc_astral_lakes_remix"), DISC_ASTRAL_LAKES_REMIX);
-        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmer_bottle"), SHIMMER_BOTTLE);
+        //Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmer_bottle"), SHIMMER_BOTTLE);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "chromatic_vacuum"), CHROMATIC_VACUUM);
         addSacrificeItem(AWAKENED_SHIMMER_HEART, ModEntities.SHIMMER_BLAZE);
     }
     private static List<Item> sacrificableItems = new ArrayList<Item>();

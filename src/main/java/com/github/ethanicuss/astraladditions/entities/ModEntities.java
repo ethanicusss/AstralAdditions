@@ -28,10 +28,13 @@ import com.github.ethanicuss.astraladditions.entities.voidtouchedskeleton.Voidto
 import com.github.ethanicuss.astraladditions.entities.voidtouchedskeleton.VoidtouchedSkeletonEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedzombie.VoidtouchedZombieEntity;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedzombie.VoidtouchedZombieEntityRenderer;
+import com.github.ethanicuss.astraladditions.registry.ModBlocks;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.render.entity.model.BlazeEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.GhastEntityModel;
@@ -39,10 +42,23 @@ import net.minecraft.client.render.entity.model.SkeletonEntityModel;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.Heightmap;
 
 public class ModEntities {
+    /*static Block[] blocks = {
+            Blocks.NETHERRACK,
+            Blocks.END_STONE,
+            Blocks.BLACKSTONE,
+            Blocks.SOUL_SOIL,
+            Blocks.STONE,
+            Blocks.GRASS,
+            ModBlocks.ENDERRACK_BLOCK,
+            ModBlocks.TWISTED_NYLIUM_BLOCK
+    };.specificSpawnBlocks(blocks)*/
     public static final EntityType<MoonmanEntity> MOONMAN = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(AstralAdditions.MOD_ID, "moonman"),
@@ -56,7 +72,7 @@ public class ModEntities {
     public static final EntityType<VoidtouchedSkeletonEntity> VOIDTOUCHED_SKELETON = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(AstralAdditions.MOD_ID, "voidtouched_skeleton"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, VoidtouchedSkeletonEntity::new).dimensions(EntityDimensions.fixed(0.75f, 1.8f)).build()
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, VoidtouchedSkeletonEntity::new).dimensions(EntityDimensions.fixed(0.75f, 1.8f)).trackRangeChunks(8).build()
     );
     public static final EntityType<VoidtouchedZombieEntity> VOIDTOUCHED_ZOMBIE = Registry.register(
             Registry.ENTITY_TYPE,
@@ -136,7 +152,7 @@ public class ModEntities {
 
         EntityRendererRegistry.register(VOIDTOUCHED_ZOMBIE, VoidtouchedZombieEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(AstralAdditionsClient.MODEL_VOIDTOUCHED_ZOMBIE_LAYER, VoidtouchedZombieEntityRenderer::getTexturedModelData);
-
+//SpawnRestriction.register(EntityType.BLAZE, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnIgnoreLightLevel);
         EntityRendererRegistry.register(SHIMMER_BLAZE, ShimmerBlazeEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(AstralAdditionsClient.MODEL_SHIMMER_BLAZE_LAYER, ShimmerBlazeEntityModel::getTexturedModelData);
 

@@ -1,0 +1,19 @@
+{
+    "type": "astraladditions:desizer",
+    "ingredients": [
+        {"item":"minecraft:bedrock"}, {"item":"minecraft:bedrock"}, {"item":"minecraft:bedrock"},
+        {"item":"minecraft:bedrock"}, {"item":"minecraft:honeycomb_block"}, {"item":"minecraft:bedrock"},
+        {"item":"minecraft:bedrock"}, {"item":"minecraft:bedrock"}, {"item":"minecraft:bedrock"},
+
+        {"item":"minecraft:bedrock"}, {"item":"minecraft:honeycomb_block"}, {"item":"minecraft:bedrock"},
+        {"item":"minecraft:honeycomb_block"}, {"item":"minecraft:beehive"}, {"item":"minecraft:honeycomb_block"},
+        {"item":"minecraft:bedrock"}, {"item":"minecraft:honeycomb_block"}, {"item":"minecraft:bedrock"},
+
+        {"item":"minecraft:bedrock"}, {"item":"minecraft:bedrock"}, {"item":"minecraft:bedrock"},
+        {"item":"minecraft:bedrock"}, {"item":"minecraft:honeycomb_block"}, {"item":"minecraft:bedrock"},
+        {"item":"minecraft:bedrock"}, {"item":"minecraft:bedrock"}, {"item":"minecraft:bedrock"}
+    ],
+    "output": {
+        "item": "minecraft:bee_nest"
+    }
+} 
