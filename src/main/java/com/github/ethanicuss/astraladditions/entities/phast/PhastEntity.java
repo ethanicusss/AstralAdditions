@@ -54,7 +54,7 @@ public class PhastEntity extends GhastEntity {
     }
 
     public static DefaultAttributeContainer.Builder createPhastAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 15.0).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100.0);
+        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 15.0).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0);
     }
 
     @Override

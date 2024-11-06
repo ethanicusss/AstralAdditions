@@ -7,6 +7,8 @@ import com.github.ethanicuss.astraladditions.entities.cometball.CometballEntityR
 import com.github.ethanicuss.astraladditions.entities.ender_watcher.EnderWatcherEntity;
 import com.github.ethanicuss.astraladditions.entities.ender_watcher.EnderWatcherEntityModel;
 import com.github.ethanicuss.astraladditions.entities.ender_watcher.EnderWatcherEntityRenderer;
+import com.github.ethanicuss.astraladditions.entities.glazer.GlazerEntity;
+import com.github.ethanicuss.astraladditions.entities.glazer.GlazerEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntity;
 import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntityModel;
 import com.github.ethanicuss.astraladditions.entities.hemogiant.HemogiantEntityRenderer;
@@ -28,6 +30,8 @@ import com.github.ethanicuss.astraladditions.entities.voidtouchedskeleton.Voidto
 import com.github.ethanicuss.astraladditions.entities.voidtouchedskeleton.VoidtouchedSkeletonEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedzombie.VoidtouchedZombieEntity;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedzombie.VoidtouchedZombieEntityRenderer;
+import com.github.ethanicuss.astraladditions.entities.whast.WhastEntity;
+import com.github.ethanicuss.astraladditions.entities.whast.WhastEntityRenderer;
 import com.github.ethanicuss.astraladditions.registry.ModBlocks;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -35,10 +39,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.render.entity.model.BlazeEntityModel;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.model.GhastEntityModel;
-import net.minecraft.client.render.entity.model.SkeletonEntityModel;
+import net.minecraft.client.render.entity.model.*;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -124,10 +125,20 @@ public class ModEntities {
             new Identifier(AstralAdditions.MOD_ID, "phast"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, PhastEntity::new).dimensions(EntityDimensions.fixed(5.0f, 5.0f)).fireImmune().build()
     );
+    public static final EntityType<WhastEntity> WHAST = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(AstralAdditions.MOD_ID, "whast"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, WhastEntity::new).dimensions(EntityDimensions.fixed(5.0f, 5.0f)).fireImmune().build()
+    );
     public static final EntityType<EnderWatcherEntity> ENDER_WATCHER = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(AstralAdditions.MOD_ID, "ender_watcher"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EnderWatcherEntity::new).dimensions(EntityDimensions.fixed(2.0f, 3.0f)).fireImmune().build()
+    );
+    public static final EntityType<GlazerEntity> GLAZER = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(AstralAdditions.MOD_ID, "glazer"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GlazerEntity::new).dimensions(EntityDimensions.fixed(1.5f, 1.5f)).fireImmune().build()
     );
 
     public static void init() {
@@ -137,7 +148,9 @@ public class ModEntities {
         FabricDefaultAttributeRegistry.register(VOIDTOUCHED_ZOMBIE, VoidtouchedZombieEntity.createVoidtouchedZombieAttributes());
         FabricDefaultAttributeRegistry.register(SHIMMER_BLAZE, ShimmerBlazeEntity.createShimmerBlazeAttributes());
         FabricDefaultAttributeRegistry.register(PHAST, PhastEntity.createPhastAttributes());
+        FabricDefaultAttributeRegistry.register(WHAST, WhastEntity.createWhastAttributes());
         FabricDefaultAttributeRegistry.register(ENDER_WATCHER, EnderWatcherEntity.createWatcherAttributes());
+        FabricDefaultAttributeRegistry.register(GLAZER, GlazerEntity.createGlazerAttributes());
     }
 
     public static void initClient() {
@@ -159,8 +172,14 @@ public class ModEntities {
         EntityRendererRegistry.register(PHAST, PhastEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(AstralAdditionsClient.MODEL_PHAST_LAYER, GhastEntityModel::getTexturedModelData);
 
+        EntityRendererRegistry.register(WHAST, WhastEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(AstralAdditionsClient.MODEL_WHAST_LAYER, GhastEntityModel::getTexturedModelData);
+
         EntityRendererRegistry.register(ENDER_WATCHER, EnderWatcherEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(AstralAdditionsClient.MODEL_ENDER_WATCHER_LAYER, EnderWatcherEntityModel::getTexturedModelData);
+
+        EntityRendererRegistry.register(GLAZER, GlazerEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(AstralAdditionsClient.MODEL_GLAZER_LAYER, BeeEntityModel::getTexturedModelData);
 
         EntityRendererRegistry.register(ENDER_BALL, EnderBallEntityRenderer::new);
 

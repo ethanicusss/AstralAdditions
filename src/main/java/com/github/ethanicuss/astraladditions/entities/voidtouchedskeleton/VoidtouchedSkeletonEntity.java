@@ -21,16 +21,10 @@ public class VoidtouchedSkeletonEntity
 
     public VoidtouchedSkeletonEntity(EntityType<? extends VoidtouchedSkeletonEntity> entityType, World world) {
         super((EntityType<? extends StrayEntity>) entityType, world);
-        int catchCount = 0;
-        while ((this.world.getBlockState(this.getBlockPos().down()) == Blocks.AIR.getDefaultState() || this.world.getBlockState(this.getBlockPos()) != Blocks.AIR.getDefaultState()) && catchCount < 80){
-            this.setPos(this.getX(), this.getY()+1, this.getZ());
-            catchCount++;
-            System.out.println("up");
-        }
     }
 
     public static DefaultAttributeContainer.Builder createVoidtouchedSkeletonAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 22.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64.0);
+        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 22.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0);
     }
 
 

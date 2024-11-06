@@ -27,7 +27,7 @@ public class MeteorPunchEntity extends ThrownItemEntity {
     private Vec3d userPosOld;
     private double width = 1;
 
-    private final double playerBoost = 7;
+    private final double playerBoost = 8;
 
     public MeteorPunchEntity(EntityType<? extends Entity> entityType, World world) {
         super((EntityType<? extends ThrownItemEntity>)entityType, world);

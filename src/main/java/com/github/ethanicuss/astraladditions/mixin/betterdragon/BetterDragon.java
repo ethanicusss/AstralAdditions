@@ -4,6 +4,7 @@ import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import com.github.ethanicuss.astraladditions.entities.moondragon.EnderBallEntity;
 import com.github.ethanicuss.astraladditions.entities.moondragon.GluttonyBallEntity;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedzombie.VoidtouchedZombieEntity;
+import com.github.ethanicuss.astraladditions.registry.ModBlocks;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -20,6 +21,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -44,6 +46,13 @@ public class BetterDragon {
     @Inject(method = "createEnderDragonAttributes", at = @At("HEAD"), cancellable = true)
     private static void createEnderDragonAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
         cir.setReturnValue(MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 250.0));
+    }
+
+    @Inject(method = "updatePostDeath", at = @At("TAIL"))
+    private void updatePostDeath(CallbackInfo ci) {
+        if (((EnderDragonEntity)(Object) this).ticksSinceDeath == 200 && ((EnderDragonEntity)(Object) this).world instanceof ServerWorld) {
+            ((EnderDragonEntity)(Object) this).world.setBlockState(((EnderDragonEntity)(Object) this).getBlockPos(), ModBlocks.THE_END_BLOCK.getDefaultState());
+        }
     }
 
     @Inject(method = "addStatusEffect", at = @At("HEAD"), cancellable = true)

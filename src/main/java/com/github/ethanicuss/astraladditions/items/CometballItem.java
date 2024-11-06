@@ -54,7 +54,7 @@ public class CometballItem
                 world.spawnEntity(snowballEntity);
             }
         }
-        user.getItemCooldownManager().set(this, 20);
+        user.getItemCooldownManager().set(this, 18);
         user.incrementStat(Stats.USED.getOrCreateStat(this));
         if (!user.getAbilities().creativeMode) {
             itemStack.decrement(1);

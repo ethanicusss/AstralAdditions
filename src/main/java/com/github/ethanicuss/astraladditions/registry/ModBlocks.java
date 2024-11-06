@@ -94,6 +94,11 @@ public class ModBlocks {
     /*public static final BlockEntityType<JarBlockEntity> DESIZER_CONTROLLER_ENTITY =
             Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AstralAdditions.MOD_ID, "desizer_8"), FabricBlockEntityTypeBuilder.create(JarBlockEntity::new, JAR_BLOCK).build());
 */
+    public static final Block THE_END_BLOCK = new Block(FabricBlockSettings.of(Material.STONE, MapColor.WHITE).nonOpaque().sounds(BlockSoundGroup.AMETHYST_CLUSTER).requiresTool().strength(50.0f, 1200).luminance((state) -> {
+        return 15;
+    }));
+    public static final BlockItem THE_END_BLOCK_ITEM = new BlockItem(THE_END_BLOCK, new FabricItemSettings().group(ItemGroup.MISC));
+
     public static void registerBlocks() {
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "moonset_crystal_block"), MOONSET_CRYSTAL_BLOCK);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "moonset_crystal_block"), MOONSET_CRYSTAL_BLOCK_ITEM);
@@ -138,6 +143,8 @@ public class ModBlocks {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "desizer_8"), DESIZER_8_ITEM);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "desizer_9"), DESIZER_9);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "desizer_9"), DESIZER_9_ITEM);
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "the_end"), THE_END_BLOCK);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "the_end"), THE_END_BLOCK_ITEM);
     }
 
     public static void registerClient() {
@@ -145,6 +152,8 @@ public class ModBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(BRAMBLEBONE_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(SHIMMER_LILY_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(SHIMMER_LILY_BLOCK, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(POTTED_SHIMMER_LILY_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(POTTED_SHIMMER_LILY_BLOCK, RenderLayer.getTranslucent());
         BlockEntityRendererRegistry.register(JAR_BLOCKENTITY, JarBlockEntityRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(JAR_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(JAR_BLOCK, RenderLayer.getTranslucent());

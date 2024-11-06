@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": {
+        "min": 1,
+        "max": 2
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "tconstruct:earth_slime_crystal",
+          "weight": 1,
+					"functions": [
+						{
+							"function": "minecraft:looting_enchant",
+							"count": {
+								"min": 1.0,
+								"max": 2.0
+							},
+							"limit": 1
+						}
+					]
+        }
+      ]
+    }
+  ]
+}

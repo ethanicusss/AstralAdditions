@@ -24,6 +24,8 @@ public class AstralAdditionsClient implements ClientModInitializer {
     public static final EntityModelLayer MODEL_VOIDTOUCHED_ZOMBIE_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "voidtouched_zombie"), "main");
     public static final EntityModelLayer MODEL_SHIMMER_BLAZE_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "shimmer_blaze"), "main");
     public static final EntityModelLayer MODEL_PHAST_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "phast"), "main");
+    public static final EntityModelLayer MODEL_WHAST_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "whast"), "main");
+    public static final EntityModelLayer MODEL_GLAZER_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "glazer"), "main");
     public static final EntityModelLayer MODEL_ENDER_WATCHER_LAYER = new EntityModelLayer(new Identifier(AstralAdditions.MOD_ID, "ender_watcher"), "main");
     @Override
     public void onInitializeClient() {

@@ -1,0 +1,43 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "ad_astra:sky_stone",
+          "weight": 49
+        },
+        {
+          "type": "minecraft:item",
+          "name": "createastral:mercurian_stone",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1,
+        "max": 2
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "createastral:crushed_raw_calorite",
+          "weight": 1,
+					"functions": [
+						{
+							"function": "minecraft:looting_enchant",
+							"count": {
+								"min": 1.0,
+								"max": 2.0
+							},
+							"limit": 1
+						}
+					]
+        }
+      ]
+    }
+  ]
+}

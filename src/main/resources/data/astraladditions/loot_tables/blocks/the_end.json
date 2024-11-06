@@ -1,0 +1,55 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:nether_star"
+        },
+				{
+          "type": "minecraft:item",
+          "name": "minecraft:dragon_head"
+        },
+				{
+          "type": "minecraft:item",
+          "name": "astralsignals:polyvinyl_sheet"
+        }
+      ]
+    },
+		{
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "createastral:astral_singularity"
+        }
+      ]
+    },
+		{
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "doodads:magic_plum"
+        }
+      ]
+    },
+		{
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "create:experience_block",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 32
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

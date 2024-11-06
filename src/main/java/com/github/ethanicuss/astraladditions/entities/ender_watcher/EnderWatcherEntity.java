@@ -38,10 +38,11 @@ public class EnderWatcherEntity extends BlazeEntity {
 
     public EnderWatcherEntity(EntityType<? extends BlazeEntity> entityType, World world) {
         super(entityType, world);
+        this.experiencePoints = 50;
     }
 
     public static DefaultAttributeContainer.Builder createWatcherAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 60).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.12f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 16.0).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 96.0);
+        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 120).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.12f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 16.0).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0);
     }
 
     @Override
@@ -108,10 +109,16 @@ public class EnderWatcherEntity extends BlazeEntity {
 
         @Override
         public void tick() {
-            --this.fireballCooldown;
+            if (this.fireballCooldown > 0) {
+                --this.fireballCooldown;
+            }
             LivingEntity livingEntity = this.blaze.getTarget();
             if (livingEntity == null) {
-                return;
+                this.blaze.setTarget(this.blaze.world.getClosestPlayer(this.blaze, 32));
+                livingEntity = this.blaze.getTarget();
+                if (livingEntity == null) {
+                    return;
+                }
             }
             boolean bl = this.blaze.getVisibilityCache().canSee(livingEntity);
             this.targetNotVisibleTicks = bl ? 0 : ++this.targetNotVisibleTicks;
@@ -132,7 +139,7 @@ public class EnderWatcherEntity extends BlazeEntity {
                         case 2 -> this.attack = "rain";
                         case 3 -> this.attack = "teleport";
                     }
-                    this.fireballCooldown = 20;
+                    this.fireballCooldown = 25;
                 }
                 double e = livingEntity.getX() - this.blaze.getX();
                 double f = livingEntity.getBodyY(0.5) - this.blaze.getBodyY(0.5);
@@ -141,7 +148,7 @@ public class EnderWatcherEntity extends BlazeEntity {
                     case "burst":
                         if (this.fireballCooldown == 10) {
                             int rand = this.blaze.world.random.nextInt(2);
-                            this.blaze.addVelocity(e / (14 - rand * 5), 0.7, g / (14 - rand * 5));
+                            this.blaze.addVelocity(e / (14 - rand * 5), 0.3, g / (14 - rand * 5));
                         }
                         if (this.fireballCooldown <= 0) {
                             ModUtils.spawnForcedParticles((ServerWorld)this.blaze.world, ParticleTypes.WITCH, this.blaze.getX(), this.blaze.getY(), this.blaze.getZ(), 10, 1, 2, 1, 0.01);
@@ -177,7 +184,7 @@ public class EnderWatcherEntity extends BlazeEntity {
                         this.blaze.getLookControl().lookAt(livingEntity, 10.0f, 10.0f);
                         break;
                     case "rain":
-                        if (this.fireballCooldown <= 20 && this.fireballCooldown >= 8 + (this.blaze.getHealth()/this.blaze.getMaxHealth())*10){
+                        if (this.fireballCooldown <= 20 && this.fireballCooldown >= 10 + (this.blaze.getHealth()/this.blaze.getMaxHealth())*8){
                             BlockPos pPos = new BlockPos(this.blaze.getX()-5+this.blaze.world.random.nextInt(11), this.blaze.getY() + 4, this.blaze.getZ()-5+this.blaze.world.random.nextInt(11));
                             int stopper = 0;
                             while (!this.blaze.world.getBlockState(pPos).isAir() && stopper < 32){
@@ -196,6 +203,7 @@ public class EnderWatcherEntity extends BlazeEntity {
                             this.blaze.world.spawnEntity(gluttonyBallEntity);
                         }
                         if (this.fireballCooldown == 0){
+                            this.blaze.addVelocity(0.0, -0.1, 0.0);
                             this.fireballCooldown = 30;
                             this.attack = "";
                         }
@@ -203,9 +211,16 @@ public class EnderWatcherEntity extends BlazeEntity {
                     case "teleport":
                         if (this.fireballCooldown == 20){
                             PlayerEntity p = this.blaze.world.getClosestPlayer(this.blaze, 48);
-                            this.tpX = p.getX();
-                            this.tpY = p.getY() + 1.5;
-                            this.tpZ = p.getZ();
+                            if (p != null) {
+                                this.tpX = p.getX();
+                                this.tpY = p.getY() + 1.5;
+                                this.tpZ = p.getZ();
+                            }
+                            else{
+                                this.tpX = this.blaze.getX();
+                                this.tpY = this.blaze.getY();
+                                this.tpZ = this.blaze.getZ();
+                            }
 
                         }
                         if (this.fireballCooldown < 20){

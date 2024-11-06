@@ -26,6 +26,7 @@
 	"item.astraladditions.awakened_shimmer_heart": "Awakened Shimmer Heart",
 	"item.astraladditions.shimmer_blaze_rod": "Shimmer Blaze Rod",
 	"item.astraladditions.shimmer_blaze_powder": "Shimmer Blaze Powder",
+	"item.astraladditions.shimmer_bottle": "Bottle of Shimmer",
 	"item.astraladditions.ring_gold_cast": "Ring Gold Cast",
 	"item.astraladditions.steel_ring": "Steel Ring",
 	"item.astraladditions.blazed_steel_ring": "Blazed Steel Ring",
@@ -45,6 +46,7 @@
 	"block.astraladditions.ender_sprouts": "Ender Sprouts",
 	"block.astraladditions.ender_tip": "Ender Tip",
 	"block.astraladditions.sputum": "Sputum",
+	"block.astraladditions.the_end": "The End",
 	
 	"block.astraladditions.desizer_1": "Desizer Top Left",
 	"block.astraladditions.desizer_2": "Desizer Top Center",
@@ -57,12 +59,17 @@
 	"block.astraladditions.desizer_9": "Desizer Bottom Right",
 	
 	"astraladditions.text.pylon_too_far": "Pylon out of range",
+	"astraladditions.text.shimmer_bottle": "Slurp",
+	
+	"entity.astraladditions.pylon": "Pylon (someone's teleporter)",
 	"entity.astraladditions.hemogiant": "Hemogiant",
 	"entity.astraladditions.voidtouched_zombie": "Voidtouched Zombie",
 	"entity.astraladditions.voidtouched_skeleton": "Voidtouched Skeleton",
 	"entity.astraladditions.phast": "Phast",
+	"entity.astraladditions.whast": "Whast",
 	"entity.astraladditions.shimmer_blaze": "Shimmer Blaze",
 	"entity.astraladditions.ender_watcher": "Ender Watcher",
+	"entity.astraladditions.moonman": "Moonman",
 	
 	"item.astraladditions.disc_purple_prison": "Purple Prison Music Disc",
 	"item.astraladditions.disc_purple_prison.desc": "Purple Prison - ethanicuss",

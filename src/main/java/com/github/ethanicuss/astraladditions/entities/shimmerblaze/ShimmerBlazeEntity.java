@@ -37,7 +37,7 @@ public class ShimmerBlazeEntity extends BlazeEntity {
     }
 
     public static DefaultAttributeContainer.Builder createShimmerBlazeAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4f).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0).add(EntityAttributes.GENERIC_MAX_HEALTH, 150.0);
+        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4f).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0).add(EntityAttributes.GENERIC_MAX_HEALTH, 180.0);
     }
 
     @Override
@@ -91,10 +91,16 @@ public class ShimmerBlazeEntity extends BlazeEntity {
 
         @Override
         public void tick() {
-            --this.fireballCooldown;
+            if (this.fireballCooldown > 0) {
+                --this.fireballCooldown;
+            }
             LivingEntity livingEntity = this.blaze.getTarget();
             if (livingEntity == null) {
-                return;
+                this.blaze.setTarget(this.blaze.world.getClosestPlayer(this.blaze, 32));
+                livingEntity = this.blaze.getTarget();
+                if (livingEntity == null) {
+                    return;
+                }
             }
             boolean bl = this.blaze.getVisibilityCache().canSee(livingEntity);
             this.targetNotVisibleTicks = bl ? 0 : ++this.targetNotVisibleTicks;

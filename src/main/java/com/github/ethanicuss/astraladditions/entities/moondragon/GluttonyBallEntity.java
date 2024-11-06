@@ -37,7 +37,7 @@ public class GluttonyBallEntity extends ExplosiveProjectileEntity {
             PlayerEntity p = this.world.getClosestPlayer(this, 3);
             if (p != null){
                 p.setVelocity(0, -2.0, 0);
-                p.damage(DamageSource.STARVE, 6);
+                p.damage(DamageSource.STARVE, 3);
                 this.discard();
             }
         }
