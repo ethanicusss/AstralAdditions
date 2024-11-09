@@ -1,4 +1,4 @@
-package com.github.ethanicuss.astraladditions.registry;
+package com.github.ethanicuss.astraladditions.recipes;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
