@@ -63,6 +63,7 @@ public class ModBlocks {
     public static final BlockItem ENDERRACK_ITEM = new BlockItem(ENDERRACK_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
     public static final Block TWISTED_NYLIUM_BLOCK = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.NYLIUM).strength(2.5f));
     public static final BlockItem TWISTED_NYLIUM_ITEM = new BlockItem(TWISTED_NYLIUM_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
+
     public static final Block ENDER_TIP_BLOCK = new EnderTipBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.POINTED_DRIPSTONE).strength(1.0f));
     public static final BlockItem ENDER_TIP_ITEM = new BlockItem(ENDER_TIP_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
     public static final Block ENDER_SPROUT_BLOCK = new EnderSproutsBlock(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.NETHER_SPROUTS));
@@ -73,15 +74,18 @@ public class ModBlocks {
     public static final BlockItem JAR_ITEM = new BlockItem(JAR_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
     public static final BlockEntityType<JarBlockEntity> JAR_BLOCKENTITY =
             Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AstralAdditions.MOD_ID, "jar"), FabricBlockEntityTypeBuilder.create(JarBlockEntity::new, JAR_BLOCK).build());
-    public static final Block DESIZER_1 = new DesizerCasingBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
-    public static final Block DESIZER_2 = new DesizerCasingBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
-    public static final Block DESIZER_3 = new DesizerCasingBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
-    public static final Block DESIZER_4 = new DesizerCasingBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
+    public static final Block DESIZER_1 = new DesizerBlockTemp(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
+    public static final Block DESIZER_2 = new DesizerBlockTemp(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
+    public static final Block DESIZER_3 = new DesizerBlockTemp(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
+    public static final Block DESIZER_4 = new DesizerBlockTemp(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
     public static final Block DESIZER_CONTROLLER = new DesizerControllerBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
-    public static final Block DESIZER_6 = new DesizerCasingBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
-    public static final Block DESIZER_7 = new DesizerCasingBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
-    public static final Block DESIZER_8 = new DesizerCasingBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
-    public static final Block DESIZER_9 = new DesizerCasingBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
+    public static final Block DESIZER_6 = new DesizerBlockTemp(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
+    public static final Block DESIZER_7 = new DesizerBlockTemp(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
+    public static final Block DESIZER_8 = new DesizerBlockTemp(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
+    public static final Block DESIZER_9 = new DesizerBlockTemp(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
+
+    public static final Block DESIZER_BASE = new DesizerCasingBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
+
     public static final BlockItem DESIZER_1_ITEM = new BlockItem(DESIZER_1, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
     public static final BlockItem DESIZER_2_ITEM = new BlockItem(DESIZER_2, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
     public static final BlockItem DESIZER_3_ITEM = new BlockItem(DESIZER_3, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
@@ -91,6 +95,8 @@ public class ModBlocks {
     public static final BlockItem DESIZER_7_ITEM = new BlockItem(DESIZER_7, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
     public static final BlockItem DESIZER_8_ITEM = new BlockItem(DESIZER_8, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
     public static final BlockItem DESIZER_9_ITEM = new BlockItem(DESIZER_9, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
+
+    public static final BlockItem DESIZER_BASE_ITEM = new BlockItem(DESIZER_BASE, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
     /*public static final BlockEntityType<JarBlockEntity> DESIZER_CONTROLLER_ENTITY =
             Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AstralAdditions.MOD_ID, "desizer_8"), FabricBlockEntityTypeBuilder.create(JarBlockEntity::new, JAR_BLOCK).build());
 */
@@ -143,6 +149,10 @@ public class ModBlocks {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "desizer_8"), DESIZER_8_ITEM);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "desizer_9"), DESIZER_9);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "desizer_9"), DESIZER_9_ITEM);
+
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "desizer_base"), DESIZER_BASE);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "desizer_base"), DESIZER_BASE_ITEM);
+
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "the_end"), THE_END_BLOCK);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "the_end"), THE_END_BLOCK_ITEM);
     }

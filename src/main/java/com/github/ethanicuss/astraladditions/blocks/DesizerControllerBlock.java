@@ -7,6 +7,7 @@ import com.github.ethanicuss.astraladditions.util.ModUtils;
 import net.minecraft.block.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
@@ -23,6 +24,7 @@ import net.minecraft.world.World;
 
 import java.util.Optional;
 
+
 public class DesizerControllerBlock extends HorizontalFacingBlock{
 
     boolean hasTicked = false;
@@ -32,15 +34,83 @@ public class DesizerControllerBlock extends HorizontalFacingBlock{
         this.setDefaultState((BlockState)((BlockState)((BlockState)this.stateManager.getDefaultState()).with(FACING, Direction.NORTH)));
     }
 
-
-
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
         if (!world.isClient) {
-            //this.tryShrink(world, pos, state);
+            BlockState controllerDirection = world.getBlockState(pos);
+
+            BlockPos[] adjacentPositions = getAdjacentPositions(pos, controllerDirection.get(DesizerControllerBlock.FACING));
+
+            for (BlockPos adjacentPos : adjacentPositions) {
+                BlockState adjacentState = world.getBlockState(adjacentPos);
+
+                if (adjacentState.getBlock() instanceof DesizerCasingBlock) {
+                    DesizerCasingBlock.Type type = getCasingType(adjacentPos, pos, controllerDirection.get(DesizerControllerBlock.FACING));
+                    world.setBlockState(adjacentPos, adjacentState.with(DesizerCasingBlock.TYPE, type));
+                }
+            }
         }
     }
 
+
+
+    @Override
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        this.spawnBreakParticles(world, player, pos, state);
+        if (!world.isClient) {
+            BlockState controllerDirection = world.getBlockState(pos);
+
+            BlockPos[] adjacentPositions = getAdjacentPositions(pos, controllerDirection.get(DesizerControllerBlock.FACING));
+
+            for (BlockPos adjacentPos : adjacentPositions) {
+                BlockState adjacentState = world.getBlockState(adjacentPos);
+
+                if (adjacentState.getBlock() instanceof DesizerCasingBlock) {
+                    DesizerCasingBlock.Type baseType = DesizerCasingBlock.Type.BASE;
+                    world.setBlockState(adjacentPos, adjacentState.with(DesizerCasingBlock.TYPE, baseType));
+                }
+            }
+        }
+    }
+    private BlockPos[] getAdjacentPositions(BlockPos pos, Direction direction) {
+        BlockPos[] northSouthDirections = {pos.east(), pos.west(), pos.up(), pos.down(), pos.up().east(), pos.up().west(), pos.down().east(), pos.down().west()};
+        BlockPos[] eastWestDirections = {pos.north(), pos.south(), pos.up(), pos.down(), pos.up().north(), pos.down().north(), pos.up().south(), pos.down().south()};
+
+        switch (direction.getOpposite()) {
+            case NORTH, SOUTH -> { return northSouthDirections; }
+            case EAST, WEST -> { return eastWestDirections; }
+            default -> { return new BlockPos[0]; }
+        }
+    }
+    private DesizerCasingBlock.Type getCasingType(BlockPos adjacentPos, BlockPos controllerPos, Direction direction) {
+        int xDiff = adjacentPos.getX() - controllerPos.getX();
+        int yDiff = adjacentPos.getY() - controllerPos.getY();
+        int zDiff = adjacentPos.getZ() - controllerPos.getZ();
+
+        String positionKey = null;
+
+        final String yMath = yDiff == 1 ? "top" : yDiff == -1 ? "bottom" : "middle";
+
+        switch (direction.getOpposite()) {
+            case NORTH -> positionKey = yMath + (xDiff == -1 ? "left" : xDiff == 1 ? "right" : "middle");
+            case EAST -> positionKey =  yMath + (zDiff == -1 ? "left" : zDiff == 1 ? "right" : "middle");
+            case SOUTH -> positionKey = yMath + (xDiff == 1 ? "left" : xDiff == -1 ? "right" : "middle");
+            case WEST -> positionKey =  yMath + (zDiff == 1 ? "left" : zDiff == -1 ? "right" : "middle");
+        }
+
+        assert positionKey != null;
+        return switch (positionKey) {
+            case "topleft" -> DesizerCasingBlock.Type.TOPLEFT;
+            case "topmiddle" -> DesizerCasingBlock.Type.TOPMIDDLE;
+            case "topright" -> DesizerCasingBlock.Type.TOPRIGHT;
+            case "middleleft" -> DesizerCasingBlock.Type.MIDDLELEFT;
+            case "middleright" -> DesizerCasingBlock.Type.MIDDLERIGHT;
+            case "bottomleft" -> DesizerCasingBlock.Type.BOTTOMLEFT;
+            case "bottommiddle" -> DesizerCasingBlock.Type.BOTTOMMIDDLE;
+            case "bottomright" -> DesizerCasingBlock.Type.BOTTOMRIGHT;
+            default -> DesizerCasingBlock.Type.BASE;
+        };
+    }
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
         if (!world.isClient) {
@@ -226,26 +296,15 @@ public class DesizerControllerBlock extends HorizontalFacingBlock{
                     for (int i = 0; i < cubeDensity; i++) {
                         ModUtils.spawnForcedParticles((ServerWorld) world, ParticleTypes.END_ROD,
                                 pos.getX() + _X - 1 + ((float) i / cubeDensity * 3.0), pos.getY() + _Y - 1 + j * 3, pos.getZ() + _Z - 1 + k * 3, 1, 0, 0, 0, 0);
-                    }
-                }
-            }
-            for (int k = 0; k < 2; k++) {
-                for (int j = 0; j < 2; j++) {
-                    for (int i = 0; i < cubeDensity; i++) {
                         ModUtils.spawnForcedParticles((ServerWorld) world, ParticleTypes.END_ROD,
                                 pos.getX() + _X - 1 + j * 3, pos.getY() + _Y - 1 + ((float) i / cubeDensity * 3.0), pos.getZ() + _Z - 1 + k * 3, 1, 0, 0, 0, 0);
-                    }
-                }
-            }
-            for (int k = 0; k < 2; k++) {
-                for (int j = 0; j < 2; j++) {
-                    for (int i = 0; i < cubeDensity; i++) {
                         ModUtils.spawnForcedParticles((ServerWorld) world, ParticleTypes.END_ROD,
                                 pos.getX() + _X - 1 + j * 3, pos.getY() + _Y - 1 + k * 3, pos.getZ() + _Z - 1 + ((float) i / cubeDensity * 3.0), 1, 0, 0, 0, 0);
                     }
                 }
             }
             ModUtils.spawnForcedParticles((ServerWorld) world, ParticleTypes.END_ROD, pos.getX() + _X + 0.5, pos.getY() + _Y + 0.5, pos.getZ() + _Z, 5, 0, 0, 0, 0.02);
+
         }
         else{
             ModUtils.spawnForcedParticles((ServerWorld) world, ParticleTypes.END_ROD, pos.getX() + _X + 0.5, pos.getY() + _Y + 1, pos.getZ() + _Z + 0.5, 30, 0.5, 0.5, 0.5, 0.2);
@@ -275,13 +334,19 @@ public class DesizerControllerBlock extends HorizontalFacingBlock{
     }
     private boolean shouldShrink(World world, BlockPos pos, Direction pistonFace) {
 
+        BlockState controllerDirection = world.getBlockState(pos);
+
+        BlockPos[] adjacentPositions = getAdjacentPositions(pos, controllerDirection.get(DesizerControllerBlock.FACING));
+
         int casingCount = 0;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                for (int k = 0; k < 3; k++) {//hurm.... complicated....
-                    if (world.getBlockState(new BlockPos(pos.getX() - 1 + i, pos.getY() - 1 + j, pos.getZ() - 1 + k)).isIn(ModData.DESIZER_CASING_BLOCKS)){
-                        casingCount++;
-                    }
+
+        for (BlockPos adjacentPos : adjacentPositions) {
+            BlockState adjacentState = world.getBlockState(adjacentPos);
+
+            if (adjacentState.getBlock() instanceof DesizerCasingBlock) {
+                DesizerCasingBlock.Type type = getCasingType(adjacentPos, pos, controllerDirection.get(DesizerControllerBlock.FACING));
+                if (adjacentState.get(DesizerCasingBlock.TYPE) == type) {
+                    casingCount++;
                 }
             }
         }
