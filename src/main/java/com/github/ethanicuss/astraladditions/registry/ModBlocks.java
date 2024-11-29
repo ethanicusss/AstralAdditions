@@ -74,7 +74,9 @@ public class ModBlocks {
     public static final BlockItem JAR_ITEM = new BlockItem(JAR_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
     public static final BlockEntityType<JarBlockEntity> JAR_BLOCKENTITY =
             Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AstralAdditions.MOD_ID, "jar"), FabricBlockEntityTypeBuilder.create(JarBlockEntity::new, JAR_BLOCK).build());
+
     public static final Block DESIZER_1 = new DesizerBlockTemp(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
+
     public static final Block DESIZER_2 = new DesizerBlockTemp(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
     public static final Block DESIZER_3 = new DesizerBlockTemp(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
     public static final Block DESIZER_4 = new DesizerBlockTemp(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));

@@ -84,8 +84,8 @@ public abstract class ItemEntityMixin extends Entity {
     @Inject(at = @At("RETURN"), method = "applyWaterBuoyancy", cancellable = true)
     private void applyWaterBuoyancy(CallbackInfo ci) {
         if (!this.world.isClient()) {
+            //* ShimmerBlaze
             if (ModItems.isSacrificeItem(this.getStack().getItem())) {
-
                 ModUtils.spawnForcedParticles((ServerWorld) this.world, ParticleTypes.END_ROD, this.getX(), this.getY() + 1, this.getZ(), 3, 0.2, 0.2, 0.2, 0.05);
                 this.world.playSound(this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_FOX_SNIFF, SoundCategory.HOSTILE, 0.5f, 0.8f, true);
                 if (this.getStack().getItem() == ModItems.AWAKENED_SHIMMER_HEART) {
@@ -101,7 +101,7 @@ public abstract class ItemEntityMixin extends Entity {
                     }
                 }
             }
-
+            //* Item Transmute
             if (isInShimmerFluid() && !hasShimmerAbove()) {
                 if (this.age >= MINIMUM_TIME_IN_SHIMMER && this.age - lastProcessedTick >= COOLDOWN_TIME) {
                     ItemStack itemStack = this.getStack();
@@ -125,7 +125,7 @@ public abstract class ItemEntityMixin extends Entity {
 
                         if (itemStack.getItem() == recipeInputItem.getItem() && itemStack.getCount() == recipeInputCount) {
                             ModUtils.spawnForcedParticles((ServerWorld) this.world, ParticleTypes.END_ROD, this.getX(), this.getY() + 0.5, this.getZ(), 15, 0.1, 0.1, 0.1, 0.15);
-                            this.world.playSound(this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_FOX_SNIFF, SoundCategory.HOSTILE, 0.5f, 0.8f, true);
+                            this.world.playSound(this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_FOX_SNIFF, SoundCategory.NEUTRAL, 0.5f, 0.8f, true);
 
                             for (ItemStack outputItem : recipe.getOutputItems()) {
                                 ItemEntity outputEntity = new ItemEntity(this.world, this.getX(), this.getY() + 0.25, this.getZ(), outputItem.copy());
@@ -140,7 +140,6 @@ public abstract class ItemEntityMixin extends Entity {
                         }
                     }
                 }
-
             }
         }
     }

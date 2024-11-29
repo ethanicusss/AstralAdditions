@@ -74,11 +74,11 @@ public class DesizerControllerBlock extends HorizontalFacingBlock{
     }
     private BlockPos[] getAdjacentPositions(BlockPos pos, Direction direction) {
         BlockPos[] northSouthDirections = {pos.east(), pos.west(), pos.up(), pos.down(), pos.up().east(), pos.up().west(), pos.down().east(), pos.down().west()};
-        BlockPos[] eastWestDirections = {pos.north(), pos.south(), pos.up(), pos.down(), pos.up().north(), pos.down().north(), pos.up().south(), pos.down().south()};
+        BlockPos[] eastWestDirections   = {pos.north(), pos.south(), pos.up(), pos.down(), pos.up().north(), pos.down().north(), pos.up().south(), pos.down().south()};
 
         switch (direction.getOpposite()) {
             case NORTH, SOUTH -> { return northSouthDirections; }
-            case EAST, WEST -> { return eastWestDirections; }
+            case EAST, WEST   -> { return eastWestDirections; }
             default -> { return new BlockPos[0]; }
         }
     }
@@ -93,21 +93,21 @@ public class DesizerControllerBlock extends HorizontalFacingBlock{
 
         switch (direction.getOpposite()) {
             case NORTH -> positionKey = yMath + (xDiff == -1 ? "left" : xDiff == 1 ? "right" : "middle");
-            case EAST -> positionKey =  yMath + (zDiff == -1 ? "left" : zDiff == 1 ? "right" : "middle");
+            case EAST  -> positionKey = yMath + (zDiff == -1 ? "left" : zDiff == 1 ? "right" : "middle");
             case SOUTH -> positionKey = yMath + (xDiff == 1 ? "left" : xDiff == -1 ? "right" : "middle");
-            case WEST -> positionKey =  yMath + (zDiff == 1 ? "left" : zDiff == -1 ? "right" : "middle");
+            case WEST  -> positionKey = yMath + (zDiff == 1 ? "left" : zDiff == -1 ? "right" : "middle");
         }
 
         assert positionKey != null;
         return switch (positionKey) {
-            case "topleft" -> DesizerCasingBlock.Type.TOPLEFT;
-            case "topmiddle" -> DesizerCasingBlock.Type.TOPMIDDLE;
-            case "topright" -> DesizerCasingBlock.Type.TOPRIGHT;
-            case "middleleft" -> DesizerCasingBlock.Type.MIDDLELEFT;
-            case "middleright" -> DesizerCasingBlock.Type.MIDDLERIGHT;
-            case "bottomleft" -> DesizerCasingBlock.Type.BOTTOMLEFT;
+            case "topleft"      -> DesizerCasingBlock.Type.TOPLEFT;
+            case "topmiddle"    -> DesizerCasingBlock.Type.TOPMIDDLE;
+            case "topright"     -> DesizerCasingBlock.Type.TOPRIGHT;
+            case "middleleft"   -> DesizerCasingBlock.Type.MIDDLELEFT;
+            case "middleright"  -> DesizerCasingBlock.Type.MIDDLERIGHT;
+            case "bottomleft"   -> DesizerCasingBlock.Type.BOTTOMLEFT;
             case "bottommiddle" -> DesizerCasingBlock.Type.BOTTOMMIDDLE;
-            case "bottomright" -> DesizerCasingBlock.Type.BOTTOMRIGHT;
+            case "bottomright"  -> DesizerCasingBlock.Type.BOTTOMRIGHT;
             default -> DesizerCasingBlock.Type.BASE;
         };
     }
@@ -125,6 +125,7 @@ public class DesizerControllerBlock extends HorizontalFacingBlock{
         }
     }
 
+    //! I so want to clean this ;-; but not sure where to start!
     private void tryShrink(World world, BlockPos pos, BlockState state) {
 
         Direction direction = state.get(FACING);
@@ -169,9 +170,7 @@ public class DesizerControllerBlock extends HorizontalFacingBlock{
                                 pos.getY() + _Y - i,
                                 pos.getZ() + _Z - k * isDirection("z", direction) + j * isDirection("x", direction)
                         )).getBlock();
-                        String blockString = block.toString().replace("Block{", "").replace("}", "");
 
-                        //System.out.println("im seeing: " + i + ", " + j + ", " + k + " - " + block);
                         if (block == Blocks.AIR || block == Blocks.CAVE_AIR || block == Blocks.VOID_AIR){
                             block = Blocks.BEDROCK;
                         }
@@ -311,6 +310,8 @@ public class DesizerControllerBlock extends HorizontalFacingBlock{
             ModUtils.spawnForcedParticles((ServerWorld) world, ParticleTypes.SQUID_INK, pos.getX() + _X + 0.5, pos.getY() + _Y + 1, pos.getZ() + _Z + 0.5, 10, 0.5, 0.5, 0.5, 0.2);
         }
     }
+
+
 
     private static void dropResult(World world, BlockPos pos, ItemStack stack) {
         float f = EntityType.ITEM.getHeight() / 2.0f;
