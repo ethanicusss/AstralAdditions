@@ -21,15 +21,26 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class JarBlock extends Block implements BlockEntityProvider {
     public JarBlock(Settings settings) {
         super(settings);
+    }
+
+    private static final VoxelShape SHAPE_MAN = Block.createCuboidShape(1, 0, 1, 15, 16, 15);
+
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context){
+        return SHAPE_MAN;
     }
 
     @Override

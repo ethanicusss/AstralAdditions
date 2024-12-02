@@ -28,8 +28,10 @@ public class DesizerCasingBlock extends HorizontalFacingBlock {
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
         super.onPlaced(world, pos, state, placer, itemStack);
         if (!world.isClient) {
-            BlockState newBlockState = ModBlocks.DESIZER_BASE.getDefaultState();
-            world.setBlockState(pos, newBlockState);
+            if (state.getBlock() != ModBlocks.DESIZER_BASE) {
+                BlockState newBlockState = ModBlocks.DESIZER_BASE.getDefaultState();
+                world.setBlockState(pos, newBlockState);
+            }
         }
     }
 
