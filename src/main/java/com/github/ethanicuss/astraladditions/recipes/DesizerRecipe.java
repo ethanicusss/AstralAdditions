@@ -1,6 +1,8 @@
 package com.github.ethanicuss.astraladditions.recipes;
 
+import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -10,8 +12,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DesizerRecipe implements Recipe<SimpleInventory> {
+    public static final Logger LOGGER = LoggerFactory.getLogger(AstralAdditions.MOD_ID);
     private final Identifier id;
     private final ItemStack output;
     private final DefaultedList<Ingredient> recipeItems;
@@ -62,6 +67,11 @@ public class DesizerRecipe implements Recipe<SimpleInventory> {
         return Type.INSTANCE;
     }
 
+    @Override
+    public DefaultedList<Ingredient> getIngredients() {
+        return recipeItems;
+    }
+
     public static class Type implements RecipeType<DesizerRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
@@ -71,18 +81,22 @@ public class DesizerRecipe implements Recipe<SimpleInventory> {
     public static class Serializer implements RecipeSerializer<DesizerRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "desizer";
-        // this is the name given in the json file
+
 
         @Override
         public DesizerRecipe read(Identifier id, JsonObject json) {
+            // Parse output
             ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
 
+            // Parse ingredients
             JsonArray ingredients = JsonHelper.getArray(json, "ingredients");
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(27, Ingredient.EMPTY);
+            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(27, Ingredient.EMPTY); // Ensure size matches grid
 
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
+            for (int i = 0; i < ingredients.size(); i++) {
+                JsonElement element = ingredients.get(i);
+                inputs.set(i, Ingredient.fromJson(element));
             }
+
 
             return new DesizerRecipe(id, output, inputs);
         }
