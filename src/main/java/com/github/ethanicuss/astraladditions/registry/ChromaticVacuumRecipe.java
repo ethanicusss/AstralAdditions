@@ -1,10 +1,7 @@
 package com.github.ethanicuss.astraladditions.registry;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.minecraft.block.Block;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.PacketByteBuf;
@@ -64,6 +61,14 @@ public class ChromaticVacuumRecipe implements Recipe<SimpleInventory> {
     @Override
     public RecipeType<?> getType() {
         return Type.INSTANCE;
+    }
+
+    public boolean hasRemainder() {
+        return !remainder.isEmpty();
+    }
+
+    public ItemStack getIngredient() {
+        return recipeItems.get(0).getMatchingStacks()[0];
     }
 
     public static class Type implements RecipeType<ChromaticVacuumRecipe> {

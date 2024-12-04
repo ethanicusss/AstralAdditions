@@ -1,0 +1,55 @@
+{
+  "variants": {
+    "facing=east,type=base": {
+      "model": "astraladditions:block/desizer/desizer_base",
+      "y": 90
+    },
+    "facing=north,type=base": {
+      "model": "astraladditions:block/desizer/desizer_base"
+    },
+    "facing=south,type=base": {
+      "model": "astraladditions:block/desizer/desizer_base",
+      "y": 180
+    },
+    "facing=west,type=base": {
+      "model": "astraladditions:block/desizer/desizer_base",
+      "y": 270
+    },
+
+    "facing=north,type=topleft": { "model": "astraladditions:block/desizer/desizer_1" },
+    "facing=north,type=topmiddle": { "model": "astraladditions:block/desizer/desizer_2" },
+    "facing=north,type=topright": { "model": "astraladditions:block/desizer/desizer_3" },
+    "facing=north,type=middleleft": { "model": "astraladditions:block/desizer/desizer_4" },
+    "facing=north,type=middleright": { "model": "astraladditions:block/desizer/desizer_6" },
+    "facing=north,type=bottomleft": { "model": "astraladditions:block/desizer/desizer_7" },
+    "facing=north,type=bottommiddle": { "model": "astraladditions:block/desizer/desizer_8" },
+    "facing=north,type=bottomright": { "model": "astraladditions:block/desizer/desizer_9" },
+
+    "facing=east,type=topleft": { "model": "astraladditions:block/desizer/desizer_1", "y": 90 },
+    "facing=east,type=topmiddle": { "model": "astraladditions:block/desizer/desizer_2", "y": 90 },
+    "facing=east,type=topright": { "model": "astraladditions:block/desizer/desizer_3", "y": 90 },
+    "facing=east,type=middleleft": { "model": "astraladditions:block/desizer/desizer_4", "y": 90 },
+    "facing=east,type=middleright": { "model": "astraladditions:block/desizer/desizer_6", "y": 90 },
+    "facing=east,type=bottomleft": { "model": "astraladditions:block/desizer/desizer_7", "y": 90 },
+    "facing=east,type=bottommiddle": { "model": "astraladditions:block/desizer/desizer_8", "y": 90 },
+    "facing=east,type=bottomright": { "model": "astraladditions:block/desizer/desizer_9", "y": 90 },
+
+    "facing=south,type=topleft": { "model": "astraladditions:block/desizer/desizer_1", "y": 180 },
+    "facing=south,type=topmiddle": { "model": "astraladditions:block/desizer/desizer_2", "y": 180 },
+    "facing=south,type=topright": { "model": "astraladditions:block/desizer/desizer_3", "y": 180 },
+    "facing=south,type=middleleft": { "model": "astraladditions:block/desizer/desizer_4", "y": 180 },
+    "facing=south,type=middleright": { "model": "astraladditions:block/desizer/desizer_6", "y": 180 },
+    "facing=south,type=bottomleft": { "model": "astraladditions:block/desizer/desizer_7", "y": 180 },
+    "facing=south,type=bottommiddle": { "model": "astraladditions:block/desizer/desizer_8", "y": 180 },
+    "facing=south,type=bottomright": { "model": "astraladditions:block/desizer/desizer_9", "y": 180 },
+
+    "facing=west,type=topleft": { "model": "astraladditions:block/desizer/desizer_1", "y": 270 },
+    "facing=west,type=topmiddle": { "model": "astraladditions:block/desizer/desizer_2", "y": 270 },
+    "facing=west,type=topright": { "model": "astraladditions:block/desizer/desizer_3", "y": 270 },
+    "facing=west,type=middleleft": { "model": "astraladditions:block/desizer/desizer_4", "y": 270 },
+    "facing=west,type=middleright": { "model": "astraladditions:block/desizer/desizer_6", "y": 270 },
+    "facing=west,type=bottomleft": { "model": "astraladditions:block/desizer/desizer_7", "y": 270 },
+    "facing=west,type=bottommiddle": { "model": "astraladditions:block/desizer/desizer_8", "y": 270 },
+    "facing=west,type=bottomright": { "model": "astraladditions:block/desizer/desizer_9", "y": 270 }
+  }
+}

@@ -5,10 +5,6 @@ import com.github.ethanicuss.astraladditions.fluids.ModFluids;
 import com.github.ethanicuss.astraladditions.playertracker.WorldRegister;
 import com.github.ethanicuss.astraladditions.registry.*;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.item.Item;
-import net.minecraft.tag.TagKey;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +24,9 @@ public class AstralAdditions implements ModInitializer {
 		//DesizerRecipes.init();
 		ModRecipes.registerRecipes();
 		ModEntitySpawn.addEntitySpawn();
+
+		ModEffects.registerEffects();
+
 		LOGGER.info("Astral Additions is active!");
 	}
 }

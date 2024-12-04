@@ -1,7 +1,6 @@
 package com.github.ethanicuss.astraladditions.items;
 
 import com.github.ethanicuss.astraladditions.registry.ChromaticVacuumRecipe;
-import com.github.ethanicuss.astraladditions.registry.DesizerRecipe;
 import com.github.ethanicuss.astraladditions.util.ModUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
