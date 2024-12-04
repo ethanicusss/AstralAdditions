@@ -79,5 +79,9 @@
 	"entity.astraladditions.ender_watcher": "Ender Watcher",
 	"entity.astraladditions.moonman": "Moonman",
 
-	"category.astraladditions.desizer" : "Desizer"
+	"category.astraladditions.desizer" : "Desizer",
+	"category.astraladditions.transmute": "Transmute",
+	"category.astraladditions.vacuum": "Chromatic Vacuum",
+
+	"tooltip.astraladditions.transmute_text": "Shimmer Fluid"
 }

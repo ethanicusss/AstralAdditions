@@ -1,11 +1,11 @@
-package com.github.ethanicuss.astraladditions.compat;
+package com.github.ethanicuss.astraladditions.compat.desizer;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
+import com.github.ethanicuss.astraladditions.compat.AstralAdditionsREIClientPlugin;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;

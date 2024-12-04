@@ -1,9 +1,7 @@
-package com.github.ethanicuss.astraladditions.compat;
+package com.github.ethanicuss.astraladditions.compat.desizer;
 
-import com.github.ethanicuss.astraladditions.AstralAdditions;
-import com.github.ethanicuss.astraladditions.recipes.DesizerRecipe;
+import com.github.ethanicuss.astraladditions.compat.AstralAdditionsREIClientPlugin;
 import com.github.ethanicuss.astraladditions.registry.ModBlocks;
-import com.github.ethanicuss.astraladditions.registry.ModRecipes;
 import com.google.common.collect.Lists;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
