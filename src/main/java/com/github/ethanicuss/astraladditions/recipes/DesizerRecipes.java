@@ -1,4 +1,4 @@
-package com.github.ethanicuss.astraladditions.registry;
+package com.github.ethanicuss.astraladditions.recipes;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
 import net.fabricmc.fabric.impl.registry.sync.FabricRegistry;

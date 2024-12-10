@@ -3,10 +3,10 @@
 	"subtitles.astraladditions.xetroo": "By XETROO",
 	"subtitles.astraladditions.xh": "By Hesperyd and XETROO",
 	"subtitles.astraladditions.pisn3y": "By PINS3Y",
+
 	"item.astraladditions.funny_disc": "funny disc",
 	"item.astraladditions.funny_disc.desc": "omg its",
 	"item.astraladditions.moonset_crystal_block": "Moonset Crystal Block",
-	"block.astraladditions.moonset_crystal_block": "Moonset Crystal Block",
 	"item.astraladditions.moonset_crystal": "Moonset Crystal",
 	"item.kubejs.shimmer_bucket": "Shimmer Bucket",
 	"item.astraladditions.shimmer_blower": "Shimmer Blower",
@@ -16,10 +16,6 @@
 	"item.astraladditions.pylon": "Pylon",
 	"item.astraladditions.meteor_mitts": "Meteor Mitts",
 	"item.astraladditions.e_guitar": "E Guitar",
-	"block.astraladditions.bulba_root": "Bulba Root",
-	"block.astraladditions.lune_shroom": "Lune Shroom",
-	"block.astraladditions.potted_lune_shroom": "Potted Lune Shroom",
-	"block.astraladditions.bramblebone": "Bramblebone",
 	"item.astraladditions.oh-no": "OH-NO",
 	"item.astraladditions.oh-no_broken": "Shattered OH-NO",
 	"item.astraladditions.shimmer_heart": "Shimmer Heart",
@@ -34,20 +30,31 @@
 	"item.astraladditions.moonblazed_orb": "Moonblazed Orb",
 	"item.astraladditions.fragile_item": "Fragile Item",
 	"item.astraladditions.chromatic_vacuum": "Chromatic Vacuum",
-	"block.astraladditions.shimmer_lily": "Shimmer Lily",
-	"block.astraladditions.pearl_pod": "Pearl Pod",
 	"item.astraladditions.sputum_bucket": "Sputum Bucket",
 	"item.astraladditions.jar": "Jar",
-	"block.astraladditions.jar": "Jar",
 	"item.astraladditions.enderrack": "Enderrack",
-	"block.astraladditions.enderrack": "Enderrack",
 	"item.astraladditions.twisted_nylium": "Twisted Nylium",
+	"item.astraladditions.disc_purple_prison": "Purple Prison Music Disc",
+	"item.astraladditions.disc_purple_prison.desc": "Purple Prison - ethanicuss",
+	"item.astraladditions.disc_astral_lakes_remix": "Astral Lakes (ethanicuss' meow moew :wolfGif: remix) Music Disc",
+	"item.astraladditions.disc_astral_lakes_remix.desc": "Astral Lakes (ethanicuss' meow moew :wolfGif: remix) - ethanicuss",
+
+
+	"block.astraladditions.enderrack": "Enderrack",
 	"block.astraladditions.twisted_nylium": "Twisted Nylium",
 	"block.astraladditions.ender_sprouts": "Ender Sprouts",
 	"block.astraladditions.ender_tip": "Ender Tip",
 	"block.astraladditions.sputum": "Sputum",
 	"block.astraladditions.the_end": "The End",
-	
+	"block.astraladditions.jar": "Jar",
+	"block.astraladditions.moonset_crystal_block": "Moonset Crystal Block",
+	"block.astraladditions.bulba_root": "Bulba Root",
+	"block.astraladditions.lune_shroom": "Lune Shroom",
+	"block.astraladditions.potted_lune_shroom": "Potted Lune Shroom",
+	"block.astraladditions.bramblebone": "Bramblebone",
+	"block.astraladditions.shimmer_lily": "Shimmer Lily",
+	"block.astraladditions.pearl_pod": "Pearl Pod",
+
 	"block.astraladditions.desizer_1": "Desizer Top Left",
 	"block.astraladditions.desizer_2": "Desizer Top Center",
 	"block.astraladditions.desizer_3": "Desizer Top Right",
@@ -57,7 +64,8 @@
 	"block.astraladditions.desizer_7": "Desizer Bottom Left",
 	"block.astraladditions.desizer_8": "Desizer Bottom Center",
 	"block.astraladditions.desizer_9": "Desizer Bottom Right",
-	
+	"block.astraladditions.desizer_base": "Desizer Casing",
+
 	"astraladditions.text.pylon_too_far": "Pylon out of range",
 	"astraladditions.text.shimmer_bottle": "Slurp",
 	
@@ -70,9 +78,10 @@
 	"entity.astraladditions.shimmer_blaze": "Shimmer Blaze",
 	"entity.astraladditions.ender_watcher": "Ender Watcher",
 	"entity.astraladditions.moonman": "Moonman",
-	
-	"item.astraladditions.disc_purple_prison": "Purple Prison Music Disc",
-	"item.astraladditions.disc_purple_prison.desc": "Purple Prison - ethanicuss",
-	"item.astraladditions.disc_astral_lakes_remix": "Astral Lakes (ethanicuss' meow moew :wolfGif: remix) Music Disc",
-	"item.astraladditions.disc_astral_lakes_remix.desc": "Astral Lakes (ethanicuss' meow moew :wolfGif: remix) - ethanicuss"
+
+	"category.astraladditions.desizer" : "Desizer",
+	"category.astraladditions.transmute": "Transmute",
+	"category.astraladditions.vacuum": "Chromatic Vacuum",
+
+	"tooltip.astraladditions.transmute_text": "Shimmer Fluid"
 }
