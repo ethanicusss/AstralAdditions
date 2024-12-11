@@ -1,7 +1,7 @@
-package com.github.ethanicuss.astraladditions.compat.desizer;
+package com.github.ethanicuss.astraladditions.compat.rei.desizer;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
-import com.github.ethanicuss.astraladditions.compat.AstralAdditionsREIClientPlugin;
+import com.github.ethanicuss.astraladditions.compat.rei.AstralAdditionsREIClientPlugin;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;

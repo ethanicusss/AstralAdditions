@@ -28,7 +28,7 @@
       "com.github.ethanicuss.astraladditions.AstralAdditionsClient"
     ],
     "rei_client": [
-      "com.github.ethanicuss.astraladditions.compat.AstralAdditionsREIClientPlugin"
+      "com.github.ethanicuss.astraladditions.compat.rei.AstralAdditionsREIClientPlugin"
     ]
   },
   "mixins": [
