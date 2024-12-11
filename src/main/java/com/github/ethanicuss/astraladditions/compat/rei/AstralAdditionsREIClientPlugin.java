@@ -1,13 +1,13 @@
-package com.github.ethanicuss.astraladditions.compat;
+package com.github.ethanicuss.astraladditions.compat.rei;
 
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
-import com.github.ethanicuss.astraladditions.compat.desizer.DesizerCategory;
-import com.github.ethanicuss.astraladditions.compat.desizer.DesizerDisplay;
-import com.github.ethanicuss.astraladditions.compat.transmute.TransmuteCategory;
-import com.github.ethanicuss.astraladditions.compat.transmute.TransmuteDisplay;
-import com.github.ethanicuss.astraladditions.compat.vacuum.VacuumCategory;
-import com.github.ethanicuss.astraladditions.compat.vacuum.VacuumDisplay;
+import com.github.ethanicuss.astraladditions.compat.rei.desizer.DesizerCategory;
+import com.github.ethanicuss.astraladditions.compat.rei.desizer.DesizerDisplay;
+import com.github.ethanicuss.astraladditions.compat.rei.transmute.TransmuteCategory;
+import com.github.ethanicuss.astraladditions.compat.rei.transmute.TransmuteDisplay;
+import com.github.ethanicuss.astraladditions.compat.rei.vacuum.VacuumCategory;
+import com.github.ethanicuss.astraladditions.compat.rei.vacuum.VacuumDisplay;
 import com.github.ethanicuss.astraladditions.fluids.ModFluids;
 import com.github.ethanicuss.astraladditions.recipes.DesizerRecipe;
 import com.github.ethanicuss.astraladditions.recipes.TransmuteRecipe;

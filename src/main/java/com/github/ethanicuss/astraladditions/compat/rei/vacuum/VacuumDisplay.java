@@ -1,6 +1,6 @@
-package com.github.ethanicuss.astraladditions.compat.vacuum;
+package com.github.ethanicuss.astraladditions.compat.rei.vacuum;
 
-import com.github.ethanicuss.astraladditions.compat.AstralAdditionsREIClientPlugin;
+import com.github.ethanicuss.astraladditions.compat.rei.AstralAdditionsREIClientPlugin;
 import com.github.ethanicuss.astraladditions.registry.ChromaticVacuumRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;

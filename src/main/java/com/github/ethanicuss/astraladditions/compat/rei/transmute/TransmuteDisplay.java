@@ -1,6 +1,6 @@
-package com.github.ethanicuss.astraladditions.compat.transmute;
+package com.github.ethanicuss.astraladditions.compat.rei.transmute;
 
-import com.github.ethanicuss.astraladditions.compat.AstralAdditionsREIClientPlugin;
+import com.github.ethanicuss.astraladditions.compat.rei.AstralAdditionsREIClientPlugin;
 import com.github.ethanicuss.astraladditions.recipes.TransmuteRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;

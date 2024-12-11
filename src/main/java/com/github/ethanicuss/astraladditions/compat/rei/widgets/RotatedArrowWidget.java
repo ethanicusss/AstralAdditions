@@ -1,4 +1,4 @@
-package com.github.ethanicuss.astraladditions.compat.widgets;
+package com.github.ethanicuss.astraladditions.compat.rei.widgets;
 
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
