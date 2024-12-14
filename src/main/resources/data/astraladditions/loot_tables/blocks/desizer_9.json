@@ -1,12 +1,12 @@
 {
   "type": "minecraft:block",
   "pools": [
-		{
+    {
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "astraladditions:desizer_9"
+          "name": "astraladditions:desizer_base"
         }
       ]
     }
