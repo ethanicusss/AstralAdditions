@@ -46,7 +46,8 @@ public class DesizerControllerBlock extends HorizontalFacingBlock{
 
                 if (adjacentState.getBlock() instanceof DesizerCasingBlock) {
                     DesizerCasingBlock.Type type = getCasingType(adjacentPos, pos, controllerDirection.get(DesizerControllerBlock.FACING));
-                    world.setBlockState(adjacentPos, adjacentState.with(DesizerCasingBlock.TYPE, type));
+                    Direction rotation = controllerDirection.get(DesizerControllerBlock.FACING);
+                    world.setBlockState(adjacentPos, adjacentState.with(DesizerCasingBlock.TYPE, type).with(HorizontalFacingBlock.FACING, rotation));
                 }
             }
         }
@@ -67,7 +68,7 @@ public class DesizerControllerBlock extends HorizontalFacingBlock{
 
                 if (adjacentState.getBlock() instanceof DesizerCasingBlock) {
                     DesizerCasingBlock.Type baseType = DesizerCasingBlock.Type.BASE;
-                    world.setBlockState(adjacentPos, adjacentState.with(DesizerCasingBlock.TYPE, baseType));
+                    world.setBlockState(adjacentPos, adjacentState.with(DesizerCasingBlock.TYPE, baseType).with(HorizontalFacingBlock.FACING, Direction.NORTH));
                 }
             }
         }
