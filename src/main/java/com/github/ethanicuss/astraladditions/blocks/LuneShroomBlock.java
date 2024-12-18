@@ -31,11 +31,17 @@ public class LuneShroomBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        int count = 1;
+        int count = 0;
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
                 BlockPos checkPos = new BlockPos(pos.getX() - 3 + i, pos.getY(), pos.getZ() - 3 + j);
                 if (world.getBlockState(checkPos).isOf(ModBlocks.LUNE_SHROOM_BLOCK)){
+                    count++;
+                }
+                if (world.getBlockState(checkPos.up()).isOf(ModBlocks.LUNE_SHROOM_BLOCK)) {
+                    count++;
+                }
+                if (world.getBlockState(checkPos.down()).isOf(ModBlocks.LUNE_SHROOM_BLOCK)) {
                     count++;
                 }
             }
@@ -44,6 +50,12 @@ public class LuneShroomBlock extends Block {
             BlockPos blockPos = new BlockPos(pos.getX() - 3 + (int)(random.nextFloat()*7), pos.getY(), pos.getZ() - 3 + (int)(random.nextFloat()*7));
             if (canPlaceAt(this.getDefaultState(), world, blockPos)) {
                 world.setBlockState(blockPos, this.getDefaultState());
+            }
+            else if(canPlaceAt(this.getDefaultState(), world, blockPos.up())) {
+                world.setBlockState(blockPos.up(), this.getDefaultState());
+            }
+            else if(canPlaceAt(this.getDefaultState(), world, blockPos.down())) {
+                world.setBlockState(blockPos.down(), this.getDefaultState());
             }
         }
     }
