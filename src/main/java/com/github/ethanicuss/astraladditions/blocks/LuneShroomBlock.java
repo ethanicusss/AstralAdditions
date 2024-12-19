@@ -47,7 +47,8 @@ public class LuneShroomBlock extends Block {
             if (canPlaceAt(this.getDefaultState(), world, blockPos)) {
                 world.setBlockState(blockPos, this.getDefaultState());
             }
-            else if(canPlaceAt(this.getDefaultState(), world, blockPos.up())) {
+            // Prioritizes spreading up over down when both are available. Uncomment the random check below to change to random chance
+            else if(/*random.nextFloat() >= 0.5 &&*/ canPlaceAt(this.getDefaultState(), world, blockPos.up())) {
                 world.setBlockState(blockPos.up(), this.getDefaultState());
             }
             else if(canPlaceAt(this.getDefaultState(), world, blockPos.down())) {
