@@ -34,7 +34,7 @@ public class LuneShroomBlock extends Block {
         int count = 1;
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 3; j++){
-                for(int k = 0; k<7; k++) {
+                for(int k = 0; k < 7; k++){
                     BlockPos checkPos = new BlockPos(pos.getX() - 3 + i, pos.getY() - 1 + j, pos.getZ() - 3 + k);
                     if (world.getBlockState(checkPos).isOf(ModBlocks.LUNE_SHROOM_BLOCK)) {
                         count++;
