@@ -33,10 +33,12 @@ public class LuneShroomBlock extends Block {
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         int count = 1;
         for(int i = 0; i < 7; i++){
-            for(int j = 0; j < 7; j++){
-                BlockPos checkPos = new BlockPos(pos.getX() - 3 + i, pos.getY(), pos.getZ() - 3 + j);
-                if (world.getBlockState(checkPos).isOf(ModBlocks.LUNE_SHROOM_BLOCK)){
-                    count++;
+            for(int j = 0; j < 3; j++){
+                for(int k = 0; k < 7; k++){
+                    BlockPos checkPos = new BlockPos(pos.getX() - 3 + i, pos.getY() - 1 + j, pos.getZ() - 3 + k);
+                    if (world.getBlockState(checkPos).isOf(ModBlocks.LUNE_SHROOM_BLOCK)) {
+                        count++;
+                    }
                 }
             }
         }
@@ -44,6 +46,13 @@ public class LuneShroomBlock extends Block {
             BlockPos blockPos = new BlockPos(pos.getX() - 3 + (int)(random.nextFloat()*7), pos.getY(), pos.getZ() - 3 + (int)(random.nextFloat()*7));
             if (canPlaceAt(this.getDefaultState(), world, blockPos)) {
                 world.setBlockState(blockPos, this.getDefaultState());
+            }
+            // Prioritizes spreading up over down when both are available. Uncomment the random check below to change to random chance
+            else if(/*random.nextFloat() >= 0.5 &&*/ canPlaceAt(this.getDefaultState(), world, blockPos.up())) {
+                world.setBlockState(blockPos.up(), this.getDefaultState());
+            }
+            else if(canPlaceAt(this.getDefaultState(), world, blockPos.down())) {
+                world.setBlockState(blockPos.down(), this.getDefaultState());
             }
         }
     }
