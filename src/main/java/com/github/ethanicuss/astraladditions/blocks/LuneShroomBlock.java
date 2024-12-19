@@ -31,7 +31,7 @@ public class LuneShroomBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        int count = 0;
+        int count = 1;
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
                 BlockPos checkPos = new BlockPos(pos.getX() - 3 + i, pos.getY(), pos.getZ() - 3 + j);
