@@ -32,7 +32,7 @@ public class ShimmerEffect {
             if (((Entity)(Object)this) instanceof LivingEntity le) {
                 le.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 60, 0, false, false));
                 le.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 330, 0, false, false));
-                le.addStatusEffect(new StatusEffectInstance(ModEffects.SINK, 40, 2, false, false));
+                //le.addStatusEffect(new StatusEffectInstance(ModEffects.SINK, 40, 2, false, false));
             }
         }
         if (!firstUpdate && world.getBlockState(((Entity)(Object)this).getBlockPos()).isOf(ModFluids.SPUTUM)){

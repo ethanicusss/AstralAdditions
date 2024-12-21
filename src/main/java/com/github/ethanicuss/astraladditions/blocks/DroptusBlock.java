@@ -46,21 +46,18 @@ public class DroptusBlock extends Block {
         int j = state.get(AGE);
         if (j < 2) {
             world.setBlockState(pos, (BlockState)state.with(AGE, j + 1), Block.NOTIFY_LISTENERS);
-            if (j+1 == 2){
+            if (j == 1){
                 world.setBlockState(pos, (BlockState)state.with(LIT, true).with(AGE, 2), Block.NOTIFY_LISTENERS);
                 return;
             }
-        }
-        else{
-            return;
         }
         int i = 1;
         while (world.getBlockState(pos.up(i)).isOf(this)) {
             ++i;
         }
         BlockPos blockPos = pos.down();
-        if (j == 0 && i < 4) {
-            if (canPlaceAt(this.getDefaultState(), world, blockPos)) {
+        if (i < 4) {
+            if (world.getBlockState(blockPos).isAir()) {
                 world.setBlockState(blockPos, this.getDefaultState());
             }
         }
