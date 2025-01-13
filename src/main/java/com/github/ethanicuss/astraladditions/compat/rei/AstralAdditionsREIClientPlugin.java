@@ -48,7 +48,7 @@ public class AstralAdditionsREIClientPlugin implements REIClientPlugin {
 
     @Override
     public void registerDisplays(DisplayRegistry registry) {
-        RecipeManager recipeManager = MinecraftClient.getInstance().getServer().getRecipeManager();
+        RecipeManager recipeManager = MinecraftClient.getInstance().world.getRecipeManager();
 
         List<DesizerDisplay> desizerRecipes = recipeManager.listAllOfType(DesizerRecipe.Type.INSTANCE).stream().map(DesizerDisplay::of).toList();
         desizerRecipes.forEach(registry::add);
