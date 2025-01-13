@@ -123,19 +123,43 @@ public abstract class ItemEntityMixin extends Entity {
                         ItemStack recipeInputItem = recipe.getInputItem();
                         int recipeInputCount = recipeInputItem.getCount();
 
-                        if (itemStack.getItem() == recipeInputItem.getItem() && itemStack.getCount() == recipeInputCount) {
+                        if (recipe.isIgnoreCount() ||
+                                (recipe.isSoftIgnoreCount() && itemStack.getCount() >= recipeInputCount) ||
+                                (itemStack.getItem() == recipeInputItem.getItem() && itemStack.getCount() == recipeInputCount)) {
+
                             ModUtils.spawnForcedParticles((ServerWorld) this.world, ParticleTypes.END_ROD, this.getX(), this.getY() + 0.5, this.getZ(), 15, 0.1, 0.1, 0.1, 0.15);
                             this.world.playSound(this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_FOX_SNIFF, SoundCategory.NEUTRAL, 0.5f, 0.8f, true);
 
+                            int multiplier = 1;
+
+                            if (recipe.isSoftIgnoreCount()) {
+                                multiplier = itemStack.getCount() / recipeInputCount;
+                                itemStack.decrement(multiplier * recipeInputCount);
+                            }
+                            else if (recipe.isIgnoreCount()) {
+                                multiplier = itemStack.getCount();
+                                itemStack.decrement(itemStack.getCount());
+                            }
+                            else {
+                                itemStack.decrement(recipeInputCount);
+                            }
+
                             for (ItemStack outputItem : recipe.getOutputItems()) {
-                                ItemEntity outputEntity = new ItemEntity(this.world, this.getX(), this.getY() + 0.25, this.getZ(), outputItem.copy());
+                                ItemStack outputStack = outputItem.copy();
+                                outputStack.setCount(outputStack.getCount() * multiplier);
+
+                                ItemEntity outputEntity = new ItemEntity(this.world, this.getX(), this.getY() + 0.25, this.getZ(), outputStack);
                                 outputEntity.setNoGravity(true);
                                 outputEntity.setVelocity(0, 0.05, 0);
                                 this.world.spawnEntity(outputEntity);
                             }
 
                             markAsProcessed(itemStack);
-                            this.discard();
+
+                            if (itemStack.isEmpty()) {
+                                this.discard();
+                            }
+
                             lastProcessedTick = this.age;
                         }
                     }

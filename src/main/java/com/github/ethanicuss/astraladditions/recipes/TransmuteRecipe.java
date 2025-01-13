@@ -23,14 +23,23 @@ public class TransmuteRecipe implements Recipe<Inventory> {
     private final Identifier id;
     private final ItemStack inputItem;
     private final List<ItemStack> outputItems;
+    private final boolean ignoreCount;
+    private final boolean softIgnoreCount;
 
-    public TransmuteRecipe(Identifier id, ItemStack inputItem, List<ItemStack> outputItems) {
+    public TransmuteRecipe(Identifier id, ItemStack inputItem, List<ItemStack> outputItems, boolean ignoreCount, boolean softIgnoreCount) {
         this.id = id;
         this.inputItem = inputItem;
         this.outputItems = outputItems;
+        this.ignoreCount = ignoreCount;
+        this.softIgnoreCount = softIgnoreCount;
     }
 
     public boolean matches(ItemStack stack) {
+        if (ignoreCount) {
+            return stack.getItem() == inputItem.getItem();
+        } else if (softIgnoreCount) {
+            return stack.getItem() == inputItem.getItem() && stack.getCount() >= inputItem.getCount();
+        }
         return stack.getItem() == inputItem.getItem() && stack.getCount() >= inputItem.getCount();
     }
 
@@ -40,6 +49,13 @@ public class TransmuteRecipe implements Recipe<Inventory> {
     public ItemStack getInputItem() {
         return inputItem;
     }
+    public boolean isIgnoreCount() {
+        return ignoreCount;
+    }
+    public boolean isSoftIgnoreCount(){
+        return softIgnoreCount;
+    }
+
     @Override
     public boolean matches(Inventory inv, World world) {
         return false;
@@ -94,6 +110,8 @@ public class TransmuteRecipe implements Recipe<Inventory> {
             JsonObject inputJson = JsonHelper.getObject(json, "input");
             Item inputItem = JsonHelper.getItem(inputJson, "item");
             int inputCount = JsonHelper.getInt(inputJson, "count", 1);
+            boolean ignoreCount = JsonHelper.getBoolean(inputJson, "ignore_count", false);
+            boolean softIgnoreCount = JsonHelper.getBoolean(inputJson, "soft_ignore_count", false);
             ItemStack inputStack = new ItemStack(inputItem, inputCount);
 
             List<ItemStack> outputItems = new ArrayList<>();
@@ -105,12 +123,14 @@ public class TransmuteRecipe implements Recipe<Inventory> {
                 outputItems.add(new ItemStack(outputItem, outputCount));
             }
 
-            return new TransmuteRecipe(id, inputStack, outputItems);
+            return new TransmuteRecipe(id, inputStack, outputItems, ignoreCount, softIgnoreCount);
         }
 
         @Override
         public TransmuteRecipe read(Identifier id, PacketByteBuf buf) {
             ItemStack inputStack = buf.readItemStack();
+            boolean ignoreCount = buf.readBoolean();
+            boolean softIgnoreCount = buf.readBoolean();
 
             int outputSize = buf.readInt();
             List<ItemStack> outputItems = new ArrayList<>(outputSize);
@@ -118,12 +138,14 @@ public class TransmuteRecipe implements Recipe<Inventory> {
                 outputItems.add(buf.readItemStack());
             }
 
-            return new TransmuteRecipe(id, inputStack, outputItems);
+            return new TransmuteRecipe(id, inputStack, outputItems, ignoreCount, softIgnoreCount);
         }
 
         @Override
         public void write(PacketByteBuf buf, TransmuteRecipe recipe) {
             buf.writeItemStack(recipe.inputItem);
+            buf.writeBoolean(recipe.ignoreCount);
+            buf.writeBoolean(recipe.softIgnoreCount);
 
             buf.writeInt(recipe.outputItems.size());
             for (ItemStack output : recipe.outputItems) {
