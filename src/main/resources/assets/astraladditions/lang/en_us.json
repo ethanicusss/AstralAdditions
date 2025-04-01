@@ -39,7 +39,6 @@
 	"item.astraladditions.disc_astral_lakes_remix": "Astral Lakes (ethanicuss' meow moew :wolfGif: remix) Music Disc",
 	"item.astraladditions.disc_astral_lakes_remix.desc": "Astral Lakes (ethanicuss' meow moew :wolfGif: remix) - ethanicuss",
 
-
 	"block.astraladditions.enderrack": "Enderrack",
 	"block.astraladditions.twisted_nylium": "Twisted Nylium",
 	"block.astraladditions.ender_sprouts": "Ender Sprouts",
@@ -83,5 +82,7 @@
 	"category.astraladditions.transmute": "Transmute",
 	"category.astraladditions.vacuum": "Chromatic Vacuum",
 
-	"tooltip.astraladditions.transmute_text": "Shimmer Fluid"
+	"tooltip.astraladditions.transmute_text": "Shimmer Fluid",
+
+	"effect.astraladditions.sink": "Sinking"
 }
