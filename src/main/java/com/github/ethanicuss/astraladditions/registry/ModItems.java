@@ -20,7 +20,7 @@ import java.util.List;
 public class ModItems {
     public static final Item COMETBALL = new CometballItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(16).rarity(Rarity.UNCOMMON));
     public static final Item PYLON = new PylonItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).rarity(Rarity.UNCOMMON));
-    public static final Item METEOR_MITTS = new MeteorMittsItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON).maxDamage(1536));
+    public static final Item METEOR_MITTS = new MeteorMittsItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE).maxDamage(1536));
     public static final Item COSMIC_HOURGLASS = new CosmicHourglassItem(new FabricItemSettings().maxCount(1).rarity(Rarity.UNCOMMON));
     public static final Item E_GUITAR = new EGuitarItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON).maxDamage(2048));
     public static final Item MOONSET_CRYSTAL = new Item(new FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON));
@@ -43,9 +43,10 @@ public class ModItems {
     public static final Item DISC_PURPLE_PRISON = new ModMusicDiscItem(7, ModSounds.MUSIC_SHIMMER_BLAZE, new FabricItemSettings().group(ItemGroup.MISC).maxCount(1));
     public static final Item DISC_ASTRAL_LAKES_REMIX = new ModMusicDiscItem(7, ModSounds.MUSIC_ASTRAL_LAKES_REMIX, new FabricItemSettings().group(ItemGroup.MISC).maxCount(1));
     //public static final Item SHIMMER_BOTTLE = new ShimmerBottleItem(new FabricItemSettings().group(ItemGroup.BREWING).maxCount(1));
-    public static final Item SHIMMER_BOTTLE = new ShimmerBottleItem(StatusEffects.NIGHT_VISION, 3600, 0, new TranslatableText("Multiplies XP gain by 1.5 (3:00)").formatted(Formatting.BLUE), new FabricItemSettings().group(ItemGroup.BREWING).maxCount(1).rarity(Rarity.UNCOMMON));
+    public static final Item SHIMMER_BOTTLE = new ShimmerBottleItem(StatusEffects.NIGHT_VISION, 3600, 0, new TranslatableText("Yummy").formatted(Formatting.BLUE), new FabricItemSettings().group(ItemGroup.BREWING).maxCount(1).rarity(Rarity.UNCOMMON));
 
     public static final Item CHROMATIC_VACUUM = new ChromaticVacuumItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(512));
+    public static final Item ASTRAL_HOE = new AstralHoeItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE).maxDamage(1536));
     public static void registerItems() {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "cometball"), COMETBALL);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "pylon"), PYLON);
@@ -73,6 +74,7 @@ public class ModItems {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "disc_astral_lakes_remix"), DISC_ASTRAL_LAKES_REMIX);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmer_bottle"), SHIMMER_BOTTLE);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "chromatic_vacuum"), CHROMATIC_VACUUM);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "astral_hoe"), ASTRAL_HOE);
         addSacrificeItem(AWAKENED_SHIMMER_HEART, ModEntities.SHIMMER_BLAZE);
     }
     private static List<Item> sacrificableItems = new ArrayList<Item>();
