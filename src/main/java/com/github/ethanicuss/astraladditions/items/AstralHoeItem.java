@@ -68,7 +68,7 @@ public class AstralHoeItem extends Item {
         double dy = Math.sin(Math.toRadians(-attacker.getPitch())) * speed;
         double dz = Math.cos(Math.toRadians(-attacker.getYaw())) * speed;
         target.setVelocity(dx, dy/2 + 0.6, dz);
-        ModUtils.spawnForcedParticles((ServerWorld)attacker.world, ParticleTypes.WITCH, target.getX(), target.getY(), target.getZ(), 3, 0.5 * target.world.getRandom().nextFloat(), 0.3, 0.5 * target.world.getRandom().nextFloat(), 0.2);
+        ModUtils.spawnForcedParticles((ServerWorld)attacker.world, ParticleTypes.WITCH, target.getX(), target.getY()-0.5, target.getZ(), 3, 0.5 * target.world.getRandom().nextFloat(), 0.3, 0.5 * target.world.getRandom().nextFloat(), 0.15);
         if (!attacker.world.isClient) {
             for (int i = 1; i < 11; i++) {
                 if (!attacker.world.isClient) {

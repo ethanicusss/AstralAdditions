@@ -14,38 +14,33 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class LunarWackerItem extends Item {
+public class SoulstealDaggerItem extends Item {
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
-    public LunarWackerItem(Settings settings) {
+    public SoulstealDaggerItem(Settings settings) {
         super(settings);
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", (double)5, EntityAttributeModifier.Operation.ADDITION));
-        builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", (double)-3, EntityAttributeModifier.Operation.ADDITION));
+        builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", (double)4.5, EntityAttributeModifier.Operation.ADDITION));
+        builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", (double)-2, EntityAttributeModifier.Operation.ADDITION));
         this.attributeModifiers = builder.build();
     }
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        attacker.world.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.BLOCK_SHROOMLIGHT_PLACE, SoundCategory.NEUTRAL, 1.1f, 0.8f);
-        attacker.world.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundCategory.NEUTRAL, 1.0f, 1.2f);
+        attacker.world.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.NEUTRAL, 1.1f, 0.8f);
+        attacker.world.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.BLOCK_SOUL_SOIL_HIT, SoundCategory.NEUTRAL, 1.0f, 1.2f);
         if (!attacker.world.isClient()) {
             stack.damage(1, attacker, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
         }
-        target.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 45, 10));
-        double speed = 1.5;
-        double dx = Math.sin(Math.toRadians(-attacker.getYaw())) * speed;
-        double dy = Math.sin(Math.toRadians(-attacker.getPitch())) * speed;
-        double dz = Math.cos(Math.toRadians(-attacker.getYaw())) * speed;
-        target.setVelocity(dx, dy/2 + 0.6, dz);
-        ModUtils.spawnForcedParticles((ServerWorld)attacker.world, ParticleTypes.CLOUD, target.getX(), target.getY()-1, target.getZ(), 3, 0.5 * target.world.getRandom().nextFloat(), 0.3, 0.5 * target.world.getRandom().nextFloat(), 0.2);
+        attacker.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 60, 0));
+        target.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 90, 0));
+        ModUtils.spawnForcedParticles((ServerWorld)attacker.world, ParticleTypes.SOUL_FIRE_FLAME, target.getX(), target.getY()-0.5, target.getZ(), 3, 0.5 * target.world.getRandom().nextFloat(), 0.3, 0.5 * target.world.getRandom().nextFloat(), 0.1);
         return true;
     }
 
