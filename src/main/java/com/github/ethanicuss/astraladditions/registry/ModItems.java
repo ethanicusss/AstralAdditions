@@ -26,7 +26,7 @@ public class ModItems {
     public static final Item MOONSET_CRYSTAL = new Item(new FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON));
     public static final Item OHNO = new OHNOItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).rarity(Rarity.RARE));
     public static final Item OHNO_BROKEN = new OHNOBrokenItem(new FabricItemSettings().group(ItemGroup.TOOLS).rarity(Rarity.RARE));
-    public static final Item SHIMMER_BLOWER = new ShimmerBlowerItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON).maxDamage(20));
+    public static final Item SHIMMER_BLOWER = new ShimmerBlowerItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON).maxDamage(25));
     public static final Item LUNAR_WACKER = new LunarWackerItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON).maxDamage(512));
     public static final Item SHIMMER_HEART = new Item(new FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON));
     public static final Item AWAKENED_SHIMMER_HEART = new Item(new FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON));

@@ -4,13 +4,16 @@
   "version": "${version}",
 
   "name": "Astral Additions",
-  "description": "Misc additions for Create: Astral - MUSIC IS FREE TO USE IN YOUTUBE VIDEOS UNDER CC BY-SA 4.0",
+  "description": "Misc additions for Create: Astral",
   "authors": [
     "ethanicuss",
     "Erdragh",
-    "Hesperyd",
+    "Tsugomori",
     "XETROO",
-    "PINS3Y"
+    "PINS3Y",
+	"HyperRaccoon13",
+	"NikWas",
+	"Sol"
   ],
   "contact": {
     "sources": "https://github.com/ethanicuss/AstralAdditions"

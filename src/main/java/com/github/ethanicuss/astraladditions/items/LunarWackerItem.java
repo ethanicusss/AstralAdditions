@@ -94,9 +94,11 @@ public class LunarWackerItem extends Item {
         if (itemStack.hasNbt()) {
             NbtCompound nbtCompound = itemStack.getNbt();
             tooltip.add(new LiteralText("Boing!").formatted(Formatting.DARK_PURPLE));
-            String string = String.join(" ","Variant:", String.valueOf(nbtCompound.getString(VARIANT_KEY)));
-            if (!StringHelper.isEmpty(string)) {
-                tooltip.add(new LiteralText(string).formatted(Formatting.DARK_AQUA));
+            if (String.valueOf(nbtCompound.getString(VARIANT_KEY)) != "") {
+                String string = String.join(" ", "Variant:", String.valueOf(nbtCompound.getString(VARIANT_KEY)));
+                if (!StringHelper.isEmpty(string)) {
+                    tooltip.add(new LiteralText(string).formatted(Formatting.DARK_AQUA));
+                }
             }
         }
     }
