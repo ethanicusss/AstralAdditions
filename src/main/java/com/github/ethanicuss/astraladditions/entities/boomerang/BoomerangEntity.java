@@ -1,8 +1,12 @@
 package com.github.ethanicuss.astraladditions.entities.boomerang;
 
+import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.registry.ModItems;
+import net.fabricmc.fabric.api.item.v1.FabricItem;
+import net.fabricmc.fabric.impl.registry.sync.FabricRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -10,14 +14,18 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.GhastEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.registry.BuiltinRegistries;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import java.util.Objects;
@@ -27,8 +35,12 @@ public class BoomerangEntity extends ThrownItemEntity {
 
     private static final TrackedData<Boolean> HIT = DataTracker.registerData(BoomerangEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Integer> AGE = DataTracker.registerData(BoomerangEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Float> DAMAGE = DataTracker.registerData(BoomerangEntity.class, TrackedDataHandlerRegistry.FLOAT);
     private static final TrackedData<Integer> MAX_AGE = DataTracker.registerData(BoomerangEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Float> SPEED = DataTracker.registerData(BoomerangEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    private static final TrackedData<Float> CURVE = DataTracker.registerData(BoomerangEntity.class, TrackedDataHandlerRegistry.FLOAT);
     private static final TrackedData<String> OWNER = DataTracker.registerData(BoomerangEntity.class, TrackedDataHandlerRegistry.STRING);
+    private static final TrackedData<String> ITEM = DataTracker.registerData(BoomerangEntity.class, TrackedDataHandlerRegistry.STRING);
 
     public BoomerangEntity(EntityType<? extends Entity> entityType, World world) {
         super((EntityType<? extends ThrownItemEntity>)entityType, world);
@@ -56,6 +68,24 @@ public class BoomerangEntity extends ThrownItemEntity {
     public void setOwner(String UUID){
         this.getDataTracker().set(OWNER, UUID);
     }
+    public void setRangItem(String rangItem){
+        this.getDataTracker().set(ITEM, rangItem);
+    }
+    public ItemStack getRangItem(){
+        return Registry.ITEM.get(new Identifier(AstralAdditions.MOD_ID, this.dataTracker.get(ITEM))).getDefaultStack();
+    }
+    public void setMaxAge(int maxAge){
+        this.getDataTracker().set(MAX_AGE, maxAge);
+    }
+    public void setRangDamage(float damage){
+        this.getDataTracker().set(DAMAGE, damage);
+    }
+    public void setRangSpeed(float speed){
+        this.getDataTracker().set(SPEED, speed);
+    }
+    public void setCurve(float curve){
+        this.getDataTracker().set(CURVE, curve);
+    }
 
     @Override
     public void tick() {
@@ -63,7 +93,7 @@ public class BoomerangEntity extends ThrownItemEntity {
             if (!Objects.equals(this.getDataTracker().get(OWNER), "")) {
                 PlayerEntity p = world.getPlayerByUuid(UUID.fromString(this.getDataTracker().get(OWNER)));
                 if (p != null){
-                    double strength = 2.5;
+                    double strength = this.getDataTracker().get(SPEED)+0.5f;
                     double xdiff = this.getX() - p.getX();
                     double zdiff = this.getZ() - p.getZ();
                     double dist;
@@ -96,7 +126,11 @@ public class BoomerangEntity extends ThrownItemEntity {
             }
         }
         else{
-            this.getDataTracker().set(AGE, this.getDataTracker().get(AGE)+1);
+            float xspeed = (float)this.getVelocity().getX();
+            float yspeed = (float)this.getVelocity().getZ();
+            float angle = (float)(Math.toDegrees(Math.atan(xspeed/yspeed))) - this.getDataTracker().get(CURVE);
+            if (yspeed < 0){angle += 180; System.out.println("brah");}
+            this.setVelocity(Math.sqrt(Math.pow(xspeed, 2)+Math.pow(yspeed, 2))*Math.sin(Math.toRadians(angle)), (float)this.getVelocity().getY(), Math.sqrt(Math.pow(xspeed, 2)+Math.pow(yspeed, 2))*Math.cos(Math.toRadians(angle)));
             if (this.getDataTracker().get(AGE) > this.getDataTracker().get(MAX_AGE)){
                 this.getDataTracker().set(HIT, true);
             }
@@ -104,10 +138,11 @@ public class BoomerangEntity extends ThrownItemEntity {
         if (this.getDataTracker().get(AGE) > this.getDataTracker().get(MAX_AGE)*3){
             PlayerEntity p = world.getPlayerByUuid(UUID.fromString(this.getDataTracker().get(OWNER)));
             if (p != null){
-                p.giveItemStack(ModItems.DIAMOND_BOOMER.getDefaultStack());
+                world.spawnEntity(new ItemEntity(world, p.getX(), p.getY() + 1, p.getZ(), this.getRangItem()));
                 this.discard();
             }
         }
+        this.getDataTracker().set(AGE, this.getDataTracker().get(AGE)+1);
         super.tick();
     }
 
@@ -116,13 +151,20 @@ public class BoomerangEntity extends ThrownItemEntity {
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
         if (!Objects.equals(entity.getUuidAsString(), this.getDataTracker().get(OWNER))) {
-            entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), 6);
-            entity.addVelocity(0.0f, 0.3f, 0.0f);
+            entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), this.getDataTracker().get(DAMAGE));
+            entity.addVelocity(0.0f, 0.01f*this.getDataTracker().get(SPEED), 0.0f);
         }
         else{
             PlayerEntity p = world.getPlayerByUuid(UUID.fromString(this.getDataTracker().get(OWNER)));
             if (p != null){
-                p.giveItemStack(ModItems.DIAMOND_BOOMER.getDefaultStack());
+                ItemStack i = this.getRangItem();
+                if (i != null) {
+                    if (p.getInventory().getStack(p.getInventory().selectedSlot).isEmpty()) {
+                        p.getInventory().setStack(p.getInventory().selectedSlot, i);
+                    } else {
+                        world.spawnEntity(new ItemEntity(world, p.getX(), p.getY() + 1, p.getZ(), i));
+                    }
+                }
                 this.discard();
             }
         }
@@ -144,6 +186,10 @@ public class BoomerangEntity extends ThrownItemEntity {
         this.dataTracker.startTracking(HIT, false);
         this.dataTracker.startTracking(OWNER, "");
         this.dataTracker.startTracking(AGE, 0);
+        this.dataTracker.startTracking(DAMAGE, 1.0f);
         this.dataTracker.startTracking(MAX_AGE, 8);
+        this.dataTracker.startTracking(SPEED, 1.0f);
+        this.dataTracker.startTracking(CURVE, 0.0f);
+        this.dataTracker.startTracking(ITEM, "minecraft:dirt");
     }
 }

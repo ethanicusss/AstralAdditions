@@ -4,13 +4,17 @@ import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.entities.cometball.CometballEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Matrix3f;
@@ -20,7 +24,7 @@ import net.minecraft.util.math.Vec3f;
 @Environment(value= EnvType.CLIENT)
 public class BoomerangEntityRenderer
         extends EntityRenderer<BoomerangEntity> {
-    private static final Identifier TEXTURE = new Identifier(AstralAdditions.MOD_ID, "textures/entity/cometball/cometball.png");
+    private static final Identifier TEXTURE = new Identifier(AstralAdditions.MOD_ID, "textures/item/fragile_item.png");
     private static RenderLayer LAYER = RenderLayer.getEntityCutoutNoCull(TEXTURE);
 
     public BoomerangEntityRenderer(EntityRendererFactory.Context context) {
@@ -33,8 +37,8 @@ public class BoomerangEntityRenderer
     }
 
     @Override
-    public void render(BoomerangEntity dragonFireballEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
-        matrixStack.push();
+    public void render(BoomerangEntity entity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+        /*matrixStack.push();
         matrixStack.scale(1.0f, 1.0f, 1.0f);
         matrixStack.multiply(this.dispatcher.getRotation());
         matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180.0f));
@@ -47,7 +51,17 @@ public class BoomerangEntityRenderer
         produceVertex(vertexConsumer, matrix4f, matrix3f, i, 1.0f, 1, 1, 0);
         produceVertex(vertexConsumer, matrix4f, matrix3f, i, 0.0f, 1, 0, 0);
         matrixStack.pop();
-        super.render(dragonFireballEntity, f, g, matrixStack, vertexConsumerProvider, i);
+        super.render(dragonFireballEntity, f, g, matrixStack, vertexConsumerProvider, i);*/
+        ItemStack itemStack = entity.getRangItem();
+        if (itemStack != ItemStack.EMPTY || itemStack.isOf(Items.AIR)) {
+            matrixStack.push();
+            matrixStack.translate(0.0, -0.1, 0.0);
+            matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion((entity.getWorld().getTime())*20));
+            matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90));
+            matrixStack.scale(1.5f, 1.0f, 1.5f);
+            MinecraftClient.getInstance().getItemRenderer().renderItem(itemStack, ModelTransformation.Mode.FIXED, i, 0, matrixStack, vertexConsumerProvider, 0);
+            matrixStack.pop();
+        }
     }
 
     private static void produceVertex(VertexConsumer vertexConsumer, Matrix4f positionMatrix, Matrix3f normalMatrix, int light, float x, int y, int textureU, int textureV) {
