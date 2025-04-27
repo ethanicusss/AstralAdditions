@@ -1,6 +1,7 @@
 package com.github.ethanicuss.astraladditions.compat.rei.transmute;
 
 import com.github.ethanicuss.astraladditions.compat.rei.AstralAdditionsREIClientPlugin;
+import com.github.ethanicuss.astraladditions.compat.rei.widgets.CurvedArrowWidget;
 import com.github.ethanicuss.astraladditions.compat.rei.widgets.RotatedArrowWidget;
 import com.github.ethanicuss.astraladditions.fluids.ModFluids;
 import com.google.common.collect.Lists;
@@ -35,7 +36,7 @@ public class TransmuteCategory implements DisplayCategory<TransmuteDisplay> {
     public CategoryIdentifier<? extends TransmuteDisplay> getCategoryIdentifier() {
         return AstralAdditionsREIClientPlugin.TRANSMUTE;
     }
-    boolean makeBigger = false;
+
     @Override
     public List<Widget> setupDisplay(TransmuteDisplay display, Rectangle bounds) {
         List<Widget> widgets = Lists.newArrayList();
@@ -45,56 +46,53 @@ public class TransmuteCategory implements DisplayCategory<TransmuteDisplay> {
         List<EntryIngredient> outputs = display.getOutputEntries();
 
 
-        widgets.add(new RotatedArrowWidget(new Point(bounds.x + 1, bounds.y+30), 90));
+        int centerX = bounds.getCenterX();
+        int centerY = bounds.getCenterY();
 
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 5, bounds.y+5)).entries(inputs.get(0)));
+        widgets.add(Widgets.createSlot(new Point(centerX - 75, centerY-45))
+                .entries(inputs.get(0))
+                .markInput());
 
-        Rectangle renderBounds = new Rectangle(bounds.x + 5, bounds.y + 55, 16, 16);
+        widgets.add(CurvedArrowWidget.of(new Point(centerX - 54, centerY-38),90, false));
+
+        Rectangle renderBounds = new Rectangle(centerX - 61, centerY-18, 32, 32);
 
         widgets.add(Widgets.createDrawableWidget(((helper, matrices, mouseX, mouseY, delta) -> {
             EntryStacks.of(ModFluids.FLOWING_SHIMMER).render(matrices, renderBounds, mouseX, mouseY, delta);
                 })));
 
-        widgets.add(Widgets.createTooltip(renderBounds, new TranslatableText("tooltip.astraladditions.transmute_text")));
+        widgets.add(Widgets.createTooltip(renderBounds, new TranslatableText("tooltip.astraladditions.transmute_hint")));
 
-        widgets.add(Widgets.createArrow(new Point(bounds.x + 5 + 20, bounds.y+55)));
+        widgets.add(CurvedArrowWidget.of(new Point(centerX - 46, centerY+19),180, true));
 
+        widgets.add(Widgets.createLabel(new Point(centerX - 75,centerY+42), display.getHintText())
+                .leftAligned());
 
+        int[] xOffsets = {-25, -5, 15, 35};
+        int[] yOffsets = {19, -1, -21, -41};
 
-
-        int baseX = bounds.x + 55;
-        int baseY = bounds.y + 55;
-        int outputSize = outputs.size();
-        //? math, me head hurts
-        for (int i = 0; i < outputSize; i++) {
-            if (outputSize < 4) {
-                makeBigger = false;
-                widgets.add(Widgets.createSlot(new Point(baseX, baseY - (i * 20))).entries(outputs.get(i)));
-            } else if (outputSize == 4) {
-                makeBigger = true;
-                widgets.add(Widgets.createSlot(new Point(baseX, baseY - (i * 20) + 20)).entries(outputs.get(i)));
-            } else {
-                int column = i / 4;
-                int row = i % 4;
-                makeBigger = true;
-                widgets.add(Widgets.createSlot(new Point(baseX + (column * 20), baseY - (row * 20) + 20)).entries(outputs.get(i)));
+        int index = 0;
+        for (int xOffset : xOffsets) {
+            for (int yOffset : yOffsets) {
+                if (index < outputs.size()) {
+                    widgets.add(Widgets.createSlot(new Point(centerX + xOffset, centerY + yOffset))
+                            .entries(outputs.get(index))
+                            .markOutput());
+                    index++;
+                }
             }
         }
-
         return widgets;
     }
 
     @Override
     public int getDisplayHeight() {
-        if (makeBigger) {
-            return 100;
-        }
-        else return 80;
+        return 110;
 
     }
 
     @Override
     public int getDisplayWidth(TransmuteDisplay TransmuteDisplay) {
-        return 146;
+        return 160;
     }
 }

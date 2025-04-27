@@ -18,6 +18,10 @@ repositories {
 		name = 'tterrag maven'
 		url = 'https://maven.tterrag.com/'
 	}
+	maven {
+		name = "Modrinth"
+		url = "https://api.modrinth.com/maven"
+	}
 }
 
 dependencies {
@@ -35,7 +39,11 @@ dependencies {
 	modLocalRuntime("com.terraformersmc:modmenu:${modmenu_version}")
 	modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}")
 
-	implementation 'com.google.code.gson:gson:2.11.0'
+	modCompileOnly "maven.modrinth:yttr:${yttr_version}"
+	modLocalRuntime "maven.modrinth:yttr:${yttr_version}"
+
+
+	//implementation 'com.google.code.gson:gson:2.11.0'
 }
 
 processResources {
