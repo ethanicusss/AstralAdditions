@@ -41,14 +41,11 @@
 	"item.astraladditions.disc_astral_lakes_remix": "Astral Lakes (ethanicuss' meow moew :wolfGif: remix) Music Disc",
 	"item.astraladditions.disc_astral_lakes_remix.desc": "Astral Lakes (ethanicuss' meow moew :wolfGif: remix) - ethanicuss",
 
-<<<<<<< Updated upstream
-=======
 	"item.astraladditions.shimmer_fishing_rod": "Shimmer Fishing Rod",
 	"item.astraladditions.shimmering_thread": "Shimmering Thread",
 	"item.astraladditions.shimmer_trout": "Shimmer Trout",
 	"item.astraladditions.shimmer_shish": "Shish",
 	"item.astraladditions.bottomless_shimmer_bucket": "Bottomless Shimmer Bucket",
->>>>>>> Stashed changes
 
 	"block.astraladditions.enderrack": "Enderrack",
 	"block.astraladditions.twisted_nylium": "Twisted Nylium",
@@ -78,7 +75,7 @@
 
 	"astraladditions.text.pylon_too_far": "Pylon out of range",
 	"astraladditions.text.shimmer_bottle": "Slurp",
-	
+
 	"entity.astraladditions.pylon": "Pylon (someone's teleporter)",
 	"entity.astraladditions.hemogiant": "Hemogiant",
 	"entity.astraladditions.voidtouched_zombie": "Voidtouched Zombie",
