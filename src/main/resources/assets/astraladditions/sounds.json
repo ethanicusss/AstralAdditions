@@ -1,15 +1,19 @@
 {
   "music_moon": {
-    "subtitle": "subtitles.astraladditions.hesperyd",
+    "subtitle": "subtitles.astraladditions.tsugomori",
     "sounds": [
       {
         "name": "astraladditions:nostalgia",
+        "stream": true
+      },
+	  {
+        "name": "astraladditions:astroid_cluster",
         "stream": true
       }
     ]
   },
 	"music_menu": {
-    "subtitle": "subtitles.astraladditions.hesperyd",
+    "subtitle": "subtitles.astraladditions.tsugomori",
     "sounds": [
       {
         "name": "astraladditions:astral_lakes",
@@ -27,7 +31,7 @@
     ]
   },
   "music_mars": {
-    "subtitle": "subtitles.astraladditions.hesperyd",
+    "subtitle": "subtitles.astraladditions.tsugomori",
     "sounds": [
       {
         "name": "astraladditions:uneasy",
@@ -60,7 +64,7 @@
     ]
   },
   "music_orbit": {
-    "subtitle": "subtitles.astraladditions.hesperyd",
+    "subtitle": "subtitles.astraladditions.tsugomori",
     "sounds": [
       {
         "name": "astraladditions:bodiesfloatinginspace",
@@ -220,7 +224,7 @@
     ]
   },
   "music_end_boss": {
-    "subtitle": "subtitles.astraladditions.hesperyd",
+    "subtitle": "subtitles.astraladditions.tsugomori",
     "sounds": [
       {
         "name": "astraladditions:astralsend",
@@ -245,7 +249,7 @@
     ]
   },
 	"music_wither_spawn": {
-    "subtitle": "subtitles.astraladditions.hesperyd",
+    "subtitle": "subtitles.astraladditions.tsugomori",
     "sounds": [
       {
         "name": "astraladditions:witherspawn",
@@ -262,7 +266,7 @@
     ]
   },
 	"music_combat": {
-    "subtitle": "subtitles.astraladditions.hesperyd",
+    "subtitle": "subtitles.astraladditions.tsugomori",
     "sounds": [
       {
         "name": "astraladditions:tensionrising",

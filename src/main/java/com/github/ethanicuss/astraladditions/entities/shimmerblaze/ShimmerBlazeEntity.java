@@ -214,8 +214,14 @@ public class ShimmerBlazeEntity extends BlazeEntity {
                         }
                         break;
                     case "chase":
-                        this.blaze.getMoveControl().moveTo(livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0.1);
-                        this.blaze.setVelocity(e/Math.sqrt(d)/4, f/5 + Math.sin((float)this.fireballCooldown/100), g/Math.sqrt(d)/4);
+                        if (livingEntity.isOnGround()) {
+                            this.blaze.getMoveControl().moveTo(livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0.1);
+                            this.blaze.setVelocity(e / Math.sqrt(d) / 4, f / 5 + Math.sin((float) this.fireballCooldown / 100), g / Math.sqrt(d) / 4);
+                        }
+                        else{
+                            this.blaze.getMoveControl().moveTo(livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0.2);
+                            this.blaze.setVelocity(e / Math.sqrt(d) / 2, f / 2.5, g / Math.sqrt(d) / 2);
+                        }
                         if (this.fireballCooldown == 0){
                             this.fireballCooldown = 40;
                             this.attack = "";

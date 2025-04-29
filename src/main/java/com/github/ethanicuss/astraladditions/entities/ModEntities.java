@@ -2,6 +2,8 @@ package com.github.ethanicuss.astraladditions.entities;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.AstralAdditionsClient;
+import com.github.ethanicuss.astraladditions.entities.boomerang.BoomerangEntity;
+import com.github.ethanicuss.astraladditions.entities.boomerang.BoomerangEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.cometball.CometballEntity;
 import com.github.ethanicuss.astraladditions.entities.cometball.CometballEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.ender_watcher.EnderWatcherEntity;
@@ -140,6 +142,11 @@ public class ModEntities {
             new Identifier(AstralAdditions.MOD_ID, "glazer"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GlazerEntity::new).dimensions(EntityDimensions.fixed(1.5f, 1.5f)).fireImmune().build()
     );
+    public static final EntityType<BoomerangEntity> BOOMERANG = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(AstralAdditions.MOD_ID, "boomerang"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, BoomerangEntity::new).dimensions(EntityDimensions.fixed(2.0f, 1.5f)).build()
+    );
 
     public static void init() {
         FabricDefaultAttributeRegistry.register(MOONMAN, MoonmanEntity.createMoonmanAttributes());
@@ -194,5 +201,7 @@ public class ModEntities {
         EntityRendererRegistry.register(SMALL_SHIMMERBALL, SmallShimmerballEntityRenderer::new);
 
         EntityRendererRegistry.register(SHIMMER_RAIN, ShimmerBlazeRainEntityRenderer::new);
+
+        EntityRendererRegistry.register(BOOMERANG, BoomerangEntityRenderer::new);
     }
 }
