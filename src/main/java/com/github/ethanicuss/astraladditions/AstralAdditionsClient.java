@@ -2,6 +2,7 @@ package com.github.ethanicuss.astraladditions;
 
 import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import com.github.ethanicuss.astraladditions.fluids.ModFluids;
+import com.github.ethanicuss.astraladditions.particle.ModParticlesClient;
 import com.github.ethanicuss.astraladditions.playertracker.PlayerTracker;
 import com.github.ethanicuss.astraladditions.registry.ModBlocks;
 import net.fabricmc.api.ClientModInitializer;
@@ -44,7 +45,7 @@ public class AstralAdditionsClient implements ClientModInitializer {
 
         ModEntities.initClient();
         ModBlocks.registerClient();
+        ModParticlesClient.registerFactories();
 
     }
 }
-
