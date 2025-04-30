@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "astraladditions:item/bottomless_shimmer_bucket"
+    "layer0": "astraladditions:item/bottomless_water_bucket"
   }
 }

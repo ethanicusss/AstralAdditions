@@ -8,6 +8,7 @@ import com.github.ethanicuss.astraladditions.items.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -51,7 +52,7 @@ public class ModItems {
 
     //Ethan Balance the food ;-;
     public static final Item SHIMMER_FISHING_ROD = new ShimmerFishingRodItem(new Item.Settings().maxCount(1).maxDamage(150).rarity(Rarity.EPIC).group(ItemGroup.TOOLS));
-    public static final Item BOTTOMLESS_SHIMMER_BUCKET = new BottomlessBucketItem(ModFluids.STILL_SHIMMER, new Item.Settings().maxCount(1).group(ItemGroup.TOOLS).rarity(Rarity.UNCOMMON));
+    public static final Item BOTTOMLESS_WATER_BUCKET = new BottomlessBucketItem(Fluids.WATER, new Item.Settings().maxCount(1).group(ItemGroup.TOOLS).rarity(Rarity.UNCOMMON));
     public static final Item SHIMMERING_THREAD = new Item(new Item.Settings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON));
     public static final Item SHIMMER_TROUT = new Item(new Item.Settings().group(ItemGroup.FOOD).rarity(Rarity.UNCOMMON)
             .food(new FoodComponent.Builder()
@@ -105,7 +106,7 @@ public class ModItems {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmering_thread"), SHIMMERING_THREAD);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmer_trout"), SHIMMER_TROUT);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmer_shish"), SHIMMER_SHISH);
-        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "bottomless_shimmer_bucket"), BOTTOMLESS_SHIMMER_BUCKET);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "bottomless_water_bucket"), BOTTOMLESS_WATER_BUCKET);
     }
     private static List<Item> sacrificableItems = new ArrayList<Item>();
     public static void addSacrificeItem(Item item, EntityType spawns){
