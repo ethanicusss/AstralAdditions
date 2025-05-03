@@ -1,0 +1,13 @@
+{
+  "type": "astraladditions:shimmer_transmute",
+  "input": {
+    "item": "minecraft:string",
+    "soft_ignore_count": true,
+    "count": 16
+  },
+
+  "output": [
+    { "item": "astraladditions:shimmering_thread", "count": 1 }
+  ]
+
+}

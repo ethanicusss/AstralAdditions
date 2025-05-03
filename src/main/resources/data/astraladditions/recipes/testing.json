@@ -1,0 +1,27 @@
+{
+  "type": "astraladditions:shimmer_transmute",
+  "input": {
+    "item": "minecraft:iron_ingot",
+    "count": 2
+  },
+
+  "output": [
+    { "item": "minecraft:gold_ingot", "count": 2 },
+    { "item": "minecraft:dirt" },
+    { "item": "minecraft:sand" },
+    { "item": "minecraft:cobblestone" },
+    { "item": "minecraft:oak_planks" },
+    { "item": "minecraft:stone" },
+    { "item": "minecraft:iron_ingot" },
+    { "item": "minecraft:glass" },
+    { "item": "minecraft:coal" },
+    { "item": "minecraft:gravel" },
+    { "item": "minecraft:clay" },
+    { "item": "minecraft:emerald" },
+    { "item": "minecraft:lapis_lazuli" },
+    { "item": "minecraft:brick" },
+    { "item": "minecraft:redstone" },
+    { "item": "minecraft:quartz" }
+  ]
+
+}

@@ -18,8 +18,15 @@
     "betterdragon.HoverPhaseAccessor",
     "betterdragon.LandingPhaseAccessor",
     "betterdragon.SittingFlamingPhaseAccessor",
-    "ItemEntityMixin"
+    "ItemEntityMixin",
+    "ParticleRecolourMixin",
+    "fishing.FishingBobberEntityAccessor",
+    "fishing.FishingBobberEntityMixin",
+    "fishing.BottomlessBucketItemMixin"
+
   ],
+
+
   "client": [
     "SpaceMusic"
   ],

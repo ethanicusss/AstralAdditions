@@ -1,0 +1,16 @@
+{
+  "type": "astraladditions:shimmer_transmute",
+  "input": {
+    "item": "minecraft:dirt",
+    "soft_ignore_count": true,
+    "count": 2
+  },
+
+  "output": [
+    {
+      "item": "minecraft:gold_ingot",
+      "count": 1
+    }
+  ]
+
+}

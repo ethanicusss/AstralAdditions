@@ -1,0 +1,14 @@
+{
+  "type": "astraladditions:shimmer_transmute",
+  "input": {
+    "item": "minecraft:sand",
+    "ignore_count": true
+  },
+
+  "output": [
+    {
+      "item": "minecraft:gold_ingot"
+    }
+  ]
+
+}
