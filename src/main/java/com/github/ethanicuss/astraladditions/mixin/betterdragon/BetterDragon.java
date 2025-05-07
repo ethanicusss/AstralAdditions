@@ -10,7 +10,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.boss.dragon.phase.*;
@@ -42,6 +41,7 @@ import java.util.Random;
 public class BetterDragon {
 
     @Shadow @Final private PhaseManager phaseManager;
+
 
     @Inject(method = "createEnderDragonAttributes", at = @At("HEAD"), cancellable = true)
     private static void createEnderDragonAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
@@ -295,3 +295,4 @@ class BetterChargingPlayerPhase {
         }
     }
 }
+

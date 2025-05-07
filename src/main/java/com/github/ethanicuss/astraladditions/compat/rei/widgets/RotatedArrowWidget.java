@@ -15,6 +15,7 @@ public class RotatedArrowWidget extends Widget {
     private final Widget baseArrow;
     private final float rotationDegrees;
     private final Rectangle bounds;
+
     public RotatedArrowWidget(Point point, float rotationDegrees) {
         this.baseArrow = Widgets.createArrow(point);
         this.rotationDegrees = rotationDegrees;

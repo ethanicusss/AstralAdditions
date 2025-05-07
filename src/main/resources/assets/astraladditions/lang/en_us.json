@@ -41,7 +41,6 @@
 	"item.astraladditions.disc_astral_lakes_remix": "Astral Lakes (ethanicuss' meow moew :wolfGif: remix) Music Disc",
 	"item.astraladditions.disc_astral_lakes_remix.desc": "Astral Lakes (ethanicuss' meow moew :wolfGif: remix) - ethanicuss",
 
-
 	"block.astraladditions.enderrack": "Enderrack",
 	"block.astraladditions.twisted_nylium": "Twisted Nylium",
 	"block.astraladditions.ender_sprouts": "Ender Sprouts",
@@ -70,7 +69,7 @@
 
 	"astraladditions.text.pylon_too_far": "Pylon out of range",
 	"astraladditions.text.shimmer_bottle": "Slurp",
-	
+
 	"entity.astraladditions.pylon": "Pylon (someone's teleporter)",
 	"entity.astraladditions.hemogiant": "Hemogiant",
 	"entity.astraladditions.voidtouched_zombie": "Voidtouched Zombie",
@@ -82,8 +81,27 @@
 	"entity.astraladditions.moonman": "Moonman",
 
 	"category.astraladditions.desizer" : "Desizer",
-	"category.astraladditions.transmute": "Transmute",
-	"category.astraladditions.vacuum": "Chromatic Vacuum",
 
-	"tooltip.astraladditions.transmute_text": "Shimmer Fluid"
+	"category.astraladditions.transmute": "Transmute",
+	"tooltip.astraladditions.transmute_hint": "Drop item into Shimmer",
+	"label.astraladditions.transmute_hint_least": "At least %d of input item",
+	"label.astraladditions.transmute_hint_exactly": "Exactly %d of input item",
+	"label.astraladditions.transmute_hint_any": "Any amount of input item",
+
+	"category.astraladditions.vacuum": "Chromatic Vacuum",
+	"category.astraladditions.vacuum.remainder_hint": "Leftover Block",
+
+
+	"category.astraladditions.centrifuge": "Centrifuging",
+	"category.astraladditions.piston_smashing": "Piston Smashing",
+	"category.astraladditions.piston_smashing.cloud_output_hint": "Use a Glass Bottle on the resulting cloud",
+	"category.astraladditions.soaking": "Soaking",
+
+	"category.astraladditions.voidfiltering": "Void Filtering",
+	"category.astraladditions.void_filtering.chance": "Chance: %s%%",
+
+	"category.astraladditions.shattering": "Shattering",
+	"category.astraladditions.shattering.workstations": "Any tool with this enchantment",
+
+	"effect.astraladditions.sink": "Sinking"
 }

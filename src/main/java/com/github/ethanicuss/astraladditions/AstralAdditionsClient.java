@@ -6,13 +6,10 @@ import com.github.ethanicuss.astraladditions.playertracker.PlayerTracker;
 import com.github.ethanicuss.astraladditions.registry.ModBlocks;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
-import net.minecraft.block.Block;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.util.Identifier;
 
 public class AstralAdditionsClient implements ClientModInitializer {

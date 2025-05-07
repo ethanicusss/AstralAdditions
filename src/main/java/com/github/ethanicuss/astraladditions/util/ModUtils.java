@@ -1,5 +1,6 @@
 package com.github.ethanicuss.astraladditions.util;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
@@ -8,6 +9,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.math.Vec3d;
 import org.spongepowered.include.com.google.gson.JsonObject;
 
 import java.io.StringReader;
@@ -24,14 +26,5 @@ public class ModUtils {
             player.world.playSound(x, y, z, sound, category, vol, pitch, falloff);
         }
     }
-
-    public static void setVelocityPlayer(ServerWorld world, PlayerEntity p, double x, double y, double z) {
-        for (ServerPlayerEntity player : world.getPlayers()) {
-            if (player == (ServerPlayerEntity) p) {
-                player.setVelocity(x, y, z);
-            }
-        }
-    }
-
 }
 
