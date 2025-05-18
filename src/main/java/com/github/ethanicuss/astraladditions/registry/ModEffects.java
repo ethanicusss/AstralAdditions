@@ -1,7 +1,7 @@
 package com.github.ethanicuss.astraladditions.registry;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
-import com.github.ethanicuss.astraladditions.effects.SinkEffect;
+import com.github.ethanicuss.astraladditions.effects.sinkeffect.SinkEffect;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.util.Identifier;
