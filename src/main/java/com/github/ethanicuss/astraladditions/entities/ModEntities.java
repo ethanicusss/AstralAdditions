@@ -28,28 +28,25 @@ import com.github.ethanicuss.astraladditions.entities.phast.PhastEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.pylon.PylonEntity;
 import com.github.ethanicuss.astraladditions.entities.pylon.PylonEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.shimmerblaze.*;
+import com.github.ethanicuss.astraladditions.entities.shimmerfishingrod.ShimmerFishingBobberEntity;
+import com.github.ethanicuss.astraladditions.entities.shimmerfishingrod.ShimmerFishingBobberRenderer;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedskeleton.VoidtouchedSkeletonEntity;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedskeleton.VoidtouchedSkeletonEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedzombie.VoidtouchedZombieEntity;
 import com.github.ethanicuss.astraladditions.entities.voidtouchedzombie.VoidtouchedZombieEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.whast.WhastEntity;
 import com.github.ethanicuss.astraladditions.entities.whast.WhastEntityRenderer;
-import com.github.ethanicuss.astraladditions.registry.ModBlocks;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.render.entity.model.*;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.Heightmap;
+
 
 public class ModEntities {
     /*static Block[] blocks = {
@@ -148,6 +145,18 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, BoomerangEntity::new).dimensions(EntityDimensions.fixed(2.0f, 1.5f)).build()
     );
 
+    public static final EntityType<ShimmerFishingBobberEntity> SHIMMER_FISHING_BOBBER = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(AstralAdditions.MOD_ID, "shimmer_fishing_bobber"),
+            FabricEntityTypeBuilder.<ShimmerFishingBobberEntity>create(SpawnGroup.MISC, ShimmerFishingBobberEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+                    .trackRangeChunks(5)
+                    .trackedUpdateRate(10)
+                    .build()
+    );
+
+
+
     public static void init() {
         FabricDefaultAttributeRegistry.register(MOONMAN, MoonmanEntity.createMoonmanAttributes());
         FabricDefaultAttributeRegistry.register(HEMOGIANT, HemogiantEntity.createGluttonAttributes());
@@ -158,6 +167,7 @@ public class ModEntities {
         FabricDefaultAttributeRegistry.register(WHAST, WhastEntity.createWhastAttributes());
         FabricDefaultAttributeRegistry.register(ENDER_WATCHER, EnderWatcherEntity.createWatcherAttributes());
         FabricDefaultAttributeRegistry.register(GLAZER, GlazerEntity.createGlazerAttributes());
+
     }
 
     public static void initClient() {
@@ -201,6 +211,8 @@ public class ModEntities {
         EntityRendererRegistry.register(SMALL_SHIMMERBALL, SmallShimmerballEntityRenderer::new);
 
         EntityRendererRegistry.register(SHIMMER_RAIN, ShimmerBlazeRainEntityRenderer::new);
+
+        EntityRendererRegistry.register(SHIMMER_FISHING_BOBBER, ShimmerFishingBobberRenderer::new);
 
         EntityRendererRegistry.register(BOOMERANG, BoomerangEntityRenderer::new);
     }

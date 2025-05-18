@@ -2,6 +2,7 @@ package com.github.ethanicuss.astraladditions;
 
 import com.github.ethanicuss.astraladditions.entities.ModEntities;
 import com.github.ethanicuss.astraladditions.fluids.ModFluids;
+import com.github.ethanicuss.astraladditions.particle.ModParticles;
 import com.github.ethanicuss.astraladditions.playertracker.WorldRegister;
 import com.github.ethanicuss.astraladditions.registry.*;
 import net.fabricmc.api.ModInitializer;
@@ -26,6 +27,7 @@ public class AstralAdditions implements ModInitializer {
 		ModEntitySpawn.addEntitySpawn();
 
 		ModEffects.registerEffects();
+		ModParticles.registerParticles();
 
 		LOGGER.info("Astral Additions is active!");
 	}
