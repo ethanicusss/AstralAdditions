@@ -12,8 +12,14 @@ group = project.maven_group
 
 repositories {
 	maven { url "https://maven.shedaniel.me/" }
-	maven { url "https://maven.terraformersmc.com/releases/" }
+	maven { url "https://maven.terraformersmc.com/releases/" } // Mod Menu
 	maven { url "<https://maven.architectury.dev/>" }
+	maven { url = "https://api.modrinth.com/maven" } // LazyDFU
+	maven { url = "https://mvn.devos.one/snapshots/" } // Create, Porting Lib, Forge Tags, Milk Lib, Registrate
+	maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // Forge Config API Port
+	maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
+	maven { url = "https://jitpack.io/" } // Mixin Extras, Fabric ASM
+	maven { url = "https://maven.tterrag.com/" } // Flywheel
 	maven {
 		name = 'tterrag maven'
 		url = 'https://maven.tterrag.com/'
@@ -21,6 +27,10 @@ repositories {
 	maven {
 		name = "Modrinth"
 		url = "https://api.modrinth.com/maven"
+	}
+	maven {
+		name = "Ladysnake Libs"
+		url = 'https://maven.ladysnake.org/releases'
 	}
 	google()
 }
@@ -43,6 +53,7 @@ dependencies {
 	modCompileOnly "maven.modrinth:yttr:${yttr_version}"
 	modLocalRuntime "maven.modrinth:yttr:${yttr_version}"
 
+	modImplementation("com.simibubi.create:create-fabric-1.18.2:${create_version}")
 
 	implementation 'com.google.code.gson:gson:2.8.5'
 }
