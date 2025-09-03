@@ -13,7 +13,7 @@ group = project.maven_group
 repositories {
 	maven { url "https://maven.shedaniel.me/" }
 	maven { url "https://maven.terraformersmc.com/releases/" } // Mod Menu
-	maven { url "<https://maven.architectury.dev/>" }
+	maven { url "https://maven.architectury.dev/" }
 	maven { url = "https://api.modrinth.com/maven" } // LazyDFU
 	maven { url = "https://mvn.devos.one/snapshots/" } // Create, Porting Lib, Forge Tags, Milk Lib, Registrate
 	maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // Forge Config API Port
@@ -32,6 +32,10 @@ repositories {
 		name = "Ladysnake Libs"
 		url = 'https://maven.ladysnake.org/releases'
 	}
+    maven {
+        name "ModMaven"
+        url "https://modmaven.dev"
+    }
 	google()
 }
 
