@@ -59,6 +59,9 @@ public class ModBlocks {
 
     public static final Block MISSING_BLOCK = new MissingBlock(FabricBlockSettings.of(Material.LAVA).ticksRandomly().sounds(BlockSoundGroup.CROP).collidable(false).nonOpaque().allowsSpawning(ModBlocks::never).suffocates(ModBlocks::never));
 
+    public static final Block PRISMATIC_GEYSER_BLOCK = new GeyserBlock(FabricBlockSettings.of(Material.STONE).ticksRandomly().sounds(BlockSoundGroup.STONE).allowsSpawning(ModBlocks::never));
+    public static final Block CRACKED_ICE_BLOCK = new CrackedIceBlock(FabricBlockSettings.of(Material.ICE).ticksRandomly().sounds(BlockSoundGroup.GLASS).allowsSpawning(ModBlocks::never));
+
     public static final Block ENDERRACK_BLOCK = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.NETHERRACK).strength(2.0f));
     public static final BlockItem ENDERRACK_ITEM = new BlockItem(ENDERRACK_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
     public static final Block TWISTED_NYLIUM_BLOCK = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.NYLIUM).strength(2.5f));
@@ -120,6 +123,8 @@ public class ModBlocks {
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "bramblebone"), BRAMBLEBONE_BLOCK);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "bramblebone"), BRAMBLEBONE_ITEM);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "missing_block"), MISSING_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "prismatic_geyser"), PRISMATIC_GEYSER_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "cracked_ice"), CRACKED_ICE_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "enderrack"), ENDERRACK_BLOCK);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "enderrack"), ENDERRACK_ITEM);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "twisted_nylium"), TWISTED_NYLIUM_BLOCK);
