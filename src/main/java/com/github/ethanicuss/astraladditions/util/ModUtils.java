@@ -21,7 +21,7 @@ public class ModUtils {
         }
     }
 
-    public static <T extends ParticleEffect> void playSound(ServerWorld world, double x, double y, double z, SoundEvent sound, SoundCategory category, float vol, float pitch, boolean falloff) {
+    public static void playSound(ServerWorld world, double x, double y, double z, SoundEvent sound, SoundCategory category, float vol, float pitch, boolean falloff) {
         for (ServerPlayerEntity player : world.getPlayers()) {
             player.world.playSound(x, y, z, sound, category, vol, pitch, falloff);
         }

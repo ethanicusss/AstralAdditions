@@ -60,7 +60,7 @@ public class ModBlocks {
     public static final Block MISSING_BLOCK = new MissingBlock(FabricBlockSettings.of(Material.LAVA).ticksRandomly().sounds(BlockSoundGroup.CROP).collidable(false).nonOpaque().allowsSpawning(ModBlocks::never).suffocates(ModBlocks::never));
 
     public static final Block PRISMATIC_GEYSER_BLOCK = new GeyserBlock(FabricBlockSettings.of(Material.STONE).ticksRandomly().sounds(BlockSoundGroup.STONE).allowsSpawning(ModBlocks::never));
-    public static final Block CRACKED_ICE_BLOCK = new CrackedIceBlock(FabricBlockSettings.of(Material.ICE).ticksRandomly().sounds(BlockSoundGroup.GLASS).allowsSpawning(ModBlocks::never));
+    public static final Block CRACKED_ICE_BLOCK = new CrackedIceBlock(FabricBlockSettings.of(Material.ICE).ticksRandomly().sounds(BlockSoundGroup.GLASS).nonOpaque().allowsSpawning(ModBlocks::never).suffocates(ModBlocks::never));
 
     public static final Block ENDERRACK_BLOCK = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.NETHERRACK).strength(2.0f));
     public static final BlockItem ENDERRACK_ITEM = new BlockItem(ENDERRACK_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
@@ -173,6 +173,7 @@ public class ModBlocks {
         BlockEntityRendererRegistry.register(JAR_BLOCKENTITY, JarBlockEntityRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(JAR_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(JAR_BLOCK, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(CRACKED_ICE_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ENDER_SPROUT_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ENDER_SPROUT_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ENDER_TIP_BLOCK, RenderLayer.getCutout());

@@ -25,6 +25,8 @@ import com.github.ethanicuss.astraladditions.entities.moonman.MoonmanEntityModel
 import com.github.ethanicuss.astraladditions.entities.moonman.MoonmanEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.phast.PhastEntity;
 import com.github.ethanicuss.astraladditions.entities.phast.PhastEntityRenderer;
+import com.github.ethanicuss.astraladditions.entities.prismatic_geyser.PrismaticGeyserEntity;
+import com.github.ethanicuss.astraladditions.entities.prismatic_geyser.PrismaticGeyserRenderer;
 import com.github.ethanicuss.astraladditions.entities.pylon.PylonEntity;
 import com.github.ethanicuss.astraladditions.entities.pylon.PylonEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.shimmerblaze.*;
@@ -119,6 +121,11 @@ public class ModEntities {
             new Identifier(AstralAdditions.MOD_ID, "shimmer_rain"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, ShimmerBlazeRainEntity::new).dimensions(EntityDimensions.fixed(1.0f, 5.0f)).build()
     );
+    public static final EntityType<PrismaticGeyserEntity> PRISMATIC_GEYSER = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(AstralAdditions.MOD_ID, "prismatic_geyser"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, PrismaticGeyserEntity::new).dimensions(EntityDimensions.fixed(1.0f, 5.0f)).build()
+    );
     public static final EntityType<PhastEntity> PHAST = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(AstralAdditions.MOD_ID, "phast"),
@@ -211,6 +218,8 @@ public class ModEntities {
         EntityRendererRegistry.register(SMALL_SHIMMERBALL, SmallShimmerballEntityRenderer::new);
 
         EntityRendererRegistry.register(SHIMMER_RAIN, ShimmerBlazeRainEntityRenderer::new);
+
+        EntityRendererRegistry.register(PRISMATIC_GEYSER, PrismaticGeyserRenderer::new);
 
         EntityRendererRegistry.register(SHIMMER_FISHING_BOBBER, ShimmerFishingBobberRenderer::new);
 

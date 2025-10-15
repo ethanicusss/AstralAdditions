@@ -22,8 +22,10 @@ public class CrackedIceBlock extends Block {
     }
 
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-        if (canFallThrough(world.getBlockState(pos.down())) && pos.getY() >= world.getBottomY()) {
+        if (canFallThrough(world.getBlockState(pos.down())) && pos.getY() >= world.getBottomY() && !world.isClient()) {
             FallingBlockEntity fallingBlockEntity = FallingBlockEntity.spawnFromBlock(world, pos, state);
+            ModUtils.spawnForcedParticles((ServerWorld)world, ParticleTypes.SNOWFLAKE, pos.getX(), pos.getY(), pos.getZ(), 20, 0.5, 0.5, 0.5, 0.3);
+            ModUtils.spawnForcedParticles((ServerWorld)world, ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX(), pos.getY(), pos.getZ(), 3, 0.5, 0.5, 0.5, 0);
         }
 
         super.onSteppedOn(world, pos, state, entity);
