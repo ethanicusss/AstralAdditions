@@ -49,6 +49,8 @@ public class ModItems {
     //public static final Item SHIMMER_BOTTLE = new ShimmerBottleItem(new FabricItemSettings().group(ItemGroup.BREWING).maxCount(1));
     public static final Item SHIMMER_BOTTLE = new ShimmerBottleItem(StatusEffects.NIGHT_VISION, 3600, 0, new TranslatableText("Multiplies XP gain by 1.5 (3:00)").formatted(Formatting.BLUE), new FabricItemSettings().group(ItemGroup.BREWING).maxCount(1).rarity(Rarity.UNCOMMON));
     public static final Item CHROMATIC_VACUUM = new ChromaticVacuumItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(512));
+    public static final Item SHOTGUN = new ShotgunItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(512));
+    public static final Item MACHINEGUN = new MachinegunItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(1024));
 
     //Ethan Balance the food ;-;
     public static final Item SHIMMER_FISHING_ROD = new ShimmerFishingRodItem(new Item.Settings().maxCount(1).maxDamage(150).rarity(Rarity.EPIC).group(ItemGroup.TOOLS));
@@ -96,6 +98,8 @@ public class ModItems {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "disc_astral_lakes_remix"), DISC_ASTRAL_LAKES_REMIX);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmer_bottle"), SHIMMER_BOTTLE);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "chromatic_vacuum"), CHROMATIC_VACUUM);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "machinegun"), MACHINEGUN);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shotgun"), SHOTGUN);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "astral_hoe"), ASTRAL_HOE);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "soulsteal_dagger"), SOULSTEAL_DAGGER);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "diamond_boomer"), DIAMOND_BOOMER);
