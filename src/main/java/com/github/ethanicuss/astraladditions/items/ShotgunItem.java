@@ -1,11 +1,13 @@
 package com.github.ethanicuss.astraladditions.items;
 
+import com.github.ethanicuss.astraladditions.entities.ModEntities;
+import com.github.ethanicuss.astraladditions.entities.scrap_projectile.ScrapProjectileEntity;
+import com.github.ethanicuss.astraladditions.entities.scrap_projectile.ScrapProjectileEntityRenderer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
@@ -30,7 +32,7 @@ public class ShotgunItem extends BowItem {
         }
         boolean bl2;
         boolean bl = playerEntity.getAbilities().creativeMode;
-        ItemStack itemStack = playerEntity.getArrowType(stack);
+        ItemStack itemStack = playerEntity.getArrowType(stack);//change
         boolean bl3 = bl2 = bl && itemStack.isOf(Items.ARROW);
         float f = getPullProgress(this.getMaxUseTime(stack) - remainingUseTicks);
 
@@ -38,16 +40,12 @@ public class ShotgunItem extends BowItem {
             int k;
             int j;
             for (var i = 0; i < 15; i++) {
-                ArrowItem arrowItem = (ArrowItem) (itemStack.getItem() instanceof ArrowItem ? itemStack.getItem() : Items.ARROW);
-                PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, itemStack, playerEntity);
-                persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 1.0f, 2.0f + f-1, 13f);
-                persistentProjectileEntity.setDamage(persistentProjectileEntity.getDamage() * 1);
-                stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
-                if (bl2 || playerEntity.getAbilities().creativeMode && (itemStack.isOf(Items.SPECTRAL_ARROW) || itemStack.isOf(Items.TIPPED_ARROW))) {
-                    persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
-                }
-                world.spawnEntity(persistentProjectileEntity);
+                ScrapProjectileEntity proj = new ScrapProjectileEntity(ModEntities.SCRAP_PROJECTILE, world);
+                proj.setPos(playerEntity.getX(), playerEntity.getEyeY(), playerEntity.getZ());
+                proj.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 1.0f, 1.5f + f-1, 12f);
+                world.spawnEntity(proj);
             }
+            stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
         }
         if (!itemStack.isEmpty() || bl) {
             world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 0.8f, 0.5f / (world.getRandom().nextFloat() * 0.4f + 1.2f) + 0.3f);
