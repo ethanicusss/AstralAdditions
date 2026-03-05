@@ -7,7 +7,6 @@ import com.github.ethanicuss.astraladditions.items.tools.ChromaticVacuumItem;
 import com.github.ethanicuss.astraladditions.items.tools.ShimmerBlowerItem;
 import com.github.ethanicuss.astraladditions.items.tools.ShimmerFishingRodItem;
 import com.github.ethanicuss.astraladditions.items.weapons.*;
-import com.simibubi.create.content.equipment.goggles.GogglesItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffects;

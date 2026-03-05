@@ -1,5 +1,6 @@
 package com.github.ethanicuss.astraladditions.musicplayer;
 
+import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.AstralAdditionsClient;
 import com.github.ethanicuss.astraladditions.entities.shimmerblaze.ShimmerBlazeEntity;
 import com.github.ethanicuss.astraladditions.registry.ModMusic;
@@ -10,6 +11,7 @@ import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.sound.MusicSound;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.TypeFilter;
 import net.minecraft.util.math.Box;
 
@@ -18,6 +20,8 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 public class MusicPlayer {
+    private static net.minecraft.util.Identifier lastShownTrack = null;
+
     private static final Predicate<WitherEntity> WITHER_PREDICATE = (entity) -> {
         return true;
     };
@@ -219,5 +223,17 @@ public class MusicPlayer {
             }
         }
         return val;
+    }
+
+    public static void onTrackStarted(Identifier soundId) {
+        if (soundId == null) return;
+        if (!AstralAdditions.MOD_ID.equals(soundId.getNamespace())) return;
+        if (soundId.equals(lastShownTrack)) return;
+        lastShownTrack = soundId;
+
+        ModMusic.TrackInfo info = ModMusic.getNowPlaying(soundId);
+        if (info != null) {
+            NowPlayingHud.show(info.title(), info.artist());
+        }
     }
 }

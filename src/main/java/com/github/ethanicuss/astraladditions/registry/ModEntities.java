@@ -1,7 +1,6 @@
 package com.github.ethanicuss.astraladditions.registry;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
-import com.github.ethanicuss.astraladditions.AstralAdditionsClient;
 import com.github.ethanicuss.astraladditions.entities.blackhole.BlackholeEntity;
 import com.github.ethanicuss.astraladditions.entities.blackhole.BlackholeEntityRenderer;
 import com.github.ethanicuss.astraladditions.entities.boomerang.BoomerangEntity;
@@ -55,6 +54,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+
 
 
 public class ModEntities {
@@ -184,7 +184,6 @@ public class ModEntities {
         FabricDefaultAttributeRegistry.register(ENDER_WATCHER, EnderWatcherEntity.createWatcherAttributes());
         FabricDefaultAttributeRegistry.register(GLAZER, GlazerEntity.createGlazerAttributes());
         FabricDefaultAttributeRegistry.register(BLACKHOLE, BlackholeEntity.createBlackholeAttributes());
-
     }
 
     public static void registerClient() {

@@ -50,9 +50,9 @@ public class ModSounds {
     public static final SoundEvent MUSIC_SHIMMER_BLAZE         = new SoundEvent(MUSIC_SHIMMER_BLAZE_ID);
     public static final Identifier MUSIC_ASTRAL_LAKES_REMIX_ID = new Identifier(AstralAdditions.MOD_ID, "music_astral_lakes_remix");
     public static final SoundEvent MUSIC_ASTRAL_LAKES_REMIX    = new SoundEvent(MUSIC_ASTRAL_LAKES_REMIX_ID);
+    public static final Identifier ITEM_EGUITAR_NOTE_ID        = new Identifier(AstralAdditions.MOD_ID, "item/note_eguitar");
+    public static final SoundEvent ITEM_EGUITAR_NOTE           = new SoundEvent(ITEM_EGUITAR_NOTE_ID);
 
-    public static final Identifier ITEM_EGUITAR_NOTE_ID = new Identifier(AstralAdditions.MOD_ID, "item/note_eguitar");
-    public static final SoundEvent ITEM_EGUITAR_NOTE = new SoundEvent(ITEM_EGUITAR_NOTE_ID);
     public static void registerSounds() {
         Registry.register(Registry.SOUND_EVENT, MUSIC_MOON_ID, MUSIC_MOON);
         Registry.register(Registry.SOUND_EVENT, MUSIC_POST_MOON_ID, MUSIC_POST_MOON);
