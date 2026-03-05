@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E#",
+    "XF ",
+    "OX "
+  ],
+  "key": {
+    "#": {
+      "item": "createastral:prismatic_crystal"
+    },
+    "X": {
+      "item": "ad_astra:ostrum_plate"
+    },
+    "F": {
+      "item": "astraladditions:fragile_item"
+    },
+    "O": {
+      "item": "createaddition:iron_rod"
+    },
+    "E": {
+      "item": "tech_reborn:electronic_circuit"
+    }
+  },
+  "result": {
+    "item": "astraladditions:rapier"
+  }
+}
