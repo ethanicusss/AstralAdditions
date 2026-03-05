@@ -11,8 +11,7 @@ import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.sound.MusicSound;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.TypeFilter;
 import net.minecraft.util.math.Box;
 
@@ -21,7 +20,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 public class MusicPlayer {
-    private static MusicSound lastShown = null;
+    private static net.minecraft.util.Identifier lastShownTrack = null;
 
     private static final Predicate<WitherEntity> WITHER_PREDICATE = (entity) -> {
         return true;
@@ -223,25 +222,18 @@ public class MusicPlayer {
                 }
             }
         }
-        maybeShowNowPlaying(val, musicTracker);
         return val;
     }
 
-    private static void maybeShowNowPlaying(MusicSound next, MusicTracker tracker) {
-        if (next == null || next == lastShown) return;
+    public static void onTrackStarted(Identifier soundId) {
+        if (soundId == null) return;
+        if (!AstralAdditions.MOD_ID.equals(soundId.getNamespace())) return;
+        if (soundId.equals(lastShownTrack)) return;
+        lastShownTrack = soundId;
 
-        if (!ModMusic.isCustom(next)) {
-            lastShown = next;
-            return;
+        ModMusic.TrackInfo info = ModMusic.getNowPlaying(soundId);
+        if (info != null) {
+            NowPlayingHud.show(info.title(), info.artist());
         }
-
-        String key = ModMusic.getTrackKey(next);
-        if (key != null) {
-            Text title = new TranslatableText(AstralAdditions.MOD_ID + ".music." + key + ".title");
-            Text artist = new TranslatableText(AstralAdditions.MOD_ID + ".music." + key + ".artist");
-            NowPlayingHud.show(title, artist);
-        }
-
-        lastShown = next;
     }
 }

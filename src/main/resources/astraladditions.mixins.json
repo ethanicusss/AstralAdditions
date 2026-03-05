@@ -38,7 +38,8 @@
     "SpaceMusicMixin",
     "ParticleRecolourMixin",
     "InGameHudMixin",
-    "ParticleRecolourMixin"
+    "ParticleRecolourMixin",
+    "NowPlayingSoundMixin"
   ],
   "injectors": {
     "defaultRequire": 1
