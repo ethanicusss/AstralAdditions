@@ -1,19 +1,17 @@
 {
   "music_moon": {
-    "subtitle": "subtitles.astraladditions.tsugomori",
     "sounds": [
       {
         "name": "astraladditions:nostalgia",
         "stream": true
       },
-	  {
+      {
         "name": "astraladditions:astroid_cluster",
         "stream": true
       }
     ]
   },
-	"music_menu": {
-    "subtitle": "subtitles.astraladditions.tsugomori",
+  "music_menu": {
     "sounds": [
       {
         "name": "astraladditions:astral_lakes",
@@ -21,8 +19,7 @@
       }
     ]
   },
-	"music_post_moon": {
-    "subtitle": "subtitles.astraladditions.xetroo",
+  "music_post_moon": {
     "sounds": [
       {
         "name": "astraladditions:despiteeverythingitsstillyou",
@@ -31,7 +28,6 @@
     ]
   },
   "music_mars": {
-    "subtitle": "subtitles.astraladditions.tsugomori",
     "sounds": [
       {
         "name": "astraladditions:uneasy",
@@ -64,20 +60,18 @@
     ]
   },
   "music_orbit": {
-    "subtitle": "subtitles.astraladditions.tsugomori",
     "sounds": [
       {
         "name": "astraladditions:bodiesfloatinginspace",
         "stream": true
       },
-			{
+      {
         "name": "astraladditions:wow",
         "stream": true
       }
     ]
   },
   "music_day": {
-    "subtitle": "subtitles.astraladditions.xh",
     "sounds": [
       {
         "name": "astraladditions:newday",
@@ -90,7 +84,6 @@
     ]
   },
   "music_night": {
-    "subtitle": "subtitles.astraladditions.xh",
     "sounds": [
       {
         "name": "astraladditions:moonlight",
@@ -98,87 +91,97 @@
       }
     ]
   },
-	"music_ow_day": {
+  "music_ow_day": {
     "sounds": [
       {
         "name": "astraladditions:day",
         "stream": true,
         "weight": 3
       },
-			{
+      {
+        "name": "astraladditions:sunlight",
+        "stream": true,
+        "weight": 3
+      },
+      {
+        "name": "astraladditions:they_will_listen",
+        "stream": true,
+        "weight": 3
+      },
+      {
         "name": "music/game/calm1",
         "stream": true,
         "weight": 1
       },
-			{
+      {
         "name": "music/game/hal2",
         "stream": true,
         "weight": 1
       },
-			{
+      {
         "name": "music/game/hal3",
         "stream": true,
         "weight": 1
       },
-			{
+      {
         "name": "music/game/hal4",
         "stream": true,
         "weight": 1
       },
-			{
+      {
         "name": "music/game/piano2",
         "stream": true,
         "weight": 1
       },
-			{
+      {
         "name": "music/game/piano3",
         "stream": true,
         "weight": 1
       }
     ]
   },
-	"music_ow_night": {
+  "music_ow_night": {
     "sounds": [
       {
         "name": "astraladditions:night",
         "stream": true,
         "weight": 2
       },
-			{
+      {
         "name": "music/game/calm2",
         "stream": true,
         "weight": 1
       },
-			{
+      {
         "name": "music/game/calm3",
         "stream": true,
         "weight": 1
       },
-			{
+      {
         "name": "music/game/hal1",
         "stream": true,
         "weight": 1
       },
-			{
+      {
         "name": "music/game/piano1",
         "stream": true,
         "weight": 1
       }
     ]
   },
-	"music_ow_scary": {
+  "music_ow_scary": {
     "sounds": [
       {
         "name": "astraladditions:cave",
         "stream": true,
         "weight": 2
       },
-			{
+      {
         "name": "music/game/nuance1",
         "stream": true,
         "weight": 1
       },
-			{
+      {
         "name": "music/game/nether/soulsand_valley/so_below",
         "stream": true,
         "weight": 1
@@ -192,7 +195,7 @@
         "stream": true,
         "weight": 2
       },
-			{
+      {
         "name": "music/game/nuance2",
         "stream": true,
         "weight": 1
@@ -224,7 +227,6 @@
     ]
   },
   "music_end_boss": {
-    "subtitle": "subtitles.astraladditions.tsugomori",
     "sounds": [
       {
         "name": "astraladditions:astralsend",
@@ -240,7 +242,7 @@
       }
     ]
   },
-	"music_wither_phase2": {
+  "music_wither_phase2": {
     "sounds": [
       {
         "name": "astraladditions:witherphase2",
@@ -248,8 +250,7 @@
       }
     ]
   },
-	"music_wither_spawn": {
-    "subtitle": "subtitles.astraladditions.tsugomori",
+  "music_wither_spawn": {
     "sounds": [
       {
         "name": "astraladditions:witherspawn",
@@ -257,7 +258,7 @@
       }
     ]
   },
-	"music_wither_death": {
+  "music_wither_death": {
     "sounds": [
       {
         "name": "astraladditions:stance",
@@ -265,8 +266,7 @@
       }
     ]
   },
-	"music_combat": {
-    "subtitle": "subtitles.astraladditions.tsugomori",
+  "music_combat": {
     "sounds": [
       {
         "name": "astraladditions:tensionrising",
@@ -274,7 +274,7 @@
       }
     ]
   },
-	"music_combat_end": {
+  "music_combat_end": {
     "sounds": [
       {
         "name": "astraladditions:andbreathe",
@@ -282,27 +282,27 @@
       }
     ]
   },
-	"music_shimmer_blaze": {
-		"sounds": [
-			{
-				"name": "astraladditions:purple_prison",
-				"stream": true
-			}
-		]
-	},
-	"music_astral_lakes_remix": {
-		"sounds": [
-			{
-				"name": "astraladditions:disc/astral_lakes_remix",
-				"stream": true
-			}
-		]
-	},
-	"item/note_eguitar": {
-		"sounds": [
-			{
-				"name": "astraladditions:item/note_eguitar"
-			}
-		]
-	}
+  "music_shimmer_blaze": {
+    "sounds": [
+      {
+        "name": "astraladditions:purple_prison",
+        "stream": true
+      }
+    ]
+  },
+  "music_astral_lakes_remix": {
+    "sounds": [
+      {
+        "name": "astraladditions:disc/astral_lakes_remix",
+        "stream": true
+      }
+    ]
+  },
+  "item/note_eguitar": {
+    "sounds": [
+      {
+        "name": "astraladditions:item/note_eguitar"
+      }
+    ]
+  }
 }
