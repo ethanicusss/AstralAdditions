@@ -49,7 +49,7 @@ public class NowPlayingHud {
 
 		Text line1 = new TranslatableText("gui." + AstralAdditions.MOD_ID + ".music_hud_now_playing");
 		Text line2 = title;
-		Text line3 = artist;
+		Text line3 = Text.of(new TranslatableText("gui." + AstralAdditions.MOD_ID + ".music_hud_by").getString() + artist.getString());
 
 		TextRenderer textRenderer = client.textRenderer;
 		int x = 10;
