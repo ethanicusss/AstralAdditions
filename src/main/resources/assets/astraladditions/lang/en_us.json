@@ -201,6 +201,8 @@
 	"music.astraladditions.track.purple_prison.artist": "ethanicuss",
 
 	"music.astraladditions.track.disc_astral_lakes_remix.title": "Astral Lakes (Remix)",
-	"music.astraladditions.track.disc_astral_lakes_remix.artist": "Unknown"
+	"music.astraladditions.track.disc_astral_lakes_remix.artist": "Unknown",
+
+	"gui.astraladditions.music_hud_now_playing": "Now playing..."
 
 }

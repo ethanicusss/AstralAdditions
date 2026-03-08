@@ -1,15 +1,17 @@
 package com.github.ethanicuss.astraladditions.musicplayer;
 
+import com.github.ethanicuss.astraladditions.AstralAdditions;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 
 public class NowPlayingHud {
 
-	private static final int showTick = 20*4;
-	private static final int fadeTick = 20;
+	private static final int showTick = 20*8;
+	private static final int fadeTick = 20*2;
 
 	private static Text title = Text.of("");
 	private static Text artist = Text.of("");
@@ -45,19 +47,21 @@ public class NowPlayingHud {
 
 		int a = ((int)(alpha * 255.0f) & 0xFF) << 24;
 
-		Text line1 = title;
-		Text line2 = artist;
+		Text line1 = new TranslatableText("gui." + AstralAdditions.MOD_ID + ".music_hud_now_playing");
+		Text line2 = title;
+		Text line3 = artist;
 
 		TextRenderer textRenderer = client.textRenderer;
 		int x = 10;
 		int y = 10;
 
-		int w = Math.max(textRenderer.getWidth(line1), textRenderer.getWidth(line2));
-		int h = textRenderer.fontHeight * 2 + 6;
+		int w = Math.max(Math.max(textRenderer.getWidth(line1), textRenderer.getWidth(line2)), textRenderer.getWidth(line3));
+		int h = textRenderer.fontHeight * 3 + 6;
 
 		DrawableHelper.fill(matrices, x - 4, y - 4, x + w + 4, y + h, a | 0x101010);
 
 		textRenderer.drawWithShadow(matrices, line1, x, y, a | 0xFFFFFF);
-		textRenderer.drawWithShadow(matrices, line2, x, y + textRenderer.fontHeight + 2, a | 0xB0B0B0);
+		textRenderer.drawWithShadow(matrices, line2, x, y + textRenderer.fontHeight + 2, a | 0xFFFFFF);
+		textRenderer.drawWithShadow(matrices, line3, x, y + (textRenderer.fontHeight + 2) * 2, a | 0xB0B0B0);
 	}
 }
