@@ -129,6 +129,81 @@
 	"item.minecraft.lingering_potion.effect.sputum": "Lingering Bottle of Sputum",
 	"item.minecraft.tipped_arrow.effect.sputum": "Arrow of Sputum",
 
-	"tooltip.astraladditions.cogfly": "W.I.P for 2.2"
+	"tooltip.astraladditions.cogfly": "W.I.P for 2.2",
+
+	"music.astraladditions.track.nostalgia.title": "Nostalgia",
+	"music.astraladditions.track.nostalgia.artist": "Tsugomori",
+
+	"music.astraladditions.track.astroid_cluster.title": "Astroid Cluster",
+	"music.astraladditions.track.astroid_cluster.artist": "Tsugomori",
+
+	"music.astraladditions.track.astral_lakes.title": "Astral Lakes",
+	"music.astraladditions.track.astral_lakes.artist": "Ethan Quirk and Tsugomori",
+
+	"music.astraladditions.track.despiteeverythingitsstillyou.title": "Despite Everything It's Still You",
+	"music.astraladditions.track.despiteeverythingitsstillyou.artist": "XETROO",
+
+	"music.astraladditions.track.uneasy.title": "Uneasy",
+	"music.astraladditions.track.uneasy.artist": "Tsugomori",
+
+	"music.astraladditions.track.bodiesfloatinginspace.title": "Bodies Floating in Space",
+	"music.astraladditions.track.bodiesfloatinginspace.artist": "Tsugomori",
+
+	"music.astraladditions.track.wow.title": "Wow",
+	"music.astraladditions.track.wow.artist": "Tsugomori",
+
+	"music.astraladditions.track.newday.title": "New Day",
+	"music.astraladditions.track.newday.artist": "Tsugomori",
+
+	"music.astraladditions.track.breathein.title": "Breath In",
+	"music.astraladditions.track.breathein.artist": "Tsugomori, XETROO",
+
+	"music.astraladditions.track.moonlight.title": "Moonlight",
+	"music.astraladditions.track.moonlight.artist": "Tsugomori, XETROO",
+
+	"music.astraladditions.track.day.title": "Day",
+	"music.astraladditions.track.day.artist": "Tsugomori",
+
+	"music.astraladditions.track.night.title": "Night",
+	"music.astraladditions.track.night.artist": "Tsugomori",
+
+	"music.astraladditions.track.cave.title": "Cave",
+	"music.astraladditions.track.cave.artist": "Tsugomori",
+
+	"music.astraladditions.track.starcave.title": "Star Cave",
+	"music.astraladditions.track.starcave.artist": "Pins3y",
+
+	"music.astraladditions.track.gazinglakes.title": "Gazing Lakes",
+	"music.astraladditions.track.gazinglakes.artist": "Tsugomori",
+
+	"music.astraladditions.track.astralsend.title": "Astral's End",
+	"music.astraladditions.track.astralsend.artist": "Ethan Quirk and Tsugomori",
+
+	"music.astraladditions.track.wither.title": "Wither",
+	"music.astraladditions.track.wither.artist": "Tsugomori",
+
+	"music.astraladditions.track.witherphase2.title": "Wither (Phase 2)",
+	"music.astraladditions.track.witherphase2.artist": "Tsugomori",
+
+	"music.astraladditions.track.witherspawn.title": "Witherspawn",
+	"music.astraladditions.track.witherspawn.artist": "Tsugomori",
+
+	"music.astraladditions.track.stance.title": "Stance",
+	"music.astraladditions.track.stance.artist": "Tsugomori",
+
+	"music.astraladditions.track.tensionrising.title": "Tension Rising",
+	"music.astraladditions.track.tensionrising.artist": "Tsugomori",
+
+	"music.astraladditions.track.andbreathe.title": "And Breathe",
+	"music.astraladditions.track.andbreathe.artist": "Tsugomori",
+
+	"music.astraladditions.track.purple_prison.title": "Purple Prison",
+	"music.astraladditions.track.purple_prison.artist": "ethanicuss",
+
+	"music.astraladditions.track.disc_astral_lakes_remix.title": "Astral Lakes (Remix)",
+	"music.astraladditions.track.disc_astral_lakes_remix.artist": "Unknown",
+
+	"gui.astraladditions.music_hud_now_playing": "Now playing...",
+	"gui.astraladditions.music_hud_by": "by "
 
 }

@@ -24,8 +24,8 @@ import java.util.List;
 
 public class ShimmerBottleItem extends Item {
 
-    StatusEffectInstance glowing = new StatusEffectInstance(StatusEffects.GLOWING, 600);
-    StatusEffectInstance vision = new StatusEffectInstance(StatusEffects.NIGHT_VISION, 600);
+    StatusEffectInstance glowing = new StatusEffectInstance(StatusEffects.GLOWING, 600, 0, false, false);
+    StatusEffectInstance vision = new StatusEffectInstance(StatusEffects.NIGHT_VISION, 600, 0, false, false);
 
     private static final int MAX_USE_TIME = 40;
 
@@ -37,8 +37,8 @@ public class ShimmerBottleItem extends Item {
         ItemStack itemStack = super.finishUsing(stack, world, user);
         if (!world.isClient) {
             PlayerEntity player = (PlayerEntity)user;
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 600, 0, false, false));
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 600, 0, false, false));
+            player.addStatusEffect(glowing);
+            player.addStatusEffect(vision);
             player.playSound(SoundEvents.BLOCK_BUBBLE_COLUMN_UPWARDS_INSIDE, SoundCategory.AMBIENT, 0.8f, 0.8f);
             return user instanceof PlayerEntity && ((PlayerEntity) user).getAbilities().creativeMode ? itemStack : new ItemStack(Items.GLASS_BOTTLE);
         }
@@ -50,7 +50,7 @@ public class ShimmerBottleItem extends Item {
     }
 
     public int getMaxUseTime(ItemStack stack) {
-        return 40;
+        return MAX_USE_TIME;
     }
 
     public UseAction getUseAction(ItemStack stack) {

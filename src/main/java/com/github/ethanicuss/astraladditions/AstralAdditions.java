@@ -17,7 +17,6 @@ public class AstralAdditions implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-
 		ModFluids.registerFluids();
 		ModEntities.registerEntities();
 		ModBlocks.registerBlocks();

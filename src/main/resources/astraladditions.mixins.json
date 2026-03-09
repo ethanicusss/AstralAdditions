@@ -28,15 +28,18 @@
 
     "fishing.FishingBobberEntityAccessor",
     "fishing.FishingBobberEntityMixin",
-    "fishing.BottomlessBucketItemMixin"
+    "fishing.BottomlessBucketItemMixin",
 
+    "knockback.AttackKnockbackCompatMixin",
+    "knockback.MobAttackKnockbackCompatMixin"
   ],
 
   "client": [
     "SpaceMusicMixin",
     "ParticleRecolourMixin",
     "InGameHudMixin",
-    "ParticleRecolourMixin"
+    "ParticleRecolourMixin",
+    "NowPlayingSoundMixin"
   ],
   "injectors": {
     "defaultRequire": 1
