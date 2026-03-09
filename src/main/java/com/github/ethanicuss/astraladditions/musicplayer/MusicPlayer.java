@@ -63,14 +63,17 @@ public class MusicPlayer {
             if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:moon") && player.getY() < 95) {
                 val = ModMusic.MOON;
             }
+            if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:mars")) {
+                val = ModMusic.MARS;
+            }
+            if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:glacio")) {
+                val = ModMusic.GLACIO;
+            }
             if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:mercury")) {
                 val = ModMusic.MERCURY;
             }
             if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:the_nether") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "createastral:moon_debris") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "minecraft:the_end")) {
                 val = ModMusic.END;
-            }
-            if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:mars") && player.getY() < 80) {
-                val = ModMusic.MARS;
             }
             if (Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:moon_orbit") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:mars_orbit") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:mercury_orbit") || Objects.equals(player.world.getRegistryKey().getValue().toString(), "ad_astra:earth_orbit")) {
                 val = ModMusic.ORBIT;

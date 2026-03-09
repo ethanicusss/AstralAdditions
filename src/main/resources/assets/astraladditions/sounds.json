@@ -30,8 +30,38 @@
   "music_mars": {
     "sounds": [
       {
-        "name": "astraladditions:uneasy",
-        "stream": true
+        "name": "astraladditions:maybe_just_maybe",
+        "stream": true,
+        "weight": 2
+      },
+      {
+        "name": "astraladditions:project_501",
+        "stream": true,
+        "weight": 2
+      },
+      {
+        "name": "music/game/nether/nether3",
+        "stream": true,
+        "weight": 1
+      },
+      {
+        "name": "music/game/nether/nether4",
+        "stream": true,
+        "weight": 1
+      }
+    ]
+  },
+  "music_glacio": {
+    "sounds": [
+      {
+        "name": "astraladditions:frosted_glass",
+        "stream": true,
+        "weight": 2
+      },
+      {
+        "name": "astraladditions:so_cold",
+        "stream": true,
+        "weight": 2
       }
     ]
   },
@@ -96,17 +126,17 @@
       {
         "name": "astraladditions:day",
         "stream": true,
-        "weight": 3
+        "weight": 2
       },
       {
         "name": "astraladditions:sunlight",
         "stream": true,
-        "weight": 3
+        "weight": 2
       },
       {
         "name": "astraladditions:they_will_listen",
         "stream": true,
-        "weight": 3
+        "weight": 2
       },
       {
         "name": "music/game/calm1",
@@ -202,11 +232,6 @@
       },
       {
         "name": "music/game/nether/nether3",
-        "stream": true,
-        "weight": 1
-      },
-      {
-        "name": "music/game/nether/nether4",
         "stream": true,
         "weight": 1
       }
