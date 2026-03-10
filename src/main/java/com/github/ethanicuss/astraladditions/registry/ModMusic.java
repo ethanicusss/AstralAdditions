@@ -25,6 +25,7 @@ public class ModMusic {
     public static final MusicSound ORBIT              = new MusicSound(ModSounds.MUSIC_ORBIT, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
     public static final MusicSound MERCURY            = new MusicSound(ModSounds.MUSIC_MERCURY, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
     public static final MusicSound MARS               = new MusicSound(ModSounds.MUSIC_MARS, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
+    public static final MusicSound GLACIO               = new MusicSound(ModSounds.MUSIC_GLACIO, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
     public static final MusicSound END                = new MusicSound(ModSounds.MUSIC_END, GAME_MIN_DELAY, GAME_MAX_DELAY, false);
     public static final MusicSound END_BOSS           = new MusicSound(ModSounds.MUSIC_END_BOSS, 0, 0, true);
     public static final MusicSound WITHER             = new MusicSound(ModSounds.MUSIC_WITHER, 0, 0, true);

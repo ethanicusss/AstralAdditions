@@ -30,6 +30,8 @@ public class ModSounds {
     public static final SoundEvent MUSIC_MERCURY               = new SoundEvent(MUSIC_MERCURY_ID);
     public static final Identifier MUSIC_MARS_ID               = new Identifier(AstralAdditions.MOD_ID, "music_mars");
     public static final SoundEvent MUSIC_MARS                  = new SoundEvent(MUSIC_MARS_ID);
+    public static final Identifier MUSIC_GLACIO_ID               = new Identifier(AstralAdditions.MOD_ID, "music_glacio");
+    public static final SoundEvent MUSIC_GLACIO                  = new SoundEvent(MUSIC_GLACIO_ID);
     public static final Identifier MUSIC_END_ID                = new Identifier(AstralAdditions.MOD_ID, "music_end");
     public static final SoundEvent MUSIC_END                   = new SoundEvent(MUSIC_END_ID);
     public static final Identifier MUSIC_END_BOSS_ID           = new Identifier(AstralAdditions.MOD_ID, "music_end_boss");
