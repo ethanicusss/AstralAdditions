@@ -72,8 +72,12 @@ public class MusicPlayer {
         if (nether || moonDebris || end)
             val = ModMusic.END;
 
-        if (dimStr.equals("ad_astra:mars") && player.getY() < 80)
+        if (dimStr.equals("ad_astra:mars")) {
             val = ModMusic.MARS;
+        }
+        if (dimStr.equals("ad_astra:glacio")) {
+            val = ModMusic.GLACIO;
+        }
 
         if (dimStr.equals("ad_astra:moon_orbit")
                 || dimStr.equals("ad_astra:mars_orbit")
