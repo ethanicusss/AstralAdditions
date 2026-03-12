@@ -43,6 +43,12 @@
 	"item.astraladditions.rapier": "Rapier",
 	"item.astraladditions.parry_shield": "Round Shield",
 	"item.astraladditions.cogfly": "Cogfly",
+	"item.astraladditions.beta_iron_weapon": "Beta Iron Sword",
+	"item.astraladditions.beta_diamond_weapon": "Beta Diamond Sword",
+	"item.astraladditions.beta_desh_weapon": "Beta Desh Sword",
+	"item.astraladditions.beta_ostrum_weapon": "Beta Ostrum Sword",
+	"item.astraladditions.beta_calorite_weapon": "Beta Calorite Sword",
+	"item.astraladditions.beta_ender_weapon": "Beta Ender Sword",
 
 	"item.astraladditions.shimmer_fishing_rod": "Shimmer Fishing Rod",
 	"item.astraladditions.shimmering_thread": "Shimmering Thread",
@@ -130,6 +136,7 @@
 	"item.minecraft.tipped_arrow.effect.sputum": "Arrow of Sputum",
 
 	"tooltip.astraladditions.cogfly": "W.I.P for 2.2",
+	"tooltip.astraladditions.beta_sword_smell": "It smells like thick fog",
 
 	"music.astraladditions.track.nostalgia.title": "Nostalgia",
 	"music.astraladditions.track.nostalgia.artist": "Tsugomori",

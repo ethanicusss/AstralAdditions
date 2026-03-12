@@ -53,6 +53,12 @@ public class ModItems {
     public static final Item CHROMATIC_VACUUM = new ChromaticVacuumItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(512));
     public static final Item SHOTGUN = new ShotgunItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(512));
     public static final Item MACHINEGUN = new MachinegunItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(1024));
+    public static final Item BETA_IRON_SWORD = new BetaSwordItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.COMMON).maxDamage(250), 4);
+    public static final Item BETA_DIAMOND_SWORD = new BetaSwordItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.COMMON).maxDamage(1561), 5);
+    public static final Item BETA_DESH_SWORD = new BetaSwordItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON).maxDamage(1024), 5);
+    public static final Item BETA_OSTRUM_SWORD = new BetaSwordItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON).maxDamage(1561), 6);
+    public static final Item BETA_CALORITE_SWORD = new BetaSwordItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE).maxDamage(2048), 7);
+    public static final Item BETA_ENDER_SWORD = new BetaSwordItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.EPIC).maxDamage(2560), 8);
 
     //!Ethan Balance the food ;-;
     public static final Item SHIMMER_FISHING_ROD = new ShimmerFishingRodItem(new Item.Settings().maxCount(1).maxDamage(150).rarity(Rarity.EPIC).group(ItemGroup.TOOLS));
@@ -112,6 +118,12 @@ public class ModItems {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "rapier"), RAPIER);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "parry_shield"), SHIELD);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "cogfly"), COGFLY);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "beta_iron_weapon"), BETA_IRON_SWORD);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "beta_diamond_weapon"), BETA_DIAMOND_SWORD);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "beta_desh_weapon"), BETA_DESH_SWORD);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "beta_ostrum_weapon"), BETA_OSTRUM_SWORD);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "beta_calorite_weapon"), BETA_CALORITE_SWORD);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "beta_ender_weapon"), BETA_ENDER_SWORD);
         addSacrificeItem(AWAKENED_SHIMMER_HEART, ModEntities.SHIMMER_BLAZE);
 
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmer_fishing_rod"), SHIMMER_FISHING_ROD);
