@@ -33,6 +33,9 @@
     ],
     "rei_client": [
       "com.github.ethanicuss.astraladditions.compat.rei.AstralAdditionsREIClientPlugin"
+    ],
+    "modmenu": [
+      "com.github.ethanicuss.astraladditions.config.AstralAdditionsModMenu"
     ]
   },
   "mixins": [
