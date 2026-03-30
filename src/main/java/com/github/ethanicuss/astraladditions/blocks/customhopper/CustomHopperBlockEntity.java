@@ -118,7 +118,7 @@ this.inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
         blockEntity.lastTickTime = world.getTime();
         if (!blockEntity.needsCooldown()) {
             blockEntity.setTransferCooldown(0);
-            insertAndExtract(world, pos, state, blockEntity, () -> extract((World)world, (CustomHopperBlockEntity)blockEntity), blockEntity.itemRate);
+            insertAndExtract(world, pos, state, blockEntity, () -> extract((World)world, (CustomHopperBlockEntity)blockEntity, blockEntity.itemRate), blockEntity.itemRate);
         }
 
     }
@@ -202,14 +202,14 @@ this.inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
         return getAvailableSlots(inv, facing).allMatch((slot) -> inv.getStack(slot).isEmpty());
     }
 
-    public static boolean extract(World world, CustomHopperBlockEntity hopper) {
+    public static boolean extract(World world, CustomHopperBlockEntity hopper, int itemRate) {
         Inventory inventory = getInputInventory(world, hopper);
         if (inventory != null) {
             Direction direction = Direction.DOWN;
-            return isInventoryEmpty(inventory, direction) ? false : getAvailableSlots(inventory, direction).anyMatch((slot) -> extract(hopper, inventory, slot, direction));
+            return isInventoryEmpty(inventory, direction) ? false : getAvailableSlots(inventory, direction).anyMatch((slot) -> extract(hopper, inventory, slot, direction, hopper.itemRate));
         } else {
             for(ItemEntity itemEntity : getInputItemEntities(world, hopper)) {
-                if (extract((Inventory)hopper, (ItemEntity)itemEntity)) {
+                if (extract((Inventory)hopper, (ItemEntity)itemEntity, hopper.itemRate)) {
                     return true;
                 }
             }
@@ -218,31 +218,37 @@ this.inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
         }
     }
 
-    private static boolean extract(Hopper hopper, Inventory inventory, int slot, Direction side) {
+    private static boolean extract(Hopper hopper, Inventory inventory, int slot, Direction side, int itemRate) {
         ItemStack itemStack = inventory.getStack(slot);
-        if (!itemStack.isEmpty() && canExtract(inventory, itemStack, slot, side)) {
-            ItemStack itemStack2 = itemStack.copy();
-            ItemStack itemStack3 = transfer(inventory, hopper, inventory.removeStack(slot, 1), (Direction)null);
-            if (itemStack3.isEmpty()) {
-                inventory.markDirty();
-                return true;
-            }
 
-            inventory.setStack(slot, itemStack2);
+        for (var i = 0; i < itemRate; i++) {
+            if (!itemStack.isEmpty() && canExtract(inventory, itemStack, slot, side)) {
+                ItemStack itemStack2 = itemStack.copy();
+                ItemStack itemStack3 = transfer(inventory, hopper, inventory.removeStack(slot, 1), (Direction) null);
+                if (itemStack3.isEmpty()) {
+                    inventory.markDirty();
+                    return true;
+                }
+
+                inventory.setStack(slot, itemStack2);
+            }
         }
 
         return false;
     }
 
-    public static boolean extract(Inventory inventory, ItemEntity itemEntity) {
+    public static boolean extract(Inventory inventory, ItemEntity itemEntity, int itemRate) {
         boolean bl = false;
-        ItemStack itemStack = itemEntity.getStack().copy();
-        ItemStack itemStack2 = transfer((Inventory)null, inventory, itemStack, (Direction)null);
-        if (itemStack2.isEmpty()) {
-            bl = true;
-            itemEntity.discard();
-        } else {
-            itemEntity.setStack(itemStack2);
+
+        for (var i = 0; i < itemRate; i++) {
+            ItemStack itemStack = itemEntity.getStack().copy();
+            ItemStack itemStack2 = transfer((Inventory) null, inventory, itemStack, (Direction) null);
+            if (itemStack2.isEmpty()) {
+                bl = true;
+                itemEntity.discard();
+            } else {
+                itemEntity.setStack(itemStack2);
+            }
         }
 
         return bl;
@@ -416,7 +422,7 @@ this.inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
 
     public static void onEntityCollided(World world, BlockPos pos, BlockState state, Entity entity, CustomHopperBlockEntity blockEntity) {
         if (entity instanceof ItemEntity && VoxelShapes.matchesAnywhere(VoxelShapes.cuboid(entity.getBoundingBox().offset((double)(-pos.getX()), (double)(-pos.getY()), (double)(-pos.getZ()))), blockEntity.getInputAreaShape(), BooleanBiFunction.AND)) {
-            insertAndExtract(world, pos, state, blockEntity, () -> extract((Inventory)blockEntity, (ItemEntity)((ItemEntity)entity)), blockEntity.itemRate);
+            insertAndExtract(world, pos, state, blockEntity, () -> extract((Inventory)blockEntity, (ItemEntity)((ItemEntity)entity), blockEntity.itemRate), blockEntity.itemRate);
         }
 
     }
