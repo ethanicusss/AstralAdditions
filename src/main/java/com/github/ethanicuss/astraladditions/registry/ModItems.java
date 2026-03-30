@@ -129,7 +129,7 @@ public class ModItems {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmer_fishing_rod"), SHIMMER_FISHING_ROD);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmering_thread"), SHIMMERING_THREAD);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmer_trout"), SHIMMER_TROUT);
-        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmer_shish"), SHIMMER_SHISH);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shish"), SHIMMER_SHISH);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "bottomless_water_bucket"), BOTTOMLESS_WATER_BUCKET);
     }
     private static List<Item> sacrificableItems = new ArrayList<Item>();

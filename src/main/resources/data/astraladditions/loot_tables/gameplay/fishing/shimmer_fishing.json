@@ -11,6 +11,11 @@
         },
         {
           "type": "minecraft:item",
+          "name": "astraladditions:shimmer_trout",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:prismarine_crystals",
           "weight": 5
         },
@@ -26,7 +31,22 @@
         },
         {
           "type": "minecraft:item",
+          "name": "astraladditions:bottomless_water_bucket",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "astraladditions:shimmer_heart",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:nautilus_shell",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "create:experience_nugget",
           "weight": 2
         }
       ]

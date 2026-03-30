@@ -13,6 +13,8 @@
 	"item.astraladditions.lunar_wacker": "Lunar Wacker",
 	"item.astraladditions.astral_hoe": "Shimmering Hoe",
 	"item.astraladditions.soulsteal_dagger": "Soulsteal Dagger",
+	"item.astraladditions.diamond_boomer": "Diamond Boomer",
+	"item.astraladditions.shimmerang": "Shimmerang",
 	"item.astraladditions.cometball": "Cometball",
 	"item.astraladditions.cosmic_hourglass": "Cosmic Hourglass",
 	"item.astraladditions.pylon": "Pylon",
@@ -53,7 +55,7 @@
 	"item.astraladditions.shimmer_fishing_rod": "Shimmer Fishing Rod",
 	"item.astraladditions.shimmering_thread": "Shimmering Thread",
 	"item.astraladditions.shimmer_trout": "Shimmer Trout",
-	"item.astraladditions.shimmer_shish": "Shish",
+	"item.astraladditions.shish": "Shish",
 	"item.astraladditions.bottomless_water_bucket": "Bottomless Water Bucket",
 
 	"block.astraladditions.enderrack": "Enderrack",
@@ -81,6 +83,9 @@
 	"block.astraladditions.desizer_8": "Desizer Bottom Center",
 	"block.astraladditions.desizer_9": "Desizer Bottom Right",
 	"block.astraladditions.desizer_base": "Desizer Casing",
+
+	"block.astraladditions.andesite_hopper": "Andesite Hopper",
+	"block.astraladditions.desh_hopper": "Desh Hopper",
 
 	"astraladditions.text.pylon_too_far": "Pylon out of range",
 	"astraladditions.text.shimmer_bottle": "Slurp",

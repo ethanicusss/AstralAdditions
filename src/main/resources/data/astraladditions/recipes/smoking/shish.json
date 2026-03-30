@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "ingredient": {
+    "item": "astraladditions:shimmer_trout"
+  },
+  "result": "astraladditions:shish",
+  "experience": 0.5,
+  "cookingtime": 70
+}
