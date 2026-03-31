@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "astraladditions:item/shimmer_shish"
+    "layer0": "astraladditions:item/shish"
   }
 }

@@ -29,11 +29,11 @@ import java.util.*;
 
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin extends Entity {
-    private static final int COOLDOWN_TIME = 40;
+    private static final int SHIMMER_COOLDOWN_TIME = 40;
     private static final int MINIMUM_TIME_IN_SHIMMER = 40;
-    private static final double MAX_RAYCAST_DISTANCE = 1.25;
-    private static final Set<ItemStack> PROCESSED_ITEMS = new HashSet<>();
-    private int lastProcessedTick = -COOLDOWN_TIME;
+    private static final double SHIMMER_MAX_RAYCAST_DISTANCE = 1.25;
+    private static final Set<ItemStack> SHIMMER_PROCESSED_ITEMS = new HashSet<>();
+    private int shimmerLastProcessedTick = -SHIMMER_COOLDOWN_TIME;
 
     public ItemEntityMixin(EntityType<?> type, World world) {
         super(type, world);
@@ -52,7 +52,7 @@ public abstract class ItemEntityMixin extends Entity {
 
     private boolean hasShimmerAbove() {
         BlockPos currentPos = getBlockPos();
-        for (int i = 1; i <= MAX_RAYCAST_DISTANCE; i++) {
+        for (int i = 1; i <= SHIMMER_MAX_RAYCAST_DISTANCE; i++) {
             BlockPos checkPos = currentPos.up(i);
             Fluid fluid = world.getFluidState(checkPos).getFluid();
             if (fluid == ModFluids.STILL_SHIMMER || fluid == ModFluids.FLOWING_SHIMMER) {
@@ -66,24 +66,24 @@ public abstract class ItemEntityMixin extends Entity {
         return !stack.hasEnchantments() && !stack.hasCustomName() && !stack.isIn(ModData.INGORE_TRANSMUTATION);
     }
 
-    private boolean hasBeenProcessed(ItemStack stack) {
-        return PROCESSED_ITEMS.contains(stack);
+    private boolean hasBeenShimmerProcessed(ItemStack stack) {
+        return SHIMMER_PROCESSED_ITEMS.contains(stack);
     }
 
-    private void markAsProcessed(ItemStack stack) {
-        PROCESSED_ITEMS.add(stack.copy());
+    private void markAsShimmerProcessed(ItemStack stack) {
+        SHIMMER_PROCESSED_ITEMS.add(stack.copy());
     }
 
-    private void spawnParticlesAndSound(double yOffset) {
+    private void spawnShimmerParticlesAndSound(double yOffset) {
         ModUtils.spawnForcedParticles((ServerWorld) world, ParticleTypes.END_ROD, getX(), getY() + yOffset, getZ(), 15, 0.1, 0.1, 0.1, 0.15);
         world.playSound(getX(), getY(), getZ(), SoundEvents.ENTITY_FOX_SNIFF, SoundCategory.NEUTRAL, 0.5f, 0.8f, true);
     }
 
     private void HandleShimmerBlazeSpawn() {
         if (ModItems.isSacrificeItem(getStack().getItem())) {
-            spawnParticlesAndSound(1);
+            spawnShimmerParticlesAndSound(1);
             if (getStack().getItem() == ModItems.AWAKENED_SHIMMER_HEART && age > 60) {
-                spawnParticlesAndSound(1);
+                spawnShimmerParticlesAndSound(1);
                 ShimmerBlazeEntity shimmerBlaze = new ShimmerBlazeEntity(ModEntities.SHIMMER_BLAZE, world);
                 shimmerBlaze.refreshPositionAndAngles(getX(), getY(), getZ(), 0.0f, 0.0f);
                 shimmerBlaze.setVelocity(0, 1, 0);
@@ -93,11 +93,11 @@ public abstract class ItemEntityMixin extends Entity {
         }
     }
 
-    private void HandleItemTransmutation() {
-        if (isInShimmerFluid() && !hasShimmerAbove() && age >= MINIMUM_TIME_IN_SHIMMER && age - lastProcessedTick >= COOLDOWN_TIME) {
+    private void HandleItemShimmerTransmutation() {
+        if (isInShimmerFluid() && !hasShimmerAbove() && age >= MINIMUM_TIME_IN_SHIMMER && age - shimmerLastProcessedTick >= SHIMMER_COOLDOWN_TIME) {
             ItemStack itemStack = getStack();
 
-            if (!isValidForTransmutation(itemStack) || hasBeenProcessed(itemStack)) return;
+            if (!isValidForTransmutation(itemStack) || hasBeenShimmerProcessed(itemStack)) return;
 
             Optional<TransmuteRecipe> recipeOptional = world.getRecipeManager()
                     .listAllOfType(TransmuteRecipe.Type.INSTANCE)
@@ -107,20 +107,20 @@ public abstract class ItemEntityMixin extends Entity {
 
             if (recipeOptional.isPresent()) {
                 TransmuteRecipe recipe = recipeOptional.get();
-                ProcessTransmutation(recipe, itemStack);
+                ProcessShimmerTransmutation(recipe, itemStack);
             }
         }
     }
 
-    private void ProcessTransmutation(TransmuteRecipe recipe, ItemStack itemStack) {
+    private void ProcessShimmerTransmutation(TransmuteRecipe recipe, ItemStack itemStack) {
         ItemStack recipeInputItem = recipe.getInputItem();
         int recipeInputCount = recipeInputItem.getCount();
 
-        int multiplier = calculateMultiplier(recipe, itemStack, recipeInputCount);
+        int multiplier = calculateShimmerTransmutationMultiplier(recipe, itemStack, recipeInputCount);
         if (multiplier == 0) return;
 
         itemStack.decrement(multiplier * recipeInputCount);
-        spawnParticlesAndSound(0.5);
+        spawnShimmerParticlesAndSound(0.5);
 
         for (ItemStack outputItem : recipe.getOutputItems()) {
             ItemStack outputStack = outputItem.copy();
@@ -132,12 +132,12 @@ public abstract class ItemEntityMixin extends Entity {
             world.spawnEntity(outputEntity);
         }
 
-        markAsProcessed(itemStack);
+        markAsShimmerProcessed(itemStack);
         if (itemStack.isEmpty()) discard();
-        lastProcessedTick = age;
+        shimmerLastProcessedTick = age;
     }
 
-    private int calculateMultiplier(TransmuteRecipe recipe, ItemStack itemStack, int recipeInputCount) {
+    private int calculateShimmerTransmutationMultiplier(TransmuteRecipe recipe, ItemStack itemStack, int recipeInputCount) {
         if (recipe.isIgnoreCount()) {
             return itemStack.getCount();
         } else if (recipe.isSoftIgnoreCount()) {
@@ -153,7 +153,7 @@ public abstract class ItemEntityMixin extends Entity {
     private void applyWaterBuoyancy(CallbackInfo ci) {
         if (!world.isClient()) {
             HandleShimmerBlazeSpawn();
-            HandleItemTransmutation();
+            HandleItemShimmerTransmutation();
         }
     }
 }

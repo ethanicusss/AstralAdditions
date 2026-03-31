@@ -2,6 +2,8 @@ package com.github.ethanicuss.astraladditions.registry;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
 import com.github.ethanicuss.astraladditions.blocks.*;
+import com.github.ethanicuss.astraladditions.blocks.customhopper.CustomHopperBlock;
+import com.github.ethanicuss.astraladditions.blocks.customhopper.CustomHopperBlockEntity;
 import com.github.ethanicuss.astraladditions.blocks.desizer.DesizerCasingBlock;
 import com.github.ethanicuss.astraladditions.blocks.desizer.DesizerControllerBlock;
 import com.github.ethanicuss.astraladditions.blocks.jar.JarBlock;
@@ -80,6 +82,14 @@ public class ModBlocks {
     public static final BlockItem JAR_ITEM = new BlockItem(JAR_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
     public static final BlockEntityType<JarBlockEntity> JAR_BLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AstralAdditions.MOD_ID, "jar"), FabricBlockEntityTypeBuilder.create(JarBlockEntity::new, JAR_BLOCK).build());
 
+    public static final Block ANDESITE_HOPPER_BLOCK = new CustomHopperBlock(FabricBlockSettings.of(Material.STONE, MapColor.STONE_GRAY).requiresTool().strength(3.0F, 4.8F).sounds(BlockSoundGroup.METAL).nonOpaque().allowsSpawning(ModBlocks::never).suffocates(ModBlocks::never), "andesite_hopper", 16, 1);
+    public static final BlockItem ANDESITE_HOPPER_ITEM = new BlockItem(ANDESITE_HOPPER_BLOCK, new FabricItemSettings().group(ItemGroup.REDSTONE));
+    public static final BlockEntityType<CustomHopperBlockEntity> ANDESITE_HOPPER_BLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AstralAdditions.MOD_ID, "andesite_hopper"), FabricBlockEntityTypeBuilder.create(CustomHopperBlockEntity::new, ANDESITE_HOPPER_BLOCK).build());
+
+    public static final Block DESH_HOPPER_BLOCK = new CustomHopperBlock(FabricBlockSettings.of(Material.STONE, MapColor.STONE_GRAY).requiresTool().strength(3.5F, 5.0F).sounds(BlockSoundGroup.METAL).nonOpaque().allowsSpawning(ModBlocks::never).suffocates(ModBlocks::never), "desh_hopper",16, 16);
+    public static final BlockItem DESH_HOPPER_ITEM = new BlockItem(DESH_HOPPER_BLOCK, new FabricItemSettings().group(ItemGroup.REDSTONE));
+    public static final BlockEntityType<CustomHopperBlockEntity> DESH_HOPPER_BLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AstralAdditions.MOD_ID, "desh_hopper"), FabricBlockEntityTypeBuilder.create(CustomHopperBlockEntity::new, DESH_HOPPER_BLOCK).build());
+
 
     public static final Block DESIZER_CONTROLLER = new DesizerControllerBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
     public static final Block DESIZER_BASE = new DesizerCasingBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(3.0f));
@@ -107,6 +117,8 @@ public class ModBlocks {
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "enderrack"), ENDERRACK_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "twisted_nylium"), TWISTED_NYLIUM_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "jar"), JAR_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "andesite_hopper"), ANDESITE_HOPPER_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "desh_hopper"), DESH_HOPPER_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "ender_tip"), ENDER_TIP_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "ender_sprouts"), ENDER_SPROUT_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "pearl_pod"), PEARL_POD_BLOCK);
@@ -125,6 +137,8 @@ public class ModBlocks {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "enderrack"), ENDERRACK_ITEM);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "twisted_nylium"), TWISTED_NYLIUM_ITEM);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "jar"), JAR_ITEM);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "andesite_hopper"), ANDESITE_HOPPER_ITEM);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "desh_hopper"), DESH_HOPPER_ITEM);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "ender_tip"), ENDER_TIP_ITEM);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "ender_sprouts"), ENDER_SPROUT_ITEM);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "pearl_pod"), PEARL_POD_ITEM);
