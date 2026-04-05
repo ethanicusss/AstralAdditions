@@ -1,5 +1,6 @@
 package com.github.ethanicuss.astraladditions.entities.shimmerfishingrod;
 
+import com.github.ethanicuss.astraladditions.registry.ModData;
 import com.github.ethanicuss.astraladditions.registry.ModEntities;
 import com.github.ethanicuss.astraladditions.mixin.fishing.FishingBobberEntityAccessor;
 import com.github.ethanicuss.astraladditions.registry.ModItems;
@@ -19,7 +20,6 @@ import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
@@ -58,15 +58,20 @@ public class ShimmerFishingBobberEntity extends FishingBobberEntity {
 		double e = player.getEyeY();
 		double l = player.getZ() - (double)h * 0.3;
 		this.refreshPositionAndAngles(d, e, l, g, f);
+
 		Vec3d vec3d = new Vec3d(-i, MathHelper.clamp(-(k / j), -5.0F, 5.0F), -h);
 		double m = vec3d.length();
-		vec3d = vec3d.multiply(0.6 / m + (double)0.5F + this.random.nextGaussian() * 0.0045, 0.6 / m + (double)0.5F + this.random.nextGaussian() * 0.0045, 0.6 / m + (double)0.5F + this.random.nextGaussian() * 0.0045);
+		vec3d = vec3d.multiply(
+				0.6 / m + 0.5F + this.random.nextGaussian() * 0.0045,
+				0.6 / m + 0.5F + this.random.nextGaussian() * 0.0045,
+				0.6 / m + 0.5F + this.random.nextGaussian() * 0.0045
+		);
+
 		this.setVelocity(vec3d);
 		this.setYaw((float)(MathHelper.atan2(vec3d.x, vec3d.z) * (double)(180F / (float)Math.PI)));
 		this.setPitch((float)(MathHelper.atan2(vec3d.y, vec3d.horizontalLength()) * (double)(180F / (float)Math.PI)));
 		this.prevYaw = this.getYaw();
 		this.prevPitch = this.getPitch();
-
 	}
 
 	@Override
@@ -87,7 +92,7 @@ public class ShimmerFishingBobberEntity extends FishingBobberEntity {
 
 		FishingBobberEntityAccessor accessor = (FishingBobberEntityAccessor) this;
 		Object currentState = FishingBobberStateHelper.getState(this);
-		String stateName = ((Enum<?>)currentState).name();
+		String stateName = ((Enum<?>) currentState).name();
 
 		if (this.onGround) {
 			accessor.setRemovalTimer(accessor.getRemovalTimer() + 1);
@@ -103,11 +108,11 @@ public class ShimmerFishingBobberEntity extends FishingBobberEntity {
 		BlockPos blockPos = this.getBlockPos();
 		FluidState fluidState = this.world.getFluidState(blockPos);
 
-		if (fluidState.isIn(FluidTags.WATER)) {
+		if (fluidState.isIn(ModData.SHIMMER_TAG)) {
 			fluidHeight = fluidState.getHeight(this.world, blockPos);
 		}
 
-		boolean isInWater = fluidHeight > 0.0F;
+		boolean isInShimmer = fluidHeight > 0.0F;
 
 		switch (stateName) {
 			case "FLYING" -> {
@@ -117,7 +122,7 @@ public class ShimmerFishingBobberEntity extends FishingBobberEntity {
 					return;
 				}
 
-				if (isInWater) {
+				if (isInShimmer) {
 					this.setVelocity(this.getVelocity().multiply(0.3, 0.2, 0.3));
 					FishingBobberStateHelper.setState(this, getEnumStateByName("BOBBING"));
 					return;
@@ -127,8 +132,13 @@ public class ShimmerFishingBobberEntity extends FishingBobberEntity {
 			}
 			case "HOOKED_IN_ENTITY" -> {
 				if (accessor.getHookedEntity() != null) {
-					if (!accessor.getHookedEntity().isRemoved() && accessor.getHookedEntity().world.getRegistryKey() == this.world.getRegistryKey()) {
-						this.setPosition(accessor.getHookedEntity().getX(), accessor.getHookedEntity().getBodyY(0.8), accessor.getHookedEntity().getZ());
+					if (!accessor.getHookedEntity().isRemoved()
+							&& accessor.getHookedEntity().world.getRegistryKey() == this.world.getRegistryKey()) {
+						this.setPosition(
+								accessor.getHookedEntity().getX(),
+								accessor.getHookedEntity().getBodyY(0.8),
+								accessor.getHookedEntity().getZ()
+						);
 					} else {
 						accessor.callUpdateHookedEntityId(null);
 						FishingBobberStateHelper.setState(this, getEnumStateByName("FLYING"));
@@ -144,18 +154,31 @@ public class ShimmerFishingBobberEntity extends FishingBobberEntity {
 					dy += Math.signum(dy) * 0.1;
 				}
 
-				this.setVelocity(vec3d.x * 0.9, vec3d.y - dy * (double) this.random.nextFloat() * 0.2, vec3d.z * 0.9);
+				this.setVelocity(
+						vec3d.x * 0.9,
+						vec3d.y - dy * (double) this.random.nextFloat() * 0.2,
+						vec3d.z * 0.9
+				);
 
 				if (accessor.getHookCountdown() <= 0 && accessor.getFishTravelCountdown() <= 0) {
 					accessor.setInOpenWater(true);
 				} else {
-					accessor.setInOpenWater(accessor.isInOpenWater() && accessor.getOutOfOpenWaterTicks() < 10 && accessor.callIsOpenOrWaterAround(blockPos));
+					accessor.setInOpenWater(
+							accessor.isInOpenWater()
+									&& accessor.getOutOfOpenWaterTicks() < 10
+									&& accessor.callIsOpenOrWaterAround(blockPos)
+					);
 				}
 
-				if (isInWater) {
+				if (isInShimmer) {
 					accessor.setOutOfOpenWaterTicks(Math.max(0, accessor.getOutOfOpenWaterTicks() - 1));
+
 					if (accessor.isCaughtFish()) {
-						this.setVelocity(this.getVelocity().add(0.0, -0.1 * (double) this.velocityRandom.nextFloat() * (double) this.velocityRandom.nextFloat(), 0.0));
+						this.setVelocity(this.getVelocity().add(
+								0.0,
+								-0.1 * (double) this.velocityRandom.nextFloat() * (double) this.velocityRandom.nextFloat(),
+								0.0
+						));
 					}
 
 					if (!this.world.isClient) {
@@ -167,7 +190,7 @@ public class ShimmerFishingBobberEntity extends FishingBobberEntity {
 			}
 		}
 
-		if (!isInWater) {
+		if (!isInShimmer) {
 			this.setVelocity(this.getVelocity().add(0.0, -0.03, 0.0));
 		}
 
@@ -175,14 +198,13 @@ public class ShimmerFishingBobberEntity extends FishingBobberEntity {
 		this.updateRotation();
 
 		Object stateAfterMove = FishingBobberStateHelper.getState(this);
-		if (((Enum<?>)stateAfterMove).name().equals("FLYING") && (this.onGround || this.horizontalCollision)) {
+		if (((Enum<?>) stateAfterMove).name().equals("FLYING") && (this.onGround || this.horizontalCollision)) {
 			this.setVelocity(Vec3d.ZERO);
 		}
 
 		this.setVelocity(this.getVelocity().multiply(0.92));
 		this.refreshPosition();
 	}
-
 
 	@Override
 	public int use(ItemStack usedItem) {
@@ -193,30 +215,45 @@ public class ShimmerFishingBobberEntity extends FishingBobberEntity {
 
 			if (accessor.getHookedEntity() != null) {
 				this.pullHookedEntity(accessor.getHookedEntity());
-				Criteria.FISHING_ROD_HOOKED.trigger((ServerPlayerEntity)player, usedItem, this, Collections.emptyList());
-				this.world.sendEntityStatus(this, (byte)31);
+				Criteria.FISHING_ROD_HOOKED.trigger((ServerPlayerEntity) player, usedItem, this, Collections.emptyList());
+				this.world.sendEntityStatus(this, (byte) 31);
 				i = accessor.getHookedEntity() instanceof ItemEntity ? 3 : 5;
 			} else if (accessor.getHookCountdown() > 0) {
-				LootContext.Builder builder = new LootContext.Builder((ServerWorld)this.world)
+				LootContext.Builder builder = new LootContext.Builder((ServerWorld) this.world)
 						.parameter(LootContextParameters.ORIGIN, this.getPos())
 						.parameter(LootContextParameters.TOOL, usedItem)
 						.parameter(LootContextParameters.THIS_ENTITY, this)
 						.random(this.random)
-						.luck((float)accessor.getLuckOfTheSeaLevel() + player.getLuck());
+						.luck((float) accessor.getLuckOfTheSeaLevel() + player.getLuck());
 
-				LootTable lootTable = this.world.getServer().getLootManager().getTable(new Identifier("astraladditions", "gameplay/fishing/shimmer_fishing"));
+				LootTable lootTable = this.world.getServer()
+						.getLootManager()
+						.getTable(new Identifier("astraladditions", "gameplay/fishing/shimmer_fishing"));
+
 				List<ItemStack> loot = lootTable.generateLoot(builder.build(LootContextTypes.FISHING));
-				Criteria.FISHING_ROD_HOOKED.trigger((ServerPlayerEntity)player, usedItem, this, loot);
+				Criteria.FISHING_ROD_HOOKED.trigger((ServerPlayerEntity) player, usedItem, this, loot);
 
 				for (ItemStack itemStack : loot) {
 					ItemEntity itemEntity = new ItemEntity(this.world, this.getX(), this.getY(), this.getZ(), itemStack);
 					double dx = player.getX() - this.getX();
 					double dy = player.getY() - this.getY();
 					double dz = player.getZ() - this.getZ();
-					itemEntity.setVelocity(dx * 0.1, dy * 0.1 + Math.sqrt(Math.sqrt(dx * dx + dy * dy + dz * dz)) * 0.08, dz * 0.1);
+
+					itemEntity.setVelocity(
+							dx * 0.1,
+							dy * 0.1 + Math.sqrt(Math.sqrt(dx * dx + dy * dy + dz * dz)) * 0.08,
+							dz * 0.1
+					);
+
 					this.world.spawnEntity(itemEntity);
 
-					player.world.spawnEntity(new ExperienceOrbEntity(player.world, player.getX(), player.getY() + 0.5, player.getZ() + 0.5, this.random.nextInt(6) + 1));
+					player.world.spawnEntity(new ExperienceOrbEntity(
+							player.world,
+							player.getX(),
+							player.getY() + 0.5,
+							player.getZ() + 0.5,
+							this.random.nextInt(6) + 1
+					));
 
 					if (itemStack.isIn(ItemTags.FISHES)) {
 						player.increaseStat(Stats.FISH_CAUGHT, 1);
@@ -293,11 +330,11 @@ public class ShimmerFishingBobberEntity extends FishingBobberEntity {
 		}
 
 		for (Object constant : constants) {
-			if (((Enum<?>)constant).name().equals(name)) {
+			if (((Enum<?>) constant).name().equals(name)) {
 				return constant;
 			}
 		}
+
 		throw new IllegalArgumentException("No such FishingBobberEntity.State: " + name);
 	}
-
 }
