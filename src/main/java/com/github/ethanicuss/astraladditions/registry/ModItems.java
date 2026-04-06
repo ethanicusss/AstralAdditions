@@ -79,7 +79,7 @@ public class ModItems {
     public static final Item SOULSTEAL_DAGGER = new SoulstealDaggerItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE).maxDamage(768));
     public static final Item DIAMOND_BOOMER = new BoomerangItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE), 6.0f, 12, 1.2f, 0.0f);
     public static final Item SHIMMERANG = new BoomerangItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE), 8.0f, 8, 2.0f, 5.0f);
-    public static final Item RAPIER = new RapierItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE));
+    public static final Item RAPIER = new RapierItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE).maxDamage(1024));
     public static final Item SHIELD = new ParryShieldItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON));
     public static final Item COGFLY = new CogflySpawnItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(4).rarity(Rarity.RARE));
     public static void registerItems() {

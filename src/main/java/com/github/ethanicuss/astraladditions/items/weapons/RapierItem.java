@@ -1,4 +1,4 @@
-package com.github.ethanicuss.astraladditions.items;
+package com.github.ethanicuss.astraladditions.items.weapons;
 
 import com.github.ethanicuss.astraladditions.registry.ModEffects;
 import com.google.common.collect.ImmutableMultimap;
@@ -30,12 +30,12 @@ public class RapierItem extends Item {
     public RapierItem(Settings settings) {
         super(settings);
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", 7, EntityAttributeModifier.Operation.ADDITION));
+        builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", 3, EntityAttributeModifier.Operation.ADDITION));
         builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", 0, EntityAttributeModifier.Operation.ADDITION));
         this.attributeModifiers = builder.build();
     }
 
-    private float dash = 2.8f;
+    private float dash = 2.6f;
     private boolean backDash = false;
 
     @Override
@@ -51,7 +51,7 @@ public class RapierItem extends Item {
 //                builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", -3, EntityAttributeModifier.Operation.ADDITION));
 //                this.attributeModifiers = builder.build();
             world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_GOAT_LONG_JUMP, SoundCategory.NEUTRAL, 0.8f, 1.2f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
-            user.addStatusEffect(new StatusEffectInstance(ModEffects.PARRY, 10, 2));
+            user.addStatusEffect(new StatusEffectInstance(ModEffects.PARRY, 9, 2));
             MinecraftClient.getInstance().player.setVelocity(Math.sin(Math.toRadians(-user.getYaw()))*dash, 0, Math.cos(Math.toRadians(-user.getYaw()))*dash);
             user.setVelocity(Math.sin(Math.toRadians(-user.getYaw())) * 0.45, Math.sin(Math.toRadians(-user.getPitch())) * 0.45, Math.cos(Math.toRadians(-user.getYaw())) * 0.45);
             user.incrementStat(Stats.USED.getOrCreateStat(this));
@@ -63,7 +63,7 @@ public class RapierItem extends Item {
 //                builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", 0, EntityAttributeModifier.Operation.ADDITION));
 //                this.attributeModifiers = builder.build();
                 world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_GOAT_LONG_JUMP, SoundCategory.NEUTRAL, 0.8f, 0.6f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
-                user.addStatusEffect(new StatusEffectInstance(ModEffects.PARRY, 10, 3));
+                user.addStatusEffect(new StatusEffectInstance(ModEffects.PARRY, 9, 3));
                 MinecraftClient.getInstance().player.setVelocity(Math.sin(Math.toRadians(-user.getYaw()))*-dash*1.1, 0, Math.cos(Math.toRadians(-user.getYaw()))*-dash*1.1);
                 user.setVelocity(Math.sin(Math.toRadians(-user.getYaw())) * 0.45, Math.sin(Math.toRadians(-user.getPitch())) * 0.45, Math.cos(Math.toRadians(-user.getYaw())) * 0.45);
                 user.getItemCooldownManager().set(this, 60);
