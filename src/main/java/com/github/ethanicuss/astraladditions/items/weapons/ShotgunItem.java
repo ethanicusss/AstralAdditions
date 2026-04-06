@@ -2,18 +2,23 @@ package com.github.ethanicuss.astraladditions.items.weapons;
 
 import com.github.ethanicuss.astraladditions.registry.ModEntities;
 import com.github.ethanicuss.astraladditions.entities.scrap_projectile.ScrapProjectileEntity;
+import com.github.ethanicuss.astraladditions.registry.ModItems;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.RangedWeaponItem;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.tag.ItemTags;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+
+import java.util.function.Predicate;
 
 public class ShotgunItem extends BowItem {
 
@@ -26,13 +31,26 @@ public class ShotgunItem extends BowItem {
         if (!(user instanceof PlayerEntity playerEntity)) {
             return;
         }
-        boolean bl2;
-        boolean bl = playerEntity.getAbilities().creativeMode;
-        ItemStack itemStack = playerEntity.getArrowType(stack);//change
-        boolean bl3 = bl2 = bl && itemStack.isOf(Items.ARROW);
+        boolean bl2 = false;
+        boolean isCreative = playerEntity.getAbilities().creativeMode;
+
+        Predicate<ItemStack> predicate = (ammoStack) -> ammoStack.isOf(ModItems.SPUD_MAG);
+
+        PlayerEntity p = (PlayerEntity) user;
+
+        ItemStack itemStack = stack;//set to stack just to init
+
+        for(int i = 0; i < p.getInventory().size(); ++i) {
+            ItemStack itemStack2 = p.getInventory().getStack(i);
+            if (predicate.test(itemStack2)) {
+                bl2 = true;
+                itemStack = itemStack2;
+            }
+        }
+
         float f = getPullProgress(this.getMaxUseTime(stack) - remainingUseTicks);
 
-        if (!world.isClient && !itemStack.isEmpty()) {
+        if (!world.isClient && (isCreative || bl2)) {
             int k;
             int j;
             for (var i = 0; i < 15; i++) {
@@ -41,12 +59,10 @@ public class ShotgunItem extends BowItem {
                 proj.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 1.0f, 1.5f + f-1, 12f);
                 world.spawnEntity(proj);
             }
-            stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
-        }
-        if (!itemStack.isEmpty() || bl) {
+            stack.damage(1, playerEntity, p2 -> p2.sendToolBreakStatus(playerEntity.getActiveHand()));
             world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 0.8f, 0.5f / (world.getRandom().nextFloat() * 0.4f + 1.2f) + 0.3f);
         }
-        if (!bl2 && !bl) {
+        if (bl2 && !isCreative) {
             itemStack.decrement(1);
             if (itemStack.isEmpty()) {
                 playerEntity.getInventory().removeOne(itemStack);
