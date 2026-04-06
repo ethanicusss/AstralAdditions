@@ -1,6 +1,7 @@
 package com.github.ethanicuss.astraladditions.mixin.fishing;
 
 import com.github.ethanicuss.astraladditions.entities.shimmerfishingrod.ShimmerFishingBobberEntity;
+import com.github.ethanicuss.astraladditions.registry.ModData;
 import com.github.ethanicuss.astraladditions.registry.ModFluids;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.fluid.FluidState;
@@ -16,12 +17,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class FishingBobberEntityMixin {
 
 	@Inject(method = "tickFishingLogic", at = @At("HEAD"), cancellable = true)
-	private void astraladditions$controlFishingBasedOnFluid(BlockPos pos, CallbackInfo ci) {
+	private void controlFishingBasedOnFluid(BlockPos pos, CallbackInfo ci) {
 		FishingBobberEntity bobber = (FishingBobberEntity)(Object)this;
 		World world = bobber.world;
 		FluidState fluidState = world.getFluidState(pos);
 
-		boolean inShimmer = fluidState.isOf(ModFluids.STILL_SHIMMER) || fluidState.isOf(ModFluids.FLOWING_SHIMMER);
+		boolean inShimmer = fluidState.isIn(ModData.SHIMMER_TAG);
 
 		if (bobber instanceof ShimmerFishingBobberEntity) {
 			if (!inShimmer) {
