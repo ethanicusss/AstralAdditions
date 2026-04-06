@@ -51,12 +51,24 @@
 	"item.astraladditions.beta_ostrum_weapon": "Beta Ostrum Sword",
 	"item.astraladditions.beta_calorite_weapon": "Beta Calorite Sword",
 	"item.astraladditions.beta_ender_weapon": "Beta Ender Sword",
+	"item.astraladditions.spudshotgun": "Spud Shotgun",
+	"item.astraladditions.spud_mag": "Spud Magazine",
 
 	"item.astraladditions.shimmer_fishing_rod": "Shimmer Fishing Rod",
 	"item.astraladditions.shimmering_thread": "Shimmering Thread",
 	"item.astraladditions.shimmer_trout": "Shimmer Trout",
 	"item.astraladditions.shish": "Shish",
 	"item.astraladditions.bottomless_water_bucket": "Bottomless Water Bucket",
+
+	"item.minecraft.potion.effect.shimmer": "Bottle of Shimmer",
+	"item.minecraft.splash_potion.effect.shimmer": "Splash Bottle of Shimmer",
+	"item.minecraft.lingering_potion.effect.shimmer": "Lingering Bottle of Shimmer",
+	"item.minecraft.tipped_arrow.effect.shimmer": "Arrow of Shimmer",
+
+	"item.minecraft.potion.effect.sputum": "Bottle of Sputum",
+	"item.minecraft.splash_potion.effect.sputum": "Splash Bottle of Sputum",
+	"item.minecraft.lingering_potion.effect.sputum": "Lingering Bottle of Sputum",
+	"item.minecraft.tipped_arrow.effect.sputum": "Arrow of Sputum",
 
 	"block.astraladditions.enderrack": "Enderrack",
 	"block.astraladditions.twisted_nylium": "Twisted Nylium",
@@ -129,16 +141,6 @@
 	"effect.astraladditions.sink": "Sinking",
 	"effect.astraladditions.parry": "Parry",
 	"effect.astraladditions.frost": "Frost",
-
-	"item.minecraft.potion.effect.shimmer": "Bottle of Shimmer",
-	"item.minecraft.splash_potion.effect.shimmer": "Splash Bottle of Shimmer",
-	"item.minecraft.lingering_potion.effect.shimmer": "Lingering Bottle of Shimmer",
-	"item.minecraft.tipped_arrow.effect.shimmer": "Arrow of Shimmer",
-
-	"item.minecraft.potion.effect.sputum": "Bottle of Sputum",
-	"item.minecraft.splash_potion.effect.sputum": "Splash Bottle of Sputum",
-	"item.minecraft.lingering_potion.effect.sputum": "Lingering Bottle of Sputum",
-	"item.minecraft.tipped_arrow.effect.sputum": "Arrow of Sputum",
 
 	"tooltip.astraladditions.cogfly": "W.I.P for 2.2",
 	"tooltip.astraladditions.beta_sword_smell": "It smells like thick fog",
