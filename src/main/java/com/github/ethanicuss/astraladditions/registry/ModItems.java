@@ -49,7 +49,7 @@ public class ModItems {
     public static final Item DISC_PURPLE_PRISON = new ModMusicDiscItem(7, ModSounds.MUSIC_SHIMMER_BLAZE, new FabricItemSettings().group(ItemGroup.MISC).maxCount(1));
     public static final Item DISC_ASTRAL_LAKES_REMIX = new ModMusicDiscItem(7, ModSounds.MUSIC_ASTRAL_LAKES_REMIX, new FabricItemSettings().group(ItemGroup.MISC).maxCount(1));
     //public static final Item SHIMMER_BOTTLE = new ShimmerBottleItem(new FabricItemSettings().group(ItemGroup.BREWING).maxCount(1));
-    public static final Item SHIMMER_BOTTLE = new ShimmerBottleItem(StatusEffects.NIGHT_VISION, 3600, 0, new TranslatableText("Multiplies XP gain by 1.5 (3:00)").formatted(Formatting.BLUE), new FabricItemSettings().group(ItemGroup.BREWING).maxCount(1).rarity(Rarity.UNCOMMON));
+    public static final Item SHIMMER_BOTTLE = new ShimmerBottleItem(StatusEffects.NIGHT_VISION, 3600, 0, new TranslatableText("astraladditions.text.shimmer_bottle").formatted(Formatting.BLUE), new FabricItemSettings().group(ItemGroup.BREWING).maxCount(1).rarity(Rarity.UNCOMMON));
     public static final Item CHROMATIC_VACUUM = new ChromaticVacuumItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(512));
     public static final Item SHOTGUN = new ShotgunItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(512));
     public static final Item MACHINEGUN = new MachinegunItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(1024));
@@ -77,8 +77,9 @@ public class ModItems {
 
     public static final Item ASTRAL_HOE = new AstralHoeItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE).maxDamage(1536));
     public static final Item SOULSTEAL_DAGGER = new SoulstealDaggerItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE).maxDamage(768));
-    public static final Item DIAMOND_BOOMER = new BoomerangItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE), 6.0f, 12, 1.2f, 0.0f);
-    public static final Item SHIMMERANG = new BoomerangItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE), 8.0f, 8, 2.0f, 5.0f);
+    public static final Item DIAMOND_BOOMER = new BoomerangItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE), 4.0f, 16, 0.7f, 0.5f);
+    public static final Item SHIMMERANG = new BoomerangItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE), 6.0f, 8, 1.8f, 5.0f);
+    public static final Item ADMIN_RANG = new BoomerangItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(4).rarity(Rarity.EPIC), 20.0f, 4, 4.0f, 0.0f);
     public static final Item RAPIER = new RapierItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE).maxDamage(1024));
     public static final Item SHIELD = new ParryShieldItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON));
     public static final Item COGFLY = new CogflySpawnItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(4).rarity(Rarity.RARE));
@@ -115,6 +116,7 @@ public class ModItems {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "soulsteal_dagger"), SOULSTEAL_DAGGER);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "diamond_boomer"), DIAMOND_BOOMER);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "shimmerang"), SHIMMERANG);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "admin_rang"), ADMIN_RANG);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "rapier"), RAPIER);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "parry_shield"), SHIELD);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "cogfly"), COGFLY);

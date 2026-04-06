@@ -66,12 +66,9 @@ public class BoomerangItem
 
     @Override
     public void appendTooltip(ItemStack itemStack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if (itemStack.hasNbt()) {
-            NbtCompound nbtCompound = itemStack.getNbt();
-            tooltip.add(new LiteralText("Damage: " + this.DAMAGE).formatted(Formatting.BLUE));
-            tooltip.add(new LiteralText("Speed: " + this.SPEED).formatted(Formatting.BLUE));
-            tooltip.add(new LiteralText("Duration: " + this.DISTANCE).formatted(Formatting.BLUE));
-            tooltip.add(new LiteralText("Curve: " + this.CURVE).formatted(Formatting.BLUE));
-        }
+        tooltip.add(new LiteralText("Damage: " + this.DAMAGE).formatted(Formatting.GRAY));
+        tooltip.add(new LiteralText("Speed: " + this.SPEED).formatted(Formatting.GRAY));
+        tooltip.add(new LiteralText("Duration: " + this.DISTANCE).formatted(Formatting.GRAY));
+        tooltip.add(new LiteralText("Curve: " + this.CURVE).formatted(Formatting.GRAY));
     }
 }
