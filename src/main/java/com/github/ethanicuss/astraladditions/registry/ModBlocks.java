@@ -44,6 +44,15 @@ public class ModBlocks {
     }));
     public static final BlockItem MOONSET_CRYSTAL_BLOCK_ITEM = new BlockItem(MOONSET_CRYSTAL_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
 
+    public static final Block MOURNING_OBSIDIAN_BLOCK = new CryingObsidianBlock(FabricBlockSettings.of(Material.STONE, MapColor.BLACK).nonOpaque().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(40.0f, 1000.0f).luminance((state) -> {
+        return 15;
+    }));
+    public static final BlockItem MOURNING_OBSIDIAN_BLOCK_ITEM = new BlockItem(MOURNING_OBSIDIAN_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
+
+    public static final Block STEEL_CASING_BLOCK = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.LANTERN).strength(3.0f).requiresTool());
+    public static final BlockItem STEEL_CASING_BLOCK_ITEM = new BlockItem(STEEL_CASING_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
+
+
     public static final Block BULBA_BLOCK = new DroptusBlock(FabricBlockSettings.of(Material.CACTUS).ticksRandomly().sounds(BlockSoundGroup.SHROOMLIGHT).strength(0.2f).luminance(createLightLevelFromLitBlockState(7)));
     public static final BlockItem BULBA_BLOCK_ITEM = new BlockItem(BULBA_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
 
