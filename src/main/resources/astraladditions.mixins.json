@@ -6,6 +6,7 @@
   "mixins": [
     "yttr.YttrEachRegisterableFieldMixin",
     "yttr.MagtankScreenHandlerMixin",
+    "yttr.ItemStackMixin",
 
     "ParryEffectMixin",
     "ShimmerEffectMixin",
