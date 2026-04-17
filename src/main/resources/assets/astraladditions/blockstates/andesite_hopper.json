@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "astraladditions:block/andesite_hopper"
+    },
+    "facing=east": {
+      "model": "astraladditions:block/andesite_hopper_side",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "astraladditions:block/andesite_hopper_side"
+    },
+    "facing=south": {
+      "model": "astraladditions:block/andesite_hopper_side",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "astraladditions:block/andesite_hopper_side",
+      "y": 270
+    }
+  }
+}
