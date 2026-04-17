@@ -18,6 +18,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
@@ -43,6 +44,15 @@ public class ModBlocks {
         return 10;
     }));
     public static final BlockItem MOONSET_CRYSTAL_BLOCK_ITEM = new BlockItem(MOONSET_CRYSTAL_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
+
+    public static final Block MOURNING_OBSIDIAN_BLOCK = new CryingObsidianBlock(FabricBlockSettings.of(Material.STONE, MapColor.BLACK).nonOpaque().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(40.0f, 1000.0f).luminance((state) -> {
+        return 15;
+    }));
+    public static final BlockItem MOURNING_OBSIDIAN_BLOCK_ITEM = new BlockItem(MOURNING_OBSIDIAN_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
+
+    public static final Block STEEL_CASING_BLOCK = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.LANTERN).strength(3.0f).requiresTool());
+    public static final BlockItem STEEL_CASING_BLOCK_ITEM = new BlockItem(STEEL_CASING_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
+
 
     public static final Block BULBA_BLOCK = new DroptusBlock(FabricBlockSettings.of(Material.CACTUS).ticksRandomly().sounds(BlockSoundGroup.SHROOMLIGHT).strength(0.2f).luminance(createLightLevelFromLitBlockState(7)));
     public static final BlockItem BULBA_BLOCK_ITEM = new BlockItem(BULBA_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
@@ -81,6 +91,12 @@ public class ModBlocks {
     public static final Block JAR_BLOCK = new JarBlock(FabricBlockSettings.of(Material.GLASS).sounds(BlockSoundGroup.GLASS).nonOpaque().allowsSpawning(ModBlocks::never).suffocates(ModBlocks::never));
     public static final BlockItem JAR_ITEM = new BlockItem(JAR_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
     public static final BlockEntityType<JarBlockEntity> JAR_BLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AstralAdditions.MOD_ID, "jar"), FabricBlockEntityTypeBuilder.create(JarBlockEntity::new, JAR_BLOCK).build());
+
+    public static final Block DESERT_AZULIA_BLOCK = new DesertFlowerBlock(StatusEffects.WATER_BREATHING, 360, FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.FLOWERING_AZALEA).breakInstantly().noCollision());
+    public static final BlockItem DESERT_AZULIA_ITEM = new BlockItem(DESERT_AZULIA_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
+    public static final Block DESERT_ROOTS_BLOCK = new DesertFlowerBlock(StatusEffects.MINING_FATIGUE, 700, FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.ROOTS).breakInstantly().noCollision());
+    public static final BlockItem DESERT_ROOTS_ITEM = new BlockItem(DESERT_ROOTS_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
+
 
     public static final Block ANDESITE_HOPPER_BLOCK = new CustomHopperBlock(FabricBlockSettings.of(Material.STONE, MapColor.STONE_GRAY).requiresTool().strength(3.0F, 4.8F).sounds(BlockSoundGroup.METAL).nonOpaque().allowsSpawning(ModBlocks::never).suffocates(ModBlocks::never), "andesite_hopper", 16, 1);
     public static final BlockItem ANDESITE_HOPPER_ITEM = new BlockItem(ANDESITE_HOPPER_BLOCK, new FabricItemSettings().group(ItemGroup.REDSTONE));
@@ -122,6 +138,10 @@ public class ModBlocks {
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "ender_tip"), ENDER_TIP_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "ender_sprouts"), ENDER_SPROUT_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "pearl_pod"), PEARL_POD_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "desert_azulia"), DESERT_AZULIA_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "desert_roots"), DESERT_ROOTS_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "mourning_obsidian"), MOURNING_OBSIDIAN_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "steel_casing"), STEEL_CASING_BLOCK);
 
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "desizer_controller"), DESIZER_CONTROLLER);
         Registry.register(Registry.BLOCK, new Identifier(AstralAdditions.MOD_ID, "desizer_base"), DESIZER_BASE);
@@ -142,6 +162,10 @@ public class ModBlocks {
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "ender_tip"), ENDER_TIP_ITEM);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "ender_sprouts"), ENDER_SPROUT_ITEM);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "pearl_pod"), PEARL_POD_ITEM);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "desert_azulia"), DESERT_AZULIA_ITEM);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "desert_roots"), DESERT_ROOTS_ITEM);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "mourning_obsidian"), MOURNING_OBSIDIAN_BLOCK_ITEM);
+        Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "steel_casing"), STEEL_CASING_BLOCK_ITEM);
 
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "desizer_controller"), DESIZER_CONTROLLER_ITEM);
         Registry.register(Registry.ITEM, new Identifier(AstralAdditions.MOD_ID, "desizer_base"), DESIZER_BASE_ITEM);
@@ -165,5 +189,9 @@ public class ModBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(ENDER_TIP_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(PEARL_POD_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(PEARL_POD_BLOCK, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(DESERT_AZULIA_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(DESERT_AZULIA_BLOCK, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(DESERT_ROOTS_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(DESERT_ROOTS_BLOCK, RenderLayer.getTranslucent());
     }
 }

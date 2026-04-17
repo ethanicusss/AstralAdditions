@@ -71,6 +71,8 @@
 	"item.minecraft.tipped_arrow.effect.sputum": "Arrow of Sputum",
 
 	"block.astraladditions.enderrack": "Enderrack",
+	"block.astraladditions.mourning_obsidian": "Mourning Obsidian",
+	"block.astraladditions.steel_casing": "Steel Casing",
 	"block.astraladditions.twisted_nylium": "Twisted Nylium",
 	"block.astraladditions.ender_sprouts": "Ender Sprouts",
 	"block.astraladditions.ender_tip": "Ender Tip",
@@ -84,6 +86,8 @@
 	"block.astraladditions.bramblebone": "Bramblebone",
 	"block.astraladditions.shimmer_lily": "Shimmer Lily",
 	"block.astraladditions.pearl_pod": "Pearl Pod",
+	"block.astraladditions.desert_azulia": "Desert Azulia",
+	"block.astraladditions.desert_roots": "Desert Roots",
 
 	"block.astraladditions.desizer_1": "Desizer Top Left",
 	"block.astraladditions.desizer_2": "Desizer Top Center",

@@ -20,12 +20,12 @@
                   }
                 }
               ],
-              "name": "astraladditions:pearl_pod"
+              "name": "astraladditions:desert_roots"
             },
             {
               "type": "minecraft:item",
               "functions": [],
-              "name": "minecraft:ender_pearl"
+              "name": "minecraft:stick"
             }
           ]
         }
