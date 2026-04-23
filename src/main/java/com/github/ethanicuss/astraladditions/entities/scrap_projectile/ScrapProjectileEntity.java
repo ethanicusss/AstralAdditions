@@ -49,8 +49,6 @@ public class ScrapProjectileEntity extends ThrownItemEntity {
 
         float damage = 25 - this.age*2;
 
-        System.out.println(damage);
-
         entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), damage);
     }
 

@@ -122,7 +122,7 @@ public class BoomerangEntity extends ThrownItemEntity {
             float xspeed = (float)this.getVelocity().getX();
             float yspeed = (float)this.getVelocity().getZ();
             float angle = (float)(Math.toDegrees(Math.atan(xspeed/yspeed))) - this.getDataTracker().get(CURVE);
-            if (yspeed < 0){angle += 180; System.out.println("brah");}
+            if (yspeed < 0){angle += 180;}
             this.setVelocity(Math.sqrt(Math.pow(xspeed, 2)+Math.pow(yspeed, 2))*Math.sin(Math.toRadians(angle)), (float)this.getVelocity().getY(), Math.sqrt(Math.pow(xspeed, 2)+Math.pow(yspeed, 2))*Math.cos(Math.toRadians(angle)));
             if (this.getDataTracker().get(AGE) > this.getDataTracker().get(MAX_AGE)){
                 this.getDataTracker().set(HIT, true);
