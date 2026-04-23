@@ -8,12 +8,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.RangedWeaponItem;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.tag.ItemTags;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -36,12 +33,10 @@ public class ShotgunItem extends BowItem {
 
         Predicate<ItemStack> predicate = (ammoStack) -> ammoStack.isOf(ModItems.SPUD_MAG);
 
-        PlayerEntity p = (PlayerEntity) user;
-
         ItemStack itemStack = stack;//set to stack just to init
 
-        for(int i = 0; i < p.getInventory().size(); ++i) {
-            ItemStack itemStack2 = p.getInventory().getStack(i);
+        for(int i = 0; i < playerEntity.getInventory().size(); ++i) {
+            ItemStack itemStack2 = playerEntity.getInventory().getStack(i);
             if (predicate.test(itemStack2)) {
                 bl2 = true;
                 itemStack = itemStack2;
@@ -51,8 +46,6 @@ public class ShotgunItem extends BowItem {
         float f = getPullProgress(this.getMaxUseTime(stack) - remainingUseTicks);
 
         if (!world.isClient && (isCreative || bl2)) {
-            int k;
-            int j;
             for (var i = 0; i < 15; i++) {
                 ScrapProjectileEntity proj = new ScrapProjectileEntity(ModEntities.SCRAP_PROJECTILE, world);
                 proj.setPos(playerEntity.getX(), playerEntity.getEyeY(), playerEntity.getZ());
@@ -96,9 +89,18 @@ public class ShotgunItem extends BowItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        boolean bl;
+        boolean bl = false;
         ItemStack itemStack = user.getStackInHand(hand);
-        boolean bl2 = bl = user.getArrowType(itemStack).getCount() > 0;
+
+        Predicate<ItemStack> predicate = (ammoStack) -> ammoStack.isOf(ModItems.SPUD_MAG);
+
+        for(int i = 0; i < ((PlayerEntity) user).getInventory().size(); ++i) {
+            ItemStack itemStack2 = ((PlayerEntity) user).getInventory().getStack(i);
+            if (predicate.test(itemStack2)) {
+                bl = true;
+            }
+        }
+
         if (user.getAbilities().creativeMode || bl) {
             user.setCurrentHand(hand);
             return TypedActionResult.consume(itemStack);
