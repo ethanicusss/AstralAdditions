@@ -1,12 +1,12 @@
 package com.github.ethanicuss.astraladditions.blocks.customhopper;
 
 import com.github.ethanicuss.astraladditions.AstralAdditions;
-import com.github.ethanicuss.astraladditions.registry.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HopperBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -27,11 +27,24 @@ public class CustomHopperBlock extends HopperBlock {
     private final int itemRate;
     private final String blockEntityTypeId;
 
-    public CustomHopperBlock(Settings settings, String _blockEntityTypeId, int _cooldown, int _itemRate) {
+    public CustomHopperBlock(Settings settings, String blockEntityTypeId, int cooldown, int itemRate) {
         super(settings);
-        this.cooldown = _cooldown;
-        this.itemRate = _itemRate;
-        this.blockEntityTypeId = _blockEntityTypeId;
+        this.cooldown = cooldown;
+        this.itemRate = itemRate;
+        this.blockEntityTypeId = blockEntityTypeId;
+    }
+
+
+    public String getBlockEntityTypeId() {
+        return this.blockEntityTypeId;
+    }
+
+    public int getCooldown() {
+        return this.cooldown;
+    }
+
+    public int getItemRate() {
+        return this.itemRate;
     }
 
     @Override
@@ -39,9 +52,11 @@ public class CustomHopperBlock extends HopperBlock {
         return new CustomHopperBlockEntity(pos, state, this.blockEntityTypeId, this.cooldown, this.itemRate);
     }
 
+    @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         BlockEntityType<CustomHopperBlockEntity> blockEntityType = (BlockEntityType<CustomHopperBlockEntity>) Registry.BLOCK_ENTITY_TYPE.get(new Identifier(AstralAdditions.MOD_ID, blockEntityTypeId));
+
         return world.isClient ? null : checkType(type, blockEntityType, CustomHopperBlockEntity::serverTick);
     }
 
@@ -50,24 +65,31 @@ public class CustomHopperBlock extends HopperBlock {
         if (itemStack.hasCustomName()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof CustomHopperBlockEntity) {
-                ((CustomHopperBlockEntity)blockEntity).setCustomName(itemStack.getName());
+                ((CustomHopperBlockEntity) blockEntity).setCustomName(itemStack.getName());
             }
         }
-
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.isClient) {
             return ActionResult.SUCCESS;
-        } else {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof CustomHopperBlockEntity) {
-                player.openHandledScreen((CustomHopperBlockEntity)blockEntity);
-                player.incrementStat(Stats.INSPECT_HOPPER);
-            }
+        }
 
-            return ActionResult.CONSUME;
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof CustomHopperBlockEntity) {
+            player.openHandledScreen((CustomHopperBlockEntity) blockEntity);
+            player.incrementStat(Stats.INSPECT_HOPPER);
+        }
+
+        return ActionResult.CONSUME;
+    }
+
+    @Override
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof CustomHopperBlockEntity) {
+            CustomHopperBlockEntity.onEntityCollided(world, pos, state, entity, (CustomHopperBlockEntity) blockEntity);
         }
     }
 
@@ -76,10 +98,9 @@ public class CustomHopperBlock extends HopperBlock {
         if (!state.isOf(newState.getBlock())) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof CustomHopperBlockEntity) {
-                ItemScatterer.spawn(world, pos, (CustomHopperBlockEntity)blockEntity);
+                ItemScatterer.spawn(world, pos, (CustomHopperBlockEntity) blockEntity);
                 world.updateComparators(pos, this);
             }
-
             super.onStateReplaced(state, world, pos, newState, moved);
         }
     }
