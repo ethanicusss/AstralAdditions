@@ -2,7 +2,7 @@
 	"subtitles.astraladditions.tsugomori": "By Tsugomori",
 	"subtitles.astraladditions.xetroo": "By XETROO",
 	"subtitles.astraladditions.xh": "By Tsugomori and XETROO",
-	"subtitles.astraladditions.pisn3y": "By PINS3Y",
+	"subtitles.astraladditions.pisn3y": "By WORLDLINE",
 
 	"item.astraladditions.funny_disc": "funny disc",
 	"item.astraladditions.funny_disc.desc": "omg its",
@@ -51,6 +51,8 @@
 	"item.astraladditions.beta_ostrum_weapon": "Beta Ostrum Sword",
 	"item.astraladditions.beta_calorite_weapon": "Beta Calorite Sword",
 	"item.astraladditions.beta_ender_weapon": "Beta Ender Sword",
+	"item.astraladditions.spudshotgun": "Spud Shotgun",
+	"item.astraladditions.spud_mag": "Spud Magazine",
 
 	"item.astraladditions.shimmer_fishing_rod": "Shimmer Fishing Rod",
 	"item.astraladditions.shimmering_thread": "Shimmering Thread",
@@ -58,7 +60,19 @@
 	"item.astraladditions.shish": "Shish",
 	"item.astraladditions.bottomless_water_bucket": "Bottomless Water Bucket",
 
+	"item.minecraft.potion.effect.shimmer": "Bottle of Shimmer",
+	"item.minecraft.splash_potion.effect.shimmer": "Splash Bottle of Shimmer",
+	"item.minecraft.lingering_potion.effect.shimmer": "Lingering Bottle of Shimmer",
+	"item.minecraft.tipped_arrow.effect.shimmer": "Arrow of Shimmer",
+
+	"item.minecraft.potion.effect.sputum": "Bottle of Sputum",
+	"item.minecraft.splash_potion.effect.sputum": "Splash Bottle of Sputum",
+	"item.minecraft.lingering_potion.effect.sputum": "Lingering Bottle of Sputum",
+	"item.minecraft.tipped_arrow.effect.sputum": "Arrow of Sputum",
+
 	"block.astraladditions.enderrack": "Enderrack",
+	"block.astraladditions.mourning_obsidian": "Mourning Obsidian",
+	"block.astraladditions.steel_casing": "Steel Casing",
 	"block.astraladditions.twisted_nylium": "Twisted Nylium",
 	"block.astraladditions.ender_sprouts": "Ender Sprouts",
 	"block.astraladditions.ender_tip": "Ender Tip",
@@ -72,6 +86,8 @@
 	"block.astraladditions.bramblebone": "Bramblebone",
 	"block.astraladditions.shimmer_lily": "Shimmer Lily",
 	"block.astraladditions.pearl_pod": "Pearl Pod",
+	"block.astraladditions.desert_azulia": "Desert Azulia",
+	"block.astraladditions.desert_roots": "Desert Roots",
 
 	"block.astraladditions.desizer_1": "Desizer Top Left",
 	"block.astraladditions.desizer_2": "Desizer Top Center",
@@ -130,16 +146,6 @@
 	"effect.astraladditions.parry": "Parry",
 	"effect.astraladditions.frost": "Frost",
 
-	"item.minecraft.potion.effect.shimmer": "Bottle of Shimmer",
-	"item.minecraft.splash_potion.effect.shimmer": "Splash Bottle of Shimmer",
-	"item.minecraft.lingering_potion.effect.shimmer": "Lingering Bottle of Shimmer",
-	"item.minecraft.tipped_arrow.effect.shimmer": "Arrow of Shimmer",
-
-	"item.minecraft.potion.effect.sputum": "Bottle of Sputum",
-	"item.minecraft.splash_potion.effect.sputum": "Splash Bottle of Sputum",
-	"item.minecraft.lingering_potion.effect.sputum": "Lingering Bottle of Sputum",
-	"item.minecraft.tipped_arrow.effect.sputum": "Arrow of Sputum",
-
 	"tooltip.astraladditions.cogfly": "W.I.P for 2.2",
 	"tooltip.astraladditions.beta_sword_smell": "It smells like thick fog",
 
@@ -183,7 +189,7 @@
 	"music.astraladditions.track.cave.artist": "Tsugomori",
 
 	"music.astraladditions.track.starcave.title": "Star Cave",
-	"music.astraladditions.track.starcave.artist": "Pins3y",
+	"music.astraladditions.track.starcave.artist": "WORLDLINE",
 
 	"music.astraladditions.track.gazinglakes.title": "Gazing Lakes",
 	"music.astraladditions.track.gazinglakes.artist": "Tsugomori",

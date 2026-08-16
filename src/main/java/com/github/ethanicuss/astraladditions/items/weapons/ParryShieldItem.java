@@ -1,4 +1,4 @@
-package com.github.ethanicuss.astraladditions.items;
+package com.github.ethanicuss.astraladditions.items.weapons;
 
 import com.github.ethanicuss.astraladditions.registry.ModEffects;
 import net.minecraft.entity.effect.StatusEffectInstance;

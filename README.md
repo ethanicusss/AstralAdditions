@@ -5,7 +5,7 @@ Although it will run without the modpack, it is not intended to be used in this 
 
 ## Custom Music
 
-Create: Astral OST by Hesperyd (ft. XETROO, PINS3Y and myself), breathing tons of new life into the overworld and the planets of Ad Astra.\
+Create: Astral OST by Hesperyd (ft. XETROO, WORLDLINE, Solaara Evermore, Avery, and ethanicuss), breathing tons of new life into the overworld and the planets of Ad Astra.\
 \
 Day time on the overworld - Venture\
 Night time on the overworld - Craven\

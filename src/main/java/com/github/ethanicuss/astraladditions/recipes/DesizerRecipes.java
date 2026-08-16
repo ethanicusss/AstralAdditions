@@ -56,8 +56,6 @@ public class DesizerRecipes{
         }*/
 
         DESIZER_RECIPES.add(register("desizer_recipes/testrecipe"));
-
-        System.out.println(DESIZER_RECIPES.get(0).tryCast(Registry.BLOCK_KEY));
         //TagPacketSerializer.
 
         recipes.add(new RecipeStructure());
@@ -90,12 +88,9 @@ public class DesizerRecipes{
         recipes.get(0).blocks[2][2][1] = Blocks.OBSIDIAN;
         recipes.get(0).blocks[2][2][2] = Blocks.OBSIDIAN;
 
-        System.out.println("I'm gonna print!!!");
         for (int i = 0; i < DESIZER_RECIPES.size(); i++){
             recipes.add(new RecipeStructure());
             recipes.get(0).resultItem = Items.GLOWSTONE;
-            System.out.println(DESIZER_RECIPES.get(i).toString());
-            System.out.println(DESIZER_RECIPES.get(i));
             //RegistryEntryList<Block> blocks = DESIZER_RECIPES.get(i);
             //blocks.get();
 

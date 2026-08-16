@@ -6,7 +6,7 @@
 				"identifier": "geometry.blackhole",
 				"texture_width": 48,
 				"texture_height": 36,
-				"visible_bounds_width": 4,
+				"visible_bounds_width": 3,
 				"visible_bounds_height": 3.5,
 				"visible_bounds_offset": [0, 1.25, 0]
 			},
@@ -25,7 +25,7 @@
 								"south": {"uv": [27, 30], "uv_size": [24, 0]},
 								"west": {"uv": [24, 30], "uv_size": [3, 0]},
 								"up": {"uv": [0, 27], "uv_size": [24, 3]},
-								"down": {"uv": [24, 30], "uv_size": [24, -3]}
+								"down": {"uv": [0, 30], "uv_size": [24, -3]}
 							}
 						},
 						{
@@ -37,7 +37,7 @@
 								"south": {"uv": [27, 36], "uv_size": [24, 0]},
 								"west": {"uv": [24, 36], "uv_size": [3, 0]},
 								"up": {"uv": [0, 33], "uv_size": [24, 3]},
-								"down": {"uv": [24, 36], "uv_size": [24, -3]}
+								"down": {"uv": [0, 36], "uv_size": [24, -3]}
 							}
 						},
 						{
@@ -51,7 +51,7 @@
 								"south": {"uv": [27, 33], "uv_size": [24, 0]},
 								"west": {"uv": [24, 33], "uv_size": [3, 0]},
 								"up": {"uv": [0, 30], "uv_size": [24, 3]},
-								"down": {"uv": [24, 33], "uv_size": [24, -3]}
+								"down": {"uv": [0, 33], "uv_size": [24, -3]}
 							}
 						},
 						{
@@ -65,7 +65,7 @@
 								"south": {"uv": [27, 27], "uv_size": [24, 0]},
 								"west": {"uv": [24, 27], "uv_size": [3, 0]},
 								"up": {"uv": [0, 24], "uv_size": [24, 3]},
-								"down": {"uv": [24, 27], "uv_size": [24, -3]}
+								"down": {"uv": [0, 27], "uv_size": [24, -3]}
 							}
 						}
 					]
@@ -75,8 +75,22 @@
 					"pivot": [-0.18477, 16.95213, 0.06404],
 					"cubes": [
 						{
-							"origin": [-7, 10, -7],
-							"size": [14, 14, 14],
+							"origin": [6.5, 23.5, 6.5],
+							"size": [-13, -13, -13],
+							"pivot": [-0.5, 16.5, -1.5],
+							"rotation": [0, -10, 10],
+							"uv": {
+								"north": {"uv": [12, 12], "uv_size": [12, 12]},
+								"east": {"uv": [12, 12], "uv_size": [12, 12]},
+								"south": {"uv": [12, 12], "uv_size": [12, 12]},
+								"west": {"uv": [12, 12], "uv_size": [12, 12]},
+								"up": {"uv": [24, 24], "uv_size": [-12, -12]},
+								"down": {"uv": [24, 24], "uv_size": [-12, -12]}
+							}
+						},
+						{
+							"origin": [-6, 11, -6],
+							"size": [12, 12, 12],
 							"pivot": [-0.5, 16.5, -1.5],
 							"rotation": [0, -10, 10],
 							"uv": {

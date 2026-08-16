@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "astraladditions:block/desh_hopper"
+    },
+    "facing=east": {
+      "model": "astraladditions:block/desh_hopper_side",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "astraladditions:block/desh_hopper_side"
+    },
+    "facing=south": {
+      "model": "astraladditions:block/desh_hopper_side",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "astraladditions:block/desh_hopper_side",
+      "y": 270
+    }
+  }
+}
