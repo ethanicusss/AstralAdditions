@@ -89,15 +89,7 @@
 	"block.astraladditions.desert_azulia": "Desert Azulia",
 	"block.astraladditions.desert_roots": "Desert Roots",
 
-	"block.astraladditions.desizer_1": "Desizer Top Left",
-	"block.astraladditions.desizer_2": "Desizer Top Center",
-	"block.astraladditions.desizer_3": "Desizer Top Right",
-	"block.astraladditions.desizer_4": "Desizer Middle Left",
 	"block.astraladditions.desizer_controller": "Desizer Controller",
-	"block.astraladditions.desizer_6": "Desizer Middle Right",
-	"block.astraladditions.desizer_7": "Desizer Bottom Left",
-	"block.astraladditions.desizer_8": "Desizer Bottom Center",
-	"block.astraladditions.desizer_9": "Desizer Bottom Right",
 	"block.astraladditions.desizer_base": "Desizer Casing",
 
 	"block.astraladditions.andesite_hopper": "Andesite Hopper",
