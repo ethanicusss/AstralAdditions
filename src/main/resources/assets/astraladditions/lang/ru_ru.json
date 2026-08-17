@@ -1,0 +1,219 @@
+{
+  "subtitles.astraladditions.tsugomori": "От Tsugomori",
+  "subtitles.astraladditions.xetroo": "От XETROO",
+  "subtitles.astraladditions.xh": "От Tsugomori и XETROO",
+  "subtitles.astraladditions.pisn3y": "От WORLDLINE",
+
+  "item.astraladditions.funny_disc": "смешной диск",
+  "item.astraladditions.funny_disc.desc": "омг это",
+  "item.astraladditions.moonset_crystal_block": "Блок кристаллов лунного заката",
+  "item.astraladditions.moonset_crystal": "Кристалл лунного заката",
+  "item.kubejs.shimmer_bucket": "Ведро Мерцания",
+  "item.astraladditions.shimmer_blower": "Мерцающий пускатель",
+  "item.astraladditions.lunar_wacker": "Лунная колотушка",
+  "item.astraladditions.astral_hoe": "Мерацющая мотыга",
+  "item.astraladditions.soulsteal_dagger": "Кинжал кражи душ",
+  "item.astraladditions.diamond_boomer": "Алмазный бумер",
+  "item.astraladditions.shimmerang": "Мерцающий бумеранг",
+  "item.astraladditions.cometball": "Кометный шар",
+  "item.astraladditions.cosmic_hourglass": "Космические песочные часы",
+  "item.astraladditions.pylon": "Пилон",
+  "item.astraladditions.meteor_mitts": "Метеорные перчатки",
+  "item.astraladditions.e_guitar": "Э-гитара",
+  "item.astraladditions.oh-no": "OH-NO",
+  "item.astraladditions.oh-no_broken": "Разбитая OH-NO",
+  "item.astraladditions.shimmer_heart": "Мерацющее сердце",
+  "item.astraladditions.awakened_shimmer_heart": "Пробуждённое Мерацющее сердце",
+  "item.astraladditions.shimmer_blaze_rod": "Мерцающий огненный стержень",
+  "item.astraladditions.shimmer_blaze_powder": "Мерцающий огненный порошок",
+  "item.astraladditions.shimmer_bottle": "Бутылочка Мерцания",
+  "item.astraladditions.ring_gold_cast": "Золотая литейная форма: Кольцо",
+  "item.astraladditions.steel_ring": "Стальное кольцо",
+  "item.astraladditions.blazed_steel_ring": "Пылающее стальное кольцо",
+  "item.astraladditions.orbital_navigation_ring": "Кольцо орбитальной навигации",
+  "item.astraladditions.moonblazed_orb": "Луннопламенная сфера",
+  "item.astraladditions.fragile_item": "Хрупкий предмет",
+  "item.astraladditions.chromatic_vacuum": "Хроматический пылесос",
+  "item.astraladditions.sputum_bucket": "Ведро мокроты",
+  "item.astraladditions.jar": "Банка",
+  "item.astraladditions.enderrack": "Эндерак",
+  "item.astraladditions.twisted_nylium": "Искривлённый нилий",
+  "item.astraladditions.disc_purple_prison": "Пластинка с Purple Prison",
+  "item.astraladditions.disc_purple_prison.desc": "Purple Prison - ethanicuss",
+  "item.astraladditions.disc_astral_lakes_remix": "Пластинка с Astral Lakes (ethanicuss' meow moew :wolfGif: remix)",
+  "item.astraladditions.disc_astral_lakes_remix.desc": "Astral Lakes (ethanicuss' meow moew :wolfGif: remix) - ethanicuss",
+  "item.astraladditions.rapier": "Рапира",
+  "item.astraladditions.parry_shield": "Круглый щит",
+  "item.astraladditions.cogfly": "Заводная муха",
+  "item.astraladditions.beta_iron_weapon": "Железный бета-меч",
+  "item.astraladditions.beta_diamond_weapon": "Алмазный бета-меч",
+  "item.astraladditions.beta_desh_weapon": "Бета-меч из деша",
+  "item.astraladditions.beta_ostrum_weapon": "Бета-меч из острума",
+  "item.astraladditions.beta_calorite_weapon": "Бета-меч из калорита",
+  "item.astraladditions.beta_ender_weapon": "Бета-эндер-меч",
+  "item.astraladditions.spudshotgun": "Картофельный дробовик",
+  "item.astraladditions.spud_mag": "Картофельный магазин",
+
+  "item.astraladditions.shimmer_fishing_rod": "Мерцающая удочка",
+  "item.astraladditions.shimmering_thread": "Мерацющая нить",
+  "item.astraladditions.shimmer_trout": "Мерацющая форель",
+  "item.astraladditions.shish": "Мерцыба",
+  "item.astraladditions.bottomless_water_bucket": "Бездонное ведро воды",
+
+  "item.minecraft.potion.effect.shimmer": "Бутылочка Мерцания",
+  "item.minecraft.splash_potion.effect.shimmer": "Взрвыная бутылочка Мерцания",
+  "item.minecraft.lingering_potion.effect.shimmer": "Бутылочка с взвесью Мерцания",
+  "item.minecraft.tipped_arrow.effect.shimmer": "Стрела Мерцания",
+
+  "item.minecraft.potion.effect.sputum": "Бутылочка мокроты",
+  "item.minecraft.splash_potion.effect.sputum": "Взрвыная бутылочка мокроты",
+  "item.minecraft.lingering_potion.effect.sputum": "Бутылочка с взвесью мокроты",
+  "item.minecraft.tipped_arrow.effect.sputum": "Стрела мокроты",
+
+  "block.astraladditions.enderrack": "Эндерак",
+  "block.astraladditions.mourning_obsidian": "Оплакивающий обсидиан",
+  "block.astraladditions.steel_casing": "Стальной корпус",
+  "block.astraladditions.twisted_nylium": "Искривлённый нилий",
+  "block.astraladditions.ender_sprouts": "Эндерские ростки",
+  "block.astraladditions.ender_tip": "Эндер-кончик",
+  "block.astraladditions.sputum": "Мокрота",
+  "block.astraladditions.the_end": "Энд",
+  "block.astraladditions.jar": "Банка",
+  "block.astraladditions.moonset_crystal_block": "Блок кристаллов лунного заката",
+  "block.astraladditions.bulba_root": "Корень Бульбы",
+  "block.astraladditions.lune_shroom": "Лунный гриб",
+  "block.astraladditions.potted_lune_shroom": "Лунный гриб в горшке",
+  "block.astraladditions.bramblebone": "Колючий костекуст",
+  "block.astraladditions.shimmer_lily": "Мерацющая лилия",
+  "block.astraladditions.pearl_pod": "Жемчужный стручок",
+  "block.astraladditions.desert_azulia": "Пустынная азулия",
+  "block.astraladditions.desert_roots": "Пустынные корни",
+
+  "block.astraladditions.desizer_controller": "Контроллер десайзера",
+  "block.astraladditions.desizer_base": "Корпус десайзера",
+
+  "block.astraladditions.andesite_hopper": "Андезитовая воронка",
+  "block.astraladditions.desh_hopper": "Воронка из деша (WIP)",
+
+  "astraladditions.text.pylon_too_far": "Пилон вне досягаемости",
+  "astraladditions.text.shimmer_bottle": "Slurp",
+
+  "entity.astraladditions.pylon": "Пилон (чей-то телепортер)",
+  "entity.astraladditions.hemogiant": "Гемогигант",
+  "entity.astraladditions.voidtouched_zombie": "Зомби, тронутый пустотой",
+  "entity.astraladditions.voidtouched_skeleton": "Скедет, тронутый пустотой",
+  "entity.astraladditions.phast": "Фаст",
+  "entity.astraladditions.whast": "Васт",
+  "entity.astraladditions.shimmer_blaze": "Мерцающий всполох",
+  "entity.astraladditions.ender_watcher": "Эндер-наблюдатель",
+  "entity.astraladditions.moonman": "Луномен",
+  "entity.astraladditions.blackhole": "Чёрная дыра",
+
+  "category.astraladditions.desizer" : "Десайзер",
+
+  "category.astraladditions.transmute": "Трансмутация",
+  "tooltip.astraladditions.transmute_hint": "Бросьте предмет в Мерцание",
+  "label.astraladditions.transmute_hint_least": "Как минимум %d предметов",
+  "label.astraladditions.transmute_hint_exactly": "Ровно %d предметов",
+  "label.astraladditions.transmute_hint_any": "Любое количество предметов",
+
+  "category.astraladditions.vacuum": "Хроматический пылесос",
+  "category.astraladditions.vacuum.remainder_hint": "Остающийся блок",
+
+
+  "category.astraladditions.centrifuge": "Центрифугирование",
+  "category.astraladditions.piston_smashing": "Сжатие поршнем",
+  "category.astraladditions.piston_smashing.cloud_output_hint": "Используйте бутылочку на получившемся облаке",
+  "category.astraladditions.soaking": "Замачивание",
+
+  "category.astraladditions.voidfiltering": "Фильтрация Пустоты",
+  "category.astraladditions.void_filtering.chance": "Шанс: %s%%",
+
+  "category.astraladditions.shattering": "Разбивание",
+  "category.astraladditions.shattering.workstations": "Любой инструмент с этим зачарованием",
+
+  "category.astraladditions.bulk_shimmering": "Массовое мерцание",
+
+  "effect.astraladditions.sink": "Погружение",
+  "effect.astraladditions.parry": "Парирование",
+  "effect.astraladditions.frost": "Мороз",
+
+  "tooltip.astraladditions.cogfly": "W.I.P для 2.2",
+  "tooltip.astraladditions.beta_sword_smell": "Пахнет густым туманом",
+
+  "music.astraladditions.track.nostalgia.title": "Nostalgia",
+  "music.astraladditions.track.nostalgia.artist": "Tsugomori",
+
+  "music.astraladditions.track.astroid_cluster.title": "Astroid Cluster",
+  "music.astraladditions.track.astroid_cluster.artist": "Tsugomori",
+
+  "music.astraladditions.track.astral_lakes.title": "Astral Lakes",
+  "music.astraladditions.track.astral_lakes.artist": "Ethan Quirk и Tsugomori",
+
+  "music.astraladditions.track.despiteeverythingitsstillyou.title": "Despite Everything It's Still You",
+  "music.astraladditions.track.despiteeverythingitsstillyou.artist": "XETROO",
+
+  "music.astraladditions.track.uneasy.title": "Uneasy",
+  "music.astraladditions.track.uneasy.artist": "Tsugomori",
+
+  "music.astraladditions.track.bodiesfloatinginspace.title": "Bodies Floating in Space",
+  "music.astraladditions.track.bodiesfloatinginspace.artist": "Tsugomori",
+
+  "music.astraladditions.track.wow.title": "Wow",
+  "music.astraladditions.track.wow.artist": "Tsugomori",
+
+  "music.astraladditions.track.newday.title": "New Day",
+  "music.astraladditions.track.newday.artist": "Tsugomori",
+
+  "music.astraladditions.track.breathein.title": "Breath In",
+  "music.astraladditions.track.breathein.artist": "Tsugomori, XETROO",
+
+  "music.astraladditions.track.moonlight.title": "Moonlight",
+  "music.astraladditions.track.moonlight.artist": "Tsugomori, XETROO",
+
+  "music.astraladditions.track.day.title": "Day",
+  "music.astraladditions.track.day.artist": "Tsugomori",
+
+  "music.astraladditions.track.night.title": "Night",
+  "music.astraladditions.track.night.artist": "Tsugomori",
+
+  "music.astraladditions.track.cave.title": "Cave",
+  "music.astraladditions.track.cave.artist": "Tsugomori",
+
+  "music.astraladditions.track.starcave.title": "Star Cave",
+  "music.astraladditions.track.starcave.artist": "WORLDLINE",
+
+  "music.astraladditions.track.gazinglakes.title": "Gazing Lakes",
+  "music.astraladditions.track.gazinglakes.artist": "Tsugomori",
+
+  "music.astraladditions.track.astralsend.title": "Astral's End",
+  "music.astraladditions.track.astralsend.artist": "Ethan Quirk и Tsugomori",
+
+  "music.astraladditions.track.wither.title": "Wither",
+  "music.astraladditions.track.wither.artist": "Tsugomori",
+
+  "music.astraladditions.track.witherphase2.title": "Wither (Phase 2)",
+  "music.astraladditions.track.witherphase2.artist": "Tsugomori",
+
+  "music.astraladditions.track.witherspawn.title": "Witherspawn",
+  "music.astraladditions.track.witherspawn.artist": "Tsugomori",
+
+  "music.astraladditions.track.stance.title": "Stance",
+  "music.astraladditions.track.stance.artist": "Tsugomori",
+
+  "music.astraladditions.track.tensionrising.title": "Tension Rising",
+  "music.astraladditions.track.tensionrising.artist": "Tsugomori",
+
+  "music.astraladditions.track.andbreathe.title": "And Breathe",
+  "music.astraladditions.track.andbreathe.artist": "Tsugomori",
+
+  "music.astraladditions.track.purple_prison.title": "Purple Prison",
+  "music.astraladditions.track.purple_prison.artist": "ethanicuss",
+
+  "music.astraladditions.track.disc_astral_lakes_remix.title": "Astral Lakes (Remix)",
+  "music.astraladditions.track.disc_astral_lakes_remix.artist": "Unknown",
+
+  "gui.astraladditions.music_hud_now_playing": "Сейчас играет...",
+  "gui.astraladditions.music_hud_by": "от "
+
+}
