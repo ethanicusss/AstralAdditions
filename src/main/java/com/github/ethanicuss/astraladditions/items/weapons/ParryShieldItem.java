@@ -20,8 +20,8 @@ public class ParryShieldItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, SoundCategory.NEUTRAL, 0.6f, 0.6f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
         if (!world.isClient) {
-            world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, SoundCategory.NEUTRAL, 0.6f, 0.6f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
             user.addStatusEffect(new StatusEffectInstance(ModEffects.PARRY, 4, 6));
             user.incrementStat(Stats.USED.getOrCreateStat(this));
             user.getItemCooldownManager().set(this, 40);
