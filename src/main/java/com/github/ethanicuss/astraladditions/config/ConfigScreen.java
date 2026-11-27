@@ -22,6 +22,7 @@ public class ConfigScreen {
 
         ConfigCategory combatCategory = builder.getOrCreateCategory(new LiteralText("Combat Music"));
         ConfigCategory musicBoxCategory = builder.getOrCreateCategory(new LiteralText("Music Box"));
+        ConfigCategory chatCategory = builder.getOrCreateCategory(new LiteralText("Chat Restrictions"));
 
         combatCategory.addEntry(entryBuilder
                 .startBooleanToggle(new LiteralText("Enabled"), AstralAdditionsConfig.combatMusicEnabled)
@@ -98,6 +99,18 @@ public class ConfigScreen {
                 .startBooleanToggle(new LiteralText("Word Wrap"), AstralAdditionsConfig.musicBoxWordWrap)
                 .setDefaultValue(true)
                 .setSaveConsumer(value -> AstralAdditionsConfig.musicBoxWordWrap = value)
+                .build());
+
+        chatCategory.addEntry(entryBuilder
+                .startBooleanToggle(new LiteralText("Chat Telemetry"), AstralAdditionsConfig.chatTelemetryEnabled)
+                .setDefaultValue(false)
+                .setSaveConsumer(value -> AstralAdditionsConfig.chatTelemetryEnabled = value)
+                .build());
+
+        chatCategory.addEntry(entryBuilder
+                .startBooleanToggle(new LiteralText("Chat Profanity Filter"), AstralAdditionsConfig.chatProfanityFilterEnabled)
+                .setDefaultValue(false)
+                .setSaveConsumer(value -> AstralAdditionsConfig.chatProfanityFilterEnabled = value)
                 .build());
 
         return builder.build();
