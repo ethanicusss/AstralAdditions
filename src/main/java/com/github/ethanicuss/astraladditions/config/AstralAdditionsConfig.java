@@ -33,6 +33,9 @@ public class AstralAdditionsConfig {
     public static boolean hasBeenToMoon = false;
     public static boolean hasHeardPostMoonSong = false;
 
+    public static boolean chatTelemetryEnabled = false;
+    public static boolean chatProfanityFilterEnabled = false;
+
 
     public static void load() {
         try {
@@ -68,6 +71,9 @@ public class AstralAdditionsConfig {
             hasBeenToMoon = config.getOrElse("playerData.hasBeenToMoon", false);
             hasHeardPostMoonSong = config.getOrElse("playerData.hasHeardPostMoonSong", false);
 
+            chatTelemetryEnabled = config.getOrElse("chatTelemetry.enabled", false);
+            chatProfanityFilterEnabled = config.getOrElse("chatProfanityFilter.enabled", false);
+
             save();
             AstralAdditions.LOGGER.info("AstralAdditions config loaded successfully");
         } catch (Exception error) {
@@ -91,6 +97,9 @@ public class AstralAdditionsConfig {
 
         addDefault("playerData.hasBeenToMoon", false, "Has the player has visited the moon");
         addDefault("playerData.hasHeardPostMoonSong", false, "Has the player has heard the post-moon song");
+
+        addDefault("chatTelemetry.enabled", false, "Enable chat telemetry");
+        addDefault("chatProfanityFilter.enabled", false, "Enable chat profanity filter");
     }
 
     private static void addDefault(String path, Object value, String comment) {
@@ -121,6 +130,9 @@ public class AstralAdditionsConfig {
 
             config.set("playerData.hasBeenToMoon", hasBeenToMoon);
             config.set("playerData.hasHeardPostMoonSong", hasHeardPostMoonSong);
+
+            config.set("chatTelemetry.enabled", chatTelemetryEnabled);
+            config.set("chatProfanityFilter.enabled", chatProfanityFilterEnabled);
 
             config.save();
             AstralAdditions.LOGGER.info("AstralAdditions config saved successfully");
